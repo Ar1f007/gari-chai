@@ -1,9 +1,10 @@
 import { title } from "@/components/primitives";
+import SectionTitle from "@/components/section-title";
 
 const PopularBrands = () => {
   return (
     <section>
-      <h1 className={title({ size: "sm" })}>Popular Brands</h1>
+      <SectionTitle>Popular Brands</SectionTitle>
     </section>
   );
 };
