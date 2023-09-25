@@ -1,0 +1,6 @@
+{
+  "arrowParens": "always",
+  "endOfLine": "auto",
+  "tabWidth": 2,
+  "singleAttributePerLine": true
+}
