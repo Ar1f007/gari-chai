@@ -1,0 +1,45 @@
+{
+  "popularBrands": [
+    {
+      "id": "b-1",
+      "src": "/cars/car1.webp",
+      "brandName": "Toyota"
+    },
+    {
+      "id": "b-2",
+      "src": "/cars/car2.webp",
+      "brandName": "Honda"
+    },
+    {
+      "id": "b-3",
+      "src": "/cars/car3.webp",
+      "brandName": "Toyota"
+    },
+    {
+      "id": "b-4",
+      "src": "/cars/car3.webp",
+      "brandName": "Honda"
+    },
+
+    {
+      "id": "b-5",
+      "src": "/cars/car1.webp",
+      "brandName": "Toyota"
+    },
+    {
+      "id": "b-6",
+      "src": "/cars/car2.webp",
+      "brandName": "Honda"
+    },
+    {
+      "id": "b-7",
+      "src": "/cars/car1.webp",
+      "brandName": "Toyota"
+    },
+    {
+      "id": "b-8",
+      "src": "/cars/car3.webp",
+      "brandName": "Toyota"
+    }
+  ]
+}

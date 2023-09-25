@@ -1,10 +1,11 @@
-import { title } from "@/components/primitives";
 import SectionTitle from "@/components/section-title";
+import { BrandList } from "./brand-list";
 
 const PopularBrands = () => {
   return (
     <section>
       <SectionTitle>Popular Brands</SectionTitle>
+      <BrandList />
     </section>
   );
 };
