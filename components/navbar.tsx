@@ -51,6 +51,7 @@ export const Navbar = () => {
     <NextUINavbar
       maxWidth="2xl"
       position="sticky"
+      className="shadow-sm"
     >
       <NavbarContent
         className="basis-1/5 sm:basis-full"
