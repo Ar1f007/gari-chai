@@ -41,5 +41,184 @@
       "src": "/cars/car3.webp",
       "brandName": "Toyota"
     }
+  ],
+  "mostSearchedCars": [
+    {
+      "id": "SUV",
+      "content": [
+        {
+          "src": "/cars/car1.webp",
+          "name": "SUV - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car2.webp",
+          "name": "SUV - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car3.webp",
+          "name": "SUV - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car1.webp",
+          "name": "SUV - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car3.webp",
+          "name": "SUV - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car2.webp",
+          "name": "SUV - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        }
+      ]
+    },
+    {
+      "id": "Hatchback",
+      "content": [
+        {
+          "src": "/cars/car2.webp",
+          "name": "Hatchback - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car3.webp",
+          "name": "Hatchback - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car1.webp",
+          "name": "Hatchback - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+
+        {
+          "src": "/cars/car3.webp",
+          "name": "Hatchback - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car1.webp",
+          "name": "Hatchback - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car2.webp",
+          "name": "Hatchback - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        }
+      ]
+    },
+    {
+      "id": "Sedan",
+      "content": [
+        {
+          "src": "/cars/car1.webp",
+          "name": "Sedan - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car2.webp",
+          "name": "Sedan - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car3.webp",
+          "name": "Sedan - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car1.webp",
+          "name": "Sedan - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car3.webp",
+          "name": "Sedan - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car2.webp",
+          "name": "Sedan - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        }
+      ]
+    },
+    {
+      "id": "MUV",
+      "content": [
+        {
+          "src": "/cars/car2.webp",
+          "name": "MUV - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car3.webp",
+          "name": "MUV - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car1.webp",
+          "name": "MUV - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+
+        {
+          "src": "/cars/car3.webp",
+          "name": "MUV - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car1.webp",
+          "name": "MUV - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car2.webp",
+          "name": "MUV - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        }
+      ]
+    },
+    {
+      "id": "Luxury",
+      "content": [
+        {
+          "src": "/cars/car1.webp",
+          "name": "LUXURY - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car2.webp",
+          "name": "LUXURY - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car3.webp",
+          "name": "LUXURY - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car1.webp",
+          "name": "LUXURY - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car3.webp",
+          "name": "LUXURY - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        },
+        {
+          "src": "/cars/car2.webp",
+          "name": "LUXURY - Tata Nexon",
+          "price": "8.10 - 13.50 Lakh"
+        }
+      ]
+    }
   ]
 }

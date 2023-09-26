@@ -13,7 +13,7 @@ const SectionTitle = React.forwardRef<HTMLHeadingElement, SectionTitleProps>(
 
     return (
       <Title
-        className={title({ size: "sm", className })}
+        className={title({ size: "xs", className })}
         ref={ref}
         {...props}
       >

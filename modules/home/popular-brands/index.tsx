@@ -3,7 +3,7 @@ import { BrandList } from "./brand-list";
 
 const PopularBrands = () => {
   return (
-    <section>
+    <section className="pt-8 md:pt-16">
       <SectionTitle>Popular Brands</SectionTitle>
       <BrandList />
     </section>
