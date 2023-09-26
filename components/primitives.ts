@@ -52,3 +52,7 @@ export const subtitle = tv({
     fullWidth: true,
   },
 });
+
+export const link = tv({
+  base: "text-sm dark:text-slate-100 hover:underline",
+});

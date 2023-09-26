@@ -1,3 +1,5 @@
+"use client";
+
 import "keen-slider/keen-slider.min.css";
 import "@/styles/slider.css";
 import { useState } from "react";
