@@ -16,7 +16,7 @@ export const Slider = ({ content }: Items) => {
 
   return (
     <div className="navigation-wrapper">
-      <div
+      <ul
         ref={sliderRef}
         className="keen-slider min-h-[375px]"
       >
@@ -26,7 +26,7 @@ export const Slider = ({ content }: Items) => {
             key={item.id}
           />
         ))}
-      </div>
+      </ul>
 
       {loaded && instanceRef.current && (
         <>

@@ -8,8 +8,8 @@ import manifest from "@/data/index.json";
 export default function Home() {
   return (
     <>
+      <Hero />
       <section className="container mx-auto max-w-screen-2xl px-4 2xl:px-0">
-        <Hero />
         <PopularBrands />
 
         <TabSlider

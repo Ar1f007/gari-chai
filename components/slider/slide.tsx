@@ -11,7 +11,7 @@ export const Slide = (props: Slide) => {
   const { name, src, priceMin, priceMax } = props;
 
   return (
-    <div className="keen-slider__slide">
+    <li className="keen-slider__slide">
       <Card className="shadow-md border-1 border-slate-200">
         <CardHeader className="relative h-[200px]">
           <Image
@@ -37,6 +37,6 @@ export const Slide = (props: Slide) => {
           </Button>
         </CardBody>
       </Card>
-    </div>
+    </li>
   );
 };
