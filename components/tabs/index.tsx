@@ -2,20 +2,24 @@
 
 import { Tabs, Tab } from "@nextui-org/tabs";
 
-import manifest from "@/data/index.json";
 import { Slider } from "../slider";
+import type { Tabs as TypeTabs } from "@/types";
 
-export const TabsContainer = () => {
+type TabsContainer = {
+  tabs: TypeTabs;
+};
+
+export const TabsContainer = ({ tabs }: TabsContainer) => {
   return (
     <div className="flex w-full flex-col mt-6">
       <Tabs
         aria-label="Most searched cars tab"
-        items={manifest.mostSearchedCars}
+        items={tabs}
       >
         {(item) => (
           <Tab
             key={item.id}
-            title={item.id}
+            title={item.brandName}
           >
             <Slider content={item.content} />
           </Tab>

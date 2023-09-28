@@ -3,15 +3,12 @@ import Image from "next/image";
 
 import { subtitle } from "../primitives";
 import { Button } from "@nextui-org/button";
+import { TabItem } from "@/types";
 
-type Item = {
-  src: string;
-  name: string;
-  price: string;
-};
+type Slide = TabItem;
 
-export const Slide = (props: Item) => {
-  const { price, name, src } = props;
+export const Slide = (props: Slide) => {
+  const { name, src, priceMin, priceMax } = props;
 
   return (
     <div className="keen-slider__slide">
@@ -27,7 +24,10 @@ export const Slide = (props: Item) => {
         </CardHeader>
         <CardBody>
           <h2 className={subtitle()}>{name}</h2>
-          <p className="text-base mb-3">{price}</p>
+
+          <p className="text-base mb-3">
+            {priceMin} &mdash; {priceMax}
+          </p>
 
           <Button
             color="primary"
