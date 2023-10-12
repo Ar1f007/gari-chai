@@ -1,0 +1,432 @@
+{
+  "popularBrands": [
+    {
+      "id": "b-1",
+      "imgSrc": "/cars/car1.webp",
+      "brandName": "Toyota"
+    },
+    {
+      "id": "b-2",
+      "imgSrc": "/cars/car2.webp",
+      "brandName": "Honda"
+    },
+    {
+      "id": "b-3",
+      "imgSrc": "/cars/car3.webp",
+      "brandName": "Toyota"
+    },
+    {
+      "id": "b-4",
+      "imgSrc": "/cars/car3.webp",
+      "brandName": "Honda"
+    },
+
+    {
+      "id": "b-5",
+      "imgSrc": "/cars/car1.webp",
+      "brandName": "Toyota"
+    },
+    {
+      "id": "b-6",
+      "imgSrc": "/cars/car2.webp",
+      "brandName": "Honda"
+    },
+    {
+      "id": "b-7",
+      "imgSrc": "/cars/car1.webp",
+      "brandName": "Toyota"
+    },
+    {
+      "id": "b-8",
+      "imgSrc": "/cars/car3.webp",
+      "brandName": "Toyota"
+    }
+  ],
+  "mostSearchedCars": [
+    {
+      "id": "SUV",
+      "brandName": "SUV",
+      "content": [
+        {
+          "id": "id-1",
+          "src": "/cars/car1.webp",
+          "name": "SUV - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "id-2",
+          "src": "/cars/car2.webp",
+          "name": "SUV - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "id-3",
+          "src": "/cars/car3.webp",
+          "name": "SUV - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "id-4",
+          "src": "/cars/car1.webp",
+          "name": "SUV - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "id-5",
+          "src": "/cars/car3.webp",
+          "name": "SUV - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "id-6",
+          "src": "/cars/car2.webp",
+          "name": "SUV - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        }
+      ]
+    },
+    {
+      "id": "Hatchback",
+      "brandName": "Hatchback",
+      "content": [
+        {
+          "id": "id-1",
+          "src": "/cars/car2.webp",
+          "name": "Hatchback - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "id-2",
+          "src": "/cars/car3.webp",
+          "name": "Hatchback - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "id-3",
+          "src": "/cars/car1.webp",
+          "name": "Hatchback - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+
+        {
+          "id": "id-4",
+          "src": "/cars/car3.webp",
+          "name": "Hatchback - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "id-5",
+          "src": "/cars/car1.webp",
+          "name": "Hatchback - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "id-6",
+          "src": "/cars/car2.webp",
+          "name": "Hatchback - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        }
+      ]
+    },
+    {
+      "id": "Sedan",
+      "brandName": "Sedan",
+      "content": [
+        {
+          "id": "Sedan-1",
+          "src": "/cars/car1.webp",
+          "name": "Sedan - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "Sedan-2",
+          "src": "/cars/car2.webp",
+          "name": "Sedan - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "Sedan-3",
+          "src": "/cars/car3.webp",
+          "name": "Sedan - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "Sedan-4",
+          "src": "/cars/car1.webp",
+          "name": "Sedan - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "Sedan-5",
+          "src": "/cars/car3.webp",
+          "name": "Sedan - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "Sedan-6",
+          "src": "/cars/car2.webp",
+          "name": "Sedan - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        }
+      ]
+    },
+    {
+      "id": "MUV",
+      "brandName": "MUV",
+      "content": [
+        {
+          "id": "MUV-1",
+          "src": "/cars/car2.webp",
+          "name": "MUV - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "MUV-2",
+          "src": "/cars/car3.webp",
+          "name": "MUV - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "MUV-3",
+          "src": "/cars/car1.webp",
+          "name": "MUV - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "MUV-4",
+          "src": "/cars/car3.webp",
+          "name": "MUV - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "MUV-5",
+          "src": "/cars/car1.webp",
+          "name": "MUV - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "MUV-6",
+          "src": "/cars/car2.webp",
+          "name": "MUV - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        }
+      ]
+    },
+    {
+      "id": "Luxury",
+      "brandName": "Luxury",
+      "content": [
+        {
+          "id": "Luxury-1",
+          "src": "/cars/car1.webp",
+          "name": "LUXURY - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "Luxury-2",
+          "src": "/cars/car2.webp",
+          "name": "LUXURY - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "Luxury-3",
+          "src": "/cars/car3.webp",
+          "name": "LUXURY - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "Luxury-4",
+          "src": "/cars/car1.webp",
+          "name": "LUXURY - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "Luxury-5",
+          "src": "/cars/car3.webp",
+          "name": "LUXURY - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        },
+        {
+          "id": "Luxury-6",
+          "src": "/cars/car2.webp",
+          "name": "LUXURY - Tata Nexon",
+          "priceMin": "8.10",
+          "priceMax": "13.50"
+        }
+      ]
+    }
+  ],
+  "services": [
+    {
+      "serviceId": "s-1",
+      "serviceImg": "/cars/service.webp",
+      "serviceName": "Car Service History",
+      "price": {
+        "basePrice": "500",
+        "discount": "40%",
+        "salePrice": "299"
+      },
+      "btnText": "View Challan Details"
+    },
+    {
+      "serviceId": "s-2",
+      "serviceImg": "/cars/service.webp",
+      "serviceName": "Car Service History",
+      "price": {
+        "basePrice": "500",
+        "discount": "40%",
+        "salePrice": "299"
+      },
+      "btnText": "Get Report"
+    },
+    {
+      "serviceId": "s-3",
+      "serviceImg": "/cars/service.webp",
+      "serviceName": "Car Service History",
+      "price": {
+        "basePrice": "500",
+        "discount": "40%",
+        "salePrice": "299"
+      },
+      "btnText": "View Challan Details"
+    },
+    {
+      "serviceId": "s-4",
+      "serviceImg": "/cars/service.webp",
+      "serviceName": "Car Service History",
+      "price": {
+        "basePrice": "500",
+        "discount": "40%",
+        "salePrice": "299"
+      },
+      "btnText": "Get Report"
+    },
+    {
+      "serviceId": "s-5",
+      "serviceImg": "/cars/service.webp",
+      "serviceName": "Car Service History",
+      "price": {
+        "basePrice": "500",
+        "discount": "40%",
+        "salePrice": "299"
+      },
+      "btnText": "View details"
+    },
+    {
+      "serviceId": "s-6",
+      "serviceImg": "/cars/service.webp",
+      "serviceName": "Car Service History",
+      "price": {
+        "basePrice": "500",
+        "discount": "40%",
+        "salePrice": "299"
+      },
+      "btnText": "Book Now"
+    },
+    {
+      "serviceId": "s-7",
+      "serviceImg": "/cars/service.webp",
+      "serviceName": "Car Service History",
+      "price": {
+        "basePrice": "500",
+        "discount": "40%",
+        "salePrice": "299"
+      },
+      "btnText": "Book Now"
+    }
+  ],
+  "locations": [
+    { "value": "bagerhat", "label": "Bagerhat" },
+    { "value": "bandarban", "label": "Bandarban" },
+    { "value": "barguna", "label": "Barguna" },
+    { "value": "barisal", "label": "Barisal" },
+    { "value": "bhola", "label": "Bhola" },
+    { "value": "bogura", "label": "Bogura" },
+    { "value": "brahmanbaria", "label": "Brahmanbaria" },
+    { "value": "chandpur", "label": "Chandpur" },
+    { "value": "chapainawabganj", "label": "Chapainawabganj" },
+    { "value": "chattogram", "label": "Chattogram" },
+    { "value": "chuadanga", "label": "Chuadanga" },
+    { "value": "comilla", "label": "Comilla" },
+    { "value": "coxsbazar", "label": "Cox's Bazar" },
+    { "value": "dhaka", "label": "Dhaka" },
+    { "value": "dinajpur", "label": "Dinajpur" },
+    { "value": "faridpur", "label": "Faridpur" },
+    { "value": "feni", "label": "Feni" },
+    { "value": "gaibandha", "label": "Gaibandha" },
+    { "value": "gazipur", "label": "Gazipur" },
+    { "value": "gopalganj", "label": "Gopalganj" },
+    { "value": "habiganj", "label": "Habiganj" },
+    { "value": "jamalpur", "label": "Jamalpur" },
+    { "value": "jashore", "label": "Jashore (Jessore)" },
+    { "value": "jhalokati", "label": "Jhalokati" },
+    { "value": "jhenaidah", "label": "Jhenaidah" },
+    { "value": "joypurhat", "label": "Joypurhat" },
+    { "value": "khagrachari", "label": "Khagrachari" },
+    { "value": "khulna", "label": "Khulna" },
+    { "value": "kishoreganj", "label": "Kishoreganj" },
+    { "value": "kushtia", "label": "Kushtia" },
+    { "value": "lakshmipur", "label": "Lakshmipur" },
+    { "value": "lalmonirhat", "label": "Lalmonirhat" },
+    { "value": "madaripur", "label": "Madaripur" },
+    { "value": "magura", "label": "Magura" },
+    { "value": "manikganj", "label": "Manikganj" },
+    { "value": "meherpur", "label": "Meherpur" },
+    { "value": "moulvibazar", "label": "Moulvibazar" },
+    { "value": "munshiganj", "label": "Munshiganj" },
+    { "value": "mymensingh", "label": "Mymensingh" },
+    { "value": "naogaon", "label": "Naogaon" },
+    { "value": "narail", "label": "Narail" },
+    { "value": "narayanganj", "label": "Narayanganj" },
+    { "value": "narsingdi", "label": "Narsingdi" },
+    { "value": "natore", "label": "Natore" },
+    { "value": "netrokona", "label": "Netrokona" },
+    { "value": "nilphamari", "label": "Nilphamari" },
+    { "value": "noakhali", "label": "Noakhali" },
+    { "value": "pabna", "label": "Pabna" },
+    { "value": "panchagarh", "label": "Panchagarh" },
+    { "value": "patuakhali", "label": "Patuakhali" },
+    { "value": "pirojpur", "label": "Pirojpur" },
+    { "value": "rajbari", "label": "Rajbari" },
+    { "value": "rajshahi", "label": "Rajshahi" },
+    { "value": "rangamati", "label": "Rangamati" },
+    { "value": "rangpur", "label": "Rangpur" },
+    { "value": "satkhira", "label": "Satkhira" },
+    { "value": "shariatpur", "label": "Shariatpur" },
+    { "value": "sherpur", "label": "Sherpur" },
+    { "value": "sirajganj", "label": "Sirajganj" },
+    { "value": "sunamganj", "label": "Sunamganj" },
+    { "value": "sylhet", "label": "Sylhet" },
+    { "value": "tangail", "label": "Tangail" },
+    { "value": "thakurgaon", "label": "Thakurgaon" }
+  ]
+}
