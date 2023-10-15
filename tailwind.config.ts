@@ -17,6 +17,9 @@ const config: Config = {
       translate: {
         full: '100%',
       },
+      transitionProperty: {
+        height: 'height',
+      },
       minWidth: {
         '0': '0',
         '24': '6rem',
