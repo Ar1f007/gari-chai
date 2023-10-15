@@ -86,7 +86,7 @@ export const siteConfig = {
     {
       id: 'item-3',
       label: 'Item 3',
-      href: '/asdasd/asdasd',
+      href: '/todo',
       hasChildren: false,
     },
   ],

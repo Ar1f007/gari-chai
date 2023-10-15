@@ -1,21 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import clsx from 'clsx';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 import {
   NavbarBrand,
   NavbarContent,
   NavbarMenu,
-  NavbarMenuItem,
   NavbarMenuToggle,
   Navbar as NextUINavbar,
 } from '@nextui-org/navbar';
 
 import { Button } from '@nextui-org/button';
-import { link as linkStyles } from '@nextui-org/theme';
 import { Select, SelectItem } from '@nextui-org/select';
 
 import { Logo } from '@/components/icons';
@@ -29,21 +24,21 @@ import Icon from '@/components/icon';
 import manifest from '@/data/index.json';
 import MenuItems from './multi-dropdown/menu-items';
 import NavItem from './NavItem';
+import { useSnapshot } from 'valtio';
+import { layoutActions, layoutStore } from '@/store';
+import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const navLinkClasses = clsx(
-    linkStyles({ color: 'foreground', size: 'lg' }),
-    'data-[active=true]:text-primary-50 data-[active=true]:font-medium capitalize',
-  );
+  const { isMenuOpen } = useSnapshot(layoutStore);
 
   const pathname = usePathname();
 
   useEffect(() => {
     if (isMenuOpen) {
-      setIsMenuOpen(false);
+      layoutActions.toggleMenuState(false);
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
@@ -53,7 +48,7 @@ const Navbar = () => {
       <NextUINavbar
         maxWidth='2xl'
         isMenuOpen={isMenuOpen}
-        onMenuOpenChange={setIsMenuOpen}
+        onMenuOpenChange={layoutActions.toggleMenuState}
         className='shadow-sm'
         classNames={{
           wrapper: '2xl:px-0',
@@ -84,6 +79,7 @@ const Navbar = () => {
                     key={item.id}
                     item={item}
                     depthLevel={depthLevel}
+                    currentActivePathname={pathname}
                   />
                 );
               })}
@@ -124,6 +120,7 @@ const Navbar = () => {
                 <NavItem
                   key={item.id}
                   item={item}
+                  currentActivePathname={pathname}
                 />
               ))}
             </ul>

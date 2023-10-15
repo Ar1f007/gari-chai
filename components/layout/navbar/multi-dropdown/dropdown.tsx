@@ -7,10 +7,12 @@ const Dropdown = ({
   submenus,
   dropdown,
   depthLevel,
+  currentActivePathname,
 }: {
   submenus: TDropdownItem[];
   dropdown: boolean;
   depthLevel: number;
+  currentActivePathname: string;
 }) => {
   depthLevel += 1;
 
@@ -29,6 +31,7 @@ const Dropdown = ({
           key={submenu.id}
           item={submenu}
           depthLevel={depthLevel}
+          currentActivePathname={currentActivePathname}
         />
       ))}
     </ul>

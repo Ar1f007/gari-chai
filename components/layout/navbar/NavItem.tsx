@@ -2,19 +2,22 @@ import { TDropdownItem } from '@/types';
 
 import clsx from 'clsx';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 import { NavbarMenuItem } from '@nextui-org/navbar';
 
 import { link as linkStyles } from '@nextui-org/theme';
 import { Button } from '@nextui-org/button';
 import { ChevronDown } from '@/components/icons';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-const NavItem = ({ item }: { item: TDropdownItem }) => {
+const NavItem = ({
+  item,
+  currentActivePathname,
+}: {
+  item: TDropdownItem;
+  currentActivePathname: string;
+}) => {
   const [dropdown, setDropdown] = useState(false);
-
-  const pathname = usePathname();
 
   const navLinkClasses = clsx(
     linkStyles({ color: 'foreground', size: dropdown ? 'md' : 'lg' }),
@@ -25,8 +28,6 @@ const NavItem = ({ item }: { item: TDropdownItem }) => {
     linkStyles({ color: 'foreground', size: 'lg' }),
     'justify-start capitalize p-0 h-6',
   );
-
-  useEffect(() => {}, [pathname]);
 
   if (item.hasChildren) {
     return (
@@ -55,6 +56,7 @@ const NavItem = ({ item }: { item: TDropdownItem }) => {
               <NavItem
                 key={item.id}
                 item={item}
+                currentActivePathname={currentActivePathname}
               />
             ))}
           </ul>
@@ -67,7 +69,7 @@ const NavItem = ({ item }: { item: TDropdownItem }) => {
     <NavbarMenuItem>
       <Link
         href={item.href}
-        data-active={pathname === item.href}
+        data-active={currentActivePathname === item.href}
         className={clsx('w-full', navLinkClasses)}
       >
         {item.label}
