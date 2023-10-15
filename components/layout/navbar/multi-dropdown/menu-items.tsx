@@ -3,17 +3,22 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
-import { usePathname } from 'next/navigation';
 import { link as linkStyles } from '@nextui-org/theme';
 import { NavbarItem } from '@nextui-org/navbar';
 import Dropdown from './dropdown';
 import { ChevronDown } from '@/components/icons';
 import { TDropdownItem } from '@/types';
 
-const MenuItems = ({ item, depthLevel }: { item: TDropdownItem; depthLevel: number }) => {
+const MenuItems = ({
+  item,
+  depthLevel,
+  currentActivePathname,
+}: {
+  item: TDropdownItem;
+  depthLevel: number;
+  currentActivePathname: string;
+}) => {
   const [dropdown, setDropdown] = useState(false);
-
-  const pathname = usePathname();
 
   const navLinkClasses = clsx(
     linkStyles({ color: 'foreground', size: depthLevel > 0 ? 'md' : 'lg' }),
@@ -69,6 +74,7 @@ const MenuItems = ({ item, depthLevel }: { item: TDropdownItem; depthLevel: numb
               submenus={item.children}
               dropdown={dropdown}
               depthLevel={depthLevel}
+              currentActivePathname={currentActivePathname}
             />
           </>
         </li>
@@ -77,7 +83,7 @@ const MenuItems = ({ item, depthLevel }: { item: TDropdownItem; depthLevel: numb
           <Link
             href={item.href}
             color='foreground'
-            data-active={pathname === item.href}
+            data-active={currentActivePathname === item.href}
             className={navLinkClasses}
           >
             {item.label}
