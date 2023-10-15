@@ -28,6 +28,7 @@ import Icon from '@/components/icon';
 
 import manifest from '@/data/index.json';
 import MenuItems from './multi-dropdown/menu-items';
+import NavItem from './NavItem';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -118,17 +119,12 @@ const Navbar = () => {
             <Search />
           </li>
           <li>
-            <ul className='mx-4 mt-2 flex flex-col gap-2'>
-              {siteConfig.navMenuItems.map((item, index) => (
-                <NavbarMenuItem key={`${item}-${index}`}>
-                  <Link
-                    href={item.href}
-                    data-active={pathname === item.href}
-                    className={clsx('w-full', navLinkClasses)}
-                  >
-                    {item.label}
-                  </Link>
-                </NavbarMenuItem>
+            <ul className='mx-4 mt-2 flex flex-col gap-6'>
+              {siteConfig.navMenuItems.map((item) => (
+                <NavItem
+                  key={item.id}
+                  item={item}
+                />
               ))}
             </ul>
           </li>
