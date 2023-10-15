@@ -14,7 +14,23 @@ const config: Config = {
       screens: {
         '3xl': '1664px',
       },
+      translate: {
+        full: '100%',
+      },
+      minWidth: {
+        '0': '0',
+        '24': '6rem',
+        '32': '8rem',
+        '1/4': '25%',
+        '1/2': '50%',
+        '3/4': '75%',
+        full: '100%',
+      },
     },
+  },
+  variants: {
+    rotate: ['responsive', 'hover', 'group-hover'],
+    scale: ['responsive', 'hover', 'group-hover'],
   },
   darkMode: 'class',
   plugins: [
@@ -29,10 +45,10 @@ const config: Config = {
               '300': '#056d4d',
               '400': '#057956',
               '500': '#1e8667',
-              '600': '#379478',
-              '700': '#50a189',
-              '800': '#69af9a',
-              '900': '#82bcab',
+              '600': '#78b6a4',
+              '700': '#ADDDC0',
+              '800': '#d2e7e1',
+              '900': '#e9f3f0',
               DEFAULT: '#057956',
               foreground: '#3e444d',
             },

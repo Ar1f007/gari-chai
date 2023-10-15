@@ -8,12 +8,12 @@ import { usePathname } from 'next/navigation';
 import {
   NavbarBrand,
   NavbarContent,
-  NavbarItem,
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
   Navbar as NextUINavbar,
 } from '@nextui-org/navbar';
+
 import { Button } from '@nextui-org/button';
 import { link as linkStyles } from '@nextui-org/theme';
 import { Select, SelectItem } from '@nextui-org/select';
@@ -27,6 +27,7 @@ import { routes } from '@/config/routes';
 import Icon from '@/components/icon';
 
 import manifest from '@/data/index.json';
+import MenuItems from './multi-dropdown/menu-items';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -57,6 +58,7 @@ const Navbar = () => {
           wrapper: '2xl:px-0',
         }}
       >
+        {/* Desktop */}
         <NavbarContent className='hidden w-full lg:flex'>
           <li className='w-full max-w-[200px] lg:min-w-[200px]'>
             <Select
@@ -74,18 +76,16 @@ const Navbar = () => {
 
           <li className='flex-auto justify-center'>
             <ul className='ml-2 flex justify-center gap-4 2xl:gap-8'>
-              {siteConfig.navMenuItems.map((item) => (
-                <NavbarItem key={item.href}>
-                  <Link
-                    href={item.href}
-                    color='foreground'
-                    data-active={pathname === item.href}
-                    className={navLinkClasses}
-                  >
-                    {item.label}
-                  </Link>
-                </NavbarItem>
-              ))}
+              {siteConfig.navMenuItems.map((item) => {
+                const depthLevel = 0;
+                return (
+                  <MenuItems
+                    key={item.id}
+                    item={item}
+                    depthLevel={depthLevel}
+                  />
+                );
+              })}
             </ul>
           </li>
 
@@ -102,6 +102,7 @@ const Navbar = () => {
           </li>
         </NavbarContent>
 
+        {/* Mobile */}
         <NavbarContent className='lg:hidden'>
           <NavbarBrand as='li'>
             <Link href={routes.home}>
