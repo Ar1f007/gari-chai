@@ -12,16 +12,18 @@ export const routes = {
   latestCars: '/latest-cars',
 
   videoAndReels: 'video-and-reels',
-  buyParts: 'buy-parts',
+  videos: '/videos',
+  reels: '/reels',
+  buyParts: '/buy-parts',
+
+  buyAndSellUsedCars: '/buy-and-sell-cars',
+  buyUsedCar: '/buy-used-cars',
+  sellUsedCar: '/sell-used-car',
+
+  services: '/services',
 };
 
 export const navMenuItems: SiteConfig['navMenuItems'] = [
-  {
-    id: 'menu-0',
-    label: 'Home',
-    href: routes.home,
-    hasChildren: false,
-  },
   {
     id: 'menu-1',
     label: 'New Cars',
@@ -52,12 +54,61 @@ export const navMenuItems: SiteConfig['navMenuItems'] = [
     id: 'menu-2',
     label: 'Videos & Reels',
     href: routes.videoAndReels,
-    hasChildren: false,
+    hasChildren: true,
+    children: [
+      {
+        id: 'menu-2-1',
+        label: 'Videos',
+        href: routes.videos,
+        hasChildren: false,
+      },
+      {
+        id: 'menu-2-2',
+        label: 'Reels',
+        href: routes.reels,
+        hasChildren: false,
+      },
+    ],
   },
   {
     id: 'menu-3',
     label: 'Buy Parts',
     href: routes.buyParts,
     hasChildren: false,
+  },
+  {
+    id: 'menu-4',
+    label: 'Buy & Sell Used Cars',
+    href: routes.buyAndSellUsedCars,
+    hasChildren: true,
+    children: [
+      {
+        id: 'menu-4-1',
+        label: 'Buy Used Car',
+        href: routes.buyUsedCar,
+        hasChildren: false,
+      },
+      {
+        id: 'menu-4-2',
+        label: 'Sell Car',
+        href: routes.sellUsedCar,
+        hasChildren: false,
+      },
+    ],
+  },
+
+  {
+    id: 'menu-5',
+    label: 'Car Services',
+    href: routes.services,
+    hasChildren: true,
+    children: [
+      {
+        id: 'menu-5-1',
+        label: 'Service 1',
+        href: '/services',
+        hasChildren: false,
+      },
+    ],
   },
 ];
