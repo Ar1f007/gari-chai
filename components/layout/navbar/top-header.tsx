@@ -6,6 +6,7 @@ import Search from '@/components/search';
 import { routes } from '@/config/routes';
 
 const TopHeader = () => {
+  console.log('top');
   return (
     <div className='gap container mx-auto hidden h-16 w-full max-w-screen-2xl items-center gap-1 px-6 lg:flex 2xl:px-0'>
       <div className='shrink-0 basis-1/3'>

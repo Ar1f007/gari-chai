@@ -1,4 +1,4 @@
-import { TDropdownItem } from '@/types';
+import { TNavItem } from '@/types';
 
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -8,13 +8,13 @@ import { NavbarMenuItem } from '@nextui-org/navbar';
 import { link as linkStyles } from '@nextui-org/theme';
 import { Button } from '@nextui-org/button';
 import { ChevronDown } from '@/components/icons';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
 const NavItem = ({
   item,
   currentActivePathname,
 }: {
-  item: TDropdownItem;
+  item: TNavItem;
   currentActivePathname: string;
 }) => {
   const [dropdown, setDropdown] = useState(false);
@@ -77,4 +77,4 @@ const NavItem = ({
     </NavbarMenuItem>
   );
 };
-export default NavItem;
+export default memo(NavItem);
