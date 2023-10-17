@@ -1,4 +1,18 @@
-const page = () => {
-  return <div>page</div>;
+'use client';
+import { useSetActivePathname } from '@/hooks/useSetActivePathname';
+import { usePathname } from 'next/navigation';
+
+const A = () => {
+  const p = usePathname();
+
+  return <>{p}</>;
 };
-export default page;
+
+const Page = () => {
+  return (
+    <div>
+      <A />
+    </div>
+  );
+};
+export default Page;

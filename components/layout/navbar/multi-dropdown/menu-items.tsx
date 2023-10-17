@@ -1,24 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { link as linkStyles } from '@nextui-org/theme';
 import { NavbarItem } from '@nextui-org/navbar';
 import Dropdown from './dropdown';
 import { ChevronDown } from '@/components/icons';
-import { TDropdownItem } from '@/types';
+import { TNavItem } from '@/types';
+import { usePathname } from 'next/navigation';
 
-const MenuItems = ({
-  item,
-  depthLevel,
-  currentActivePathname,
-}: {
-  item: TDropdownItem;
-  depthLevel: number;
-  currentActivePathname: string;
-}) => {
+const MenuItems = ({ item, depthLevel }: { item: TNavItem; depthLevel: number }) => {
   const [dropdown, setDropdown] = useState(false);
+  const pathname = usePathname();
 
   const navLinkClasses = clsx(
     linkStyles({ color: 'foreground', size: depthLevel > 0 ? 'md' : 'lg' }),
@@ -74,7 +68,6 @@ const MenuItems = ({
               submenus={item.children}
               dropdown={dropdown}
               depthLevel={depthLevel}
-              currentActivePathname={currentActivePathname}
             />
           </>
         </li>
@@ -83,7 +76,7 @@ const MenuItems = ({
           <Link
             href={item.href}
             color='foreground'
-            data-active={currentActivePathname === item.href}
+            data-active={pathname === item.href}
             className={navLinkClasses}
           >
             {item.label}
@@ -94,4 +87,4 @@ const MenuItems = ({
   );
 };
 
-export default MenuItems;
+export default memo(MenuItems);

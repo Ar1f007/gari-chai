@@ -17,17 +17,15 @@ export type TNavLink = {
   label: string;
 };
 
-export type TDropdownItemWithChildren = {
+export type TNavLinkWithChildren = {
   hasChildren: true;
-  children: TDropdownItem[];
+  children: TNavItem[];
 } & TNavLink;
 
-export type TDropdownItemWithoutChildren = {
+export type TNavLinkWithoutChildren = {
   hasChildren: false;
 } & TNavLink;
 
-export type TDropdownItem = TDropdownItemWithChildren | TDropdownItemWithoutChildren;
+export type TNavItem = TNavLinkWithChildren | TNavLinkWithoutChildren;
 
-export type TDropdownList = TDropdownItem[];
-
-export type NavItems = TDropdownItem[];
+export type TNavItems = TNavItem[];

@@ -19,24 +19,35 @@ import Search from '@/components/search';
 
 import { siteConfig } from '@/config/site';
 import { routes } from '@/config/routes';
-import Icon from '@/components/icon';
 
-import manifest from '@/data/index.json';
 import MenuItems from './multi-dropdown/menu-items';
-import NavItem from './NavItem';
 import { useSnapshot } from 'valtio';
-import { layoutActions, layoutStore } from '@/store';
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
+import { settingsActions, settingsStore } from '@/store';
+import SelectLocation from './SelectLocation';
 
 const Navbar = () => {
-  const { isMenuOpen } = useSnapshot(layoutStore);
+  const settingSnap = useSnapshot(settingsStore);
 
   const pathname = usePathname();
 
+  function renderNavMenuItems() {
+    return siteConfig.navMenuItems.map((item) => {
+      const depthLevel = 0;
+      return (
+        <MenuItems
+          key={item.id}
+          item={item}
+          depthLevel={depthLevel}
+        />
+      );
+    });
+  }
+
   useEffect(() => {
-    if (isMenuOpen) {
-      layoutActions.toggleMenuState(false);
+    if (settingsStore.layout.isMenuOpen) {
+      settingsActions.toggleMenuState(false);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -44,11 +55,10 @@ const Navbar = () => {
 
   return (
     <>
-      <TopHeader />
       <NextUINavbar
         maxWidth='2xl'
-        isMenuOpen={isMenuOpen}
-        onMenuOpenChange={layoutActions.toggleMenuState}
+        isMenuOpen={settingSnap.layout.isMenuOpen}
+        onMenuOpenChange={settingsActions.toggleMenuState}
         className='shadow-sm'
         classNames={{
           wrapper: '2xl:px-0',
@@ -57,33 +67,11 @@ const Navbar = () => {
         {/* Desktop */}
         <NavbarContent className='hidden w-full lg:flex'>
           <li className='w-full max-w-[200px] lg:min-w-[200px]'>
-            <Select
-              label='Select location'
-              startContent={<Icon name='map-pin' />}
-              defaultSelectedKeys={['dhaka']}
-              size='sm'
-              className='min-w-[180px]'
-            >
-              {manifest.locations.map((location) => (
-                <SelectItem key={location.value}>{location.label}</SelectItem>
-              ))}
-            </Select>
+            <SelectLocation />
           </li>
 
           <li className='flex-auto justify-center'>
-            <ul className='ml-2 flex justify-center gap-4 2xl:gap-8'>
-              {siteConfig.navMenuItems.map((item) => {
-                const depthLevel = 0;
-                return (
-                  <MenuItems
-                    key={item.id}
-                    item={item}
-                    depthLevel={depthLevel}
-                    currentActivePathname={pathname}
-                  />
-                );
-              })}
-            </ul>
+            <ul className='ml-2 flex justify-center gap-4 2xl:gap-8'>{renderNavMenuItems()}</ul>
           </li>
 
           <li>
@@ -115,15 +103,7 @@ const Navbar = () => {
             <Search />
           </li>
           <li>
-            <ul className='mx-4 mt-2 flex flex-col gap-6'>
-              {siteConfig.navMenuItems.map((item) => (
-                <NavItem
-                  key={item.id}
-                  item={item}
-                  currentActivePathname={pathname}
-                />
-              ))}
-            </ul>
+            <ul className='mx-4 mt-2 flex flex-col gap-6'>{renderNavMenuItems()}</ul>
           </li>
         </NavbarMenu>
       </NextUINavbar>

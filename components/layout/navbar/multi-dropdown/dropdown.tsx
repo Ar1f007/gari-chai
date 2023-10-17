@@ -1,18 +1,16 @@
 import clsx from 'clsx';
 import MenuItems from '../multi-dropdown/menu-items';
 
-import { TDropdownItem } from '@/types';
+import { TNavItem } from '@/types';
 
 const Dropdown = ({
   submenus,
   dropdown,
   depthLevel,
-  currentActivePathname,
 }: {
-  submenus: TDropdownItem[];
+  submenus: TNavItem[];
   dropdown: boolean;
   depthLevel: number;
-  currentActivePathname: string;
 }) => {
   depthLevel += 1;
 
@@ -31,7 +29,6 @@ const Dropdown = ({
           key={submenu.id}
           item={submenu}
           depthLevel={depthLevel}
-          currentActivePathname={currentActivePathname}
         />
       ))}
     </ul>
