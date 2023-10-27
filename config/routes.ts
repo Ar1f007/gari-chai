@@ -7,9 +7,9 @@ export const routes = {
   brands: '/brands',
   loan: '/loan',
 
-  newCars: '/new-cars',
-  popularCars: '/popular-cars',
-  latestCars: '/latest-cars',
+  newCars: '/cars/new',
+  popularCars: '/cars/popular',
+  latestCars: '/cars/latest',
 
   videoAndReels: 'video-and-reels',
   videos: '/videos',
@@ -18,7 +18,7 @@ export const routes = {
 
   buyAndSellUsedCars: '/buy-and-sell-cars',
   buyUsedCar: '/buy-used-cars',
-  sellUsedCar: '/sell-used-car',
+  sellUsedCar: '/sell-cars',
 
   services: '/services',
 };
