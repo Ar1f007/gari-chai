@@ -7,6 +7,7 @@ export const routes = {
   brands: '/brands',
   loan: '/loan',
 
+  cars: '/cars',
   newCars: '/cars/new',
   popularCars: '/cars/popular',
   latestCars: '/cars/latest',
@@ -26,20 +27,20 @@ export const routes = {
 export const navMenuItems: SiteConfig['navMenuItems'] = [
   {
     id: 'menu-1',
-    label: 'New Cars',
+    label: 'Cars',
     href: routes.newCars,
     hasChildren: true,
     children: [
       {
         id: 'menu-1-1',
-        label: 'Explore new cars',
-        href: routes.newCars,
+        label: 'Explore cars',
+        href: routes.cars,
         hasChildren: false,
       },
       {
         id: 'menu-1-2',
         label: 'Popular cars',
-        href: routes.newCars,
+        href: routes.popularCars,
         hasChildren: false,
       },
       {
