@@ -11,10 +11,8 @@ import {
 } from '@nextui-org/navbar';
 
 import { Button } from '@nextui-org/button';
-import { Select, SelectItem } from '@nextui-org/select';
 
 import { Logo } from '@/components/icons';
-import TopHeader from './top-header';
 import Search from '@/components/search';
 
 import { siteConfig } from '@/config/site';
@@ -26,6 +24,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 import { settingsActions, settingsStore } from '@/store';
 import SelectLocation from './SelectLocation';
+import NavItem from './NavItem';
 
 const Navbar = () => {
   const settingSnap = useSnapshot(settingsStore);
@@ -103,7 +102,15 @@ const Navbar = () => {
             <Search />
           </li>
           <li>
-            <ul className='mx-4 mt-2 flex flex-col gap-6'>{renderNavMenuItems()}</ul>
+            <ul className='mx-4 mt-2 flex flex-col gap-6'>
+              {siteConfig.navMenuItems.map((item) => (
+                <NavItem
+                  key={item.id}
+                  item={item}
+                  currentActivePathname={pathname}
+                />
+              ))}
+            </ul>
           </li>
         </NavbarMenu>
       </NextUINavbar>
