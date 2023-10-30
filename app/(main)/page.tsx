@@ -1,6 +1,7 @@
 import Hero from '@/modules/home/hero';
 import { LatestCars } from '@/modules/home/latest-cars';
 import PopularBrands from '@/modules/home/popular-brands/popular-brands';
+import { PopularCars } from '@/modules/home/popular-cars';
 
 const Homepage = () => {
   return (
@@ -11,6 +12,8 @@ const Homepage = () => {
         <PopularBrands />
 
         <LatestCars />
+
+        <PopularCars />
       </section>
     </>
   );

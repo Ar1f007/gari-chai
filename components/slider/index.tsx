@@ -17,12 +17,12 @@ const Sliders = ({ children }: Props) => {
     <div className='navigation-wrapper'>
       <ul
         ref={sliderRef}
-        className='keen-slider gap-5'
+        className='keen-slider'
       >
         {children}
       </ul>
 
-      {loaded && instanceRef.current && (
+      {loaded && instanceRef.current && instanceRef.current.size >= 1 && (
         <>
           <Arrow
             left
