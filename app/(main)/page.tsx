@@ -1,3 +1,4 @@
+import { ElectricCars } from '@/modules/home/electric-cars';
 import Hero from '@/modules/home/hero';
 import { LatestCars } from '@/modules/home/latest-cars';
 import PopularBrands from '@/modules/home/popular-brands/popular-brands';
@@ -14,6 +15,8 @@ const Homepage = () => {
         <LatestCars />
 
         <PopularCars />
+
+        <ElectricCars />
       </section>
     </>
   );

@@ -22,7 +22,7 @@ const Sliders = ({ children }: Props) => {
         {children}
       </ul>
 
-      {loaded && instanceRef.current && instanceRef.current.size >= 1 && (
+      {loaded && instanceRef.current && instanceRef.current.track.details.length >= 1 && (
         <>
           <Arrow
             left
