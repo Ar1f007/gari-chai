@@ -14,3 +14,5 @@ export const homeSettingApiSchemaSingleInstance = z.object({
 export type THomeSettingApiSchemaSingleInstance = z.infer<
   typeof homeSettingApiSchemaSingleInstance
 >;
+
+export type TCarsByTagName = { name: string; items: THomeSettingApiSchemaSingleInstance[] };

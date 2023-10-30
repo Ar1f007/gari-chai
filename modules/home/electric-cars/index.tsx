@@ -1,0 +1,53 @@
+import { subtitle } from '@/components/primitives';
+import SectionTitle from '@/components/section-title';
+import Sliders from '@/components/slider';
+import { routes } from '@/config/routes';
+import { HOME_SETTINGS_OPTIONS } from '@/lib/constants';
+import { THomeSettingApiSchemaSingleInstance } from '@/schema/common';
+import { getHomePageCarsBySection } from '@/services';
+import { Card, CardBody, CardHeader } from '@nextui-org/card';
+import Image from 'next/image';
+import Link from 'next/link';
+import { TabSlider } from './TabSlider';
+
+function groupCarsByTag(
+  cars: THomeSettingApiSchemaSingleInstance[],
+): { name: string; items: THomeSettingApiSchemaSingleInstance[] }[] {
+  const groupedCars: { [key: string]: THomeSettingApiSchemaSingleInstance[] } = {};
+
+  // Group cars by tags
+  for (const car of cars) {
+    for (const tag of car.tags) {
+      if (!groupedCars[tag]) {
+        groupedCars[tag] = [];
+      }
+      groupedCars[tag].push(car);
+    }
+  }
+
+  // Convert the grouped data into the desired format
+  const result: { name: string; items: THomeSettingApiSchemaSingleInstance[] }[] = [];
+  for (const tag in groupedCars) {
+    let tagName = tag.split('-')[0];
+
+    result.push({ name: tagName, items: groupedCars[tag] });
+  }
+
+  return result;
+}
+
+export const ElectricCars = async () => {
+  const res = await getHomePageCarsBySection(HOME_SETTINGS_OPTIONS.electricCars);
+
+  if (!res || res.length === 0) return null;
+
+  const groupedCars = groupCarsByTag(res);
+
+  return (
+    <section className='mt-8 rounded-xl bg-background px-6 py-8 shadow-md md:mt-16'>
+      <SectionTitle>Electric Cars</SectionTitle>
+
+      <TabSlider data={groupedCars} />
+    </section>
+  );
+};

@@ -11,6 +11,7 @@ export const routes = {
   newCars: '/cars/new',
   popularCars: '/cars/popular',
   latestCars: '/cars/latest',
+  electricCars: '/cars/electric',
 
   videoAndReels: 'video-and-reels',
   videos: '/videos',
