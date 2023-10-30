@@ -29,3 +29,29 @@ export type TNavLinkWithoutChildren = {
 export type TNavItem = TNavLinkWithChildren | TNavLinkWithoutChildren;
 
 export type TNavItems = TNavItem[];
+
+/**
+ * API
+ */
+export type TApiData<T> = {
+  data: T;
+  status: 'success';
+};
+
+type TApiErrorData = {
+  status: 'error' | 'fail';
+  message: string;
+};
+
+type FieldError = {
+  fieldName: string;
+  message: string;
+};
+
+export type TApiValidationError = {
+  status: 'validationError';
+  message: string;
+  errors: FieldError[];
+};
+
+export type TApiError = TApiErrorData | TApiValidationError;
