@@ -6,9 +6,9 @@ const BREAKPOINT_LARGE = '(min-width: 1400px)';
 const SLIDE_PER_VIEW_SMALL = 2;
 const SLIDE_PER_VIEW_MEDIUM = 3;
 const SLIDE_PER_VIEW_LARGE = 4;
-const SLIDE_SPACING_SMALL = 0;
-const SLIDE_SPACING_MEDIUM = 0;
-const SLIDE_SPACING_LARGE = 0;
+const SLIDE_SPACING_SMALL = 15;
+const SLIDE_SPACING_MEDIUM = 20;
+const SLIDE_SPACING_LARGE = 20;
 
 export const defaultKeenOptions: KeenSliderOptions = {
   initial: 0,
