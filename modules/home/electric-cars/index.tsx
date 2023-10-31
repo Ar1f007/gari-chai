@@ -1,13 +1,8 @@
-import { subtitle } from '@/components/primitives';
 import SectionTitle from '@/components/section-title';
-import Sliders from '@/components/slider';
-import { routes } from '@/config/routes';
+
 import { HOME_SETTINGS_OPTIONS } from '@/lib/constants';
 import { THomeSettingApiSchemaSingleInstance } from '@/schema/common';
 import { getHomePageCarsBySection } from '@/services';
-import { Card, CardBody, CardHeader } from '@nextui-org/card';
-import Image from 'next/image';
-import Link from 'next/link';
 import { TabSlider } from './TabSlider';
 
 function groupCarsByTag(

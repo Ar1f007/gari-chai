@@ -4,9 +4,9 @@ import SectionTitle from '@/components/section-title';
 import { subtitle } from '@/components/primitives';
 import { Card, CardBody, CardHeader } from '@nextui-org/card';
 import Image from 'next/image';
-import Sliders from '@/components/slider';
 import Link from 'next/link';
 import { routes } from '@/config/routes';
+import Sliders from '@/components/slider';
 
 export const PopularCars = async () => {
   const res = await getHomePageCarsBySection(HOME_SETTINGS_OPTIONS.popularCars);

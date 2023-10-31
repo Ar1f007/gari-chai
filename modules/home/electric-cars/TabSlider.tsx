@@ -2,6 +2,7 @@
 
 import { subtitle } from '@/components/primitives';
 import Sliders from '@/components/slider';
+
 import { routes } from '@/config/routes';
 import { TCarsByTagName } from '@/schema/common';
 import { Button } from '@nextui-org/button';
