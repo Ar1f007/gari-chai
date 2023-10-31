@@ -15,7 +15,7 @@ export const SearchParams = {
   getAllBrands: 'get=all',
 };
 
-// Home settings
+// Home settings keys
 
 export const HOME_SETTINGS_OPTIONS = {
   latestCars: 'latest-cars',
@@ -24,27 +24,14 @@ export const HOME_SETTINGS_OPTIONS = {
   services: 'services',
   mostSearched: 'most-searched',
   popularBrands: 'popular-brands',
+  upcomingCars: 'upcoming-cars',
 };
-
-export const settingsSectionToAddOptions = [
-  {
-    value: HOME_SETTINGS_OPTIONS.latestCars,
-    label: 'Latest Car',
-  },
-  {
-    value: HOME_SETTINGS_OPTIONS.popularCars,
-    label: 'Popular Car',
-  },
-  {
-    value: HOME_SETTINGS_OPTIONS.electricCars,
-    label: 'Electric Car',
-  },
-];
 
 export const homePageSectionNameEnum = z.enum([
   HOME_SETTINGS_OPTIONS.mostSearched,
   HOME_SETTINGS_OPTIONS.latestCars,
   HOME_SETTINGS_OPTIONS.popularCars,
+  HOME_SETTINGS_OPTIONS.upcomingCars,
   HOME_SETTINGS_OPTIONS.electricCars,
   HOME_SETTINGS_OPTIONS.services,
 ]);
