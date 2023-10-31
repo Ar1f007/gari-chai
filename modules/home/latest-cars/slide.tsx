@@ -1,6 +1,7 @@
 import { Card, CardBody, CardHeader } from '@nextui-org/card';
 import Image from 'next/image';
 
+import { Button } from '@nextui-org/button';
 import { subtitle } from '@/components/primitives';
 import { THomeSettingApiSchemaSingleInstance } from '@/schema/common';
 
