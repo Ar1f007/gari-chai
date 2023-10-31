@@ -1,5 +1,5 @@
 import { HOME_SETTINGS_OPTIONS } from '@/lib/constants';
-import { getHomePageLatestCars } from '@/services';
+import { getHomePageCarsBySection } from '@/services';
 import SectionTitle from '@/components/section-title';
 import { subtitle } from '@/components/primitives';
 import { Card, CardBody, CardHeader } from '@nextui-org/card';
@@ -9,9 +9,9 @@ import Link from 'next/link';
 import { routes } from '@/config/routes';
 
 export const LatestCars = async () => {
-  const res = await getHomePageLatestCars(HOME_SETTINGS_OPTIONS.latestCars);
+  const res = await getHomePageCarsBySection(HOME_SETTINGS_OPTIONS.latestCars);
 
-  if (!res) {
+  if (!res || !res.length) {
     return null;
   }
 

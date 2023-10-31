@@ -35,7 +35,7 @@ export async function getHomePageCarsBySection(sectionName: string) {
         return parsedData.data;
       }
 
-      throw new Error('Home: Latest Cars data missing');
+      throw new Error(`Home: ${sectionName} data missing`);
     }
 
     return undefined;
