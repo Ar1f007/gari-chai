@@ -22,13 +22,13 @@ export const HOME_SETTINGS_OPTIONS = {
   popularCars: 'popular-cars',
   electricCars: 'electric-cars',
   services: 'services',
-  mostSearched: 'most-searched',
+  mostSearchedCars: 'most-searched-cars',
   popularBrands: 'popular-brands',
   upcomingCars: 'upcoming-cars',
 };
 
 export const homePageSectionNameEnum = z.enum([
-  HOME_SETTINGS_OPTIONS.mostSearched,
+  HOME_SETTINGS_OPTIONS.mostSearchedCars,
   HOME_SETTINGS_OPTIONS.latestCars,
   HOME_SETTINGS_OPTIONS.popularCars,
   HOME_SETTINGS_OPTIONS.upcomingCars,
