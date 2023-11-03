@@ -21,7 +21,7 @@ import { routes } from '@/config/routes';
 import MenuItems from './multi-dropdown/menu-items';
 import { useSnapshot } from 'valtio';
 import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { settingsActions, settingsStore } from '@/store';
 import SelectLocation from './SelectLocation';
 import NavItem from './NavItem';
@@ -99,7 +99,9 @@ const Navbar = () => {
 
         <NavbarMenu>
           <li>
-            <Search />
+            <Suspense>
+              <Search />
+            </Suspense>
           </li>
           <li>
             <ul className='mx-4 mt-2 flex flex-col gap-6'>

@@ -4,6 +4,7 @@ import { Logo } from '@/components/icons';
 import Icon from '@/components/icon';
 import Search from '@/components/search';
 import { routes } from '@/config/routes';
+import { Suspense } from 'react';
 
 const TopHeader = () => {
   return (
@@ -15,7 +16,9 @@ const TopHeader = () => {
       </div>
 
       <div className='shrink-0 basis-1/3'>
-        <Search />
+        <Suspense>
+          <Search />
+        </Suspense>
       </div>
 
       <div className='basic-1/3 flex w-full justify-end text-primary'>
