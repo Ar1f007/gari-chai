@@ -4,11 +4,7 @@ import { apiFetch } from '../apiFetch';
 import { ReqMethod } from '../serviceHelper';
 import { TAGS } from '../tags';
 import { z } from 'zod';
-import {
-  TCarsByTagName,
-  THomeSettingApiSchemaSingleInstance,
-  homeSettingApiSchemaSingleInstance,
-} from '@/schema/common';
+import { homeSettingApiSchemaSingleInstance } from '@/schema/common';
 
 export async function getHomePageCarsBySection(sectionName: string) {
   const parsedSectionName = homePageSectionNameEnum.safeParse(sectionName);
