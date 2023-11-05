@@ -1,7 +1,6 @@
 import { proxy } from 'valtio';
 import { devtools } from 'valtio/utils';
-import type {} from '@redux-devtools/extension'
-
+import type {} from '@redux-devtools/extension';
 
 type Store = {
   layout: {

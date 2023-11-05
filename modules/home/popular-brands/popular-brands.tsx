@@ -1,15 +1,17 @@
 import SectionTitle from '@/components/section-title';
-import manifest from '@/data/index.json';
 import Brand from './brand';
-import { TBrand } from '@/types';
+import { getHomePageBrandsBySectionName } from '@/services';
+import { HOME_SETTINGS_OPTIONS } from '@/lib/constants';
+import { THomeSettingApiBrandSchemaSingleInstance } from '@/schema/common';
 
-const PopularBrands = () => {
-  const renderBrand = (brand: TBrand) => (
-    <li
-      key={brand.id}
-      className='w-full'
-    >
-      <Brand {...brand} />
+const PopularBrands = async () => {
+  const brands = await getHomePageBrandsBySectionName(HOME_SETTINGS_OPTIONS.popularBrands);
+
+  if (!brands || !brands.length) return null;
+
+  const renderBrand = (brand: THomeSettingApiBrandSchemaSingleInstance) => (
+    <li key={brand._id}>
+      <Brand brand={brand} />
     </li>
   );
 
@@ -17,8 +19,8 @@ const PopularBrands = () => {
     <section className='pt-8 md:pt-16'>
       <SectionTitle>Popular Brands</SectionTitle>
 
-      <ul className='mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:mt-12'>
-        {manifest.popularBrands.map(renderBrand)}
+      <ul className='mt-8 grid w-full grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:mt-12'>
+        {brands.map(renderBrand)}
       </ul>
     </section>
   );

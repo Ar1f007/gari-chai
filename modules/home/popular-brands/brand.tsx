@@ -1,29 +1,33 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { TBrand } from '@/types';
 import { routes } from '@/config/routes';
 import { title } from '@/components/primitives';
+import { THomeSettingApiBrandSchemaSingleInstance } from '@/schema/common';
+import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 
-const Brand = (props: TBrand) => {
-  const { imgSrc, brandName } = props;
+type BrandProps = {
+  brand: THomeSettingApiBrandSchemaSingleInstance;
+};
 
-  const path = routes.brands + '/' + brandName;
+const Brand = (props: BrandProps) => {
+  const { content } = props.brand;
+
+  const path = routes.brands + '/' + content.slug;
 
   return (
     <Link
       href={path}
-      className='block overflow-hidden rounded-lg pb-3 shadow-md duration-300 ease-in-out hover:shadow-xl'
+      className='flex flex-col items-center overflow-hidden rounded-lg pb-3 shadow-md duration-300 ease-in-out hover:shadow-xl'
     >
-      <div className='relative h-80 w-full'>
-        <Image
-          src={imgSrc}
-          alt={brandName}
-          className='object-cover'
-          fill
-          sizes='100%'
-        />
-      </div>
+      {/* <div className='relative h-80 w-full'></div> */}
+      <Image
+        src={content.image.originalUrl ?? PLACEHOLDER_IMAGE}
+        alt={content.name}
+        width={220}
+        height={220}
+        className='object-cover'
+      />
 
       <h3
         className={title({
@@ -32,7 +36,7 @@ const Brand = (props: TBrand) => {
           className: 'mt-2 text-center uppercase',
         })}
       >
-        {brandName}
+        {content.name}
       </h3>
     </Link>
   );

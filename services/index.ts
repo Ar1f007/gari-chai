@@ -5,3 +5,4 @@ export * from './tags';
 
 export * from './home/car';
 export * from './most-searched-cars';
+export * from './home/brand';
