@@ -1,6 +1,7 @@
 import KeySpecs from '@/modules/car/key-specs';
 import CarImage from '@/modules/car/new-car/car-image';
 import CarInfo from '@/modules/car/new-car/car-info';
+import Reviews from '@/modules/car/reviews';
 
 import { getCarBySlug } from '@/services/car/getCarBySlug';
 import { notFound } from 'next/navigation';
@@ -33,6 +34,8 @@ export default async function CarDetailsPage(props: Props) {
       </div>
 
       <KeySpecs car={car} />
+
+      <Reviews car={car} />
     </div>
   );
 }
