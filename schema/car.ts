@@ -42,3 +42,5 @@ export const carSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
 });
+
+export type TCarSchema = z.infer<typeof carSchema>;

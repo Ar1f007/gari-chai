@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Sliders from '@/components/slider';
 import Link from 'next/link';
 import { routes } from '@/config/routes';
+import { Car } from '@/components/car/new-car-card';
 
 export const PopularCars = async () => {
   const res = await getHomePageCarsBySection(HOME_SETTINGS_OPTIONS.popularCars);
@@ -26,24 +27,7 @@ export const PopularCars = async () => {
               className='keen-slider__slide max-w-[372px]'
               key={item._id}
             >
-              <Card className='border-1 border-slate-200 shadow-md'>
-                <CardHeader className='relative h-[200px]'>
-                  <Link href={routes.latestCars}>
-                    <Image
-                      src={item.content.posterImage.thumbnailUrl}
-                      alt={item.content.name}
-                      fill
-                      sizes='100%'
-                      className='object-cover'
-                    />
-                  </Link>
-                </CardHeader>
-                <CardBody>
-                  <Link href={routes.latestCars}>
-                    <h2 className={subtitle()}>{item.content.name}</h2>
-                  </Link>
-                </CardBody>
-              </Card>
+              <Car car={item.content} />
             </li>
           ))}
         </Sliders>

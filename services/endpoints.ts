@@ -11,7 +11,8 @@ export const endpoints = {
       baseUrl: '/brands',
     },
     cars: {
-      baseUrl: '/cars',
+      newCarBaseUrl: '/cars',
+      usedCarBaseUrl: '/used-cars',
     },
   },
   admin: {},
