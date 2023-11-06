@@ -1,3 +1,4 @@
+import KeySpecs from '@/modules/car/key-specs';
 import CarImage from '@/modules/car/new-car/car-image';
 import CarInfo from '@/modules/car/new-car/car-info';
 
@@ -25,9 +26,13 @@ export default async function CarDetailsPage(props: Props) {
   }
 
   return (
-    <div className='flex flex-col gap-5 xl:flex-row xl:gap-10'>
-      <CarImage car={car} />
-      <CarInfo car={car} />
+    <div>
+      <div className='flex flex-col gap-5 xl:flex-row xl:gap-10'>
+        <CarImage car={car} />
+        <CarInfo car={car} />
+      </div>
+
+      <KeySpecs car={car} />
     </div>
   );
 }
