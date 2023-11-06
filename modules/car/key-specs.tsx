@@ -1,8 +1,9 @@
-import { GearIcon, MileageIcon } from '@/components/icons';
+import { MileageIcon } from '@/components/icons';
 import { title } from '@/components/primitives';
 import { TCarSchema } from '@/schema/car';
 import { FuelIcon, Settings as SettingsIcon, UtilityPoleIcon } from 'lucide-react';
 import KeySpec from './key-spec';
+import AdditionalSpecifications from './additional-specs';
 
 type Props = {
   car: TCarSchema;
@@ -15,7 +16,7 @@ const KeySpecs = ({ car }: Props) => {
       </h2>
 
       <div className='mt-12 flex flex-col gap-8'>
-        <div className='grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4'>
+        <div className='grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5'>
           {/* Engine */}
           <KeySpec
             icon={SettingsIcon}
@@ -44,10 +45,9 @@ const KeySpecs = ({ car }: Props) => {
             value={car.mileage + ' kmpl'}
           />
         </div>
-
         <div className='h-[2px] w-full bg-gray-300' />
 
-        <p className='text-primary'>Specs and Features</p>
+        <AdditionalSpecifications car={car} />
       </div>
     </article>
   );

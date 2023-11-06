@@ -36,5 +36,5 @@ export const settingsActions = {
 
 devtools(settingsStore, {
   name: 'layout',
-  enabled: true,
+  enabled: typeof window === undefined ? false : true,
 });
