@@ -20,6 +20,7 @@ export async function apiFetch<Data = unknown, ErrData = TApiError>(
       ...headers,
     },
     body: isFormData ? constructFormData(body) : JSON.stringify(body),
+    credentials: 'include',
     ...rest,
   };
 

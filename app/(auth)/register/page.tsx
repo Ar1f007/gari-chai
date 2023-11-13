@@ -9,8 +9,16 @@ import { LockIcon, PhoneIcon, UserIcon } from 'lucide-react';
 import Link from 'next/link';
 
 import { FormProvider, useForm } from 'react-hook-form';
+import { registerUser } from '@/services/user/register';
+import { toast } from 'sonner';
+import { mapValidationErrors } from '@/util/mapValidationError';
+import { useState } from 'react';
+import OTPForm from '@/components/auth/otp-form';
 
 const RegisterPage = () => {
+  const [showOTPInputForm, setShowOTPInputForm] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+
   const formHandler = useForm<RegisterInputs>({
     criteriaMode: 'firstError',
     mode: 'onTouched',
@@ -23,7 +31,28 @@ const RegisterPage = () => {
   });
 
   async function onSubmit(data: RegisterInputs) {
-    console.log(data);
+    const res = await registerUser(data);
+
+    if (!res) {
+      toast.error('Something went wrong, please try again later');
+      return;
+    }
+
+    if (res.status === 'validationError') {
+      mapValidationErrors(res.errors, formHandler);
+      return;
+    }
+
+    if (res.status === 'fail' || res.status === 'error') {
+      toast.error(res.message);
+
+      return;
+    }
+
+    if (res.status === 'success' && res.data) {
+      setPhoneNumber(data.phoneNumber);
+      setShowOTPInputForm(true);
+    }
   }
 
   return (
@@ -78,6 +107,7 @@ const RegisterPage = () => {
             className='py-6 text-large font-semibold'
             color='primary'
             type='submit'
+            isLoading={formHandler.formState.isSubmitting}
           >
             Create Account
           </Button>
@@ -95,6 +125,8 @@ const RegisterPage = () => {
           </Link>
         </p>
       </div>
+
+      {showOTPInputForm && <OTPForm phoneNumber={phoneNumber} />}
     </>
   );
 };

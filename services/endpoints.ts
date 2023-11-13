@@ -15,6 +15,10 @@ export const endpoints = {
       usedCarBaseUrl: '/used-cars',
       getReviews: '/reviews',
     },
+    users: {
+      baseUrl: '/users',
+      verifyOTP: '/users/verify-otp',
+    },
   },
   admin: {},
 };
