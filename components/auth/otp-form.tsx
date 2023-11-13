@@ -10,10 +10,13 @@ import { toast } from 'sonner';
 import { GENERIC_ERROR_MSG } from '@/lib/constants';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/config/routes';
+import { userAPIResponseSchema } from '@/schema/user';
+import { userActions } from '@/store';
+import { auth } from '@/services/user/auth';
 
 const otpStore = proxy({
   otpCode: '',
-  resendingOTP: false,
+  loading: false,
   isResendBtnDisabled: true,
   errorMsg: '',
 });
@@ -29,12 +32,33 @@ const OTPForm = ({ phoneNumber }: OTPFormProps) => {
 
   const otpSnap = useSnapshot(otpStore);
 
-  function resendOTP() {}
+  async function resendOTP() {
+    try {
+      otpStore.loading = true;
+      const res = await auth.sendOTP({ phoneNumber });
+
+      if (!res) {
+        toast.error(GENERIC_ERROR_MSG);
+        return;
+      }
+
+      if (res.status === 'success') {
+        toast.success('OTP is sent! Please fill up the box.');
+        return;
+      }
+
+      toast.error(res.message);
+    } catch (error) {
+      toast.error(GENERIC_ERROR_MSG);
+    } finally {
+      otpStore.loading = false;
+    }
+  }
 
   function resetOTPStore() {
     otpStore.errorMsg = '';
     otpStore.isResendBtnDisabled = true;
-    otpStore.resendingOTP = false;
+    otpStore.loading = false;
     otpStore.otpCode = '';
   }
 
@@ -45,7 +69,7 @@ const OTPForm = ({ phoneNumber }: OTPFormProps) => {
         return;
       }
 
-      otpStore.resendingOTP = true;
+      otpStore.loading = true;
 
       const res = await verifyOTP({
         otp: +otpSnap.otpCode,
@@ -62,6 +86,12 @@ const OTPForm = ({ phoneNumber }: OTPFormProps) => {
         return;
       }
 
+      const parsedData = userAPIResponseSchema.safeParse(res.data);
+
+      if (parsedData.success) {
+        userActions.setUser(parsedData.data);
+      }
+
       toast.success('Account verification successful, Redirecting...');
 
       resetOTPStore();
@@ -69,7 +99,7 @@ const OTPForm = ({ phoneNumber }: OTPFormProps) => {
     } catch (error) {
       toast.error(GENERIC_ERROR_MSG);
     } finally {
-      otpStore.resendingOTP = false;
+      otpStore.loading = false;
     }
   }
 
@@ -103,7 +133,7 @@ const OTPForm = ({ phoneNumber }: OTPFormProps) => {
                 Click on resend button{' '}
                 {otpSnap.isResendBtnDisabled && (
                   <Countdown
-                    date={Date.now() + TWO_MINUTES * 1000}
+                    date={Date.now() + 2}
                     renderer={({ minutes, seconds, completed }) => {
                       if (completed) {
                         otpStore.isResendBtnDisabled = false;
@@ -126,7 +156,7 @@ const OTPForm = ({ phoneNumber }: OTPFormProps) => {
             <Button
               variant='faded'
               color='primary'
-              isLoading={otpSnap.resendingOTP}
+              isLoading={otpSnap.loading}
               onPress={handleVerifyOTP}
             >
               Verify
@@ -134,6 +164,8 @@ const OTPForm = ({ phoneNumber }: OTPFormProps) => {
             <Button
               variant='faded'
               isDisabled={otpSnap.isResendBtnDisabled}
+              isLoading={otpSnap.loading}
+              onPress={resendOTP}
             >
               Resend
             </Button>

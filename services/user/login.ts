@@ -1,16 +1,11 @@
-import { TAuthUser } from '@/schema/user';
+import { RegisterInputs } from '@/schema/register';
 import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
 
-type VerifyOTPProps = {
-  phoneNumber: string;
-  otp: number;
-};
-
-export async function verifyOTP(payload: VerifyOTPProps) {
+export async function login(payload: RegisterInputs) {
   try {
-    return apiFetch<TAuthUser>(endpoints.api.users.verifyOTP, {
+    return apiFetch(endpoints.api.users.baseUrl, {
       method: ReqMethod.POST,
       body: payload,
     });

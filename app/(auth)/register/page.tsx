@@ -14,6 +14,8 @@ import { toast } from 'sonner';
 import { mapValidationErrors } from '@/util/mapValidationError';
 import { useState } from 'react';
 import OTPForm from '@/components/auth/otp-form';
+import { userAPIResponseSchema } from '@/schema/user';
+import { userActions } from '@/store';
 
 const RegisterPage = () => {
   const [showOTPInputForm, setShowOTPInputForm] = useState(false);
@@ -50,6 +52,11 @@ const RegisterPage = () => {
     }
 
     if (res.status === 'success' && res.data) {
+      const parsedData = userAPIResponseSchema.safeParse(res.data);
+
+      if (parsedData.success) {
+        userActions.setUser(parsedData.data);
+      }
       setPhoneNumber(data.phoneNumber);
       setShowOTPInputForm(true);
     }
