@@ -4,8 +4,9 @@ export const MAX_FILE_SIZE_LIMIT = 300000; // 300 kb
 export const PLACEHOLDER_IMAGE = '/images/placeholder.webp';
 export const CURRENCY_SYMBOL = '৳';
 export const GENERIC_ERROR_MSG = 'Something went wrong';
+export const AUTH_TOKEN_NAME = 'X_GARI_CHAI_TOKEN';
 
-export const IS_SERVER = typeof window !== 'undefined';
+export const IS_CLIENT = typeof window !== 'undefined';
 
 export const API_BASE_URL =
   process.env.NODE_ENV === 'development'

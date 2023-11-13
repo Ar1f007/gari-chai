@@ -18,6 +18,7 @@ export const endpoints = {
     users: {
       baseUrl: '/users',
       verifyOTP: '/users/verify-otp',
+      me: '/users/me',
     },
   },
   admin: {},

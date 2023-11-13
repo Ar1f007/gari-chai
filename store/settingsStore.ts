@@ -1,7 +1,7 @@
 import { proxy } from 'valtio';
 import { devtools } from 'valtio/utils';
 import type {} from '@redux-devtools/extension';
-import {IS_SERVER} from "@/lib/constants";
+import { IS_CLIENT } from '@/lib/constants';
 
 type Store = {
   layout: {
@@ -37,5 +37,5 @@ export const settingsActions = {
 
 devtools(settingsStore, {
   name: 'layout',
-  enabled: IS_SERVER,
+  enabled: IS_CLIENT,
 });

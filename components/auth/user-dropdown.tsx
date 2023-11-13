@@ -1,11 +1,16 @@
 'use client';
 
-// import { signOut } from 'next-auth/react';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/dropdown';
 import { Avatar } from '@nextui-org/avatar';
-// import { Session } from 'next-auth';
+import { useSnapshot } from 'valtio';
+import { userActions, userStore } from '@/store';
+import { auth } from '@/services/user';
 
-const Logout = ({ session }: { session: any }) => {
+const UserDropdown = () => {
+  const { user } = useSnapshot(userStore);
+
+  if (!user) return null;
+
   return (
     <Dropdown placement='bottom-end'>
       <DropdownTrigger>
@@ -13,10 +18,7 @@ const Logout = ({ session }: { session: any }) => {
           isBordered
           as='button'
           className='transition-transform'
-          src={
-            session.user?.image ??
-            'https://eu.ui-avatars.com/api/?name=${session.user?.name}&size=150'
-          }
+          src={user.image ?? `https://eu.ui-avatars.com/api/?name=${user.name}&size=150`}
         />
       </DropdownTrigger>
 
@@ -29,7 +31,7 @@ const Logout = ({ session }: { session: any }) => {
           className='h-14 gap-2'
         >
           <p className='font-semibold'>Signed in as</p>
-          <p className='font-semibold'>{session.user?.email}</p>
+          <p className='font-semibold'>{user.emails?.length ? user.emails?.[0] : user.name}</p>
         </DropdownItem>
 
         <DropdownItem key='settings'>My Settings</DropdownItem>
@@ -37,7 +39,7 @@ const Logout = ({ session }: { session: any }) => {
         <DropdownItem
           key='logout'
           color='danger'
-          onPress={() => {}}
+          onPress={auth.logout}
         >
           Log Out
         </DropdownItem>
@@ -45,4 +47,4 @@ const Logout = ({ session }: { session: any }) => {
     </Dropdown>
   );
 };
-export default Logout;
+export default UserDropdown;

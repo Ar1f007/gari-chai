@@ -1,10 +1,10 @@
 import Link from 'next/link';
 
 import { Logo } from '@/components/icons';
-import Icon from '@/components/icon';
 import Search from '@/components/search';
 import { routes } from '@/config/routes';
 import { Suspense } from 'react';
+import AuthButton from './auth-button';
 
 const TopHeader = () => {
   return (
@@ -22,14 +22,7 @@ const TopHeader = () => {
       </div>
 
       <div className='basic-1/3 flex w-full justify-end text-primary'>
-        <Icon
-          name='user-2'
-          className='-mt-1 mr-1'
-        />
-
-        <Link href={routes.login}>Login</Link>
-        <span>&nbsp;/&nbsp;</span>
-        <Link href={routes.register}>Register</Link>
+        <AuthButton />
       </div>
     </div>
   );

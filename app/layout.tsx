@@ -4,6 +4,9 @@ import { siteConfig } from '@/config/site';
 import { fontSans } from '@/config/fonts';
 import { Providers } from './providers';
 import clsx from 'clsx';
+import { Suspense } from 'react';
+import SetStoreValue from './set-store-value';
+import { auth } from '@/services/user';
 
 export const viewport: Viewport = {
   themeColor: [
@@ -35,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head />
       <body className={clsx('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
+          <SetStoreValue />
           <main>{children}</main>
         </Providers>
       </body>
