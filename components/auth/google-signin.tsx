@@ -8,8 +8,6 @@ const GoogleSignInButton = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl');
 
-  console.log(callbackUrl);
-
   return (
     <Button
       className='w-full py-6'
