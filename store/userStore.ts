@@ -1,19 +1,32 @@
-import { proxy } from 'valtio';
-import { devtools } from 'valtio/utils';
+import {proxy} from 'valtio';
+import {devtools} from 'valtio/utils';
 import {IS_SERVER} from "@/lib/constants";
 
 type TUserStore = {
-    isLoggedIn: boolean;
     user: {} | null;
+    status: () => "pending" | "loggedOut" | "loggedIn";
 };
 
 const initialState: TUserStore = {
-    isLoggedIn: false,
     user: null,
+    status() {
+        return this.user instanceof Promise
+            ? "pending"
+            : this.user === null
+                ? "loggedOut"
+                : "loggedIn";
+    }
 }
 
 export const userStore = proxy<TUserStore>(initialState);
 
 export const userActions = {
-    setUser(){}
+    setUser() {
+    }
 };
+
+
+devtools(userStore, {
+    name: 'user',
+    enabled: IS_SERVER,
+});
