@@ -33,49 +33,47 @@ const WriteReview = () => {
 
             <Modal isOpen={showReviewModal} hideCloseButton>
                 <ModalContent>
-                    <>
-                        <FormProvider {...formHandler}>
-                            <form onSubmit={formHandler.handleSubmit(onSubmit)}>
-                                <ModalHeader className="flex flex-col gap-1">Write your review</ModalHeader>
-                                <ModalBody>
-                                    <RHFInput
-                                        name="title"
-                                        label="Add a heading"
-                                    />
+                    <FormProvider {...formHandler}>
+                        <form onSubmit={formHandler.handleSubmit(onSubmit)}>
+                            <ModalHeader className="flex flex-col gap-1">Write your review</ModalHeader>
+                            <ModalBody>
+                                <RHFInput
+                                    name="title"
+                                    label="Add a heading"
+                                />
 
-                                    <RHFTextarea
-                                        name="review"
-                                        label="What did you like or dislike?"
-                                    />
+                                <RHFTextarea
+                                    name="review"
+                                    label="What did you like or dislike?"
+                                />
 
-                                    <RHFInput
-                                        name="rating"
-                                        label="Rating (1-5)"
-                                        type="number"
-                                        min={1}
-                                        max={5}
-                                    />
+                                <RHFInput
+                                    name="rating"
+                                    label="Rating (1-5)"
+                                    type="number"
+                                    min={1}
+                                    max={5}
+                                />
 
-                                </ModalBody>
-                                <ModalFooter>
-                                    <Button
-                                        type="submit"
-                                        isLoading={formHandler.formState.isSubmitting}
-                                        variant="bordered"
-                                        color="primary"
-                                    >
-                                        Submit Review
-                                    </Button>
-                                    <Button
-                                        onPress={() => setShowReviewModal(false)}
-                                        variant="light"
-                                    >
-                                        Cancel
-                                    </Button>
-                                </ModalFooter>
-                            </form>
-                        </FormProvider>
-                    </>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button
+                                    type="submit"
+                                    isLoading={formHandler.formState.isSubmitting}
+                                    variant="bordered"
+                                    color="primary"
+                                >
+                                    Submit Review
+                                </Button>
+                                <Button
+                                    onPress={() => setShowReviewModal(false)}
+                                    variant="light"
+                                >
+                                    Cancel
+                                </Button>
+                            </ModalFooter>
+                        </form>
+                    </FormProvider>
                 </ModalContent>
             </Modal>
         </>
