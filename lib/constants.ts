@@ -5,6 +5,8 @@ export const PLACEHOLDER_IMAGE = '/images/placeholder.webp';
 export const CURRENCY_SYMBOL = '৳';
 export const GENERIC_ERROR_MSG = 'Something went wrong';
 
+export const IS_SERVER = typeof window !== 'undefined';
+
 export const API_BASE_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:8000'
