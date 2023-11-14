@@ -13,9 +13,11 @@ import { registerUser } from '@/services/user/register';
 import { toast } from 'sonner';
 import { mapValidationErrors } from '@/util/mapValidationError';
 import { useState } from 'react';
-import OTPForm from '@/components/auth/otp-form';
 import { userAPIResponseSchema } from '@/schema/user';
 import { userActions } from '@/store';
+import dynamic from 'next/dynamic';
+
+const OTPForm = dynamic(() => import('@/components/auth/otp-form'));
 
 const RegisterPage = () => {
   const [showOTPInputForm, setShowOTPInputForm] = useState(false);

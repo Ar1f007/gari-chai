@@ -133,7 +133,7 @@ const OTPForm = ({ phoneNumber }: OTPFormProps) => {
                 Click on resend button{' '}
                 {otpSnap.isResendBtnDisabled && (
                   <Countdown
-                    date={Date.now() + 2}
+                    date={Date.now() + TWO_MINUTES * 1000}
                     renderer={({ minutes, seconds, completed }) => {
                       if (completed) {
                         otpStore.isResendBtnDisabled = false;

@@ -5,7 +5,6 @@ import { InfoIcon, LockIcon, PhoneIcon } from 'lucide-react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@nextui-org/button';
-import { Input } from '@nextui-org/input';
 
 import { LoginInputs, loginSchema } from '@/schema/login';
 import { routes } from '@/config/routes';
@@ -16,10 +15,12 @@ import { mapValidationErrors } from '@/util/mapValidationError';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { AUTH_TOKEN_NAME, GENERIC_ERROR_MSG } from '@/lib/constants';
-import OTPForm from '@/components/auth/otp-form';
 import { userActions } from '@/store';
 import { removeAuthCookie } from '@/util/removeAuthCookie';
 import { parsePhoneNumber } from 'libphonenumber-js';
+import dynamic from 'next/dynamic';
+
+const OTPForm = dynamic(() => import('@/components/auth/otp-form'));
 
 const LoginPage = () => {
   const router = useRouter();
