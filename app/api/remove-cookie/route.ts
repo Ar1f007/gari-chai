@@ -4,8 +4,6 @@ import { cookies } from 'next/headers';
 export async function POST(req: Request) {
   const { tokenName } = await req.json();
 
-  console.log(await req.json());
-
   if (!tokenName) {
     return Response.json(
       {

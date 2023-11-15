@@ -17,6 +17,7 @@ import { auth } from '@/services/user/auth';
 const otpStore = proxy({
   otpCode: '',
   loading: false,
+  isResendingOTP: false,
   isResendBtnDisabled: true,
   errorMsg: '',
 });
@@ -34,7 +35,7 @@ const OTPForm = ({ phoneNumber }: OTPFormProps) => {
 
   async function resendOTP() {
     try {
-      otpStore.loading = true;
+      otpStore.isResendingOTP = true;
       const res = await auth.sendOTP({ phoneNumber });
 
       if (!res) {
@@ -51,7 +52,7 @@ const OTPForm = ({ phoneNumber }: OTPFormProps) => {
     } catch (error) {
       toast.error(GENERIC_ERROR_MSG);
     } finally {
-      otpStore.loading = false;
+      otpStore.isResendingOTP = false;
     }
   }
 
@@ -164,7 +165,7 @@ const OTPForm = ({ phoneNumber }: OTPFormProps) => {
             <Button
               variant='faded'
               isDisabled={otpSnap.isResendBtnDisabled}
-              isLoading={otpSnap.loading}
+              isLoading={otpSnap.isResendingOTP}
               onPress={resendOTP}
             >
               Resend

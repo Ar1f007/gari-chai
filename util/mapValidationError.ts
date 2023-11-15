@@ -8,6 +8,9 @@ export const mapValidationErrors = <FormFields extends FieldValues>(
 ) => {
   errors.forEach((error) => {
     //@ts-ignore
-    formHandler.setError(error.fieldName, error.message);
+    formHandler.setError(error.fieldName, {
+      type: 'validation',
+      message: error.message,
+    });
   });
 };

@@ -7,9 +7,18 @@ import { RHFTextarea } from '@/components/form/RHFTextarea';
 import { useState } from 'react';
 import { ReviewFormInputs, reviewSchema } from '@/schema/review';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { reviews } from '@/services/reviews';
+import { toast } from 'sonner';
+import { GENERIC_ERROR_MSG } from '@/lib/constants';
+import { mapValidationErrors } from '@/util/mapValidationError';
+import { ZodError } from 'zod';
+import { TCarSchema } from '@/schema/car';
+import { useSnapshot } from 'valtio';
+import { userStore } from '@/store';
 
-const WriteReview = () => {
+const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
   const [showReviewModal, setShowReviewModal] = useState(false);
+  const userSnap = useSnapshot(userStore);
 
   const formHandler = useForm<ReviewFormInputs>({
     criteriaMode: 'firstError',
@@ -18,7 +27,46 @@ const WriteReview = () => {
   });
 
   async function onSubmit(data: ReviewFormInputs) {
-    console.log(data);
+    if (!userSnap.user) {
+      toast.error('Please login to continue');
+      return;
+    }
+
+    const res = await reviews.addReview({
+      ...data,
+      carId,
+      userId: userSnap.user._id,
+    });
+
+    if (!res) {
+      toast.error(GENERIC_ERROR_MSG);
+      return;
+    }
+
+    if (res instanceof ZodError) {
+      toast.error('Invalid input given for: ' + res.errors.map((e) => e.path.toString()));
+      return;
+    }
+
+    if (res.status === 'success') {
+      toast.success('Review was added successfully');
+      formHandler.reset();
+      setShowReviewModal(false);
+      return;
+    }
+
+    if (res.status === 'validationError') {
+      mapValidationErrors(res.errors, formHandler);
+      toast.error(res.message ?? 'Invalid Inputs');
+      return;
+    }
+
+    toast.error(res.message ?? GENERIC_ERROR_MSG);
+  }
+
+  function handleCancel() {
+    setShowReviewModal(false);
+    formHandler.reset();
   }
 
   return (
@@ -68,7 +116,7 @@ const WriteReview = () => {
                   Submit Review
                 </Button>
                 <Button
-                  onPress={() => setShowReviewModal(false)}
+                  onPress={handleCancel}
                   variant='light'
                 >
                   Cancel

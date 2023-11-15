@@ -26,6 +26,9 @@ export const endpoints = {
       verifyOTP: '/users/verify-otp',
       me: '/users/me',
     },
+    reviews: {
+      baseUrl: '/reviews',
+    },
   },
   admin: {},
 };

@@ -1,11 +1,9 @@
 import { FilledStar } from '@/components/icons';
 import { title } from '@/components/primitives';
 import { TCarSchema } from '@/schema/car';
-import { Button } from '@nextui-org/button';
 import Review from './review';
 import { getCarReview } from '@/services/car/getCarReview';
 import WriteReview from '@/modules/car/write-review';
-import Link from 'next/link';
 
 type ReviewsProps = {
   car: TCarSchema;
@@ -29,7 +27,7 @@ const Reviews = async ({ car }: ReviewsProps) => {
           </p>
         </div>
 
-        <WriteReview />
+        <WriteReview carId={car._id} />
       </div>
 
       <div>
