@@ -7,8 +7,6 @@ import { RHFTextarea } from '@/components/form/RHFTextarea';
 import { useState } from 'react';
 import { ReviewFormInputs, reviewSchema } from '@/schema/review';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSnapshot } from 'valtio';
-import { userStore } from '@/store';
 
 const WriteReview = () => {
   const [showReviewModal, setShowReviewModal] = useState(false);
