@@ -17,6 +17,7 @@ const CarImage = (props: Props) => {
         width={800}
         height={400}
         className='max-h-[450px] rounded-lg object-cover'
+        priority
       />
     </div>
   );

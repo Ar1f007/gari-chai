@@ -32,7 +32,7 @@ export const reviews = {
       const res = await apiFetch(url, {
         method: ReqMethod.GET,
         next: {
-          revalidate: 60 * 60 * 3, // every 3 hours
+          revalidate: 0, // every 3 hours
         },
       });
 

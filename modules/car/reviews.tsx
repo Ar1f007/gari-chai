@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { FilledStar } from '@/components/icons';
 import { title } from '@/components/primitives';
 import { TCarSchema } from '@/schema/car';
@@ -5,7 +7,9 @@ import Review from './review';
 import WriteReview from '@/modules/car/write-review';
 import { reviews } from '@/services/reviews';
 import Sliders from '@/components/slider';
+
 import { reviewKeenSliderOptions } from '@/lib/keen-slider/keen-slider-options';
+import { routes } from '@/config/routes';
 
 type ReviewsProps = {
   car: TCarSchema;
@@ -15,6 +19,11 @@ const Reviews = async ({ car }: ReviewsProps) => {
 
   if (!res || !res.reviews.length) {
     return null;
+  }
+
+  function getHref() {
+    const url = routes.cars + '/' + car._id + routes.reviews;
+    return url;
   }
 
   return (
@@ -36,7 +45,7 @@ const Reviews = async ({ car }: ReviewsProps) => {
         <WriteReview carId={car._id} />
       </div>
 
-      <div>
+      <div className='py-3'>
         <Sliders sliderOptions={{ options: reviewKeenSliderOptions }}>
           {res.reviews.map((review) => (
             <li
@@ -47,6 +56,13 @@ const Reviews = async ({ car }: ReviewsProps) => {
             </li>
           ))}
         </Sliders>
+
+        <Link
+          href={getHref()}
+          className='mt-3 inline-block text-primary underline'
+        >
+          View All Reviews
+        </Link>
       </div>
     </section>
   );

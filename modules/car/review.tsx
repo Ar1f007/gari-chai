@@ -14,7 +14,12 @@ const Review = ({ review }: { review: ReviewBody }) => {
       <Ratings stars={review.rating} />
 
       <div className='mt-4'>
-        <p className='mt-4 leading-relaxed text-gray-500'>{review.review}</p>
+        <p
+          className='mt-4 line-clamp-4 leading-relaxed text-gray-500'
+          title={review.review}
+        >
+          {review.review}
+        </p>
       </div>
 
       <footer className='mt-8 text-sm text-gray-500'>&mdash; {review.userInfo.name}</footer>

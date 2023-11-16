@@ -23,6 +23,8 @@ export const routes = {
   sellUsedCar: '/sell-cars',
 
   services: '/services',
+
+  reviews: '/reviews',
 };
 
 export const navMenuItems: SiteConfig['navMenuItems'] = [
