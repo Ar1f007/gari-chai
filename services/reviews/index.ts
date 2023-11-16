@@ -26,4 +26,14 @@ export const reviews = {
       return null;
     }
   },
+  getReviews: async function ({ carId }: { carId: string }) {
+    try {
+      const url = endpoints.api.reviews.baseUrl + '/' + carId;
+      return apiFetch(url, {
+        method: ReqMethod.GET,
+      });
+    } catch (error) {
+      return null;
+    }
+  },
 };

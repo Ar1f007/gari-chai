@@ -52,6 +52,7 @@ const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
       toast.success('Review was added successfully');
       formHandler.reset();
       setShowReviewModal(false);
+
       return;
     }
 

@@ -2,14 +2,18 @@ import { FilledStar } from '@/components/icons';
 import { title } from '@/components/primitives';
 import { TCarSchema } from '@/schema/car';
 import Review from './review';
-import { getCarReview } from '@/services/car/getCarReview';
 import WriteReview from '@/modules/car/write-review';
+import { reviews } from '@/services/reviews';
 
 type ReviewsProps = {
   car: TCarSchema;
 };
 const Reviews = async ({ car }: ReviewsProps) => {
-  const reviews = await getCarReview({ carId: car._id });
+  const res = await reviews.getReviews({ carId: car._id });
+
+  if (!res) {
+    return null;
+  }
 
   return (
     <section className='mt-8 rounded-xl bg-foreground-50 p-6'>
