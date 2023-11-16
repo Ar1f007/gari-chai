@@ -1,25 +1,23 @@
 import { Ratings } from '@/components/ratings';
+import { ReviewBody } from '@/schema/review';
 
-const Review = () => {
+const Review = ({ review }: { review: ReviewBody }) => {
   return (
-    <blockquote className='flex h-full flex-col justify-between rounded bg-default-100 p-12'>
+    <blockquote className='flex h-full flex-col justify-between rounded bg-default-100 p-6'>
       <h4
         className='mb-2 truncate text-xl font-medium'
         title='Excellent car'
       >
-        Excellent Car
+        {review.title}
       </h4>
 
-      <Ratings stars={4.5} />
+      <Ratings stars={review.rating} />
 
       <div className='mt-4'>
-        <p className='mt-4 leading-relaxed text-gray-500'>
-          It is a refreshing choice to explore within the entry-level SUV segment. With appealing
-          French styling.
-        </p>
+        <p className='mt-4 leading-relaxed text-gray-500'>{review.review}</p>
       </div>
 
-      <footer className='mt-8 text-sm text-gray-500'>&mdash; John Doe</footer>
+      <footer className='mt-8 text-sm text-gray-500'>&mdash; {review.userInfo.name}</footer>
     </blockquote>
   );
 };

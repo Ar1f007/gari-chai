@@ -1,4 +1,4 @@
-import { AddReviewPayload, addReviewPayloadSchema } from '@/schema/review';
+import { AddReviewPayload, addReviewPayloadSchema, reviewsWithStatsSchema } from '@/schema/review';
 import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
@@ -26,12 +26,27 @@ export const reviews = {
       return null;
     }
   },
-  getReviews: async function ({ carId }: { carId: string }) {
+  getReviewsWithStats: async function ({ carId }: { carId: string }) {
     try {
       const url = endpoints.api.reviews.baseUrl + '/' + carId;
-      return apiFetch(url, {
+      const res = await apiFetch(url, {
         method: ReqMethod.GET,
+        next: {
+          revalidate: 60 * 60 * 3, // every 3 hours
+        },
       });
+
+      if (res.status === 'success') {
+        const parsedData = reviewsWithStatsSchema.safeParse(res.data);
+
+        if (parsedData.success) {
+          return parsedData.data;
+        }
+
+        console.error('ERROR REVIEW_WITH_STATS API');
+      }
+
+      return null;
     } catch (error) {
       return null;
     }

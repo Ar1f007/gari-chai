@@ -4,14 +4,15 @@ import 'keen-slider/keen-slider.min.css';
 import '@/styles/slider.css';
 
 import { Arrow } from '@/components/Arrow';
-import { useSlider } from '@/hooks/useSlider';
+import { UseSliderProps, useSlider } from '@/hooks/useSlider';
 import { ReactNode } from 'react';
 
 type Props = {
   children: ReactNode;
+  sliderOptions?: UseSliderProps;
 };
-const Sliders = ({ children }: Props) => {
-  const { sliderRef, loaded, instanceRef, currentSlide } = useSlider();
+const Sliders = ({ children, sliderOptions }: Props) => {
+  const { sliderRef, loaded, instanceRef, currentSlide } = useSlider({ ...sliderOptions });
 
   return (
     <div className='navigation-wrapper'>
