@@ -7,7 +7,7 @@ const Review = ({ review }: { review: ReviewBody }) => {
   return (
     <blockquote className='flex h-full flex-col justify-between overflow-hidden rounded-2xl border-1 border-solid border-gray-300 bg-default-100 p-6'>
       <h4
-        className='mb-2 truncate text-xl font-medium'
+        className='mb-2 truncate text-xl font-medium text-gray-700'
         title='Excellent car'
       >
         {review.title}
