@@ -1,5 +1,5 @@
 import { TCarSchema } from '@/schema/car';
-import { CommentCreationPayload } from '@/schema/comment';
+import { CommentCreationPayload, commentSchema } from '@/schema/comment';
 
 import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
@@ -10,13 +10,26 @@ export const commentService = {
     const url = endpoints.api.comments.baseUrl + '/' + payload.carId;
 
     try {
-      return apiFetch(url, {
+      const res = await apiFetch(url, {
         method: ReqMethod.GET,
         next: {
           tags: [payload.carId],
           revalidate: 0, // revalidate every 30 mins
         },
       });
+
+      if (res.status === 'success') {
+        const parsedData = commentSchema.safeParse(res.data);
+        if (parsedData.success) {
+          return parsedData.data;
+        } else {
+          return {
+            message: 'Failed to fetch comments',
+          };
+        }
+      }
+
+      return res;
     } catch (error) {
       return null;
     }

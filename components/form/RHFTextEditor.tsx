@@ -6,10 +6,11 @@ import Typography from '@tiptap/extension-typography';
 import Placeholder from '@tiptap/extension-placeholder';
 import debounce from 'debounce';
 
-import { useFormContext, useController } from 'react-hook-form';
+import { useFormContext, useController, useWatch } from 'react-hook-form';
 import { useEditor, EditorContent, BubbleMenu, EditorOptions, EditorEvents } from '@tiptap/react';
 import { Button, ButtonGroup } from '@nextui-org/button';
 import { BoldIcon, HighlighterIcon, ItalicIcon, StrikethroughIcon } from 'lucide-react';
+import { useEffect } from 'react';
 
 type CustomEditorOptions = {
   onUpdateDelay?: number;
@@ -26,6 +27,7 @@ const INACTIVE_ICON_CLASSES = 'text-gray-500';
 export const RHFTextEditor: React.FC<TextEditorProps> = ({ name, tiptapOptions }) => {
   const { control } = useFormContext();
   const { field, fieldState } = useController({ name, control });
+  const value = useWatch({ name });
 
   const editor = useEditor({
     extensions: [
@@ -45,10 +47,17 @@ export const RHFTextEditor: React.FC<TextEditorProps> = ({ name, tiptapOptions }
         const content = editor.isEmpty ? '' : editor.getHTML();
         field.onChange(content);
       },
-      tiptapOptions?.onUpdateDelay ?? 500,
+      tiptapOptions?.onUpdateDelay ?? 700,
     ),
+
     ...tiptapOptions,
   });
+
+  useEffect(() => {
+    if (editor && !value.length && !editor.isEmpty) {
+      editor.commands.clearContent();
+    }
+  }, [value, editor]);
 
   if (!editor) return null;
 

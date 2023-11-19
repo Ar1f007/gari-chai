@@ -72,6 +72,7 @@ const CommentForm = (props: CommentFormProps) => {
 
     if (res.status === 'success') {
       await invalidateTags(props.isEditing ? props.commentBody : props.car);
+      formHandler.setValue('content', '');
 
       return;
     }
@@ -83,8 +84,6 @@ const CommentForm = (props: CommentFormProps) => {
     }
 
     toast.error(res.message || GENERIC_ERROR_MSG);
-
-    // console.log(res);
   }
 
   function handleAuth() {
