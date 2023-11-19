@@ -15,26 +15,38 @@ export const commentCreationPayloadSchema = z.object({
 });
 
 // comment body that is coming from server
-export const commentSchema = z.object({
+export const commentSchemaWithoutChild = z.object({
   _id: z.string(),
   content: z.string(),
-  children: z.array(z.string()).default([]),
-  user: z.string(),
-  car: z.string(),
-  likes: z.number().default(0),
-  dislikes: z.number().default(0),
-  visibility: z.object({
-    isApproved: z.boolean().default(true),
-    isFlagged: z.boolean().default(false),
+  user: z.object({
+    _id: z.string(),
+    name: z.string(),
+    image: z.string().or(z.undefined()),
   }),
-  depth: z.number().default(0),
-  reports: z.number().default(0),
+  car: z.string(),
+  likes: z.number(),
+  dislikes: z.number(),
+  visibility: z.object({
+    isApproved: z.boolean(),
+    isFlagged: z.boolean(),
+  }),
+  depth: z.number(),
+  reports: z.number(),
   parentId: z.string().optional(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
+
+type Comment = z.infer<typeof commentSchemaWithoutChild> & {
+  children: Comment[];
+};
+
+export const commentSchema: z.ZodType<Comment> = commentSchemaWithoutChild.extend({
+  children: z.lazy(() => z.array(commentSchema)),
 });
 
 export type CommentInputs = z.infer<typeof commentFormSchema>;
+
 export type CommentCreationPayload = z.infer<typeof commentCreationPayloadSchema>;
 
 export type CommentBody = z.infer<typeof commentSchema>;

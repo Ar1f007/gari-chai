@@ -1,6 +1,4 @@
 .tiptap {
-  --primary-color-500: #1e8667;
-  --light: #fff;
   --max-height: 100px;
 
   background-color: #fff;
@@ -22,9 +20,4 @@
 
 .tiptap:focus {
   outline-color: var(--primary-color-500);
-}
-
-.highlight-text {
-  background-color: var(--primary-color-500);
-  color: var(--light);
 }

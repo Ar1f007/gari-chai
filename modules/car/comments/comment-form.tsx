@@ -3,7 +3,12 @@ import { RHFTextEditor } from '@/components/form/RHFTextEditor';
 import { routes } from '@/config/routes';
 import { invalidateTags } from '@/lib/actions';
 import { GENERIC_ERROR_MSG } from '@/lib/constants';
-import { CommentCreationPayload, CommentInputs, commentFormSchema } from '@/schema/comment';
+import {
+  CommentBody,
+  CommentCreationPayload,
+  CommentInputs,
+  commentFormSchema,
+} from '@/schema/comment';
 import { commentService } from '@/services/comments';
 import { userStore } from '@/store';
 import { mapValidationErrors } from '@/util/mapValidationError';
@@ -16,7 +21,7 @@ import { useSnapshot } from 'valtio';
 
 type EditCommentProps = {
   isEditing: true;
-  commentBody: any;
+  commentBody: CommentBody;
 };
 
 type AddCommentProps = {
@@ -33,7 +38,10 @@ type ChildCommentProps = {
   parentId: string;
 };
 
-type CommentFormProps = AddCommentProps | EditCommentProps;
+type CommentFormProps = {
+  onSuccess?: () => void;
+  hideFormCB?: () => void;
+} & (AddCommentProps | EditCommentProps);
 
 const CommentForm = (props: CommentFormProps) => {
   const userSnap = useSnapshot(userStore);
@@ -41,7 +49,7 @@ const CommentForm = (props: CommentFormProps) => {
   const formHandler = useForm({
     mode: 'onSubmit',
     defaultValues: {
-      content: '',
+      content: props.isEditing ? props.commentBody.content : '',
     },
     resolver: zodResolver(commentFormSchema),
   });
@@ -53,7 +61,7 @@ const CommentForm = (props: CommentFormProps) => {
     }
 
     const payload: CommentCreationPayload = {
-      car: props.isEditing ? props.commentBody : props.car,
+      car: props.isEditing ? props.commentBody._id : props.car,
       user: userSnap.user._id,
       content: data.content,
       isChild: props.isEditing ? null : props.isChild,
@@ -71,8 +79,10 @@ const CommentForm = (props: CommentFormProps) => {
     }
 
     if (res.status === 'success') {
-      await invalidateTags(props.isEditing ? props.commentBody : props.car);
+      await invalidateTags(props.isEditing ? props.commentBody.car : props.car);
       formHandler.setValue('content', '');
+
+      props.onSuccess?.();
 
       return;
     }
@@ -94,22 +104,32 @@ const CommentForm = (props: CommentFormProps) => {
 
   return (
     <FormProvider {...formHandler}>
-      <form
-        onSubmit={formHandler.handleSubmit(onSubmit)}
-        className='mt-8'
-      >
+      <form onSubmit={formHandler.handleSubmit(onSubmit)}>
         <div onClick={handleAuth}>
           <RHFTextEditor name='content' />
         </div>
-        <Button
-          type='submit'
-          variant='solid'
-          color='primary'
-          isLoading={formHandler.formState.isSubmitting}
-          className='mt-4 text-foreground-50'
-        >
-          Post Comment
-        </Button>
+
+        <div className='mt-4 flex gap-2'>
+          <Button
+            type='submit'
+            variant='solid'
+            color='primary'
+            isLoading={formHandler.formState.isSubmitting}
+            className='text-foreground-50'
+          >
+            {props.isEditing ? 'Update' : 'Post Comment'}
+          </Button>
+
+          {props?.hideFormCB && (
+            <Button
+              type='button'
+              variant='ghost'
+              onPress={() => props?.hideFormCB?.()}
+            >
+              Cancel
+            </Button>
+          )}
+        </div>
       </form>
     </FormProvider>
   );

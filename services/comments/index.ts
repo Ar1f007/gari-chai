@@ -4,6 +4,7 @@ import { CommentCreationPayload, commentSchema } from '@/schema/comment';
 import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
+import { z } from 'zod';
 
 export const commentService = {
   async getComments(payload: { carId: TCarSchema['_id'] }) {
@@ -14,22 +15,21 @@ export const commentService = {
         method: ReqMethod.GET,
         next: {
           tags: [payload.carId],
-          revalidate: 0, // revalidate every 30 mins
+          revalidate: 30 * 60, // revalidate every 30 mins
         },
       });
 
       if (res.status === 'success') {
-        const parsedData = commentSchema.safeParse(res.data);
+        const parsedData = z.array(commentSchema).safeParse(res.data);
+
         if (parsedData.success) {
           return parsedData.data;
         } else {
-          return {
-            message: 'Failed to fetch comments',
-          };
+          return 'Failed to fetch comments';
         }
       }
 
-      return res;
+      return res.message;
     } catch (error) {
       return null;
     }

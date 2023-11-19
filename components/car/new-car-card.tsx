@@ -1,10 +1,10 @@
 import { TCarSchema } from '@/schema/car';
-import { routes } from '@/util/routes';
 import { Card, CardBody, CardHeader } from '@nextui-org/card';
 import Image from 'next/image';
 import Link from 'next/link';
 import { subtitle } from '../primitives';
-import { CURRENCY_SYMBOL, PLACEHOLDER_IMAGE } from '@/lib/constants';
+import { PLACEHOLDER_IMAGE } from '@/lib/constants';
+import { routes } from '@/config/routes';
 
 type CarProps = {
   car: TCarSchema;
