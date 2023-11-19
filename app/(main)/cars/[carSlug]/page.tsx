@@ -44,7 +44,7 @@ export default async function CarDetailsPage(props: Props) {
         <Reviews car={car} />
       </Suspense>
 
-      <Comments />
+      <Comments carId={car._id} />
     </Fragment>
   );
 }

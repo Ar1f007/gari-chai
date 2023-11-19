@@ -1,14 +1,14 @@
 import '@/styles/tiptap-editor.css';
-import { useFormContext, useController } from 'react-hook-form';
-import { useEditor, EditorContent, BubbleMenu, EditorOptions, EditorEvents } from '@tiptap/react';
 
 import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight';
 import Typography from '@tiptap/extension-typography';
 import Placeholder from '@tiptap/extension-placeholder';
-
-import { Button, ButtonGroup } from '@nextui-org/button';
 import debounce from 'debounce';
+
+import { useFormContext, useController } from 'react-hook-form';
+import { useEditor, EditorContent, BubbleMenu, EditorOptions, EditorEvents } from '@tiptap/react';
+import { Button, ButtonGroup } from '@nextui-org/button';
 import { BoldIcon, HighlighterIcon, ItalicIcon, StrikethroughIcon } from 'lucide-react';
 
 type CustomEditorOptions = {
@@ -103,9 +103,7 @@ export const RHFTextEditor: React.FC<TextEditorProps> = ({ name, tiptapOptions }
       </BubbleMenu>
 
       <EditorContent editor={editor} />
-      {fieldState.error && (
-        <span className='mt-2 text-sm text-danger'>{fieldState.error.message}</span>
-      )}
+      {fieldState.error && <p className='mt-2 text-sm text-danger'>{fieldState.error.message}</p>}
     </>
   );
 };

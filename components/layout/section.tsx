@@ -3,7 +3,7 @@ import { HTMLAttributes, ReactNode } from 'react';
 
 type SectionProps = {
   children: ReactNode;
-  classNames: string;
+  classNames?: string;
 } & Omit<HTMLAttributes<HTMLScriptElement>, 'className'>;
 
 export const Section = ({ children, classNames, ...rest }: SectionProps) => {

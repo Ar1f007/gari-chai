@@ -4,7 +4,7 @@ import { IS_CLIENT } from '@/lib/constants';
 import { TAuthUser } from '@/schema/user';
 
 type TUserStore = {
-  user: Promise<TAuthUser | null> | TAuthUser | null;
+  user: TAuthUser | null;
   status: 'pending' | 'loggedOut' | 'loggedIn';
 };
 

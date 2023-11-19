@@ -28,6 +28,10 @@ export const endpoints = {
     reviews: {
       baseUrl: '/reviews',
     },
+
+    comments: {
+      baseUrl: '/comments',
+    },
   },
   admin: {},
 };
