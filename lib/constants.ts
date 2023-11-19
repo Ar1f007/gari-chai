@@ -15,7 +15,7 @@ export const API_BASE_URL =
 
 export const API_V1_URL = API_BASE_URL + '/api/v1';
 
-export const PRIMARY_COLOR = '#3C50E0';
+export const PRIMARY_COLOR_500 = '#1e8667';
 
 export const SearchParams = {
   getAllBrands: 'get=all',

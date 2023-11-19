@@ -15,16 +15,14 @@ const Review = ({ review }: { review: ReviewBody }) => {
 
       <Ratings stars={review.rating} />
 
-      <div className='mt-4'>
-        <p
-          className='mt-4 line-clamp-4 leading-relaxed text-gray-500'
-          title={review.review}
-        >
-          {review.review}
-        </p>
-      </div>
+      <p
+        className='my-2 line-clamp-4 leading-relaxed text-gray-500'
+        title={review.review}
+      >
+        {review.review}
+      </p>
 
-      <footer className='mt-8 flex flex-col gap-1'>
+      <footer className='flex flex-col gap-1'>
         <span className='text-base font-medium text-gray-700'>By {review.userInfo.name}</span>
         <span className='text-sm text-gray-500'>
           on {dayjs(review.updatedAt).format('MMM MM, YYYY')}

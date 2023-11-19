@@ -1,3 +1,4 @@
+import Comments from '@/modules/car/comments';
 import KeySpecs from '@/modules/car/key-specs';
 import CarImage from '@/modules/car/new-car/car-image';
 import CarInfo from '@/modules/car/new-car/car-info';
@@ -42,6 +43,8 @@ export default async function CarDetailsPage(props: Props) {
       <Suspense>
         <Reviews car={car} />
       </Suspense>
+
+      <Comments />
     </Fragment>
   );
 }
