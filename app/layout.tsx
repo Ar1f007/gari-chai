@@ -32,11 +32,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang='en'
       suppressHydrationWarning
+      className='light'
     >
       <head />
       <body className={clsx('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
-          <main className='bg-background text-foreground light'>{children}</main>
+          <main>{children}</main>
         </Providers>
       </body>
     </html>
