@@ -4,6 +4,7 @@ import AddToWishlist from './add-to-wishlist';
 import OfferBtn from '../offer-btn';
 import { reviews } from '@/services/reviews';
 import { Ratings } from '@/components/ratings';
+import { formatAsBangladeshiCurrency } from '@/util/covert-currency';
 
 type Props = {
   car: TCarSchema;
@@ -32,7 +33,9 @@ const CarInfo = async ({ car }: Props) => {
         </div>
       )}
 
-      <p className={subtitle({ className: 'my-0 font-bold' })}>TK {price}</p>
+      <p className={subtitle({ className: 'my-0 font-bold' })}>
+        {formatAsBangladeshiCurrency(price)}
+      </p>
 
       <OfferBtn />
 
