@@ -1,12 +1,7 @@
 import { HOME_SETTINGS_OPTIONS } from '@/lib/constants';
 import { getHomePageCarsBySection } from '@/services';
 import SectionTitle from '@/components/section-title';
-import { subtitle } from '@/components/primitives';
-import { Card, CardBody, CardHeader } from '@nextui-org/card';
-import Image from 'next/image';
 import Sliders from '@/components/slider';
-import Link from 'next/link';
-import { routes } from '@/config/routes';
 import { Car } from '@/components/car/new-car-card';
 
 export const PopularCars = async () => {

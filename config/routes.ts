@@ -119,7 +119,7 @@ export const navMenuItems: SiteConfig['navMenuItems'] = [
   },
 
   {
-    id: 'menu-5',
+    id: 'menu-6',
     label: 'Car Loan',
     href: routes.loan,
     hasChildren: false,

@@ -26,7 +26,6 @@ import { settingsActions, settingsStore } from '@/store';
 import SelectLocation from './SelectLocation';
 import NavItem from './NavItem';
 import { MobileAuthButton } from './mobile-auth-button';
-import { ThemeSwitcher } from '@/components/theme-switcher';
 
 const Navbar = () => {
   const settingSnap = useSnapshot(settingsStore);
