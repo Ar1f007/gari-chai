@@ -25,6 +25,8 @@ export const routes = {
   services: '/services',
 
   reviews: '/reviews',
+
+  profileSettings: '/profile-settings',
 };
 
 export const navMenuItems: SiteConfig['navMenuItems'] = [
@@ -114,5 +116,12 @@ export const navMenuItems: SiteConfig['navMenuItems'] = [
         hasChildren: false,
       },
     ],
+  },
+
+  {
+    id: 'menu-4',
+    label: 'Car Loan',
+    href: routes.loan,
+    hasChildren: false,
   },
 ];

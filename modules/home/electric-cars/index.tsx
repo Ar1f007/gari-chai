@@ -39,7 +39,7 @@ export const ElectricCars = async () => {
   const groupedCars = groupCarsByTag(res);
 
   return (
-    <section className='mt-8 rounded-xl bg-background px-2 py-8 shadow-md md:mt-16'>
+    <section className='mt-4 rounded-xl bg-background px-2 py-8 md:mt-16 md:shadow-md'>
       <SectionTitle>Electric Cars</SectionTitle>
 
       <TabSlider data={groupedCars} />

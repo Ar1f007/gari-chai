@@ -25,6 +25,7 @@ import { Suspense, useEffect } from 'react';
 import { settingsActions, settingsStore } from '@/store';
 import SelectLocation from './SelectLocation';
 import NavItem from './NavItem';
+import { MobileAuthButton } from './mobile-auth-button';
 
 const Navbar = () => {
   const settingSnap = useSnapshot(settingsStore);
@@ -112,6 +113,10 @@ const Navbar = () => {
                   currentActivePathname={pathname}
                 />
               ))}
+
+              <li>
+                <MobileAuthButton />
+              </li>
             </ul>
           </li>
         </NavbarMenu>

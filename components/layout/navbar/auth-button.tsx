@@ -20,7 +20,7 @@ const AuthButton = () => {
         <>
           <Icon
             name='user-2'
-            className='-mt-1 mr-1'
+            className='-mt-1 mr-1 hidden lg:inline-block'
           />
 
           <Link href={routes.login}>Login</Link>

@@ -8,7 +8,7 @@ import { Suspense } from 'react';
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <section className='flex min-h-full overflow-hidden px-2 pt-16 sm:py-20'>
+    <section className='flex min-h-full px-2 pt-16 sm:py-20'>
       <Card className='mx-auto w-full max-w-2xl py-10'>
         <CardHeader className='flex flex-col gap-5'>
           <Link href={routes.home}>
