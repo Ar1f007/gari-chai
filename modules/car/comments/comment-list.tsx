@@ -12,7 +12,7 @@ const CommentList = async ({ carId }: { carId: TCarSchema['_id'] }) => {
   }
 
   return (
-    <ul className='flex flex-col gap-y-5  py-10'>
+    <ul className='flex flex-col gap-y-10  py-10'>
       {comments.map((comment) => (
         <li key={comment._id}>
           <CommentItem comment={comment} />

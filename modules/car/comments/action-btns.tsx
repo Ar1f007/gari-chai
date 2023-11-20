@@ -2,12 +2,17 @@
 
 import { ReactNode, useState } from 'react';
 import { Button } from '@nextui-org/button';
-import { EditIcon, ReplyAllIcon, ReplyIcon } from 'lucide-react';
+import { EditIcon, MinusCircleIcon, ReplyAllIcon, ReplyIcon, XIcon } from 'lucide-react';
 
 import { CommentBody } from '@/schema/comment';
 import CommentForm from './comment-form';
 import { useSnapshot } from 'valtio';
 import { userStore } from '@/store';
+import { commentService } from '@/services/comments';
+import { toast } from 'sonner';
+import { GENERIC_ERROR_MSG } from '@/lib/constants';
+import { invalidateTags } from '@/lib/actions';
+import { generateTagNameForComments } from '@/util/generate-tag-name';
 
 type Props = {
   comment: CommentBody;
@@ -19,6 +24,7 @@ const ActionButtons = ({ comment, children }: Props) => {
   const [showReplies, setShowReplies] = useState(false);
   const [commentForm, setShowCommentForm] = useState(false);
   const [editCommentForm, setEditCommentForm] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function handleEditComment() {
     setEditCommentForm(true);
@@ -44,20 +50,44 @@ const ActionButtons = ({ comment, children }: Props) => {
     setShowCommentForm(false);
   }
 
+  async function handleDeleteComment() {
+    try {
+      setLoading(true);
+      const res = await commentService.deleteComment(comment._id);
+
+      if (!res) {
+        toast.error(GENERIC_ERROR_MSG);
+        return;
+      }
+
+      if (res.status === 'success') {
+        const tag = generateTagNameForComments(comment.car); // car id
+
+        await invalidateTags(tag);
+
+        toast.success('Deleted successfully');
+
+        return;
+      }
+
+      toast.error(res.message ?? GENERIC_ERROR_MSG);
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <>
-      <div className='flex items-center'>
+      <div className='flex flex-wrap items-center'>
         {comment.depth === 0 && (
           <Button
             size='sm'
             variant='light'
             onPress={showCommentForm}
+            color='default'
           >
-            <ReplyIcon
-              className='text-default-500'
-              size={18}
-            />{' '}
-            Reply
+            <ReplyIcon size={18} /> Reply
           </Button>
         )}
 
@@ -66,27 +96,33 @@ const ActionButtons = ({ comment, children }: Props) => {
             variant='light'
             size='sm'
             onPress={toggleShowRepliesVisibility}
+            color='default'
           >
-            <ReplyAllIcon
-              className='text-default-500'
-              size={18}
-            />
+            <ReplyAllIcon size={18} />
             {comment.children.length} replies
           </Button>
         )}
 
         {userSnap.user && userSnap.user._id === comment.user._id && (
-          <Button
-            variant='light'
-            size='sm'
-            onPress={handleEditComment}
-          >
-            <EditIcon
-              className='text-default-500'
-              size={18}
-            />{' '}
-            Edit
-          </Button>
+          <>
+            <Button
+              variant='light'
+              size='sm'
+              onPress={handleEditComment}
+              color='primary'
+            >
+              <EditIcon size={18} /> Edit
+            </Button>
+            <Button
+              variant='light'
+              size='sm'
+              onPress={handleDeleteComment}
+              color='danger'
+              isLoading={loading}
+            >
+              <MinusCircleIcon size={18} /> Delete
+            </Button>
+          </>
         )}
       </div>
 

@@ -16,7 +16,7 @@ export const commentService = {
         method: ReqMethod.GET,
         next: {
           tags: [generateTagNameForComments(payload.carId)],
-          revalidate: 2 * 60 * 60, // revalidate every 2 hours
+          revalidate: 0, // revalidate every 2 hours
         },
       });
 
@@ -56,6 +56,18 @@ export const commentService = {
       return apiFetch(url, {
         method: ReqMethod.PATCH,
         body: payload,
+      });
+    } catch (error) {
+      return null;
+    }
+  },
+
+  deleteComment(commentId: string) {
+    const url = endpoints.api.comments.baseUrl + '/' + commentId;
+
+    try {
+      return apiFetch(url, {
+        method: ReqMethod.DELETE,
       });
     } catch (error) {
       return null;

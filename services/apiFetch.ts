@@ -1,5 +1,7 @@
+import { routes } from '@/config/routes';
 import { API_V1_URL } from '@/lib/constants';
 import { TApiData, TApiError } from '@/types';
+import { redirect } from 'next/navigation';
 
 type FetchExtendedOptions = {
   isFormData?: boolean;
@@ -32,6 +34,7 @@ export async function apiFetch<Data = unknown, ErrData = TApiError>(
 
     return jsonRes;
   } catch (e: any) {
+    console.log({ e });
     throw e;
   }
 }
