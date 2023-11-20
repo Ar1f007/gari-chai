@@ -7,10 +7,12 @@ import {
   CommentBody,
   CommentCreationPayload,
   CommentInputs,
+  CommentUpdatePayload,
   commentFormSchema,
 } from '@/schema/comment';
 import { commentService } from '@/services/comments';
 import { userStore } from '@/store';
+import { generateTagNameForComments } from '@/util/generate-tag-name';
 import { mapValidationErrors } from '@/util/mapValidationError';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@nextui-org/button';
@@ -54,14 +56,55 @@ const CommentForm = (props: CommentFormProps) => {
     resolver: zodResolver(commentFormSchema),
   });
 
+  async function handleEditComment(data: CommentInputs, commentId: CommentBody['_id']) {
+    const payload: CommentUpdatePayload = {
+      commentId,
+      commentBody: {
+        content: data.content,
+      },
+    };
+
+    const res = await commentService.editComment(payload);
+
+    if (!res) {
+      toast.error(GENERIC_ERROR_MSG);
+      return;
+    }
+
+    if (res.status === 'success') {
+      const tag = generateTagNameForComments(props.isEditing ? props.commentBody.car : props.car);
+
+      await invalidateTags(tag);
+
+      formHandler.setValue('content', '');
+
+      props.onSuccess?.();
+
+      return;
+    }
+
+    if (res.status === 'validationError') {
+      mapValidationErrors(res.errors, formHandler);
+      toast.error(res.message ?? 'Invalid inputs');
+      return;
+    }
+
+    toast.error(res.message || GENERIC_ERROR_MSG);
+  }
+
   async function onSubmit(data: CommentInputs) {
     if (!userSnap.user) {
       toast.error('Please login to continue');
       return;
     }
 
+    if (props.isEditing) {
+      handleEditComment(data, props.commentBody._id);
+      return;
+    }
+
     const payload: CommentCreationPayload = {
-      car: props.isEditing ? props.commentBody._id : props.car,
+      car: props.car,
       user: userSnap.user._id,
       content: data.content,
       isChild: props.isEditing ? null : props.isChild,
@@ -79,7 +122,10 @@ const CommentForm = (props: CommentFormProps) => {
     }
 
     if (res.status === 'success') {
-      await invalidateTags(props.isEditing ? props.commentBody.car : props.car);
+      const tag = generateTagNameForComments(props.car);
+
+      await invalidateTags(tag);
+
       formHandler.setValue('content', '');
 
       props.onSuccess?.();

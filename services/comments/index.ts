@@ -1,10 +1,11 @@
 import { TCarSchema } from '@/schema/car';
-import { CommentCreationPayload, commentSchema } from '@/schema/comment';
+import { CommentCreationPayload, commentSchema, CommentUpdatePayload } from '@/schema/comment';
 
 import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
 import { z } from 'zod';
+import { generateTagNameForComments } from '@/util/generate-tag-name';
 
 export const commentService = {
   async getComments(payload: { carId: TCarSchema['_id'] }) {
@@ -14,8 +15,8 @@ export const commentService = {
       const res = await apiFetch(url, {
         method: ReqMethod.GET,
         next: {
-          tags: [payload.carId],
-          revalidate: 30 * 60, // revalidate every 30 mins
+          tags: [generateTagNameForComments(payload.carId)],
+          revalidate: 2 * 60 * 60, // revalidate every 2 hours
         },
       });
 
@@ -44,6 +45,19 @@ export const commentService = {
         body: payload,
       });
     } catch (e) {
+      return null;
+    }
+  },
+
+  editComment(payload: CommentUpdatePayload) {
+    const url = endpoints.api.comments.baseUrl + '/' + payload.commentId;
+
+    try {
+      return apiFetch(url, {
+        method: ReqMethod.PATCH,
+        body: payload,
+      });
+    } catch (error) {
       return null;
     }
   },

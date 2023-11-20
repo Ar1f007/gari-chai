@@ -5,13 +5,20 @@ export const commentFormSchema = z.object({
   content: z.string().min(1, 'Please enter a comment before submitting'),
 });
 
-// when api call is made to create comment
+// when api call is made to backend to create a comment
 export const commentCreationPayloadSchema = z.object({
   user: z.string(),
   car: z.string(),
   isChild: z.union([z.boolean(), z.null()]),
   content: z.string(),
   parentId: z.string().optional(),
+});
+
+const commentUpdatePayloadSchema = z.object({
+  commentId: z.string(),
+  commentBody: z.object({
+    content: z.string(),
+  }),
 });
 
 // comment body that is coming from server
@@ -50,3 +57,5 @@ export type CommentInputs = z.infer<typeof commentFormSchema>;
 export type CommentCreationPayload = z.infer<typeof commentCreationPayloadSchema>;
 
 export type CommentBody = z.infer<typeof commentSchema>;
+
+export type CommentUpdatePayload = z.infer<typeof commentUpdatePayloadSchema>;

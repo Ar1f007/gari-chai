@@ -6,12 +6,16 @@ import { EditIcon, ReplyAllIcon, ReplyIcon } from 'lucide-react';
 
 import { CommentBody } from '@/schema/comment';
 import CommentForm from './comment-form';
+import { useSnapshot } from 'valtio';
+import { userStore } from '@/store';
 
 type Props = {
   comment: CommentBody;
   children: ReactNode;
 };
 const ActionButtons = ({ comment, children }: Props) => {
+  const userSnap = useSnapshot(userStore);
+
   const [showReplies, setShowReplies] = useState(false);
   const [commentForm, setShowCommentForm] = useState(false);
   const [editCommentForm, setEditCommentForm] = useState(false);
@@ -71,17 +75,19 @@ const ActionButtons = ({ comment, children }: Props) => {
           </Button>
         )}
 
-        <Button
-          variant='light'
-          size='sm'
-          onPress={handleEditComment}
-        >
-          <EditIcon
-            className='text-default-500'
-            size={18}
-          />{' '}
-          Edit
-        </Button>
+        {userSnap.user && userSnap.user._id === comment.user._id && (
+          <Button
+            variant='light'
+            size='sm'
+            onPress={handleEditComment}
+          >
+            <EditIcon
+              className='text-default-500'
+              size={18}
+            />{' '}
+            Edit
+          </Button>
+        )}
       </div>
 
       {editCommentForm && (
