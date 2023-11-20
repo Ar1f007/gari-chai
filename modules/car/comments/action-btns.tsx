@@ -72,6 +72,7 @@ const ActionButtons = ({ comment, children }: Props) => {
 
       toast.error(res.message ?? GENERIC_ERROR_MSG);
     } catch (error) {
+      toast.error(GENERIC_ERROR_MSG);
     } finally {
       setLoading(false);
     }

@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { Button } from '@nextui-org/button';
 import GoogleIcon from '@/public/images/google.svg';
 import Image from 'next/image';
+import { toast } from 'sonner';
 const GoogleSignInButton = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl');
@@ -11,7 +12,9 @@ const GoogleSignInButton = () => {
   return (
     <Button
       className='w-full py-6'
-      onClick={() => {}}
+      onClick={() => {
+        toast.info('Coming soon!');
+      }}
       variant='faded'
       color='default'
     >
