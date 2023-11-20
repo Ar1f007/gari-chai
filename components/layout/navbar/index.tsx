@@ -120,8 +120,6 @@ const Navbar = () => {
               </li>
             </ul>
           </li>
-
-          <ThemeSwitcher />
         </NavbarMenu>
       </NextUINavbar>
     </>
