@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { subtitle } from '../primitives';
 import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 import { Button } from '@nextui-org/button';
+import { formatAsBangladeshiCurrency } from '@/util/covert-currency';
 
 type CarProps = {
   car: TCarSchema;
@@ -31,7 +32,9 @@ export const Car = ({ car }: CarProps) => {
           <h2 className={subtitle({ className: 'font-semibold' })}>{name}</h2>
         </Link>
 
-        <p className='mb-3 text-base font-semibold text-default-600'>TK {price}</p>
+        <p className='mb-3 text-base font-semibold text-default-600'>
+          {formatAsBangladeshiCurrency(price)}
+        </p>
 
         <Button
           color='primary'
