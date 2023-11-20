@@ -20,12 +20,11 @@ const Brand = (props: BrandProps) => {
       href={path}
       className='flex flex-col items-center overflow-hidden rounded-lg pb-3 shadow-md duration-300 ease-in-out hover:shadow-xl'
     >
-      {/* <div className='relative h-80 w-full'></div> */}
       <Image
         src={content.image.originalUrl ?? PLACEHOLDER_IMAGE}
         alt={content.name}
-        width={220}
-        height={220}
+        width={200}
+        height={200}
         className='object-cover'
       />
 
