@@ -45,25 +45,27 @@ const Reviews = async ({ car }: ReviewsProps) => {
         <WriteReview carId={car._id} />
       </div>
 
-      <div className='py-3'>
-        <Sliders sliderOptions={{ options: reviewKeenSliderOptions }}>
-          {res.reviews.map((review) => (
-            <li
-              className='keen-slider__slide max-w-[500px]'
-              key={review._id}
-            >
-              <Review review={review} />
-            </li>
-          ))}
-        </Sliders>
+      {!!res.reviews.length && (
+        <div className='py-3'>
+          <Sliders sliderOptions={{ options: reviewKeenSliderOptions }}>
+            {res.reviews.map((review) => (
+              <li
+                className='keen-slider__slide max-w-[500px]'
+                key={review._id}
+              >
+                <Review review={review} />
+              </li>
+            ))}
+          </Sliders>
 
-        <Link
-          href={getHref()}
-          className='mt-3 inline-block text-primary underline'
-        >
-          View All Reviews
-        </Link>
-      </div>
+          <Link
+            href={getHref()}
+            className='mt-3 inline-block text-primary underline'
+          >
+            View All Reviews
+          </Link>
+        </div>
+      )}
     </section>
   );
 };

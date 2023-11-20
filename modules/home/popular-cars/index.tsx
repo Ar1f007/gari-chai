@@ -17,7 +17,7 @@ export const PopularCars = async () => {
   }
 
   return (
-    <section className='mt-8 rounded-xl bg-background px-6 py-8 shadow-md md:mt-16'>
+    <section className='mt-8 rounded-xl bg-background px-2 py-8 shadow-md md:mt-16'>
       <SectionTitle>Popular Cars</SectionTitle>
 
       <div className='mt-6'>
