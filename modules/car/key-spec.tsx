@@ -16,13 +16,13 @@ const KeySpec = (props: KeySpecProps) => {
         {Icon && (
           <Icon
             size={48}
-            className='stroke-[1px] text-gray-600'
+            className='stroke-[1px] text-gray-600 dark:text-[#fff]'
           />
         )}
       </div>
       <div>
         <p className='text-gray-600'>{propertyName}</p>
-        <strong className='text-gray-600'>{value}</strong>
+        <strong className='text-gray-600 dark:text-[#fff]'>{value}</strong>
       </div>
     </div>
   );

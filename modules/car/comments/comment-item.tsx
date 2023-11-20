@@ -16,7 +16,9 @@ const CommentItem = ({ comment }: { comment: CommentBody }) => {
         />
 
         <div className='flex flex-col'>
-          <h4 className='text-base font-medium text-gray-700'>{comment.user.name}</h4>
+          <h4 className='text-base font-medium light:text-gray-700 dark:text-default-500'>
+            {comment.user.name}
+          </h4>
           <p className='text-sm text-gray-500'>{formatTimeFromNow(comment.updatedAt)}</p>
         </div>
       </div>

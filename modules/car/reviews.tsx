@@ -17,7 +17,7 @@ type ReviewsProps = {
 const Reviews = async ({ car }: ReviewsProps) => {
   const res = await reviews.getReviewsWithStats({ carId: car._id });
 
-  if (!res || !res.reviews.length) {
+  if (!res) {
     return null;
   }
 

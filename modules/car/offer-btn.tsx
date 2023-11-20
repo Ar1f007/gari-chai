@@ -10,7 +10,7 @@ const OfferBtn = () => {
       >
         Checkout Offers
       </Button>
-      <p className='mt-2 text-small text-[#3E444D]'>
+      <p className='mt-2 text-small dark:text-foreground light:text-[#3E444D]'>
         Don&apos;t miss out on the best offers for this month
       </p>
     </div>
