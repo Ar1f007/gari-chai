@@ -5,6 +5,7 @@ import Search from '@/components/search';
 import { routes } from '@/config/routes';
 import { Suspense } from 'react';
 import AuthButton from './auth-button';
+import { ThemeSwitcher } from '@/components/theme-switcher';
 
 const TopHeader = () => {
   return (
@@ -23,6 +24,8 @@ const TopHeader = () => {
 
       <div className='basic-1/3 flex w-full justify-end text-primary'>
         <AuthButton />
+
+        <ThemeSwitcher />
       </div>
     </div>
   );
