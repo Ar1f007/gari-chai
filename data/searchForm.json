@@ -1,0 +1,89 @@
+{
+  "newCarBudget": [{}],
+  "newCar": {
+    "budgets": [
+      {
+        "value": "100000-500000",
+        "label": "1 - 5 Lakh"
+      },
+      {
+        "value": "500000-1000000",
+        "label": "5 - 10 Lakh"
+      },
+      {
+        "value": "1000000-1500000",
+        "label": "10 - 15 Lakh"
+      },
+      {
+        "value": "1500000-2000000",
+        "label": "15 - 20 Lakh"
+      },
+      {
+        "value": "2000000-3500000",
+        "label": "20 - 35 Lakh"
+      },
+      {
+        "value": "3500000-5000000",
+        "label": "35 - 50 Lakh"
+      },
+      {
+        "value": "5000000-10000000",
+        "label": "50 Lakh - 1 Crore"
+      },
+      {
+        "value": "10000000-100000000",
+        "label": "Above 1 Crore"
+      }
+    ],
+    "bodyTypes": [
+      {
+        "value": "hatchback",
+        "label": "Hatchback"
+      },
+      {
+        "value": "sedan",
+        "label": "Sedan"
+      },
+      {
+        "value": "suv",
+        "label": "SUV (Sport Utility Vehicle)"
+      },
+      {
+        "value": "muv",
+        "label": "MUV (Multi Utility Vehicle)"
+      },
+      {
+        "value": "luxury",
+        "label": "Luxury"
+      },
+      {
+        "value": "super-luxury",
+        "label": "Super Luxury"
+      },
+      {
+        "value": "convertible",
+        "label": "Convertible"
+      },
+      {
+        "value": "hybrid",
+        "label": "Hybrid"
+      },
+      {
+        "value": "coupe",
+        "label": "Coupe"
+      },
+      {
+        "value": "pickup-truck",
+        "label": "Pickup Truck"
+      },
+      {
+        "value": "minivan",
+        "label": "Minivan"
+      },
+      {
+        "value": "wagon",
+        "label": "Wagon"
+      }
+    ]
+  }
+}
