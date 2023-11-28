@@ -34,7 +34,10 @@ const CarInfo = async ({ car }: Props) => {
       )}
 
       <p className={subtitle({ className: 'my-0 font-bold' })}>
-        {formatAsBangladeshiCurrency(price)}
+        {formatAsBangladeshiCurrency(price.min)}
+        &nbsp;&mdash;&nbsp;
+        {formatAsBangladeshiCurrency(price.max)}
+        {price.isNegotiable && <small className='ml-2 text-xs text-foreground'>(Negotiable)</small>}
       </p>
 
       <OfferBtn />

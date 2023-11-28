@@ -27,6 +27,7 @@ export async function getCarBySlug(payload: TGetCarBySlugPayload) {
       if (parsedData.success) {
         return parsedData.data;
       }
+      console.log(parsedData.error);
     }
 
     return undefined;

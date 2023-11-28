@@ -1,5 +1,5 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "cSpell.words": ["frontpage", "Gari", "Lucide"],
+  "cSpell.words": ["frontpage", "Gari", "Lucide", "Nexon"],
   "tailwindCSS.experimental.classRegex": ["class:\\s*?[\"'`]([^\"'`]*).*?,"]
 }

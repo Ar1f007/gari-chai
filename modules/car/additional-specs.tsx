@@ -1,6 +1,5 @@
 'use client';
 import { Accordion, AccordionItem } from '@nextui-org/accordion';
-import { useState } from 'react';
 import { TCarSchema } from '@/schema/car';
 import SpecInfo from './spec-info';
 
@@ -67,36 +66,17 @@ const AdditionalSpecifications = ({ car }: AdditionalSpecificationsProps) => {
         <div className='grid grid-cols-1 gap-8 pl-2 pt-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
           <SpecInfo
             name='Brand'
-            value={car.brand.name}
+            value={typeof car.brand === 'string' ? car.brand : car.brand.name}
           />
           <SpecInfo
             name='Body Style'
-            value={car.bodyStyle}
-          />
-          <SpecInfo
-            name='Mileage'
-            value={car.mileage + ' kmpl'}
-          />
-          <SpecInfo
-            name='Color'
-            value={car.color}
-          />
-          <SpecInfo
-            name='Interior Color'
-            value={car.baseInteriorColor}
+            value={typeof car.bodyStyle === 'string' ? car.bodyStyle : car.bodyStyle.name}
           />
 
           <SpecInfo
             name='Engine'
             value={car.engine.type}
           />
-
-          {car.engine.displacement && (
-            <SpecInfo
-              name='Displacement'
-              value={car.engine.displacement + ' cc'}
-            />
-          )}
 
           {car.engine.horsePower && (
             <SpecInfo
@@ -111,11 +91,6 @@ const AdditionalSpecifications = ({ car }: AdditionalSpecificationsProps) => {
               value={car.engine.torque + 'Nm'}
             />
           )}
-
-          <SpecInfo
-            name='Fuel'
-            value={car.fuel.type}
-          />
 
           {car.fuel.economy?.city && (
             <SpecInfo
@@ -132,17 +107,13 @@ const AdditionalSpecifications = ({ car }: AdditionalSpecificationsProps) => {
           )}
 
           <SpecInfo
-            name='Model Number'
-            value={car.modelNumber}
-          />
-          <SpecInfo
             name='Transmission'
             value={car.transmission}
           />
 
           <SpecInfo
             name='Number of Doors'
-            value={car.numberOfDoors}
+            value={car.numOfDoors}
           />
 
           {car?.acceleration?.topSpeed && (
@@ -159,19 +130,20 @@ const AdditionalSpecifications = ({ car }: AdditionalSpecificationsProps) => {
             />
           )}
 
-          {car.infotainmentSystem && (
-            <SpecInfo
-              name='Infotainment System'
-              value={car.infotainmentSystem}
-            />
-          )}
+          {/* {
+            !!car.specificationsByGroup?.length && car.specificationsByGroup.map((group) => (
 
-          {car.safetyFeatures && (
-            <SpecInfo
-              name='Safety Features'
-              value={car.safetyFeatures}
-            />
-          )}
+            ))
+          } */}
+
+          {!!car.additionalSpecifications &&
+            car.additionalSpecifications.map((specification, idx) => (
+              <SpecInfo
+                key={'specification_' + idx}
+                name={specification.name}
+                value={specification.value}
+              />
+            ))}
         </div>
       </AccordionItem>
     </Accordion>

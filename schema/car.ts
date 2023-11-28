@@ -1,44 +1,92 @@
 import { z } from 'zod';
+import { brandModelSchema, brandSchema, carBodyTypeSchema } from './brand-and-model';
+
+const numberOrNull = z.union([z.number(), z.null()]);
+
+const singleSpecificationSchema = z.object({
+  name: z.string().min(1, 'name is required'),
+  value: z.union([z.string().min(1, 'value is required'), z.boolean()]),
+  valueType: z.enum(['boolean', 'text']),
+});
 
 export const carSchema = z.object({
   _id: z.string(),
   name: z.string(),
   slug: z.string(),
-  year: z.number(),
-  registrationYear: z.number(),
   description: z.string().optional(),
-  brand: z.object({ slug: z.string(), name: z.string() }),
-  modelNumber: z.number(),
+
+  brand: z.object({
+    id: z.union([z.string(), brandSchema]),
+    name: z.string(),
+  }),
+
+  brandModel: z.object({
+    id: z.union([z.string(), brandModelSchema]),
+    name: z.string(),
+  }),
+
+  colors: z
+    .array(
+      z.object({
+        name: z.string(),
+        imageUrls: z.array(z.string().url()).optional(),
+      }),
+    )
+    .default([]),
+
   engine: z.object({
     type: z.string(),
-    displacement: z.number().optional(),
-    horsePower: z.number().optional(),
-    torque: z.number().optional(),
+    numOfCylinders: numberOrNull,
+    horsePower: numberOrNull,
+    torque: numberOrNull,
   }),
+
   transmission: z.string(),
-  bodyStyle: z.string(),
+
+  bodyStyle: z.union([z.string(), carBodyTypeSchema]),
+
   fuel: z.object({
-    type: z.string(),
-    economy: z.object({ city: z.number().optional(), highway: z.number().optional() }).optional(),
+    typeInfo: z.object({
+      type: z.string(),
+      fullForm: z.string(),
+    }),
+    economy: z.object({ city: numberOrNull, highway: numberOrNull }),
   }),
-  acceleration: z
-    .object({ zeroTo60: z.number().optional(), topSpeed: z.number().optional() })
-    .optional(),
-  safetyFeatures: z.string().optional(),
-  infotainmentSystem: z.string().optional(),
-  mileage: z.number(),
+
+  acceleration: z.object({
+    zeroTo60: numberOrNull,
+    topSpeed: numberOrNull,
+  }),
+
   posterImage: z.object({
     originalUrl: z.string().url(),
     thumbnailUrl: z.string().url(),
   }),
+
   imageUrls: z.array(z.string()).optional(),
-  color: z.string(),
-  baseInteriorColor: z.string(),
-  numberOfDoors: z.number(),
-  price: z.number(),
+
+  numOfDoors: z.number(),
+
+  price: z.object({
+    min: z.number(),
+    max: z.number(),
+    isNegotiable: z.boolean(),
+  }),
+
   tags: z.array(z.object({ value: z.string(), label: z.string(), _id: z.string() })).optional(),
 
-  publishedAt: z.string(),
+  specificationsByGroup: z
+    .array(
+      z.object({
+        groupName: z.string(),
+        values: z.array(singleSpecificationSchema).optional(),
+      }),
+    )
+    .optional(),
+
+  additionalSpecifications: z.array(singleSpecificationSchema).optional(),
+
+  launchedAt: z.string(),
   createdAt: z.string(),
   updatedAt: z.string(),
 });
