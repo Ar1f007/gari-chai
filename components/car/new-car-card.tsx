@@ -33,7 +33,12 @@ export const Car = ({ car }: CarProps) => {
         </Link>
 
         <p className='mb-3 text-base font-semibold text-default-600'>
-          {formatAsBangladeshiCurrency(price)}
+          {formatAsBangladeshiCurrency(price.min)}
+          &nbsp;&mdash;&nbsp;
+          {formatAsBangladeshiCurrency(price.max)}
+          {price.isNegotiable && (
+            <small className='ml-2 text-xs text-foreground'>(Negotiable)</small>
+          )}
         </p>
 
         <Button
