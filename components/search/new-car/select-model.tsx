@@ -12,7 +12,7 @@ type SelectModelProps = {
   handleChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   isLoading: boolean;
   errMsg: string;
-  defaultSelected: string;
+  defaultSelected: string[] | undefined;
 };
 
 const SelectModel = ({
@@ -32,12 +32,11 @@ const SelectModel = ({
         isLoading={isLoading}
         onChange={handleChange}
         errorMessage={errMsg}
-        className='mt-8 max-w-xs'
         classNames={{
           ...selectClassNames,
         }}
         items={items}
-        defaultSelectedKeys={[defaultSelected]}
+        defaultSelectedKeys={defaultSelected}
       >
         {(item) => (
           <SelectItem

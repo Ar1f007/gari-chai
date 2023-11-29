@@ -3,18 +3,16 @@
 import { FormEvent, useState } from 'react';
 
 import { Radio, RadioGroup } from '@nextui-org/react';
-import { Select, SelectItem } from '@nextui-org/select';
 import { Button } from '@nextui-org/button';
 import { useRouter } from 'next/navigation';
 
-import SelectBrand from './new-car/select-brand';
-
 import useGetBodyTypes from '@/hooks/useGetBodyTypes';
-import useGetAllAndPopularBrands from '@/hooks/useGetAllAndPopularBrands';
 
-import selectOptionData from '@/data/searchForm.json';
 import { createUrl } from '@/lib/utils';
 import SelectBrandAndModel from './new-car/SelectBrandAndModel';
+import SelectBudgetAndBodyType from './new-car/select-budget-and-bodyType';
+import { useSnapshot } from 'valtio';
+import { searchQueryStore } from '@/store';
 
 type SearchBy = 'budget' | 'brand';
 
@@ -26,14 +24,11 @@ export const selectClassNames = {
 };
 
 export const NewCarSearchForm = () => {
-  const { isLoading, bodyTypes, errMsg } = useGetBodyTypes();
-
-  const router = useRouter();
+  const searchQuerySnap = useSnapshot(searchQueryStore);
 
   const [searchBy, setSearchBy] = useState<SearchBy>('budget');
-  const [budget, setBudget] = useState('');
-  const [bodyType, setBodyType] = useState('');
-  const [brand, setBrand] = useState('');
+
+  const router = useRouter();
 
   function handleQuerySubmission(e: FormEvent) {
     e.preventDefault();
@@ -43,12 +38,13 @@ export const NewCarSearchForm = () => {
     params.set('car', 'new');
 
     if (searchBy == 'budget') {
-      params.set('budget', budget);
-      params.set('bodyType', bodyType);
+      params.set('budget', searchQuerySnap.newCar.byBudget.budget);
+      params.set('bodyType', searchQuerySnap.newCar.byBudget.bodyType);
     }
 
     if (searchBy === 'brand') {
-      params.set('brand', brand);
+      params.set('brand', searchQuerySnap.newCar.byBrand.brand);
+      params.set('model', searchQuerySnap.newCar.byBrand.model);
     }
 
     router.push(createUrl('/search', params));
@@ -79,58 +75,11 @@ export const NewCarSearchForm = () => {
         </Radio>
       </RadioGroup>
 
-      {searchBy == 'budget' && (
-        <>
-          <Select
-            aria-label='Select budget'
-            placeholder='Select budget'
-            variant='bordered'
-            color='primary'
-            size='sm'
-            disableAnimation
-            isRequired
-            onChange={(e) => setBudget(e.target.value)}
-            className='mt-8 max-w-xs'
-            classNames={selectClassNames}
-          >
-            {selectOptionData.newCar.budgets.map((item) => (
-              <SelectItem
-                key={item.value}
-                value={item.value}
-              >
-                {item.label}
-              </SelectItem>
-            ))}
-          </Select>
+      <div className='mt-8 flex flex-col gap-4'>
+        {searchBy == 'budget' && <SelectBudgetAndBodyType />}
 
-          <Select
-            aria-label='Select body type'
-            placeholder='Select body type'
-            color='primary'
-            variant='bordered'
-            size='sm'
-            disableAnimation
-            isRequired
-            onChange={(e) => setBodyType(e.target.value)}
-            className='mt-4 max-w-xs'
-            classNames={selectClassNames}
-            isLoading={isLoading}
-            items={bodyTypes}
-            errorMessage={errMsg ? errMsg : ''}
-          >
-            {(item) => (
-              <SelectItem
-                key={item.value}
-                value={item.value}
-              >
-                {item.label}
-              </SelectItem>
-            )}
-          </Select>
-        </>
-      )}
-
-      {searchBy == 'brand' && <SelectBrandAndModel />}
+        {searchBy == 'brand' && <SelectBrandAndModel />}
+      </div>
 
       <Button
         type='submit'

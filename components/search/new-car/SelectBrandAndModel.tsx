@@ -21,11 +21,19 @@ const SelectBrandAndModel = () => {
     });
   }
 
+  function getDefaultModelValue() {
+    if (searchQueryStore.newCar.byBrand.model) {
+      return [searchQueryStore.newCar.byBrand.model];
+    }
+
+    return undefined;
+  }
+
   return (
     <Fragment>
       <SelectBrand />
       <SelectModel
-        defaultSelected={searchQueryStore.newCar.byBrand.model}
+        defaultSelected={getDefaultModelValue()}
         isLoading={isLoading}
         items={data}
         errMsg={errMsg}

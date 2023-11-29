@@ -28,6 +28,16 @@ const SelectBrand = () => {
     });
   }
 
+  function getDefaultValue() {
+    if (searchQueryStore.newCar.byBrand.brandId) {
+      return [
+        searchQueryStore.newCar.byBrand.brandId + '-' + searchQueryStore.newCar.byBrand.brand,
+      ];
+    }
+
+    return undefined;
+  }
+
   return (
     <Fragment>
       <Select
@@ -38,13 +48,10 @@ const SelectBrand = () => {
         isLoading={fetchingBrands}
         onChange={handleChange}
         errorMessage={brandErrMSg}
-        className='mt-8 max-w-xs'
         classNames={{
           ...selectClassNames,
         }}
-        defaultSelectedKeys={[
-          searchQueryStore.newCar.byBrand.brandId + '-' + searchQueryStore.newCar.byBrand.brand,
-        ]}
+        defaultSelectedKeys={getDefaultValue()}
       >
         {brands && !!brands.popularBrands.length ? (
           <SelectSection
