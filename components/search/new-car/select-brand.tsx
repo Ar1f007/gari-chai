@@ -13,6 +13,19 @@ const SelectBrand = () => {
   function handleChange(e: ChangeEvent<HTMLSelectElement>) {
     const [brandId, brandName] = e.target.value.split('-');
 
+    // at first reset the model field if there is any model value present
+    if (searchQueryStore.newCar.byBrand.model) {
+      // only perform reset if the current `brandId` is new
+      if (brandId !== searchQueryStore.newCar.byBrand.brandId) {
+        searchQueryActions.setSearchQuery({
+          carType: 'newCar',
+          category: 'byBrand',
+          categoryPropertyName: 'model',
+          value: '',
+        });
+      }
+    }
+
     searchQueryActions.setSearchQuery({
       carType: 'newCar',
       category: 'byBrand',
@@ -52,6 +65,7 @@ const SelectBrand = () => {
           ...selectClassNames,
         }}
         defaultSelectedKeys={getDefaultValue()}
+        isRequired
       >
         {brands && !!brands.popularBrands.length ? (
           <SelectSection

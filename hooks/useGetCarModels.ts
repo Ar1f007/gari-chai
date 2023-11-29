@@ -2,6 +2,7 @@
 
 import { GENERIC_ERROR_MSG } from '@/lib/constants';
 import { getCarModels } from '@/services/car/getCarModels';
+import { searchQueryActions, searchQueryStore } from '@/store';
 import { useEffect, useState } from 'react';
 
 type Option = {

@@ -6,13 +6,12 @@ import { Radio, RadioGroup } from '@nextui-org/react';
 import { Button } from '@nextui-org/button';
 import { useRouter } from 'next/navigation';
 
-import useGetBodyTypes from '@/hooks/useGetBodyTypes';
-
 import { createUrl } from '@/lib/utils';
 import SelectBrandAndModel from './new-car/SelectBrandAndModel';
 import SelectBudgetAndBodyType from './new-car/select-budget-and-bodyType';
 import { useSnapshot } from 'valtio';
 import { searchQueryStore } from '@/store';
+import { toast } from 'sonner';
 
 type SearchBy = 'budget' | 'brand';
 
@@ -44,7 +43,12 @@ export const NewCarSearchForm = () => {
 
     if (searchBy === 'brand') {
       params.set('brand', searchQuerySnap.newCar.byBrand.brand);
-      params.set('model', searchQuerySnap.newCar.byBrand.model);
+
+      const modelName = searchQuerySnap.newCar.byBrand.model;
+
+      if (modelName.length) {
+        params.set('model', modelName);
+      }
     }
 
     router.push(createUrl('/search', params));

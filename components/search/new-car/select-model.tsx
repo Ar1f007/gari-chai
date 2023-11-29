@@ -37,15 +37,9 @@ const SelectModel = ({
         }}
         items={items}
         defaultSelectedKeys={defaultSelected}
+        isRequired
       >
-        {(item) => (
-          <SelectItem
-            key={item.value}
-            value={item.value}
-          >
-            {item.label}
-          </SelectItem>
-        )}
+        {(item) => <SelectItem key={item.value}>{item.label}</SelectItem>}
       </Select>
     </Fragment>
   );
