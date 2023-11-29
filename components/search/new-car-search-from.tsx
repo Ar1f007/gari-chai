@@ -1,16 +1,24 @@
+'use client';
+
 import { FormEvent, useState } from 'react';
 
 import { Radio, RadioGroup } from '@nextui-org/react';
-import { Select, SelectItem, SelectSection } from '@nextui-org/select';
+import { Select, SelectItem } from '@nextui-org/select';
 import { Button } from '@nextui-org/button';
+import { useRouter } from 'next/navigation';
+
+import SelectBrand from './new-car/select-brand';
+
+import useGetBodyTypes from '@/hooks/useGetBodyTypes';
+import useGetAllAndPopularBrands from '@/hooks/useGetAllAndPopularBrands';
 
 import selectOptionData from '@/data/searchForm.json';
-import { useRouter } from 'next/navigation';
 import { createUrl } from '@/lib/utils';
+import SelectBrandAndModel from './new-car/SelectBrandAndModel';
 
 type SearchBy = 'budget' | 'brand';
 
-const selectClassNames = {
+export const selectClassNames = {
   value: 'tracking-wider text-[15px] !text-default-50',
   selectorIcon: 'text-primary-500',
   trigger:
@@ -18,11 +26,14 @@ const selectClassNames = {
 };
 
 export const NewCarSearchForm = () => {
+  const { isLoading, bodyTypes, errMsg } = useGetBodyTypes();
+
   const router = useRouter();
 
   const [searchBy, setSearchBy] = useState<SearchBy>('budget');
   const [budget, setBudget] = useState('');
   const [bodyType, setBodyType] = useState('');
+  const [brand, setBrand] = useState('');
 
   function handleQuerySubmission(e: FormEvent) {
     e.preventDefault();
@@ -34,6 +45,10 @@ export const NewCarSearchForm = () => {
     if (searchBy == 'budget') {
       params.set('budget', budget);
       params.set('bodyType', bodyType);
+    }
+
+    if (searchBy === 'brand') {
+      params.set('brand', brand);
     }
 
     router.push(createUrl('/search', params));
@@ -99,55 +114,23 @@ export const NewCarSearchForm = () => {
             onChange={(e) => setBodyType(e.target.value)}
             className='mt-4 max-w-xs'
             classNames={selectClassNames}
+            isLoading={isLoading}
+            items={bodyTypes}
+            errorMessage={errMsg ? errMsg : ''}
           >
-            {selectOptionData.newCar.bodyTypes.map((item) => (
+            {(item) => (
               <SelectItem
                 key={item.value}
                 value={item.value}
               >
                 {item.label}
               </SelectItem>
-            ))}
+            )}
           </Select>
         </>
       )}
 
-      {searchBy == 'brand' && (
-        <>
-          <Select
-            aria-label='Select brand'
-            placeholder='Select brand'
-            size='sm'
-            variant='bordered'
-            className='mt-8 max-w-xs'
-            classNames={{
-              ...selectClassNames,
-            }}
-          >
-            <SelectSection
-              showDivider
-              title='Popular Brands'
-              classNames={{
-                heading: 'font-medium text-primary',
-              }}
-            >
-              <SelectItem key='tata'>Tata</SelectItem>
-              <SelectItem key='toyota'>Toyota</SelectItem>
-              <SelectItem key='tesla'>Tesla</SelectItem>
-            </SelectSection>
-            <SelectSection
-              title='All Brands'
-              classNames={{
-                heading: 'font-medium text-primary',
-              }}
-            >
-              <SelectItem key='all-tata'>Tata</SelectItem>
-              <SelectItem key='all-toyota'>Toyota</SelectItem>
-              <SelectItem key='all-tesla'>Tesla</SelectItem>
-            </SelectSection>
-          </Select>
-        </>
-      )}
+      {searchBy == 'brand' && <SelectBrandAndModel />}
 
       <Button
         type='submit'

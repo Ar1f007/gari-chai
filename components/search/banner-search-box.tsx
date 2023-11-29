@@ -25,7 +25,7 @@ const SearchBox = () => {
         fill
         sizes='100vw'
       />
-      <Card className='bg-primary-500/35 absolute left-6 top-1/2 h-[400px] w-[340px] max-w-full -translate-y-1/2 rounded-md border border-gray-300 bg-opacity-10 bg-clip-padding backdrop-blur-md backdrop-filter'>
+      <Card className='bg-primary-500/35 absolute left-6 top-1/2 min-h-[400px] w-[340px] max-w-full -translate-y-1/2 rounded-md border border-gray-300 bg-opacity-10 bg-clip-padding backdrop-blur-md backdrop-filter'>
         <CardHeader className={title({ size: 'xs', className: 'text-center text-white' })}>
           Find Your Right Car
         </CardHeader>

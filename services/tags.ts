@@ -7,9 +7,16 @@ export const TAGS = {
     all: 'all',
     latestCars: HOME_SETTINGS_OPTIONS.latestCars,
   },
+  carBodyTypes: 'car-body-types',
+  allAndPopularBrands: 'all-and-popular-brands',
 };
 
-// group by parent section - name of the section : Ex: Home page latest cars, home-latest-cars,
+// group by "parent page/section" - "name of the child section" :
+// Ex: Home page latest cars, home-latest-cars
+// Home page - page name
+// child section - latest cars
+// follow convention if possible
+
 export enum Tags {
   HomeAllSettings = 'home-all',
   HomeLatestCars = 'home-latest-cars',

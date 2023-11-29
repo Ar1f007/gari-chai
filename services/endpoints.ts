@@ -13,10 +13,17 @@ export const endpoints = {
     },
     brand: {
       baseUrl: '/brands',
+      allAndPopularBrands: '/brands/all-with-popular',
+    },
+    models: {
+      baseUrl: '/models',
     },
     cars: {
       newCarBaseUrl: '/cars',
       usedCarBaseUrl: '/used-cars',
+      info: {
+        bodyTypes: '/car-body-types',
+      },
     },
     users: {
       baseUrl: '/users',
