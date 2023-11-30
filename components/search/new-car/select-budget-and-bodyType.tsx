@@ -2,12 +2,28 @@ import { Fragment } from 'react';
 import { Select, SelectItem } from '@nextui-org/select';
 
 import selectOptionData from '@/data/searchForm.json';
-import { searchQueryActions } from '@/store';
+import { searchQueryActions, searchQueryStore } from '@/store';
 import { selectClassNames } from '../new-car-search-from';
 import useGetBodyTypes from '@/hooks/useGetBodyTypes';
 
 const SelectBudgetAndBodyType = () => {
   const { isLoading, bodyTypes, errMsg } = useGetBodyTypes();
+
+  function getSelectedKeysForBudget() {
+    if (searchQueryStore.newCar.byBudget.budget) {
+      return [searchQueryStore.newCar.byBudget.budget];
+    }
+
+    return undefined;
+  }
+
+  function getSelectedKeysForBodyType() {
+    if (searchQueryStore.newCar.byBudget.bodyType) {
+      return [searchQueryStore.newCar.byBudget.bodyType];
+    }
+
+    return undefined;
+  }
 
   return (
     <Fragment>
@@ -19,6 +35,7 @@ const SelectBudgetAndBodyType = () => {
         size='sm'
         disableAnimation
         isRequired
+        selectedKeys={getSelectedKeysForBudget()}
         onChange={(e) =>
           searchQueryActions.setSearchQuery({
             carType: 'newCar',
@@ -47,6 +64,7 @@ const SelectBudgetAndBodyType = () => {
         size='sm'
         disableAnimation
         isRequired
+        selectedKeys={getSelectedKeysForBodyType()}
         onChange={(e) =>
           searchQueryActions.setSearchQuery({
             carType: 'newCar',
