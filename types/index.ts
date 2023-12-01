@@ -55,3 +55,16 @@ export type TApiValidationError = {
 };
 
 export type TApiError = TApiErrorData | TApiValidationError;
+
+export type QueryParams = {
+  car: string;
+  budget: string;
+  bodyType: string;
+  brand: string;
+  model: string;
+  city: string;
+  query: string;
+  page: string;
+  limit: string;
+  scope: 'new-car' | 'used-car' | 'global';
+};

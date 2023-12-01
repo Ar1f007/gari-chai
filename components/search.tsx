@@ -20,10 +20,13 @@ export default function Search() {
     const newParams = new URLSearchParams(searchParams.toString());
 
     if (search.value) {
-      newParams.set('q', search.value);
+      newParams.set('query', search.value);
     } else {
-      newParams.delete('q');
+      newParams.delete('query');
     }
+
+    newParams.set('page', '1');
+    newParams.set('limit', '20');
 
     router.push(createUrl('/search', newParams));
   }

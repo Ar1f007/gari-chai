@@ -43,7 +43,10 @@ export const carSchema = z.object({
 
   transmission: z.string(),
 
-  bodyStyle: z.union([z.string(), carBodyTypeSchema]),
+  bodyStyle: z.object({
+    id: z.union([z.string(), carBodyTypeSchema]),
+    name: z.string(),
+  }),
 
   fuel: z.object({
     typeInfo: z.object({

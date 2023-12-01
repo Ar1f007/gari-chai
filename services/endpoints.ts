@@ -39,6 +39,9 @@ export const endpoints = {
     comments: {
       baseUrl: '/comments',
     },
+    search: {
+      baseUrl: '/search',
+    }
   },
   admin: {},
 };

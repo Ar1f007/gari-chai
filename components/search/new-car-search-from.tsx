@@ -51,6 +51,9 @@ export const NewCarSearchForm = () => {
       }
     }
 
+    params.set('page', '1');
+    params.set('limit', '20');
+
     router.push(createUrl('/search', params));
   }
 

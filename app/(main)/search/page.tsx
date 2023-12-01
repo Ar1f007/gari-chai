@@ -1,23 +1,35 @@
-"use client";
+import QueryResults from '@/modules/search/query-results';
+import { QueryParams } from '@/types';
+import { Suspense } from 'react';
 
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+const SearchPage = ({ searchParams }: { searchParams?: Partial<QueryParams> }) => {
+  //   const {
+  //     query = '',
+  //     page = '1',
+  //     limit = '20',
+  //     car = '',
+  //     budget = '',
+  //     bodyType = '',
+  //     brand = '',
+  //     model = '',
+  //     city = 'all',
+  //     scope = 'global',
+  //   } = searchParams || {};
 
-const SearchPage = () => {
+  const queryParams = new URLSearchParams(searchParams);
 
-    const [searchResults, setSearchResults] = useState([]);
+  return (
+    <div>
+      <h1>SearchPage</h1>
 
-    const searchParams = useSearchParams();
+      <Suspense
+        key={queryParams.toString()}
+        fallback={<div>To be replaced soon</div>}
+      >
+        <QueryResults query={queryParams} />
+      </Suspense>
+    </div>
+  );
+};
 
-    const search = searchParams.get('q');
-
-
-    useEffect(() => {
-    }, [searchParams]);
-
-    return (
-        <div>SearchPage {search}</div>
-    )
-}
-
-export default SearchPage
+export default SearchPage;
