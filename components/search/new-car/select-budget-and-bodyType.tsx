@@ -63,7 +63,6 @@ const SelectBudgetAndBodyType = () => {
         variant='bordered'
         size='sm'
         disableAnimation
-        isRequired
         selectedKeys={getSelectedKeysForBodyType()}
         onChange={(e) =>
           searchQueryActions.setSearchQuery({

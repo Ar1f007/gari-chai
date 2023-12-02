@@ -40,7 +40,10 @@ export const NewCarSearchForm = () => {
 
     if (searchBy == 'budget') {
       params.set('budget', searchQuerySnap.newCar.byBudget.budget);
-      params.set('bodyType', searchQuerySnap.newCar.byBudget.bodyType);
+
+      if (searchQuerySnap.newCar.byBudget.bodyType) {
+        params.set('bodyType', searchQuerySnap.newCar.byBudget.bodyType);
+      }
     }
 
     if (searchBy === 'brand') {
