@@ -89,6 +89,8 @@ export const carSchema = z.object({
 
   additionalSpecifications: z.array(singleSpecificationSchema).optional(),
 
+  carType: z.enum(['new', 'used']),
+
   launchedAt: z.string(),
   createdAt: z.string(),
   updatedAt: z.string(),

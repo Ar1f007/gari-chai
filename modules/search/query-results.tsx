@@ -24,8 +24,11 @@ const QueryResults = async (props: QueryResultsProps) => {
   }
 
   function getHref(item: TCarSchema) {
-    const url = `/cars/${item.slug}`;
-    return url;
+    if (item.carType === 'new') {
+      return `/cars/${item.slug}`;
+    }
+
+    return `/cars/${item.slug}`;
   }
 
   return (
