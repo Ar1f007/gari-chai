@@ -12,14 +12,14 @@ export const PopularCars = async () => {
   }
 
   return (
-    <section className='mt-4 rounded-xl bg-background px-2 py-8 md:mt-16 md:shadow-md'>
+    <section className='home-section-wrapper'>
       <SectionTitle>Popular Cars</SectionTitle>
 
       <div className='mt-6'>
         <Sliders>
           {res.map((item) => (
             <li
-              className='keen-slider__slide max-w-[372px]'
+              className='keen-slider__slide max-w-[372px] shadow-lg rounded-2xl'
               key={item._id}
             >
               <Car car={item.content} />

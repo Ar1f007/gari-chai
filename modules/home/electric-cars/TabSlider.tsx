@@ -26,7 +26,7 @@ export const TabSlider = ({ data }: Props) => {
               {item.items.map((item) => (
                 <li
                   key={item._id}
-                  className='keen-slider__slide max-w-[372px]'
+                  className='keen-slider__slide max-w-[372px] shadow-lg rounded-2xl'
                 >
                   <Car car={item.content} />
                 </li>

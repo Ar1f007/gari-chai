@@ -16,7 +16,7 @@ export const Car = ({ car }: CarProps) => {
   const url = `/cars/${slug}`;
 
   return (
-    <Card className='border-1 border-slate-200 shadow-md'>
+    <Card className='border-1 border-slate-200'>
       <CardHeader className='relative h-[200px]'>
         <Link href={url}>
           <Image
@@ -28,7 +28,7 @@ export const Car = ({ car }: CarProps) => {
           />
         </Link>
       </CardHeader>
-      <CardBody>
+      <CardBody className='mt-5 mb-3 px-4'>
         <Link href={url}>
           <h2 className={subtitle({ className: 'font-semibold' })}>{name}</h2>
         </Link>
