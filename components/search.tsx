@@ -25,8 +25,11 @@ export default function Search() {
       newParams.delete('query');
     }
 
+    // if (!search.value.length) return; // prevent user from searching with an empty value
+
     newParams.set('page', '1');
     newParams.set('limit', '20');
+    newParams.set('scope', 'global');
 
     router.push(createUrl('/search', newParams));
   }

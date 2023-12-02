@@ -5,11 +5,15 @@ import { ReqMethod } from '../serviceHelper';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 import { TCarSchema } from '@/schema/car';
 
+type TFetchFilteredCarsResponse = {
+  results: TCarSchema[];
+};
+
 export async function fetchFilteredCars(queryParams: URLSearchParams | ReadonlyURLSearchParams) {
   try {
     const url = createUrl(endpoints.api.search.baseUrl, queryParams);
 
-    return apiFetch<TCarSchema[]>(url, {
+    return apiFetch<TFetchFilteredCarsResponse>(url, {
       method: ReqMethod.GET,
       cache: 'no-store',
     });
