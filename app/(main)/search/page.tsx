@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { fetchFilteredCars } from '@/services/search';
 import { title } from '@/components/primitives';
 import Pagination from '@/components/pagination';
+import SearchResultLoadingSkeleton from '@/modules/search/skeleton';
 
 const queryParamSchema = z.optional(
   z.string().refine((val) => {
@@ -65,7 +66,7 @@ const SearchPage = async ({ searchParams }: { searchParams?: Partial<QueryParams
     <div className='flex flex-col space-y-5'>
       <Suspense
         key={queryParams.toString()}
-        fallback={<div>To be replaced soon</div>}
+        fallback={<SearchResultLoadingSkeleton />}
       >
         <div className='flex flex-col space-y-5'>
           {hasResults && (
