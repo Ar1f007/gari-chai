@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { Select, SelectItem } from '@nextui-org/select';
+import { Select, SelectItem,  } from '@nextui-org/select';
 
 import selectOptionData from '@/data/searchForm.json';
 import { searchQueryActions, searchQueryStore } from '@/store';
