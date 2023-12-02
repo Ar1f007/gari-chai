@@ -14,6 +14,7 @@ export const Car = ({ car }: CarProps) => {
   const { posterImage, name, slug, price } = car;
 
   const url = `/cars/${slug}`;
+
   return (
     <Card className='border-1 border-slate-200 shadow-md'>
       <CardHeader className='relative h-[200px]'>

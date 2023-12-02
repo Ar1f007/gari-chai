@@ -21,13 +21,13 @@ export const SearchFilters = () => {
 
   const resetQueryPath = useCallback(() => {
     const params = new URLSearchParams();
-    params.set('q', '');
+    params.set('query', '');
     return params.toString();
   }, []);
 
   return (
     <>
-      <p>Sort By {searchParams.get('q')}</p>
+      <p>Sort By {searchParams.get('query')}</p>
 
       {/* using useRouter */}
       <button

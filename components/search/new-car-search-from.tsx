@@ -12,6 +12,7 @@ import SelectBudgetAndBodyType from './new-car/select-budget-and-bodyType';
 import { useSnapshot } from 'valtio';
 import { searchQueryStore } from '@/store';
 import { toast } from 'sonner';
+import { DEFAULT_PAGINATION_ITEMS_LIMIT } from '@/lib/constants';
 
 type SearchBy = 'budget' | 'brand';
 
@@ -52,7 +53,7 @@ export const NewCarSearchForm = () => {
     }
 
     params.set('page', '1');
-    params.set('limit', '20');
+    params.set('limit', DEFAULT_PAGINATION_ITEMS_LIMIT.toString());
 
     router.push(createUrl('/search', params));
   }

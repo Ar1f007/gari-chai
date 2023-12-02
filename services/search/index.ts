@@ -7,6 +7,13 @@ import { TCarSchema } from '@/schema/car';
 
 type TFetchFilteredCarsResponse = {
   results: TCarSchema[];
+  pagination: {
+    totalResults: number;
+    totalPages: number;
+    currentPage: number;
+    hasNextPage: boolean;
+    nextPage: number | null;
+  };
 };
 
 export async function fetchFilteredCars(queryParams: URLSearchParams | ReadonlyURLSearchParams) {

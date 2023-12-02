@@ -1,21 +1,15 @@
 import Image from 'next/image';
-import { fetchFilteredCars } from '@/services/search';
-import { ReadonlyURLSearchParams } from 'next/navigation';
 import { title } from '@/components/primitives';
 import { formatAsBangladeshiCurrency } from '@/util/covert-currency';
+import { TCarSchema } from '@/schema/car';
+import Link from 'next/link';
 
-const QueryResults = async (props: { query: URLSearchParams | ReadonlyURLSearchParams }) => {
-  const results = await fetchFilteredCars(props.query);
+type QueryResultsProps = {
+  items: TCarSchema[];
+};
 
-  if (typeof results === 'string') {
-    return <p>{results}</p>;
-  }
-
-  if (results.status !== 'success') {
-    return <p>{results.message}</p>;
-  }
-
-  if (!results.data.results.length) {
+const QueryResults = async (props: QueryResultsProps) => {
+  if (!props.items.length) {
     return (
       <div className='mx-auto max-w-xl rounded-md bg-gray-100 px-4 py-4 shadow-md dark:bg-gray-800 lg:px-8'>
         <p className='text-xl font-medium text-gray-800 dark:text-foreground-50'>
@@ -29,13 +23,21 @@ const QueryResults = async (props: { query: URLSearchParams | ReadonlyURLSearchP
     );
   }
 
+  function getHref(item: TCarSchema) {
+    const url = `/cars/${item.slug}`;
+    return url;
+  }
+
   return (
-    <div className='max-w-3xl'>
-      <ul className='flex flex-col gap-10'>
-        {results.data.results.map((item) => (
-          <li
-            key={item._id}
-            className='flex gap-5 overflow-hidden rounded-md shadow-md'
+    <ul className='flex flex-col gap-10'>
+      {props.items.map((item) => (
+        <li
+          key={item._id}
+          className='overflow-hidden rounded-md shadow-md'
+        >
+          <Link
+            href={getHref(item)}
+            className='flex gap-5'
           >
             <Image
               src={item.posterImage.thumbnailUrl}
@@ -55,10 +57,10 @@ const QueryResults = async (props: { query: URLSearchParams | ReadonlyURLSearchP
                 )}
               </p>
             </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 };
 export default QueryResults;

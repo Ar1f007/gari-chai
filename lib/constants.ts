@@ -8,6 +8,8 @@ export const AUTH_TOKEN_NAME = 'X_GARI_CHAI_TOKEN';
 
 export const DEFAULT_TIME_FORMAT = 'D MMM, YYYY';
 
+export const DEFAULT_PAGINATION_ITEMS_LIMIT = 10;
+
 export const IS_CLIENT = typeof window !== 'undefined';
 
 export const API_BASE_URL =
