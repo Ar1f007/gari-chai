@@ -34,8 +34,9 @@ const Pagination = (props: PaginationProps) => {
     <NextUIPagination
       showControls
       total={totalPages}
-      color='success'
+      color='primary'
       onChange={(page) => handlePageChange(page)}
+      classNames={{ cursor: 'text-white' }}
     />
   );
 };

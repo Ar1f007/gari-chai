@@ -13,7 +13,7 @@ type GetCarsResponseData = {
   pagination: TPagination;
 };
 
-export async function getCars(tags: GetCarsParams | GetCarsParams[]) {
+export async function getCars(tags: GetCarsParams | GetCarsParams[] = []) {
   try {
     const params = new URLSearchParams();
 
