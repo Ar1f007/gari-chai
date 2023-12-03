@@ -5,6 +5,7 @@ import SectionTitle from '@/components/section-title';
 import Sliders from '@/components/slider';
 import { Car } from '@/components/car/new-car-card';
 import { MoveRightIcon } from 'lucide-react';
+import { routes } from '@/config/routes';
 
 export const LatestCars = async () => {
   const res = await getHomePageCarsBySection(HOME_SETTINGS_OPTIONS.latestCars);
@@ -17,11 +18,11 @@ export const LatestCars = async () => {
     <section className='home-section-wrapper'>
       <SectionTitle>Latest Cars</SectionTitle>
 
-      <div className='flex flex-col space-y-5 mt-5'>
+      <div className='mt-5 flex flex-col space-y-5'>
         <Sliders>
           {res.map((item) => (
             <li
-              className='keen-slider__slide max-w-[372px] shadow-lg rounded-2xl'
+              className='keen-slider__slide max-w-[372px] rounded-2xl shadow-lg'
               key={item._id}
             >
               <Car car={item.content} />
@@ -29,14 +30,11 @@ export const LatestCars = async () => {
           ))}
         </Sliders>
 
-
         <Link
-          href={`/cars/latest`}
-          className='text-primary hover:underline flex gap-2 underline-offset-4'
+          href={routes.latestCars}
+          className='flex gap-2 text-primary underline-offset-4 hover:underline'
         >
-          <span>
-            View all Latest Cars
-          </span>
+          <span>View all latest cars</span>
         </Link>
       </div>
     </section>
