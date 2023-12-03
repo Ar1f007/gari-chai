@@ -91,6 +91,16 @@ export const carSchema = z.object({
 
   carType: z.enum(['new', 'used']),
 
+  videoUrls: z
+    .array(
+      z.object({
+        thumbnailUrl: z.string().url().optional(),
+        url: z.string().url(),
+      }),
+    )
+    .optional()
+    .default([]),
+
   launchedAt: z.string(),
   createdAt: z.string(),
   updatedAt: z.string(),

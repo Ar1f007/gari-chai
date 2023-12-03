@@ -70,7 +70,7 @@ const SearchPage = async ({ searchParams }: { searchParams?: Partial<QueryParams
       >
         <div className='flex flex-col space-y-5'>
           {hasResults && (
-            <h2 className={title({ size: 'xs' })}>Total: {res.data.pagination.totalResults}</h2>
+            <h2 className={title({ size: 'xs' })}>Total: {res.data.pagination.totalItems}</h2>
           )}
           <QueryResults items={res.data.results} />
         </div>

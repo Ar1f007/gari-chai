@@ -41,7 +41,7 @@ export const endpoints = {
     },
     search: {
       baseUrl: '/search',
-    }
+    },
   },
   admin: {},
 };

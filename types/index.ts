@@ -68,3 +68,11 @@ export type QueryParams = {
   limit: string;
   scope: 'new-car' | 'used-car' | 'global';
 };
+
+export type TPagination = {
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+  hasNextPage: boolean;
+  nextPage: number | null;
+};

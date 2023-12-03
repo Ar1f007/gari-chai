@@ -8,7 +8,7 @@ import { TCarSchema } from '@/schema/car';
 type TFetchFilteredCarsResponse = {
   results: TCarSchema[];
   pagination: {
-    totalResults: number;
+    totalItems: number;
     totalPages: number;
     currentPage: number;
     hasNextPage: boolean;

@@ -1,9 +1,9 @@
-import { HOME_SETTINGS_OPTIONS, homePageSectionNameEnum } from '@/lib/constants';
+import { z } from 'zod';
+import { homePageSectionNameEnum } from '@/lib/constants';
 import { endpoints } from '../endpoints';
 import { apiFetch } from '../apiFetch';
 import { ReqMethod } from '../serviceHelper';
 import { TAGS } from '../tags';
-import { z } from 'zod';
 import { homeSettingApiSchemaSingleInstance } from '@/schema/common';
 
 export async function getHomePageCarsBySection(sectionName: string) {
