@@ -5,6 +5,7 @@ import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
 import { TPagination } from '@/types';
+import { createUrl } from '@/lib/utils';
 
 type GetCarsParams = 'latest-cars' | 'popular-cars' | 'upcoming-cars';
 
@@ -13,20 +14,13 @@ type GetCarsResponseData = {
   pagination: TPagination;
 };
 
-export async function getCars(tags: GetCarsParams | GetCarsParams[] = []) {
+export async function getCars(queryParams: URLSearchParams) {
   try {
-    const params = new URLSearchParams();
-
-    if (Array.isArray(tags)) {
-      params.set('tags', tags.join(','));
-    } else {
-      params.set('tags', tags);
-    }
-
-    const url = endpoints.api.cars.newCarBaseUrl + '?' + params.toString();
+    const url = createUrl(endpoints.api.cars.newCarBaseUrl, queryParams);
 
     const res = await apiFetch<GetCarsResponseData>(url, {
       method: ReqMethod.GET,
+      cache: 'no-store',
     });
 
     if (res.status !== 'success') {
@@ -41,7 +35,6 @@ export async function getCars(tags: GetCarsParams | GetCarsParams[] = []) {
         pagination: res.data.pagination,
       };
     }
-
     throw new Error('ERROR! Car data missing');
   } catch (err) {
     if (err instanceof Error) {

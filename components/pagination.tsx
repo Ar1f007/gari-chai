@@ -33,8 +33,10 @@ const Pagination = (props: PaginationProps) => {
   return (
     <NextUIPagination
       showControls
-      total={totalPages}
+      showShadow
       color='primary'
+      total={totalPages}
+      initialPage={Number(searchParams.get('page')) || 1}
       onChange={(page) => handlePageChange(page)}
       classNames={{ cursor: 'text-white' }}
     />

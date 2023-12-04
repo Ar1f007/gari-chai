@@ -58,3 +58,31 @@ export type THomeSettingApiBrandSchemaSingleInstance = z.infer<
 /**
  * End Brands schema - Home page
  */
+
+const queryParamSchema = z.optional(
+  z.string().refine((val) => {
+    if (val) {
+      return val.length >= 1;
+    }
+    return true;
+  }),
+);
+
+export const searchParamsSchema = z
+  .object({
+    query: queryParamSchema,
+    car: queryParamSchema, // type of the car: 'new' | 'used'
+    budget: queryParamSchema,
+    bodyType: queryParamSchema,
+    brand: queryParamSchema,
+    model: queryParamSchema,
+    city: queryParamSchema, // city to search, default: 'all'
+    scope: queryParamSchema, // search scope 'global' | 'new' | 'used'
+  })
+  .refine(({ scope, query }) => {
+    // make sure if scope value is global, then a query string is provided
+    if (scope?.length && scope === 'global' && !query?.length) {
+      return false;
+    }
+    return true;
+  });

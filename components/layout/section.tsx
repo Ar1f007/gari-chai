@@ -9,7 +9,7 @@ type SectionProps = {
 export const Section = ({ children, classNames, ...rest }: SectionProps) => {
   return (
     <section
-      className={clsx('mx-auto max-w-screen-2xl px-6 2xl:px-0', classNames)}
+      className={clsx('mx-auto max-w-screen-2xl xl:px-6 2xl:px-0', classNames)}
       {...rest}
     >
       {children}

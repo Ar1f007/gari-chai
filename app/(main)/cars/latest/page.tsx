@@ -1,10 +1,29 @@
 import { Car } from '@/components/car/new-car-card';
 import { Section } from '@/components/layout/section';
 import Pagination from '@/components/pagination';
+import { searchParamsSchema } from '@/schema';
 import { getCars } from '@/services/car/getCars';
+import { TCarsPageParams } from '@/types';
 
-const LatestCarsPage = async () => {
-  const res = await getCars('latest-cars');
+const LatestCarsPage = async ({ searchParams }: TCarsPageParams) => {
+  const parsedParams = searchParamsSchema.safeParse(searchParams);
+
+  if (!parsedParams.success) {
+    return (
+      <div className='max-w-5xl'>
+        <p className='text-center font-medium text-foreground'>
+          Please type something in the url query.
+        </p>
+        ;
+      </div>
+    );
+  }
+
+  const queryParams = new URLSearchParams(searchParams);
+
+  queryParams.set('tags', 'latest-cars');
+
+  const res = await getCars(queryParams);
 
   if (typeof res === 'string') {
     return <p className='text-center'>{res}</p>;

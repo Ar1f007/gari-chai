@@ -76,3 +76,7 @@ export type TPagination = {
   hasNextPage: boolean;
   nextPage: number | null;
 };
+
+export type TCarsPageParams = {
+  searchParams: Partial<QueryParams>;
+};

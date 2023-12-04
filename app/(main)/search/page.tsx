@@ -6,33 +6,7 @@ import { fetchFilteredCars } from '@/services/search';
 import { title } from '@/components/primitives';
 import Pagination from '@/components/pagination';
 import SearchResultLoadingSkeleton from '@/modules/search/skeleton';
-
-const queryParamSchema = z.optional(
-  z.string().refine((val) => {
-    if (val) {
-      return val.length >= 1;
-    }
-    return true;
-  }),
-);
-
-const searchParamsSchema = z
-  .object({
-    query: queryParamSchema,
-    car: queryParamSchema,
-    budget: queryParamSchema,
-    bodyType: queryParamSchema,
-    brand: queryParamSchema,
-    model: queryParamSchema,
-    city: queryParamSchema,
-    scope: queryParamSchema,
-  })
-  .refine(({ scope, query }) => {
-    if (scope?.length && scope === 'global' && !query?.length) {
-      return false;
-    }
-    return true;
-  });
+import { searchParamsSchema } from '@/schema';
 
 const SearchPage = async ({ searchParams }: { searchParams?: Partial<QueryParams> }) => {
   const parsedParams = searchParamsSchema.safeParse(searchParams);
