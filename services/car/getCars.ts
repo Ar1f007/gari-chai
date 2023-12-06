@@ -20,6 +20,7 @@ export async function getCars(queryParams: URLSearchParams) {
 
     const res = await apiFetch<GetCarsResponseData>(url, {
       method: ReqMethod.GET,
+      cache: 'no-store'
     });
 
     if (res.status !== 'success') {
