@@ -7,7 +7,6 @@ import { ReqMethod } from '../serviceHelper';
 import { TPagination } from '@/types';
 import { createUrl } from '@/lib/utils';
 
-type GetCarsParams = 'latest-cars' | 'popular-cars' | 'upcoming-cars';
 
 type GetCarsResponseData = {
   results: TCarSchema[];

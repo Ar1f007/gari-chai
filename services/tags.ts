@@ -9,6 +9,7 @@ export const TAGS = {
   },
   carBodyTypes: 'car-body-types',
   allAndPopularBrands: 'all-and-popular-brands',
+  sliders: 'sliders',
 };
 
 // group by "parent page/section" - "name of the child section" :

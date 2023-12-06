@@ -1,4 +1,6 @@
 import { ReadonlyURLSearchParams } from 'next/navigation';
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 /**
  * Creates a URL string with the given pathname and parameters.
@@ -19,3 +21,7 @@ export const createUrl = (pathname: string, params: URLSearchParams | ReadonlyUR
 
   return `${pathname}${queryString}`;
 };
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}

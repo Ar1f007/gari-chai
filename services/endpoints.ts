@@ -42,6 +42,9 @@ export const endpoints = {
     search: {
       baseUrl: '/search',
     },
+    sliders: {
+      baseUrl: '/sliders'
+    }
   },
   admin: {},
 };
