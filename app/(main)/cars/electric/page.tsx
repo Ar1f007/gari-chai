@@ -6,7 +6,7 @@ import { searchParamsSchema } from '@/schema';
 import { getCars } from '@/services/car/getCars';
 import { TCarsPageParams } from '@/types';
 
-const PopularCarsPage = async ({ searchParams }: TCarsPageParams) => {
+const LatestCarsPage = async ({ searchParams }: TCarsPageParams) => {
   const parsedParams = searchParamsSchema.safeParse(searchParams);
 
   if (!parsedParams.success) {
@@ -22,7 +22,7 @@ const PopularCarsPage = async ({ searchParams }: TCarsPageParams) => {
 
   const queryParams = new URLSearchParams(searchParams);
 
-  queryParams.set('tags', HOME_SETTINGS_OPTIONS.popularCars);
+  queryParams.set('tags', HOME_SETTINGS_OPTIONS.electricCars);
 
   const res = await getCars(queryParams);
 
@@ -49,4 +49,4 @@ const PopularCarsPage = async ({ searchParams }: TCarsPageParams) => {
     </Section>
   );
 };
-export default PopularCarsPage;
+export default LatestCarsPage;

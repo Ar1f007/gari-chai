@@ -21,7 +21,7 @@ export const PopularCars = async () => {
         <Sliders>
           {res.map((item) => (
             <li
-              className='keen-slider__slide max-w-[372px] rounded-2xl shadow-lg'
+              className='keen-slider__slide max-w-[372px] rounded-2xl'
               key={item._id}
             >
               <Car car={item.content} />

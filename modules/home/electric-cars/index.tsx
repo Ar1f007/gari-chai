@@ -4,6 +4,8 @@ import { HOME_SETTINGS_OPTIONS } from '@/lib/constants';
 import { THomeSettingApiSchemaSingleInstance } from '@/schema/common';
 import { getHomePageCarsBySection } from '@/services';
 import { TabSlider } from './TabSlider';
+import Link from 'next/link';
+import { routes } from '@/config/routes';
 
 function groupCarsByTag(
   cars: THomeSettingApiSchemaSingleInstance[],
@@ -43,6 +45,13 @@ export const ElectricCars = async () => {
       <SectionTitle>Electric Cars</SectionTitle>
 
       <TabSlider data={groupedCars} />
+
+      <Link
+        href={routes.electricCars}
+        className='mt-2 flex gap-2 text-primary underline-offset-4 hover:underline'
+      >
+        <span>View all electric cars</span>
+      </Link>
     </section>
   );
 };

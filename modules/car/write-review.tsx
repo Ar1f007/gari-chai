@@ -15,10 +15,13 @@ import { ZodError } from 'zod';
 import { TCarSchema } from '@/schema/car';
 import { useSnapshot } from 'valtio';
 import { userStore } from '@/store';
+import { useRouter } from 'next/navigation';
+import { routes } from '@/config/routes';
 
 const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
   const [showReviewModal, setShowReviewModal] = useState(false);
   const userSnap = useSnapshot(userStore);
+  const router = useRouter();
 
   const formHandler = useForm<ReviewFormInputs>({
     criteriaMode: 'firstError',
@@ -28,7 +31,12 @@ const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
 
   async function onSubmit(data: ReviewFormInputs) {
     if (!userSnap.user) {
-      toast.error('Please login to continue');
+      toast.error('Please login to continue', {
+        action: {
+          label: 'Go to Login',
+          onClick: () => router.push(routes.login),
+        },
+      });
       return;
     }
 
@@ -49,7 +57,7 @@ const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
     }
 
     if (res.status === 'success') {
-      toast.success('Review was added successfully');
+      toast.success('Your review will be added shortly.');
       formHandler.reset();
       setShowReviewModal(false);
 

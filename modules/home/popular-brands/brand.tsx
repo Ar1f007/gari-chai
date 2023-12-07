@@ -18,14 +18,14 @@ const Brand = (props: BrandProps) => {
   return (
     <Link
       href={path}
-      className='flex flex-col items-center overflow-hidden rounded-lg pb-3 shadow-md duration-300 ease-in-out hover:shadow-xl'
+      className='flex max-h-[200px] flex-col items-center overflow-hidden rounded-lg pb-3 shadow duration-300 ease-in-out'
     >
       <Image
-        src={content.image.originalUrl ?? PLACEHOLDER_IMAGE}
+        src={content.image.originalUrl}
         alt={content.name}
         width={200}
-        height={200}
-        className='object-cover'
+        height={100}
+        className='aspect-[2/1]'
       />
 
       <h3

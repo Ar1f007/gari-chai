@@ -13,7 +13,7 @@ type CarProps = {
 export const Car = ({ car }: CarProps) => {
   const { posterImage, name, slug, price } = car;
 
-  const url = `/cars/${slug}`;
+  const url = car.carType === 'new' ? `/cars/${slug}` : `/used-cars/${slug}`;
 
   return (
     <Card className='border-1 border-slate-200'>
@@ -28,15 +28,22 @@ export const Car = ({ car }: CarProps) => {
           />
         </Link>
       </CardHeader>
-      <CardBody className='mt-5 mb-3 px-4'>
+      <CardBody className='mb-3 mt-5 px-4'>
         <Link href={url}>
           <h2 className={subtitle({ className: 'font-semibold' })}>{name}</h2>
         </Link>
 
         <p className='mb-3 text-base font-semibold text-default-600'>
-          {formatAsBangladeshiCurrency(price.min)}
-          &nbsp;&mdash;&nbsp;
-          {formatAsBangladeshiCurrency(price.max)}
+          {price.min === price.max ? (
+            <>{formatAsBangladeshiCurrency(price.min)}</>
+          ) : (
+            <>
+              {formatAsBangladeshiCurrency(price.min)}
+              &nbsp;&mdash;&nbsp;
+              {formatAsBangladeshiCurrency(price.max)}
+            </>
+          )}
+
           {price.isNegotiable && (
             <small className='ml-2 text-xs text-foreground'>(Negotiable)</small>
           )}

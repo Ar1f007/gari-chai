@@ -1,22 +1,21 @@
-import Link from 'next/link';
 import { HOME_SETTINGS_OPTIONS } from '@/lib/constants';
 import { getHomePageCarsBySection } from '@/services';
 import SectionTitle from '@/components/section-title';
 import Sliders from '@/components/slider';
 import { Car } from '@/components/car/new-car-card';
-import { MoveRightIcon } from 'lucide-react';
+import Link from 'next/link';
 import { routes } from '@/config/routes';
 
-export const LatestCars = async () => {
-  const res = await getHomePageCarsBySection(HOME_SETTINGS_OPTIONS.latestCars);
+export const UpcomingCars = async () => {
+  const res = await getHomePageCarsBySection(HOME_SETTINGS_OPTIONS.upcomingCars);
 
-  if (!res || !res.length) {
+  if (!res || res.length === 0) {
     return null;
   }
 
   return (
     <section className='home-section-wrapper'>
-      <SectionTitle>Latest Cars</SectionTitle>
+      <SectionTitle>Upcoming Cars</SectionTitle>
 
       <div className='mt-5 flex flex-col space-y-5'>
         <Sliders>
@@ -31,10 +30,10 @@ export const LatestCars = async () => {
         </Sliders>
 
         <Link
-          href={routes.latestCars}
+          href={routes.popularCars}
           className='flex gap-2 text-primary underline-offset-4 hover:underline'
         >
-          <span>View all latest cars</span>
+          <span>View all upcoming cars</span>
         </Link>
       </div>
     </section>

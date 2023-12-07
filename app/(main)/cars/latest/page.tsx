@@ -1,6 +1,7 @@
 import { Car } from '@/components/car/new-car-card';
 import { Section } from '@/components/layout/section';
 import Pagination from '@/components/pagination';
+import { HOME_SETTINGS_OPTIONS } from '@/lib/constants';
 import { searchParamsSchema } from '@/schema';
 import { getCars } from '@/services/car/getCars';
 import { TCarsPageParams } from '@/types';
@@ -21,7 +22,7 @@ const LatestCarsPage = async ({ searchParams }: TCarsPageParams) => {
 
   const queryParams = new URLSearchParams(searchParams);
 
-  queryParams.set('tags', 'latest-cars');
+  queryParams.set('tags', HOME_SETTINGS_OPTIONS.latestCars);
 
   const res = await getCars(queryParams);
 
