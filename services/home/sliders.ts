@@ -13,7 +13,7 @@ export async function getSliders() {
       method: ReqMethod.GET,
       next: {
         tags: [TAGS.sliders],
-        revalidate: 0, // revalidate every day
+        revalidate: 24 * 60 * 60, // revalidate every day
       },
     });
 
