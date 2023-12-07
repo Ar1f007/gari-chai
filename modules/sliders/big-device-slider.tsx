@@ -7,6 +7,7 @@ import Image from 'next/image';
 
 import { TSlider } from '@/schema/slider';
 import { cn } from '@/lib/utils';
+import SearchBox from '@/components/search/banner-search-box';
 
 const BigDeviceSlider = ({ sliders }: { sliders: TSlider[] }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -47,7 +48,7 @@ const BigDeviceSlider = ({ sliders }: { sliders: TSlider[] }) => {
         ))}
       </Carousel>
       {sliders.length && sliders.length > 1 && (
-        <ul className='absolute bottom-[60px] right-[60px] flex cursor-pointer space-x-6'>
+        <ul className='absolute bottom-[20px] right-[20px] flex cursor-pointer space-x-6 xl:bottom-[60px] xl:right-[60px]'>
           {sliders.map((slider, index) => (
             <li
               key={slider._id}
@@ -67,6 +68,8 @@ const BigDeviceSlider = ({ sliders }: { sliders: TSlider[] }) => {
           ))}
         </ul>
       )}
+
+      <SearchBox />
     </Fragment>
   );
 };

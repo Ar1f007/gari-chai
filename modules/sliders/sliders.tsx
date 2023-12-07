@@ -19,7 +19,7 @@ const HomeSliders = ({ sliders }: HomeSliderProps) => {
 
   return (
     <>
-      <div className='hidden md:block'>
+      <div className='relative hidden md:block'>
         <BigDeviceSlider sliders={sliders.desktopSliders} />
       </div>
       <div className='md:hidden'>
