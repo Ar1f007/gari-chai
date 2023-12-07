@@ -1,9 +1,11 @@
+import { ChangeEvent, Fragment } from 'react';
 import { useSnapshot } from 'valtio';
-import SelectBrand from './select-brand';
-import SelectModel from './select-model';
+
 import { searchQueryActions, searchQueryStore } from '@/store';
 import useGetCarModels from '@/hooks/useGetCarModels';
-import { ChangeEvent, Fragment } from 'react';
+
+import SelectBrand from './select-brand';
+import SelectModel from './select-model';
 
 const SelectBrandAndModel = () => {
   const searchQuerySnap = useSnapshot(searchQueryStore).newCar;

@@ -1,9 +1,9 @@
 import useGetAllAndPopularBrands from '@/hooks/useGetAllAndPopularBrands';
 import { Select, SelectItem, SelectSection } from '@nextui-org/select';
 import { ChangeEvent, Fragment } from 'react';
-import { selectClassNames } from '../new-car-search-from';
 import { searchQueryActions, searchQueryStore } from '@/store';
 import { useSnapshot } from 'valtio';
+import { selectClassNames } from './new-car-search-form';
 
 const SelectBrand = () => {
   const searchQuerySnap = useSnapshot(searchQueryStore);

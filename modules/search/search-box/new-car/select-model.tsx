@@ -2,7 +2,7 @@
 
 import { Select, SelectItem } from '@nextui-org/select';
 import { ChangeEvent, Fragment } from 'react';
-import { selectClassNames } from '../new-car-search-from';
+import { selectClassNames } from './new-car-search-form';
 
 type SelectModelProps = {
   items: {

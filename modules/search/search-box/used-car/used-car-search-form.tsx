@@ -24,6 +24,8 @@ export const UsedCarSearchForm = () => {
           By Brand
         </Radio>
       </RadioGroup>
+
+      <p className='py-5 text-center text-white'>Coming soon</p>
     </form>
   );
 };

@@ -5,9 +5,9 @@ import { Carousel } from 'react-responsive-carousel';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { TSlider } from '@/schema/slider';
 import { cn } from '@/lib/utils';
-import SearchBox from '@/components/search/banner-search-box';
+import SearchBox from '../search/search-box/search-box';
+import { TSlider } from '@/schema/slider';
 
 const BigDeviceSlider = ({ sliders }: { sliders: TSlider[] }) => {
   const [currentSlide, setCurrentSlide] = useState(0);

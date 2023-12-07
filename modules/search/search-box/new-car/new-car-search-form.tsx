@@ -6,13 +6,13 @@ import { Radio, RadioGroup } from '@nextui-org/react';
 import { Button } from '@nextui-org/button';
 import { SelectProps } from '@nextui-org/select';
 import { useRouter } from 'next/navigation';
-
-import { createUrl } from '@/lib/utils';
-import SelectBrandAndModel from './new-car/SelectBrandAndModel';
-import SelectBudgetAndBodyType from './new-car/select-budget-and-bodyType';
 import { useSnapshot } from 'valtio';
+
 import { searchQueryStore } from '@/store';
+import { createUrl } from '@/lib/utils';
 import { DEFAULT_PAGINATION_ITEMS_LIMIT } from '@/lib/constants';
+import SelectBudgetAndBodyType from './select-budget-and-bodyType';
+import SelectBrandAndModel from './SelectBrandAndModel';
 
 type SearchBy = 'budget' | 'brand';
 
@@ -21,7 +21,7 @@ export const selectClassNames: SelectProps['classNames'] = {
   selectorIcon: 'text-primary-500',
   trigger:
     'data-[hover=true]:border-primary-500 data-[focus]:border-primary-500 data-[open=true]:border-primary-500',
-  errorMessage: 'text-white dark:text-foreground'
+  errorMessage: 'text-white dark:text-foreground',
 };
 
 export const NewCarSearchForm = () => {

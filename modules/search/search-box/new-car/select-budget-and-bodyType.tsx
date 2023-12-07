@@ -1,10 +1,11 @@
 import { Fragment } from 'react';
-import { Select, SelectItem,  } from '@nextui-org/select';
+import { Select, SelectItem } from '@nextui-org/select';
 
 import selectOptionData from '@/data/searchForm.json';
 import { searchQueryActions, searchQueryStore } from '@/store';
-import { selectClassNames } from '../new-car-search-from';
 import useGetBodyTypes from '@/hooks/useGetBodyTypes';
+
+import { selectClassNames } from './new-car-search-form';
 
 const SelectBudgetAndBodyType = () => {
   const { isLoading, bodyTypes, errMsg } = useGetBodyTypes();
