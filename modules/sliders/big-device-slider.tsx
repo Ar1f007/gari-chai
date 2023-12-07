@@ -3,10 +3,10 @@
 import { Fragment, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { TSlider } from '@/schema/slider';
 import { cn } from '@/lib/utils';
-import Banner from './banner';
 
 const BigDeviceSlider = ({ sliders }: { sliders: TSlider[] }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -36,29 +36,37 @@ const BigDeviceSlider = ({ sliders }: { sliders: TSlider[] }) => {
             className='block'
             key={slider._id}
           >
-            <Banner slider={slider} />
+            <Image
+              src={slider.imgUrl}
+              alt={slider.title || 'slider'}
+              priority
+              width={1536}
+              height={865}
+            />
           </Link>
         ))}
       </Carousel>
-      <ul className='absolute bottom-[60px] right-[60px] flex cursor-pointer space-x-6'>
-        {sliders.map((slider, index) => (
-          <li
-            key={slider._id}
-            onClick={() => goToSlide(index)}
-          >
-            <span
-              className={cn(
-                'inline-block w-[20ch] max-w-[25ch] border-b-3 border-gray-400 pb-1 text-sm text-white',
-                {
-                  'border-primary': currentSlide === index,
-                },
-              )}
+      {sliders.length && sliders.length > 1 && (
+        <ul className='absolute bottom-[60px] right-[60px] flex cursor-pointer space-x-6'>
+          {sliders.map((slider, index) => (
+            <li
+              key={slider._id}
+              onClick={() => goToSlide(index)}
             >
-              {slider.title}
-            </span>
-          </li>
-        ))}
-      </ul>
+              <span
+                className={cn(
+                  'inline-block w-[20ch] max-w-[25ch] border-b-3 border-gray-400 pb-1 text-sm text-white',
+                  {
+                    'border-primary': currentSlide === index,
+                  },
+                )}
+              >
+                {slider.title}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
     </Fragment>
   );
 };
