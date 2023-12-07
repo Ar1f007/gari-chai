@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useCallback } from 'react';
+import { Suspense, useCallback } from 'react';
 
 export const SearchFilters = () => {
   const router = useRouter();
@@ -26,7 +26,7 @@ export const SearchFilters = () => {
   }, []);
 
   return (
-    <>
+    <Suspense>
       <p>Sort By {searchParams.get('query')}</p>
 
       {/* using useRouter */}
@@ -65,6 +65,6 @@ export const SearchFilters = () => {
       >
         Reset
       </Link>
-    </>
+    </Suspense>
   );
 };

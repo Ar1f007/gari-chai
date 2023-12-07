@@ -1,6 +1,5 @@
 import SearchBox from '@/components/search/banner-search-box';
 import { ElectricCars } from '@/modules/home/electric-cars';
-import Hero from '@/modules/home/hero';
 import { LatestCars } from '@/modules/home/latest-cars';
 import PopularBrands from '@/modules/home/popular-brands/popular-brands';
 import { PopularCars } from '@/modules/home/popular-cars';

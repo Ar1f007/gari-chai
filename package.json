@@ -37,7 +37,6 @@
     "@tiptap/starter-kit": "^2.1.12",
     "autoprefixer": "10.4.16",
     "clsx": "^2.0.0",
-    "css-mediaquery": "^0.1.2",
     "dayjs": "^1.11.10",
     "debounce": "^2.0.0",
     "framer-motion": "^10.16.5",
@@ -63,7 +62,6 @@
   },
   "devDependencies": {
     "@redux-devtools/extension": "^3.2.6",
-    "@types/css-mediaquery": "^0.1.4",
     "@types/node": "20.9.0",
     "@types/react": "18.2.37",
     "@types/react-dom": "18.2.15",

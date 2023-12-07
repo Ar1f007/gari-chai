@@ -5,12 +5,17 @@ import { getSliders } from '@/services/home/sliders';
 const SliderList = async () => {
   const sliders = await getSliders();
 
+  const isMobile = true;
+
   if (!sliders) return;
 
   return (
     <Suspense fallback={<div>Loading</div>}>
       <div className='relative'>
-        <HomeSliders sliders={sliders.desktopSliders} />
+        <HomeSliders
+          sliders={sliders.desktopSliders}
+          isMobile={isMobile}
+        />
       </div>
     </Suspense>
   );

@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
 import QueryResults from '@/modules/search/query-results';
 import { QueryParams } from '@/types';
-import { z } from 'zod';
 import { fetchFilteredCars } from '@/services/search';
 import { title } from '@/components/primitives';
 import Pagination from '@/components/pagination';
