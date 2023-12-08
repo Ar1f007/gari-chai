@@ -1,4 +1,11 @@
 'use client';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from '@nextui-org/button';
+import { redirect, useRouter } from 'next/navigation';
+import { FormProvider, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { useSnapshot } from 'valtio';
 import { RHFTextEditor } from '@/components/form/RHFTextEditor';
 import { routes } from '@/config/routes';
 import { invalidateTags } from '@/lib/actions';
@@ -14,12 +21,6 @@ import { commentService } from '@/services/comments';
 import { userStore } from '@/store';
 import { generateTagNameForComments } from '@/util/generate-tag-name';
 import { mapValidationErrors } from '@/util/mapValidationError';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@nextui-org/button';
-import { redirect } from 'next/navigation';
-import { FormProvider, useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import { useSnapshot } from 'valtio';
 
 type EditCommentProps = {
   isEditing: true;
@@ -47,6 +48,8 @@ type CommentFormProps = {
 
 const CommentForm = (props: CommentFormProps) => {
   const userSnap = useSnapshot(userStore);
+
+  const router = useRouter();
 
   const formHandler = useForm({
     mode: 'onSubmit',
@@ -94,7 +97,12 @@ const CommentForm = (props: CommentFormProps) => {
 
   async function onSubmit(data: CommentInputs) {
     if (!userSnap.user) {
-      toast.error('Please login to continue');
+      toast.error('Please login to continue', {
+        action: {
+          label: 'Go to Login',
+          onClick: () => router.push(routes.login),
+        },
+      });
       return;
     }
 
