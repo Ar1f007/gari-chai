@@ -42,7 +42,7 @@ const BigDeviceSlider = ({ sliders }: { sliders: TSlider[] }) => {
               alt={slider.title || 'slider'}
               priority
               width={1536}
-              height={865}
+              height={500}
             />
           </Link>
         ))}

@@ -25,7 +25,7 @@ const Brand = (props: BrandProps) => {
         alt={content.name}
         width={200}
         height={100}
-        className='aspect-[2/1]'
+        className='aspect-[2/1] object-scale-down'
       />
 
       <h3

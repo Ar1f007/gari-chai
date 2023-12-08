@@ -23,8 +23,8 @@ const SmallDeviceSlider = ({ sliders }: { sliders: TSlider[] }) => {
           <Image
             src={slider.imgUrl}
             alt='slider'
-            width={768}
-            height={420}
+            width={400}
+            height={220}
             priority
           />
         </Link>

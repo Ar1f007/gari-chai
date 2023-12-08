@@ -9,9 +9,7 @@ const SliderList = async () => {
 
   return (
     <Suspense fallback={<div>Loading</div>}>
-      <div className='relative'>
-        <HomeSliders sliders={sliders} />
-      </div>
+      <HomeSliders sliders={sliders} />
     </Suspense>
   );
 };
