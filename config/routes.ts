@@ -12,6 +12,7 @@ export const routes = {
   popularCars: '/cars/popular',
   latestCars: '/cars/latest',
   electricCars: '/cars/electric',
+  upcomingCars: '/cars/upcoming',
 
   videoAndReels: 'video-and-reels',
   videos: '/videos',
@@ -52,6 +53,18 @@ export const navMenuItems: SiteConfig['navMenuItems'] = [
         id: 'menu-1-3',
         label: 'New Launches',
         href: routes.latestCars,
+        hasChildren: false,
+      },
+      {
+        id: 'menu-1-4',
+        label: 'Electric Cars',
+        href: routes.electricCars,
+        hasChildren: false,
+      },
+      {
+        id: 'menu-1-4',
+        label: 'Upcoming Cars',
+        href: routes.upcomingCars,
         hasChildren: false,
       },
     ],
