@@ -7,7 +7,7 @@ type KeySpecProps = {
   icon?: LucideIcon | React.FC<IconSvgProps>;
 };
 
-const KeySpec = (props: KeySpecProps) => {
+const KeySpecificationItem = (props: KeySpecProps) => {
   const { icon: Icon, propertyName, value } = props;
 
   return (
@@ -27,4 +27,4 @@ const KeySpec = (props: KeySpecProps) => {
     </div>
   );
 };
-export default KeySpec;
+export default KeySpecificationItem;
