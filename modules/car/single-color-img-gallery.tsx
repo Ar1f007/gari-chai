@@ -7,7 +7,6 @@ import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 import { TCarSchema } from '@/schema/car';
 
 import { Gallery, Item } from 'react-photoswipe-gallery';
-import { MutableRefObject } from 'react';
 
 type SingleColorImageGalleryProps = {
   galleryItem: TCarSchema['colors'][0];
