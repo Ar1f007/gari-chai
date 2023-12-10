@@ -7,6 +7,7 @@ import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 import { TCarSchema } from '@/schema/car';
 
 import { Gallery, Item } from 'react-photoswipe-gallery';
+import { MutableRefObject } from 'react';
 
 type SingleColorImageGalleryProps = {
   galleryItem: TCarSchema['colors'][0];
@@ -29,16 +30,16 @@ const SingleColorImageGallery = ({ galleryItem }: SingleColorImageGalleryProps) 
                 height='400'
               >
                 {({ ref, open }) => (
-                  <div ref={ref}>
-                    <Image
-                      onClick={open}
-                      src={img || PLACEHOLDER_IMAGE}
-                      alt={galleryItem.name}
-                      width={100}
-                      height={100}
-                      className='aspect-square cursor-zoom-in rounded object-cover'
-                    />
-                  </div>
+                  <Image
+                    // @ts-ignore
+                    ref={ref}
+                    onClick={open}
+                    src={img || PLACEHOLDER_IMAGE}
+                    alt={galleryItem.name}
+                    width={100}
+                    height={100}
+                    className='aspect-square cursor-zoom-in rounded object-cover'
+                  />
                 )}
               </Item>
             </li>
