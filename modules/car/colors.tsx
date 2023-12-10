@@ -25,7 +25,7 @@ const Colors = ({ car }: { car: TCarSchema }) => {
       {totalNumOfColors == 1 ? (
         <SingleColorImageGallery galleryItem={car.colors[0]} />
       ) : (
-        <ul className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+        <ul className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'>
           {car.colors.map((color, idx) => (
             <li
               key={`color_${idx}`}
@@ -36,7 +36,7 @@ const Colors = ({ car }: { car: TCarSchema }) => {
                 alt={color.name}
                 width={200}
                 height={200}
-                className='aspect-square rounded'
+                className='rounded object-cover'
               />
 
               <h4 className='font-medium text-default-500'>{color.name}</h4>
