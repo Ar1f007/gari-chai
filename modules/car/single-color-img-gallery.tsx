@@ -29,15 +29,16 @@ const SingleColorImageGallery = ({ galleryItem }: SingleColorImageGalleryProps) 
                 height='400'
               >
                 {({ ref, open }) => (
-                  <Image
-                    ref={ref}
-                    onClick={open}
-                    src={img || PLACEHOLDER_IMAGE}
-                    alt={galleryItem.name}
-                    width={100}
-                    height={100}
-                    className='aspect-square cursor-zoom-in rounded object-cover'
-                  />
+                  <div ref={ref}>
+                    <Image
+                      onClick={open}
+                      src={img || PLACEHOLDER_IMAGE}
+                      alt={galleryItem.name}
+                      width={100}
+                      height={100}
+                      className='aspect-square cursor-zoom-in rounded object-cover'
+                    />
+                  </div>
                 )}
               </Item>
             </li>
