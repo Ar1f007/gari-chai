@@ -75,7 +75,7 @@ const AdditionalSpecifications = ({ car }: AdditionalSpecificationsProps) => {
         {car.specificationsByGroup?.length && (
           <ul className='space-y-6'>
             {car.specificationsByGroup.map((specificationGroup, idx) => (
-              <li key={specificationGroup._id}>
+              <li key={`specificationGroup_${idx}`}>
                 <GroupSpecifications specificationGroup={specificationGroup} />
               </li>
             ))}
@@ -87,8 +87,8 @@ const AdditionalSpecifications = ({ car }: AdditionalSpecificationsProps) => {
           <div className='mt-6'>
             <h2 className='ml-2 font-medium text-default-700 dark:text-foreground'>Other Info</h2>
             <ul className='ml-2 grid grid-cols-1 gap-8 pt-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-              {car.additionalSpecifications.map((additionalSpec) => (
-                <li key={additionalSpec._id}>
+              {car.additionalSpecifications.map((additionalSpec, idx) => (
+                <li key={`additionalSpec_${idx}`}>
                   <SpecInfo specInfo={additionalSpec} />
                 </li>
               ))}

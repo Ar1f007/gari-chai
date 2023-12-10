@@ -29,8 +29,6 @@ export default async function CarDetailsPage(props: Props) {
     notFound();
   }
 
-  console.log(car);
-
   return (
     <Fragment>
       <div className='flex flex-col gap-5 xl:flex-row xl:gap-10'>

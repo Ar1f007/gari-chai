@@ -62,7 +62,7 @@ export const navMenuItems: SiteConfig['navMenuItems'] = [
         hasChildren: false,
       },
       {
-        id: 'menu-1-4',
+        id: 'menu-1-5',
         label: 'Upcoming Cars',
         href: routes.upcomingCars,
         hasChildren: false,

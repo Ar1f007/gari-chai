@@ -1,4 +1,7 @@
 import '@/styles/globals.css';
+
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
 import { Metadata, Viewport } from 'next';
 import { siteConfig } from '@/config/site';
 import { fontSans } from '@/config/fonts';
@@ -31,7 +34,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang='en'
       suppressHydrationWarning
-      className='light'
     >
       <head />
       <body className={clsx('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>

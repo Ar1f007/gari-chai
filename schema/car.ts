@@ -4,14 +4,12 @@ import { brandModelSchema, brandSchema, carBodyTypeSchema } from './brand-and-mo
 const numberOrNull = z.union([z.number(), z.null()]);
 
 const singleSpecificationSchema = z.object({
-  _id: z.string(),
   name: z.string().min(1, 'name is required'),
-  value: z.union([z.string().min(1, 'value is required'), z.boolean()]),
+  value: z.union([z.string(), z.boolean()]),
   valueType: z.enum(['boolean', 'text']),
 });
 
 const groupSpecificationSchema = z.object({
-  _id: z.string(),
   groupName: z.string(),
   values: z.array(singleSpecificationSchema),
 });
@@ -85,9 +83,9 @@ export const carSchema = z.object({
 
   tags: z.array(z.object({ value: z.string(), label: z.string(), _id: z.string() })).optional(),
 
-  specificationsByGroup: z.array(groupSpecificationSchema).optional(),
+  specificationsByGroup: z.array(groupSpecificationSchema),
 
-  additionalSpecifications: z.array(singleSpecificationSchema).optional(),
+  additionalSpecifications: z.array(singleSpecificationSchema),
 
   carType: z.enum(['new', 'used']),
 

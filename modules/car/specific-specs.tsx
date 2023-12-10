@@ -13,7 +13,7 @@ const SpecInfo = (props: SpecInfoProps) => {
         {typeof props.value === 'boolean' ? (
           <span>checkmark {props.value}</span>
         ) : (
-          <p className='text-base font-medium'>{props.value}</p>
+          <p className='text-base font-medium capitalize'>{props.value}</p>
         )}
       </div>
       <div className='border-b-1 border-solid border-gray-200' />

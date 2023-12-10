@@ -6,9 +6,11 @@ type GroupSpecificationsProps = {
 };
 
 const GroupSpecifications = ({ specificationGroup }: GroupSpecificationsProps) => {
+  if (!specificationGroup.values?.length) return null;
+
   return (
     <section className='flex flex-col space-y-2 pl-2'>
-      <h2 className='font-medium text-default-700 dark:text-foreground'>
+      <h2 className='font-medium capitalize text-default-700 dark:text-foreground'>
         {specificationGroup.groupName}
       </h2>
 

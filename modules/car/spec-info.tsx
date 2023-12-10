@@ -8,7 +8,7 @@ const SpecInfo = ({ specInfo }: SpecInfoProps) => {
   return (
     <div className='flex flex-col gap-5'>
       <div className='flex items-center gap-5'>
-        <h4 className='whitespace-nowrap text-base text-default-500'>{specInfo.name}</h4>
+        <h4 className='whitespace-nowrap text-base capitalize text-default-500'>{specInfo.name}</h4>
 
         {specInfo.valueType === 'boolean' ? (
           <span>
@@ -19,7 +19,7 @@ const SpecInfo = ({ specInfo }: SpecInfoProps) => {
             )}
           </span>
         ) : (
-          <p className='text-base font-medium'>{specInfo.value}</p>
+          <p className='text-base font-medium capitalize'>{specInfo.value}</p>
         )}
       </div>
       <div className='border-b-1 border-solid border-gray-200' />

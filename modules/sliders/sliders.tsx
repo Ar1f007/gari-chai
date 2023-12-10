@@ -1,7 +1,5 @@
 'use client';
 
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-
 import { TSlider } from '@/schema/slider';
 
 import BigDeviceSlider from './big-device-slider';
