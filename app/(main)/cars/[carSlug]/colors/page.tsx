@@ -21,9 +21,5 @@ export default async function ColorsPage(props: Props) {
   if (!car) {
     notFound();
   }
-  return (
-    <div>
-      <ColorSlider car={car} />
-    </div>
-  );
+  return <ColorSlider car={car} />;
 }

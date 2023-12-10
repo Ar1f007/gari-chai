@@ -31,7 +31,6 @@ const ColorSlider = ({ car }: { car: TCarSchema }) => {
   return (
     <div className='mx-auto max-w-2xl rounded border pb-5'>
       <Carousel
-        dynamicHeight
         axis='horizontal'
         showIndicators={false}
         showArrows={false}
@@ -45,8 +44,8 @@ const ColorSlider = ({ car }: { car: TCarSchema }) => {
               src={item.imgUrl}
               alt={item.name}
               width={600}
-              height={600}
-              className='bg-red-50 object-cover'
+              height={300}
+              className='object-cover'
             />
           </div>
         ))}
