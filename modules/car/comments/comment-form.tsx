@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@nextui-org/button';
-import { redirect, useRouter } from 'next/navigation';
+import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { useSnapshot } from 'valtio';
@@ -21,6 +21,7 @@ import { commentService } from '@/services/comments';
 import { userStore } from '@/store';
 import { generateTagNameForComments } from '@/util/generate-tag-name';
 import { mapValidationErrors } from '@/util/mapValidationError';
+import { createUrl } from '@/lib/utils';
 
 type EditCommentProps = {
   isEditing: true;
@@ -51,10 +52,14 @@ const CommentForm = (props: CommentFormProps) => {
 
   const router = useRouter();
 
+  const pathname = usePathname();
+
+  const commentValFromURL = useSearchParams().get('content') || '';
+
   const formHandler = useForm({
     mode: 'onSubmit',
     defaultValues: {
-      content: props.isEditing ? props.commentBody.content : '',
+      content: props.isEditing ? props.commentBody.content : decodeURIComponent(commentValFromURL),
     },
     resolver: zodResolver(commentFormSchema),
   });
@@ -95,14 +100,25 @@ const CommentForm = (props: CommentFormProps) => {
     toast.error(res.message || GENERIC_ERROR_MSG);
   }
 
+  function handleUnauthenticatedUser() {
+    const params = new URLSearchParams();
+
+    params.set('pathname', pathname);
+    params.set('content', formHandler.getValues('content'));
+
+    const url = encodeURI(createUrl(routes.login, params));
+
+    http: toast.error('Please login to continue', {
+      action: {
+        label: 'Go to Login',
+        onClick: () => router.push(url),
+      },
+    });
+  }
+
   async function onSubmit(data: CommentInputs) {
     if (!userSnap.user) {
-      toast.error('Please login to continue', {
-        action: {
-          label: 'Go to Login',
-          onClick: () => router.push(routes.login),
-        },
-      });
+      handleUnauthenticatedUser();
       return;
     }
 
@@ -150,18 +166,10 @@ const CommentForm = (props: CommentFormProps) => {
     toast.error(res.message || GENERIC_ERROR_MSG);
   }
 
-  function handleAuth() {
-    if (userSnap.status == 'loggedIn') return;
-
-    redirect(routes.login);
-  }
-
   return (
     <FormProvider {...formHandler}>
       <form onSubmit={formHandler.handleSubmit(onSubmit)}>
-        <div onClick={handleAuth}>
-          <RHFTextEditor name='content' />
-        </div>
+        <RHFTextEditor name='content' />
 
         <div className='mt-4 flex gap-2'>
           <Button

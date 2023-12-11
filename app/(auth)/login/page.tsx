@@ -12,13 +12,14 @@ import { RHFInput } from '@/components/form/RHFInput';
 import { auth } from '@/services/user/auth';
 import { toast } from 'sonner';
 import { mapValidationErrors } from '@/util/mapValidationError';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { AUTH_TOKEN_NAME, GENERIC_ERROR_MSG } from '@/lib/constants';
 import { userActions } from '@/store';
 import { removeAuthCookie } from '@/util/removeAuthCookie';
 import { parsePhoneNumber } from 'libphonenumber-js';
 import dynamic from 'next/dynamic';
+import { createUrl } from '@/lib/utils';
 
 const OTPForm = dynamic(() => import('@/components/auth/otp-form'));
 
@@ -29,6 +30,8 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [showOTPInputForm, setShowOTPInputForm] = useState(false);
 
+  const params = useSearchParams();
+
   const formHandler = useForm<LoginInputs>({
     criteriaMode: 'firstError',
     mode: 'onTouched',
@@ -38,6 +41,21 @@ const LoginPage = () => {
     },
     resolver: zodResolver(loginSchema),
   });
+
+  function redirectPath() {
+    const searchParams = new URLSearchParams(params);
+    const redirectPath = searchParams.get('pathname');
+
+    searchParams.delete('pathname');
+
+    if (redirectPath) {
+      const url = createUrl(decodeURIComponent(redirectPath), searchParams);
+
+      return url;
+    }
+
+    return routes.home;
+  }
 
   async function onSubmit(data: LoginInputs) {
     const res = await auth.login(data);
@@ -59,7 +77,7 @@ const LoginPage = () => {
 
     if (res.data.isVerified) {
       userActions.setUser(res.data);
-      router.push(routes.home);
+      router.push(redirectPath());
       return;
     }
 
