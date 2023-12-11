@@ -15,6 +15,8 @@ export async function apiFetch<Data = unknown, ErrData = TApiError>(
 ) {
   const { isFormData = false, baseApiUrl = API_V1_URL, body, headers, ...rest } = options;
 
+  const abortController = new AbortController();
+
   const fetchOptions: FetchExtendedOptions = {
     headers: {
       Accept: 'application/json',
@@ -23,6 +25,7 @@ export async function apiFetch<Data = unknown, ErrData = TApiError>(
     },
     body: isFormData ? constructFormData(body) : JSON.stringify(body),
     credentials: 'include',
+    signal: abortController.signal,
     ...rest,
   };
 
