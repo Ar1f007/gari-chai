@@ -4,7 +4,7 @@ import { Button } from '@nextui-org/button';
 import { FormProvider, useForm } from 'react-hook-form';
 import { RHFInput } from '@/components/form/RHFInput';
 import { RHFTextarea } from '@/components/form/RHFTextarea';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ReviewFormInputs, reviewSchema } from '@/schema/review';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { reviews } from '@/services/reviews';
@@ -15,28 +15,51 @@ import { ZodError } from 'zod';
 import { TCarSchema } from '@/schema/car';
 import { useSnapshot } from 'valtio';
 import { userStore } from '@/store';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { routes } from '@/config/routes';
+import { createUrl } from '@/lib/utils';
 
 const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
   const [showReviewModal, setShowReviewModal] = useState(false);
   const userSnap = useSnapshot(userStore);
   const router = useRouter();
+  const pathname = usePathname();
+
+  const searchParams = useSearchParams();
 
   const formHandler = useForm<ReviewFormInputs>({
     criteriaMode: 'firstError',
     mode: 'onTouched',
     resolver: zodResolver(reviewSchema),
+    defaultValues: {
+      title: decodeURIComponent(searchParams.get('title') || ''),
+      review: decodeURIComponent(searchParams.get('review') || ''),
+      rating: decodeURIComponent(searchParams.get('rating') || ''),
+    },
   });
+
+  function handleUnauthenticatedUser() {
+    const params = new URLSearchParams();
+
+    params.set('pathname', pathname);
+    params.set('showReviewModal', 'true');
+    params.set('title', formHandler.getValues('title'));
+    params.set('review', formHandler.getValues('review'));
+    params.set('rating', formHandler.getValues('rating'));
+
+    const url = encodeURI(createUrl(routes.login, params));
+
+    http: toast.error('Please login to continue', {
+      action: {
+        label: 'Go to Login',
+        onClick: () => router.push(url),
+      },
+    });
+  }
 
   async function onSubmit(data: ReviewFormInputs) {
     if (!userSnap.user) {
-      toast.error('Please login to continue', {
-        action: {
-          label: 'Go to Login',
-          onClick: () => router.push(routes.login),
-        },
-      });
+      handleUnauthenticatedUser();
       return;
     }
 
@@ -77,6 +100,14 @@ const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
     setShowReviewModal(false);
     formHandler.reset();
   }
+
+  useEffect(() => {
+    const showReviewModal = searchParams.get('showReviewModal');
+
+    if (showReviewModal && showReviewModal === 'true') {
+      setShowReviewModal(true);
+    }
+  }, [searchParams]);
 
   return (
     <>

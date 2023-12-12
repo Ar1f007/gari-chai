@@ -4,7 +4,8 @@ export const reviewSchema = z.object({
   title: z
     .string()
     .min(1, 'Please enter a heading')
-    .min(10, 'Heading should be at least 10 characters long'),
+    .min(10, 'Heading should be at least 10 characters long')
+    .max(60, 'Too long (max 60 characters allowed)'),
 
   review: z
     .string()
