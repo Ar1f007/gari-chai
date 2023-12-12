@@ -28,6 +28,7 @@ export const endpoints = {
     users: {
       baseUrl: '/users',
       login: '/users/login',
+      logout: '/users/logout',
       sendOTP: '/users/send-otp',
       verifyOTP: '/users/verify-otp',
       me: '/users/me',
@@ -43,8 +44,8 @@ export const endpoints = {
       baseUrl: '/search',
     },
     sliders: {
-      baseUrl: '/sliders'
-    }
+      baseUrl: '/sliders',
+    },
   },
   admin: {},
 };
