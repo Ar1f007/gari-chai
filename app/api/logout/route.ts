@@ -1,13 +1,13 @@
-import { routes } from '@/config/routes';
 import { AUTH_TOKEN_NAME } from '@/lib/constants';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 
 export async function GET() {
   try {
     cookies().delete(AUTH_TOKEN_NAME);
 
-    redirect(routes.home);
+    return Response.json({
+      status: 'success',
+    });
   } catch (error) {
     return Response.json({
       status: 'fail',
