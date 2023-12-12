@@ -2,6 +2,8 @@ import '@/styles/globals.css';
 
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 import { Metadata, Viewport } from 'next';
 import { siteConfig } from '@/config/site';
 import { fontSans } from '@/config/fonts';
@@ -40,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
           <main>{children}</main>
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -17,7 +17,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    cookies().delete(tokenName);
+    cookies().set(tokenName, '', { maxAge: 0 });
 
     return Response.json(
       {
