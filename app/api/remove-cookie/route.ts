@@ -21,9 +21,6 @@ export async function POST(req: Request) {
       name: tokenName,
       value: '',
       maxAge: 0,
-      domain: 'gari-chai.onrender.com',
-      path: '/',
-      expires: -1,
     });
 
     return Response.json(
