@@ -17,7 +17,9 @@ export async function POST(req: Request) {
   }
 
   try {
-    cookies().set(tokenName, '', { maxAge: 0 });
+    const ONE_DAY = 1000 * 60 * 60 * 24;
+
+    cookies().set(tokenName, '', { expires: new Date(Date.now() - ONE_DAY), maxAge: 0 });
 
     return Response.json(
       {
