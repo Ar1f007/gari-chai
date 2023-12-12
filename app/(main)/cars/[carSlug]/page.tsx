@@ -1,5 +1,6 @@
 import Colors from '@/modules/car/colors';
 import Comments from '@/modules/car/comments';
+import CarDescription from '@/modules/car/description';
 import CarImage from '@/modules/car/new-car/car-image';
 import CarInfo from '@/modules/car/new-car/car-info';
 import Reviews from '@/modules/car/reviews';
@@ -40,6 +41,8 @@ export default async function CarDetailsPage(props: Props) {
       </div>
 
       <Specifications car={car} />
+
+      {car.description && <CarDescription text={car.description} />}
 
       <Colors car={car} />
 
