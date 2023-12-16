@@ -12,6 +12,10 @@ const SmallDeviceSlider = ({ sliders }: { sliders: TSlider[] }) => {
       showArrows={false}
       showThumbs={false}
       showStatus={false}
+      swipeable
+      emulateTouch
+      autoPlay
+      infiniteLoop
       dynamicHeight
     >
       {sliders.map((slider) => (

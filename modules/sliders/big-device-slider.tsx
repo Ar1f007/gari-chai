@@ -27,6 +27,8 @@ const BigDeviceSlider = ({ sliders }: { sliders: TSlider[] }) => {
         infiniteLoop
         dynamicHeight
         stopOnHover
+        swipeable
+        emulateTouch
         interval={6500}
         onChange={(index) => setCurrentSlide(index)}
         selectedItem={currentSlide}
