@@ -21,12 +21,12 @@ export const carSchema = z.object({
   description: z.string().optional(),
 
   brand: z.object({
-    id: z.union([z.string(), brandSchema]),
+    id: z.union([z.string(), brandSchema, z.null()]),
     name: z.string(),
   }),
 
   brandModel: z.object({
-    id: z.union([z.string(), brandModelSchema]),
+    id: z.union([z.string(), brandModelSchema, z.null()]),
     name: z.string(),
   }),
 
@@ -49,7 +49,7 @@ export const carSchema = z.object({
   transmission: z.string(),
 
   bodyStyle: z.object({
-    id: z.union([z.string(), carBodyTypeSchema]),
+    id: z.union([z.string(), carBodyTypeSchema, z.null()]),
     name: z.string(),
   }),
 
