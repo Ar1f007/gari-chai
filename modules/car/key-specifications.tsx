@@ -1,6 +1,6 @@
 import { title } from '@/components/primitives';
 import { TCarSchema } from '@/schema/car';
-import { FuelIcon, Settings as SettingsIcon, UtilityPoleIcon } from 'lucide-react';
+import { CarFrontIcon, FuelIcon, UtilityPoleIcon } from 'lucide-react';
 import KeySpecificationItem from './key-specification-item';
 
 type Props = {
@@ -14,12 +14,12 @@ const KeySpecifications = ({ car }: Props) => {
       </h2>
 
       <div className='mt-12 flex flex-col gap-8'>
-        <div className='2xl:grid-cols-45 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4'>
-          {/* Engine */}
+        <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4'>
+          {/* Brand */}
           <KeySpecificationItem
-            icon={SettingsIcon}
-            propertyName='Engine'
-            value={car.engine.type}
+            icon={CarFrontIcon}
+            propertyName='Brand'
+            value={car.brand.name}
           />
 
           {/* Fuel */}

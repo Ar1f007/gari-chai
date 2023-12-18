@@ -1,7 +1,5 @@
 import { z } from 'zod';
-import { brandModelSchema, brandSchema, carBodyTypeSchema } from './brand-and-model';
-
-const numberOrNull = z.union([z.number(), z.null()]);
+import { brandModelSchema, brandSchema, carBodyStylesSchema } from './brand-and-model';
 
 const singleSpecificationSchema = z.object({
   name: z.string().min(1, 'name is required'),
@@ -16,8 +14,11 @@ const groupSpecificationSchema = z.object({
 
 export const carSchema = z.object({
   _id: z.string(),
+
   name: z.string(),
+
   slug: z.string(),
+
   description: z.string().optional(),
 
   brand: z.object({
@@ -30,26 +31,10 @@ export const carSchema = z.object({
     name: z.string(),
   }),
 
-  colors: z
-    .array(
-      z.object({
-        name: z.string(),
-        imageUrls: z.array(z.string().url()).optional(),
-      }),
-    )
-    .default([]),
-
-  engine: z.object({
-    type: z.string(),
-    numOfCylinders: numberOrNull,
-    horsePower: numberOrNull,
-    torque: numberOrNull,
-  }),
-
   transmission: z.string(),
 
   bodyStyle: z.object({
-    id: z.union([z.string(), carBodyTypeSchema, z.null()]),
+    id: z.union([z.string(), carBodyStylesSchema, z.null()]),
     name: z.string(),
   }),
 
@@ -58,20 +43,33 @@ export const carSchema = z.object({
       type: z.string(),
       fullForm: z.string(),
     }),
-    economy: z.object({ city: numberOrNull, highway: numberOrNull }),
-  }),
-
-  acceleration: z.object({
-    zeroTo60: numberOrNull,
-    topSpeed: numberOrNull,
   }),
 
   posterImage: z.object({
     originalUrl: z.string().url(),
-    thumbnailUrl: z.string().url(),
+    thumbnailUrl: z.string().url().optional(),
   }),
 
   imageUrls: z.array(z.string()).optional(),
+
+  videoUrls: z
+    .array(
+      z.object({
+        thumbnailUrl: z.string().url().optional(),
+        url: z.string().url(),
+      }),
+    )
+    .optional()
+    .default([]),
+
+  colors: z
+    .array(
+      z.object({
+        name: z.string(),
+        imageUrls: z.array(z.string().url()).optional(),
+      }),
+    )
+    .default([]),
 
   numOfDoors: z.number(),
 
@@ -89,19 +87,13 @@ export const carSchema = z.object({
 
   carType: z.enum(['new', 'used']),
 
-  videoUrls: z
-    .array(
-      z.object({
-        thumbnailUrl: z.string().url().optional(),
-        url: z.string().url(),
-      }),
-    )
-    .optional()
-    .default([]),
-
   launchedAt: z.string(),
   createdAt: z.string(),
   updatedAt: z.string(),
+
+  status: z.enum(['available', 'sold', 'reserved']).optional(),
+  soldAt: z.string().optional(),
+  cities: z.array(z.string()).optional(),
 });
 
 export type TCarSchema = z.infer<typeof carSchema>;

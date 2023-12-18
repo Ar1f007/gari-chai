@@ -9,6 +9,7 @@ import { routes } from '@/config/routes';
 
 export const LatestCars = async () => {
   const res = await getHomePageCarsBySection(HOME_SETTINGS_OPTIONS.latestCars);
+
   if (!res || !res.length) {
     return null;
   }

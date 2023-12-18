@@ -3,9 +3,9 @@ import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
 import { TAGS } from '../tags';
-import { carBodyTypeSchema } from '@/schema/brand-and-model';
+import { carBodyStylesSchema } from '@/schema/brand-and-model';
 
-type BodyTypesResponse = z.infer<typeof carBodyTypeSchema>;
+type BodyTypesResponse = z.infer<typeof carBodyStylesSchema>;
 
 export async function getCarBodyTypes() {
   const url = endpoints.api.cars.info.bodyTypes;

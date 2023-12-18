@@ -86,7 +86,7 @@ const AdditionalSpecifications = ({ car }: AdditionalSpecificationsProps) => {
         {car.additionalSpecifications?.length && (
           <div className='mt-6'>
             <h2 className='ml-2 font-medium text-default-700 dark:text-foreground'>Other Info</h2>
-            <ul className='ml-2 grid grid-cols-1 gap-8 pt-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+            <ul className='ml-2 grid grid-cols-1 gap-8 pt-3 lg:grid-cols-2'>
               {car.additionalSpecifications.map((additionalSpec, idx) => (
                 <li key={`additionalSpec_${idx}`}>
                   <SpecInfo specInfo={additionalSpec} />

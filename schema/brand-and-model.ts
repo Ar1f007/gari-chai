@@ -34,11 +34,11 @@ export const brandModelSchema = z.object({
   updatedAt: z.string(),
 });
 
-export const carBodyTypeSchema = z.object({
+export const carBodyStylesSchema = z.object({
   _id: z.string(),
   name: z.string(),
   slug: z.string(),
-  image: imageSchema.optional(),
+  image: z.optional(imageSchema),
   createdAt: z.string(),
   updatedAt: z.string(),
 });

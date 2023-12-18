@@ -14,7 +14,7 @@ const GroupSpecifications = ({ specificationGroup }: GroupSpecificationsProps) =
         {specificationGroup.groupName}
       </h2>
 
-      <div className='grid grid-cols-1 gap-8 pt-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+      <div className='grid grid-cols-1 gap-8 pt-3 lg:grid-cols-2'>
         {specificationGroup.values.map((specification, idx) => (
           <SpecInfo
             key={idx}
