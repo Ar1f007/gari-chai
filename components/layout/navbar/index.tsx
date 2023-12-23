@@ -26,6 +26,7 @@ import { settingsActions, settingsStore } from '@/store';
 import SelectLocation from './SelectLocation';
 import NavItem from './NavItem';
 import { MobileAuthButton } from './mobile-auth-button';
+import AuthButton from './auth-button';
 
 const Navbar = () => {
   const settingSnap = useSnapshot(settingsStore);
@@ -89,13 +90,30 @@ const Navbar = () => {
 
         {/* Mobile */}
         <NavbarContent className='lg:hidden'>
-          <NavbarBrand as='li'>
-            <Link href={routes.home}>
-              <Logo />
-            </Link>
-          </NavbarBrand>
+          <NavbarContent
+            justify='start'
+            as='li'
+          >
+            <NavbarMenuToggle />
+          </NavbarContent>
 
-          <NavbarMenuToggle />
+          <NavbarContent
+            justify='center'
+            as='li'
+          >
+            <NavbarBrand className='justify-center'>
+              <Link href={routes.home}>
+                <Logo />
+              </Link>
+            </NavbarBrand>
+          </NavbarContent>
+
+          <NavbarContent
+            justify='end'
+            as='li'
+          >
+            <AuthButton showOnlySignUpBtn />
+          </NavbarContent>
         </NavbarContent>
 
         <NavbarMenu>

@@ -4,10 +4,15 @@ import UserDropdown from '@/components/auth/user-dropdown';
 import Icon from '@/components/icon';
 import { routes } from '@/config/routes';
 import { userStore } from '@/store';
+import { Button } from '@nextui-org/button';
 import Link from 'next/link';
 import { useSnapshot } from 'valtio';
 
-const AuthButton = () => {
+type AuthButtonProps = {
+  showOnlySignUpBtn?: boolean;
+};
+
+const AuthButton = ({ showOnlySignUpBtn }: AuthButtonProps) => {
   const userSnap = useSnapshot(userStore);
 
   if (userSnap.status === 'pending') return null;
@@ -18,14 +23,29 @@ const AuthButton = () => {
         <UserDropdown />
       ) : (
         <>
-          <Icon
-            name='user-2'
-            className='-mt-1 mr-1 hidden lg:inline-block'
-          />
+          {showOnlySignUpBtn ? (
+            <>
+              <Button
+                as={Link}
+                color='primary'
+                href={routes.login}
+                variant='flat'
+              >
+                Sign In
+              </Button>
+            </>
+          ) : (
+            <>
+              <Icon
+                name='user-2'
+                className='-mt-1 mr-1 hidden lg:inline-block'
+              />
 
-          <Link href={routes.login}>Login</Link>
-          <span>&nbsp;/&nbsp;</span>
-          <Link href={routes.register}>Register</Link>
+              <Link href={routes.login}>Login</Link>
+              <span>&nbsp;/&nbsp;</span>
+              <Link href={routes.register}>Register</Link>
+            </>
+          )}
         </>
       )}
     </>
