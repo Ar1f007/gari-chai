@@ -12,11 +12,11 @@ const Homepage = () => {
         <SliderList />
       </section>
       <section className='mx-auto max-w-screen-2xl px-6 2xl:px-0'>
-        <PopularBrands />
         <LatestCars />
         <UpcomingCars />
         <PopularCars />
         <ElectricCars />
+        <PopularBrands />
       </section>
     </>
   );
