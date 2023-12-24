@@ -3,6 +3,7 @@ import { title } from '@/components/primitives';
 import { formatAsBangladeshiCurrency } from '@/util/covert-currency';
 import { TCarSchema } from '@/schema/car';
 import Link from 'next/link';
+import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 
 type QueryResultsProps = {
   items: TCarSchema[];
@@ -43,7 +44,9 @@ const QueryResults = async (props: QueryResultsProps) => {
             className='flex gap-5'
           >
             <Image
-              src={item.posterImage.thumbnailUrl}
+              src={
+                (item.posterImage.thumbnailUrl ?? item.posterImage.originalUrl) || PLACEHOLDER_IMAGE
+              }
               alt={item.name}
               width={200}
               height={200}
