@@ -67,6 +67,8 @@ export type QueryParams = {
   page: string;
   limit: string;
   scope: 'new-car' | 'used-car' | 'global';
+  launchStatus: 'past' | 'future';
+  launchedDate: string;
 };
 
 export type TPagination = {

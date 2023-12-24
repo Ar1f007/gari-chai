@@ -7,7 +7,6 @@ import { ReqMethod } from '../serviceHelper';
 import { TPagination } from '@/types';
 import { createUrl } from '@/lib/utils';
 
-
 type GetCarsResponseData = {
   results: TCarSchema[];
   pagination: TPagination;
@@ -19,7 +18,7 @@ export async function getCars(queryParams: URLSearchParams) {
 
     const res = await apiFetch<GetCarsResponseData>(url, {
       method: ReqMethod.GET,
-      cache: 'no-store'
+      cache: 'no-store',
     });
 
     if (res.status !== 'success') {
@@ -34,9 +33,7 @@ export async function getCars(queryParams: URLSearchParams) {
         pagination: res.data.pagination,
       };
     }
-    
-    console.log(parsedData.error);
-    
+
     throw new Error('ERROR! Car data missing');
   } catch (err) {
     console.log(err);
