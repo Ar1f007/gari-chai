@@ -20,7 +20,7 @@ const PopularCarsPage = async ({ searchParams }: TCarsPageParams) => {
     );
   }
 
-  const queryParams = new URLSearchParams(searchParams);
+  const queryParams = new URLSearchParams(parsedParams.data);
 
   queryParams.set('tags', HOME_SETTINGS_OPTIONS.upcomingCars);
 
