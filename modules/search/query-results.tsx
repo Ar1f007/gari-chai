@@ -4,6 +4,7 @@ import { formatAsBangladeshiCurrency } from '@/util/covert-currency';
 import { TCarSchema } from '@/schema/car';
 import Link from 'next/link';
 import { PLACEHOLDER_IMAGE } from '@/lib/constants';
+import { Chip } from '@nextui-org/chip';
 
 type QueryResultsProps = {
   items: TCarSchema[];
@@ -62,6 +63,12 @@ const QueryResults = async (props: QueryResultsProps) => {
                   <small className='ml-2 text-xs text-foreground'>(Negotiable)</small>
                 )}
               </p>
+
+              <div className='flex space-x-2'>
+                <Chip>{item.brand.name}</Chip>
+                <Chip>{item.brandModel.name}</Chip>
+                <Chip>{item.bodyStyle.name}</Chip>
+              </div>
             </div>
           </Link>
         </li>

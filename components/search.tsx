@@ -49,7 +49,7 @@ export default function Search() {
             input: 'text-sm',
           }}
           labelPlacement='outside'
-          placeholder='Search cars eg. Honda elevate'
+          placeholder='Search cars by name, brand or body style...'
           startContent={
             <SearchIcon className='pointer-events-none flex-shrink-0 text-base text-default-400' />
           }
