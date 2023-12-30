@@ -4,7 +4,10 @@ import { brandModelSchema, brandSchema, carBodyStylesSchema } from './brand-and-
 const singleSpecificationSchema = z.object({
   name: z.string().min(1, 'name is required'),
   value: z.union([z.string(), z.boolean()]),
-  valueType: z.enum(['boolean', 'text']),
+  valueType: z.object({
+    value: z.enum(['boolean', 'text']),
+    label: z.string(),
+  }),
 });
 
 const groupSpecificationSchema = z.object({
@@ -22,26 +25,29 @@ export const carSchema = z.object({
   description: z.string().optional(),
 
   brand: z.object({
-    id: z.union([z.string(), brandSchema, z.null()]),
-    name: z.string(),
+    value: z.union([z.string(), brandSchema, z.null()]),
+    label: z.string(),
   }),
 
   brandModel: z.object({
-    id: z.union([z.string(), brandModelSchema, z.null()]),
-    name: z.string(),
+    value: z.union([z.string(), brandModelSchema, z.null()]),
+    label: z.string(),
   }),
 
   transmission: z.string(),
 
   bodyStyle: z.object({
-    id: z.union([z.string(), carBodyStylesSchema, z.null()]),
-    name: z.string(),
+    value: z.union([z.string(), carBodyStylesSchema, z.null()]),
+    label: z.string(),
   }),
 
   fuel: z.object({
     typeInfo: z.object({
-      type: z.string(),
-      fullForm: z.string(),
+      value: z.object({
+        type: z.string(),
+        fullForm: z.string(),
+      }),
+      label: z.string(),
     }),
   }),
 
@@ -50,7 +56,7 @@ export const carSchema = z.object({
     thumbnailUrl: z.string().url().optional(),
   }),
 
-  imageUrls: z.array(z.string()).optional(),
+  imageUrls: z.array(z.string()),
 
   videoUrls: z
     .array(
@@ -59,7 +65,6 @@ export const carSchema = z.object({
         url: z.string().url(),
       }),
     )
-    .optional()
     .default([]),
 
   colors: z
@@ -79,7 +84,7 @@ export const carSchema = z.object({
     isNegotiable: z.boolean(),
   }),
 
-  tags: z.array(z.object({ value: z.string(), label: z.string(), _id: z.string() })).optional(),
+  tags: z.array(z.object({ value: z.string(), label: z.string() })),
 
   specificationsByGroup: z.array(groupSpecificationSchema),
 
@@ -91,9 +96,14 @@ export const carSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
 
-  status: z.enum(['available', 'sold', 'reserved']).optional(),
+  status: z.enum(['available', 'sold', 'reserved']),
   soldAt: z.string().optional(),
-  cities: z.array(z.string()).optional(),
+  cities: z.array(
+    z.object({
+      value: z.string(),
+      label: z.string(),
+    }),
+  ),
 });
 
 export type TCarSchema = z.infer<typeof carSchema>;

@@ -10,7 +10,7 @@ const SpecInfo = ({ specInfo }: SpecInfoProps) => {
       <div className='flex items-center gap-5'>
         <h4 className='whitespace-nowrap text-base capitalize text-default-500'>{specInfo.name}</h4>
 
-        {specInfo.valueType === 'boolean' ? (
+        {specInfo.valueType.value === 'boolean' ? (
           <span>
             {specInfo.value ? (
               <CheckIcon className='text-primary' />

@@ -19,14 +19,14 @@ const KeySpecifications = ({ car }: Props) => {
           <KeySpecificationItem
             icon={CarFrontIcon}
             propertyName='Brand'
-            value={car.brand.name}
+            value={car.brand.label}
           />
 
           {/* Fuel */}
           <KeySpecificationItem
             icon={FuelIcon}
             propertyName='Fuel Type'
-            value={car.fuel.typeInfo.type}
+            value={car.fuel.typeInfo.value.type}
           />
 
           {/* Transmission */}

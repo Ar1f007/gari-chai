@@ -65,9 +65,9 @@ const QueryResults = async (props: QueryResultsProps) => {
               </p>
 
               <div className='flex space-x-2'>
-                <Chip>{item.brand.name}</Chip>
-                <Chip>{item.brandModel.name}</Chip>
-                <Chip>{item.bodyStyle.name}</Chip>
+                <Chip>{item.brand.label}</Chip>
+                <Chip>{item.brandModel.label}</Chip>
+                <Chip>{item.bodyStyle.label}</Chip>
               </div>
             </div>
           </Link>

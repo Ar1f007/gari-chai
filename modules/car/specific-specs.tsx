@@ -26,11 +26,11 @@ const SpecificSpecs = ({ car }: { car: TCarSchema }) => {
     <div className='mb-8 grid grid-cols-1 gap-8 pl-2 pt-3 lg:grid-cols-2'>
       <SpecInfo
         name='Brand'
-        value={typeof car.brand === 'string' ? car.brand : car.brand.name}
+        value={typeof car.brand === 'string' ? car.brand : car.brand.label}
       />
       <SpecInfo
         name='Body Style'
-        value={typeof car.bodyStyle === 'string' ? car.bodyStyle : car.bodyStyle.name}
+        value={typeof car.bodyStyle === 'string' ? car.bodyStyle : car.bodyStyle.label}
       />
 
       <SpecInfo
