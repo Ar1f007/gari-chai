@@ -5,7 +5,7 @@ import { carSchema } from './car';
 import { brandSchema } from './brand-and-model';
 
 export const imageSchema = z.object({
-  thumbnailUrl: z.string().url().optional(),
+  thumbnailUrl: z.string().url(),
   originalUrl: z.string().url(),
 });
 

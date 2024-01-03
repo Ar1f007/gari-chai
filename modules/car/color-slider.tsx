@@ -42,7 +42,7 @@ const ColorSlider = ({ car }: { car: TCarSchema }) => {
         {sliderItems.map((item, idx) => (
           <div key={idx}>
             <Image
-              src={item.imgUrl}
+              src={item.imgUrl.url.originalUrl}
               alt={item.name}
               width={600}
               height={300}

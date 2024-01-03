@@ -23,8 +23,8 @@ const SingleColorImageGallery = ({ galleryItem }: SingleColorImageGalleryProps) 
               className='flex flex-col items-center gap-2'
             >
               <Item
-                original={img || PLACEHOLDER_IMAGE}
-                thumbnail={img || PLACEHOLDER_IMAGE}
+                original={img.url.originalUrl || PLACEHOLDER_IMAGE}
+                thumbnail={img.url.thumbnailUrl || PLACEHOLDER_IMAGE}
                 width='600'
                 height='400'
               >
@@ -33,7 +33,7 @@ const SingleColorImageGallery = ({ galleryItem }: SingleColorImageGalleryProps) 
                     // @ts-ignore
                     ref={ref}
                     onClick={open}
-                    src={img || PLACEHOLDER_IMAGE}
+                    src={img.url.originalUrl || PLACEHOLDER_IMAGE}
                     alt={galleryItem.name}
                     width={100}
                     height={100}

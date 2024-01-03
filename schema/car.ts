@@ -1,6 +1,11 @@
 import { z } from 'zod';
 import { brandModelSchema, brandSchema, carBodyStylesSchema } from './brand-and-model';
 
+const imageSchema = z.object({
+  thumbnailUrl: z.string().url(),
+  originalUrl: z.string().url(),
+});
+
 const singleSpecificationSchema = z.object({
   name: z.string().min(1, 'name is required'),
   value: z.union([z.string(), z.boolean()]),
@@ -22,8 +27,6 @@ export const carSchema = z.object({
 
   slug: z.string(),
 
-  description: z.string().optional(),
-
   brand: z.object({
     value: z.union([z.string(), brandSchema, z.null()]),
     label: z.string(),
@@ -34,12 +37,18 @@ export const carSchema = z.object({
     label: z.string(),
   }),
 
-  transmission: z.string(),
-
   bodyStyle: z.object({
     value: z.union([z.string(), carBodyStylesSchema, z.null()]),
     label: z.string(),
   }),
+
+  tags: z.array(z.object({ value: z.string(), label: z.string() })),
+
+  transmission: z.string(),
+
+  numOfDoors: z.number(),
+
+  seatingCapacity: z.number(),
 
   fuel: z.object({
     typeInfo: z.object({
@@ -51,32 +60,19 @@ export const carSchema = z.object({
     }),
   }),
 
-  posterImage: z.object({
-    originalUrl: z.string().url(),
-    thumbnailUrl: z.string().url().optional(),
-  }),
-
-  imageUrls: z.array(z.string()),
-
-  videoUrls: z
-    .array(
-      z.object({
-        thumbnailUrl: z.string().url().optional(),
-        url: z.string().url(),
-      }),
-    )
-    .default([]),
-
   colors: z
     .array(
       z.object({
         name: z.string(),
-        imageUrls: z.array(z.string().url()).optional(),
+        imageUrls: z.array(
+          z.object({
+            key: z.string(),
+            url: imageSchema,
+          }),
+        ),
       }),
     )
     .default([]),
-
-  numOfDoors: z.number(),
 
   price: z.object({
     min: z.number(),
@@ -84,13 +80,37 @@ export const carSchema = z.object({
     isNegotiable: z.boolean(),
   }),
 
-  tags: z.array(z.object({ value: z.string(), label: z.string() })),
-
   specificationsByGroup: z.array(groupSpecificationSchema),
 
   additionalSpecifications: z.array(singleSpecificationSchema),
 
+  posterImage: z.object({
+    originalUrl: z.string().url(),
+    thumbnailUrl: z.string().url(),
+  }),
+
+  imageUrls: z.array(imageSchema),
+
+  videos: z
+    .array(
+      z.object({
+        thumbnailImage: z.optional(imageSchema),
+        link: z.string().url(),
+      }),
+    )
+    .optional()
+    .default([]),
+
   carType: z.enum(['new', 'used']),
+
+  description: z.string().optional(),
+
+  cities: z.array(
+    z.object({
+      value: z.string(),
+      label: z.string(),
+    }),
+  ),
 
   launchedAt: z.string(),
   createdAt: z.string(),
@@ -98,12 +118,6 @@ export const carSchema = z.object({
 
   status: z.enum(['available', 'sold', 'reserved']),
   soldAt: z.string().optional(),
-  cities: z.array(
-    z.object({
-      value: z.string(),
-      label: z.string(),
-    }),
-  ),
 });
 
 export type TCarSchema = z.infer<typeof carSchema>;

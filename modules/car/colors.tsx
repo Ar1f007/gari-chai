@@ -32,7 +32,7 @@ const Colors = ({ car }: { car: TCarSchema }) => {
               className='flex flex-col items-center gap-2'
             >
               <Image
-                src={color.imageUrls?.[0] || PLACEHOLDER_IMAGE}
+                src={color.imageUrls?.[0].url.thumbnailUrl || PLACEHOLDER_IMAGE}
                 alt={color.name}
                 width={200}
                 height={200}
