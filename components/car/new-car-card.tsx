@@ -34,7 +34,7 @@ export const Car = ({ car }: CarProps) => {
           <h2 className={subtitle({ className: 'font-semibold' })}>{name}</h2>
         </Link>
 
-        <p className='mb-4 text-base font-semibold text-default-600'>
+        <p className='mb-4 text-lg font-semibold text-default-600'>
           {price.min === price.max ? (
             <>{formatAsBangladeshiCurrency(price.min)}</>
           ) : (
@@ -42,7 +42,7 @@ export const Car = ({ car }: CarProps) => {
               {/* {formatAsBangladeshiCurrency(price.min)}
               &nbsp;&mdash;&nbsp;
               {formatAsBangladeshiCurrency(price.max)} */}
-              {formatRangeToLakhCrore(28000000, 28000000)}
+              {formatRangeToLakhCrore(price.min, price.max)}
               <sup className='text-primary'>*</sup>
             </>
           )}
