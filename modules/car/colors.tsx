@@ -25,18 +25,18 @@ const Colors = ({ car }: { car: TCarSchema }) => {
       {totalNumOfColors == 1 ? (
         <SingleColorImageGallery galleryItem={car.colors[0]} />
       ) : (
-        <ul className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'>
+        <ul className='flex flex-col flex-wrap gap-8 lg:flex-row'>
           {car.colors.map((color, idx) => (
             <li
               key={`color_${idx}`}
               className='flex flex-col items-center gap-2'
             >
               <Image
-                src={color.imageUrls?.[0].url.thumbnailUrl || PLACEHOLDER_IMAGE}
+                src={color.imageUrls?.[0]?.url.thumbnailUrl || PLACEHOLDER_IMAGE}
                 alt={color.name}
                 width={200}
                 height={200}
-                className='rounded object-cover'
+                className='aspect-square rounded object-cover'
               />
 
               <h4 className='font-medium text-default-500'>{color.name}</h4>
