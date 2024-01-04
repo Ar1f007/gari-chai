@@ -26,7 +26,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatRangeToLakhCrore(start: number, end: number) {
+export function formatRangeToLakhCrore(min: number, max: number) {
   const formatValue = (value: number) => {
     if (value >= 10000000) {
       return (value / 10000000).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' Cr';
@@ -37,12 +37,12 @@ export function formatRangeToLakhCrore(start: number, end: number) {
     }
   };
 
-  if (start === end) {
-    return formatValue(start);
+  if (min === max) {
+    return formatValue(min);
   }
 
-  const startFormatted = formatValue(start);
-  const endFormatted = formatValue(end);
+  const startFormatted = formatValue(min);
+  const endFormatted = formatValue(max);
 
   return `${startFormatted} - ${endFormatted}`;
 }
