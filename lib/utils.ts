@@ -25,3 +25,24 @@ export const createUrl = (pathname: string, params: URLSearchParams | ReadonlyUR
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+export function formatRangeToLakhCrore(start: number, end: number) {
+  const formatValue = (value: number) => {
+    if (value >= 10000000) {
+      return (value / 10000000).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' Cr';
+    } else if (value >= 100000) {
+      return (value / 100000).toFixed(2).replace(/(\d)(?=(\d{3})+)/g, '$1,') + ' Lakh';
+    } else {
+      return value.toFixed(0).replace(/(\d)(?=(\d{3})+)/g, '$1,');
+    }
+  };
+
+  if (start === end) {
+    return formatValue(start);
+  }
+
+  const startFormatted = formatValue(start);
+  const endFormatted = formatValue(end);
+
+  return `${startFormatted} - ${endFormatted}`;
+}

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { subtitle } from '../primitives';
 import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 import { Button } from '@nextui-org/button';
+import { formatRangeToLakhCrore } from '@/lib/utils';
 import { formatAsBangladeshiCurrency } from '@/util/covert-currency';
 
 type CarProps = {
@@ -35,18 +36,18 @@ export const Car = ({ car }: CarProps) => {
 
         <p className='mb-4 text-base font-semibold text-default-600'>
           {price.min === price.max ? (
-            formatAsBangladeshiCurrency(price.min)
+            <>{formatAsBangladeshiCurrency(price.min)}</>
           ) : (
             <>
-              {formatAsBangladeshiCurrency(price.min)}
+              {/* {formatAsBangladeshiCurrency(price.min)}
               &nbsp;&mdash;&nbsp;
-              {formatAsBangladeshiCurrency(price.max)}
+              {formatAsBangladeshiCurrency(price.max)} */}
+              {formatRangeToLakhCrore(28000000, 28000000)}
+              <sup className='text-primary'>*</sup>
             </>
           )}
 
-          {price.isNegotiable && (
-            <small className='ml-2 text-xs text-foreground'>(Negotiable)</small>
-          )}
+          {price.isNegotiable && <small className='text-xs text-foreground'>(Negotiable)</small>}
         </p>
 
         <Button
