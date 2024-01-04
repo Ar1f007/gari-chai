@@ -6,6 +6,15 @@ const imageSchema = z.object({
   originalUrl: z.string().url(),
 });
 
+const vendorSchema = z.object({
+  _id: z.string(),
+  name: z.string().min(1),
+  phone: z.string().min(1),
+  email: z.string().optional(),
+  address: z.string().optional(),
+  image: imageSchema.optional(),
+});
+
 const singleSpecificationSchema = z.object({
   name: z.string().min(1, 'name is required'),
   value: z.union([z.string(), z.boolean()]),
@@ -26,6 +35,11 @@ export const carSchema = z.object({
   name: z.string(),
 
   slug: z.string(),
+
+  vendor: z.object({
+    value: z.union([z.string(), vendorSchema, z.null()]),
+    label: z.string(),
+  }),
 
   brand: z.object({
     value: z.union([z.string(), brandSchema, z.null()]),
