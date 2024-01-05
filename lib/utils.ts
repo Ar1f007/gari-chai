@@ -32,17 +32,19 @@ export function formatRangeToLakhCrore(min: number, max: number) {
       return (value / 10000000).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' Cr';
     } else if (value >= 100000) {
       return (value / 100000).toFixed(2).replace(/(\d)(?=(\d{3})+)/g, '$1,') + ' Lakh';
+    } else if (value >= 1000) {
+      return (value / 100000).toFixed(2).replace(/\.00$/, '') + ' Lakh';
     } else {
-      return value.toFixed(0).replace(/(\d)(?=(\d{3})+)/g, '$1,');
+      return (value / 100000).toFixed(2).replace(/\.00$/, '') + ' Lakh';
     }
   };
 
   if (min === max) {
-    return formatValue(min);
+    return 'BDT ' + formatValue(min);
   }
 
   const startFormatted = formatValue(min);
   const endFormatted = formatValue(max);
 
-  return `${startFormatted} - ${endFormatted}`;
+  return `BDT ${startFormatted} - ${endFormatted}`;
 }

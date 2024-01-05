@@ -53,13 +53,13 @@ const ColorSlider = ({ car }: { car: TCarSchema }) => {
       </Carousel>
 
       <div>
-        <ul className='flex flex-wrap justify-center gap-y-2 space-x-3'>
-          {sliderItems.map((item, idx) => (
+        <p className='my-2 text-center font-medium uppercase'>{sliderItems[currentSlide].name}</p>
+        <ul className='flex flex-wrap justify-center space-x-3'>
+          {sliderItems.map((_, idx) => (
             <li
               key={idx}
               className='flex flex-col items-center gap-2'
             >
-              <p className='text-xs'>{item.name}</p>
               <div
                 className={clsx('h-3.5 w-3.5 cursor-pointer rounded-full bg-default-500', {
                   'bg-primary': idx === currentSlide,

@@ -6,7 +6,6 @@ import { subtitle } from '../primitives';
 import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 import { Button } from '@nextui-org/button';
 import { formatRangeToLakhCrore } from '@/lib/utils';
-import { formatAsBangladeshiCurrency } from '@/util/covert-currency';
 
 type CarProps = {
   car: TCarSchema;
@@ -31,22 +30,17 @@ export const Car = ({ car }: CarProps) => {
       </CardHeader>
       <CardBody className='px-4'>
         <Link href={url}>
-          <h2 className={subtitle({ className: 'font-semibold' })}>{name}</h2>
+          <h2
+            title={name.length > 30 ? name : ''}
+            className={subtitle({ className: 'truncate font-semibold first-letter:capitalize' })}
+          >
+            {name}
+          </h2>
         </Link>
 
         <p className='mb-4 text-lg font-semibold text-default-600'>
-          {price.min === price.max ? (
-            <>{formatAsBangladeshiCurrency(price.min)}</>
-          ) : (
-            <>
-              {/* {formatAsBangladeshiCurrency(price.min)}
-              &nbsp;&mdash;&nbsp;
-              {formatAsBangladeshiCurrency(price.max)} */}
-              {formatRangeToLakhCrore(price.min, price.max)}
-              <sup className='text-primary'>*</sup>
-            </>
-          )}
-
+          {formatRangeToLakhCrore(price.min, price.max)}
+          <sup className='text-primary'>*</sup>
           {price.isNegotiable && <small className='text-xs text-foreground'>(Negotiable)</small>}
         </p>
 

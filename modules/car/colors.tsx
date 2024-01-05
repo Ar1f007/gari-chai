@@ -10,6 +10,8 @@ const Colors = ({ car }: { car: TCarSchema }) => {
 
   const totalNumOfColors = car.colors.length;
 
+  const hasImages = totalNumOfColors > 1 && car.colors.some((car) => car.imageUrls.length >= 1);
+
   return (
     <div className='mt-8 flex flex-col space-y-4 rounded-xl bg-foreground-50 p-6'>
       <h2 className={title({ size: 'xs' })}>{car.name} Colors</h2>
@@ -45,7 +47,7 @@ const Colors = ({ car }: { car: TCarSchema }) => {
         </ul>
       )}
 
-      {totalNumOfColors > 1 && (
+      {hasImages && (
         <div>
           <Link
             className='text-primary underline'
