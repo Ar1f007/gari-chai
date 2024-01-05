@@ -11,7 +11,7 @@ const SearchBox = () => {
   const [selectedTab, setSelectedTab] = useState('new-car');
 
   return (
-    <Card className='bg-primary-500/35 absolute left-6 top-1/2 hidden min-h-[400px] w-[340px] -translate-y-1/2 rounded-md border border-gray-300 bg-opacity-10 bg-clip-padding backdrop-blur-md backdrop-filter xl:flex '>
+    <Card className='bg-primary-500/5 absolute left-6 top-1/2 hidden min-h-[400px] w-[340px] -translate-y-1/2 rounded-md border border-gray-300 bg-opacity-10 bg-clip-padding backdrop-blur-md backdrop-filter xl:flex '>
       <CardHeader className={title({ size: 'xs', className: 'text-center text-white' })}>
         Find Your Right Car
       </CardHeader>
