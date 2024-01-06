@@ -5,6 +5,7 @@ import OfferBtn from '../offer-btn';
 import { reviews } from '@/services/reviews';
 import { Ratings } from '@/components/ratings';
 import { formatAsBangladeshiCurrency } from '@/util/covert-currency';
+import { formatRangeToLakhCrore } from '@/lib/utils';
 
 type Props = {
   car: TCarSchema;
@@ -34,9 +35,7 @@ const CarInfo = async ({ car }: Props) => {
       )}
 
       <p className={subtitle({ className: 'my-0 font-bold' })}>
-        {formatAsBangladeshiCurrency(price.min)}
-        &nbsp;&mdash;&nbsp;
-        {formatAsBangladeshiCurrency(price.max)}
+        {formatRangeToLakhCrore(price.min, price.max)}
         {price.isNegotiable && <small className='ml-2 text-xs text-foreground'>(Negotiable)</small>}
       </p>
 

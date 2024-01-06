@@ -37,7 +37,7 @@ const AuthButton = ({ showOnlySignUpBtn }: AuthButtonProps) => {
           ) : (
             <>
               <Icon
-                name='user-2'
+                name='user-round'
                 className='-mt-1 mr-1 hidden lg:inline-block'
               />
 
