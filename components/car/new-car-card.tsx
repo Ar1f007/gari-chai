@@ -40,12 +40,11 @@ export const Car = ({ car }: CarProps) => {
 
         <p className='mb-4 text-lg font-semibold text-default-600'>
           {formatRangeToLakhCrore(price.min, price.max)}
-
           {price.isNegotiable && (
-            <small className='text-xs text-foreground'>
+            <>
               <sup className='text-primary'>*</sup>
-              (Negotiable)
-            </small>
+              <small className='text-xs text-foreground'>(Negotiable)</small>
+            </>
           )}
         </p>
 

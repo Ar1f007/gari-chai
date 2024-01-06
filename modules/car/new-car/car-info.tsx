@@ -37,10 +37,10 @@ const CarInfo = async ({ car }: Props) => {
       <p className={subtitle({ className: 'my-0 font-bold' })}>
         {formatRangeToLakhCrore(price.min, price.max)}
         {price.isNegotiable && (
-          <small className='text-xs text-foreground'>
+          <>
             <sup className='text-primary'>*</sup>
-            (Negotiable)
-          </small>
+            <small className='text-xs text-foreground'>(Negotiable)</small>
+          </>
         )}
       </p>
 
