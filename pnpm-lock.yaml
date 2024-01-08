@@ -50,6 +50,9 @@ dependencies:
   '@nextui-org/select':
     specifier: ^2.1.20
     version: 2.1.20(@nextui-org/system@2.0.12)(@nextui-org/theme@2.1.17)(@types/react@18.2.46)(framer-motion@10.17.9)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20)
+  '@nextui-org/slider':
+    specifier: ^2.2.5
+    version: 2.2.5(@nextui-org/system@2.0.12)(@nextui-org/theme@2.1.17)(framer-motion@10.17.9)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20)
   '@nextui-org/switch':
     specifier: 2.0.23
     version: 2.0.23(@nextui-org/system@2.0.12)(@nextui-org/theme@2.1.17)(react-dom@18.2.0)(react@18.2.0)
@@ -2163,6 +2166,34 @@ packages:
       - tailwind-variants
     dev: false
 
+  /@nextui-org/slider@2.2.5(@nextui-org/system@2.0.12)(@nextui-org/theme@2.1.17)(framer-motion@10.17.9)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20):
+    resolution: {integrity: sha512-dC6HHMmtn2WvxDmbY/Dq51XJjQ7cAnjZsuYVIvhwIiCLDG8QnEIhmYN0DQp/6oeZsCHnyMHC4DmtgOiJL0eXrQ==}
+    peerDependencies:
+      '@nextui-org/system': '>=2.0.0'
+      '@nextui-org/theme': '>=2.1.0'
+      react: '>=18'
+      react-dom: '>=18'
+    dependencies:
+      '@nextui-org/react-utils': 2.0.10(react@18.2.0)
+      '@nextui-org/shared-utils': 2.0.4(react@18.2.0)
+      '@nextui-org/system': 2.0.12(@nextui-org/theme@2.1.17)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20)
+      '@nextui-org/theme': 2.1.17(tailwindcss@3.4.0)
+      '@nextui-org/tooltip': 2.0.29(@nextui-org/system@2.0.12)(@nextui-org/theme@2.1.17)(framer-motion@10.17.9)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20)
+      '@nextui-org/use-aria-press': 2.0.1(react@18.2.0)
+      '@react-aria/focus': 3.15.0(react@18.2.0)
+      '@react-aria/i18n': 3.9.0(react@18.2.0)
+      '@react-aria/interactions': 3.20.1(react@18.2.0)
+      '@react-aria/slider': 3.7.3(react@18.2.0)
+      '@react-aria/utils': 3.23.0(react@18.2.0)
+      '@react-aria/visually-hidden': 3.8.8(react@18.2.0)
+      '@react-stately/slider': 3.4.5(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - framer-motion
+      - tailwind-variants
+    dev: false
+
   /@nextui-org/slider@2.2.5(@nextui-org/system@2.0.15)(@nextui-org/theme@2.1.17)(framer-motion@10.17.9)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20):
     resolution: {integrity: sha512-dC6HHMmtn2WvxDmbY/Dq51XJjQ7cAnjZsuYVIvhwIiCLDG8QnEIhmYN0DQp/6oeZsCHnyMHC4DmtgOiJL0eXrQ==}
     peerDependencies:
@@ -2179,9 +2210,9 @@ packages:
       '@nextui-org/use-aria-press': 2.0.1(react@18.2.0)
       '@react-aria/focus': 3.15.0(react@18.2.0)
       '@react-aria/i18n': 3.9.0(react@18.2.0)
-      '@react-aria/interactions': 3.20.0(react@18.2.0)
+      '@react-aria/interactions': 3.20.1(react@18.2.0)
       '@react-aria/slider': 3.7.3(react@18.2.0)
-      '@react-aria/utils': 3.22.0(react@18.2.0)
+      '@react-aria/utils': 3.23.0(react@18.2.0)
       '@react-aria/visually-hidden': 3.8.8(react@18.2.0)
       '@react-stately/slider': 3.4.5(react@18.2.0)
       react: 18.2.0
@@ -2488,6 +2519,35 @@ packages:
       lodash.omit: 4.5.0
       tailwind-variants: 0.1.20(tailwindcss@3.4.0)
       tailwindcss: 3.4.0
+    dev: false
+
+  /@nextui-org/tooltip@2.0.29(@nextui-org/system@2.0.12)(@nextui-org/theme@2.1.17)(framer-motion@10.17.9)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20):
+    resolution: {integrity: sha512-LaFyS5bXhcZFXP9rnh6pTKsYX6siWjzEe5z72FIOyAV2yvv2yhkRiO/mEHKI8moo+/tScW/6muFXsvbEalPefg==}
+    peerDependencies:
+      '@nextui-org/system': '>=2.0.0'
+      '@nextui-org/theme': '>=2.1.0'
+      framer-motion: '>=4.0.0'
+      react: '>=18'
+      react-dom: '>=18'
+    dependencies:
+      '@nextui-org/aria-utils': 2.0.15(@nextui-org/theme@2.1.17)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20)
+      '@nextui-org/framer-transitions': 2.0.15(@nextui-org/theme@2.1.17)(framer-motion@10.17.9)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20)
+      '@nextui-org/react-utils': 2.0.10(react@18.2.0)
+      '@nextui-org/shared-utils': 2.0.4(react@18.2.0)
+      '@nextui-org/system': 2.0.12(@nextui-org/theme@2.1.17)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20)
+      '@nextui-org/theme': 2.1.17(tailwindcss@3.4.0)
+      '@react-aria/interactions': 3.20.0(react@18.2.0)
+      '@react-aria/overlays': 3.19.0(react-dom@18.2.0)(react@18.2.0)
+      '@react-aria/tooltip': 3.6.5(react@18.2.0)
+      '@react-aria/utils': 3.22.0(react@18.2.0)
+      '@react-stately/tooltip': 3.4.6(react@18.2.0)
+      '@react-types/overlays': 3.8.4(react@18.2.0)
+      '@react-types/tooltip': 3.4.6(react@18.2.0)
+      framer-motion: 10.17.9(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - tailwind-variants
     dev: false
 
   /@nextui-org/tooltip@2.0.29(@nextui-org/system@2.0.15)(@nextui-org/theme@2.1.17)(framer-motion@10.17.9)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20):
@@ -3091,9 +3151,9 @@ packages:
     dependencies:
       '@react-aria/focus': 3.15.0(react@18.2.0)
       '@react-aria/i18n': 3.9.0(react@18.2.0)
-      '@react-aria/interactions': 3.20.0(react@18.2.0)
+      '@react-aria/interactions': 3.20.1(react@18.2.0)
       '@react-aria/label': 3.7.3(react@18.2.0)
-      '@react-aria/utils': 3.22.0(react@18.2.0)
+      '@react-aria/utils': 3.23.0(react@18.2.0)
       '@react-stately/slider': 3.4.5(react@18.2.0)
       '@react-types/shared': 3.22.0(react@18.2.0)
       '@react-types/slider': 3.7.0(react@18.2.0)
