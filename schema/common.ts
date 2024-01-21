@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { isValidPhoneNumber, parsePhoneNumber } from 'libphonenumber-js';
 
 import { homePageSectionNameEnum } from '@/lib/constants';
 import { carSchema } from './car';
@@ -87,3 +88,11 @@ export const searchParamsSchema = z
     }
     return true;
   });
+
+export const phoneNumberSchema = z
+  .string()
+  .min(1, 'Phone number is required')
+  .refine((val) => isValidPhoneNumber(val, 'BD'), {
+    message: 'Please enter a valid Bangladeshi phone number',
+  })
+  .transform((phoneNumber) => parsePhoneNumber(phoneNumber, 'BD').number);

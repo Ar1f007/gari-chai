@@ -19,12 +19,14 @@ export const MobileAuthButton = () => {
           <div className='flex items-center gap-1.5'>
             <div className='flex items-center gap-3'>
               <Avatar
-                src={userSnap.user.image}
-                alt={userSnap.user.name}
+                src={userSnap.user.profilePicture}
+                alt={userSnap.user.firstName}
               />
               <h4 className='text-lg'>
                 Signed in as&nbsp;
-                <span className='font-semibold'>{userSnap.user.name}</span>
+                <span className='font-semibold'>
+                  {userSnap.user.firstName} {userSnap.user.lastName}
+                </span>
               </h4>
             </div>
           </div>

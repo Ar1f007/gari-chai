@@ -19,13 +19,17 @@ import { TAuthBasicUserInfo } from '@/schema/user';
 import { userActions } from '@/store';
 import { mapValidationErrors } from '@/util/mapValidationError';
 import { GENERIC_ERROR_MSG } from '@/lib/constants';
-import { SignupMethods, signupWithEmailSchema, signupWithPhoneSchema } from '@/schema/register';
+import {
+  AuthenticationMethods,
+  signupWithEmailSchema,
+  signupWithPhoneSchema,
+} from '@/schema/register';
 import { registerUser } from '@/services/user/register';
 import Link from 'next/link';
 import { getRedirectPath } from '@/lib/utils';
 
 const RegisterPage = () => {
-  const [signupMethod, setSignupMethod] = React.useState<SignupMethods>('email');
+  const [signupMethod, setSignupMethod] = React.useState<AuthenticationMethods>('email');
   const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();

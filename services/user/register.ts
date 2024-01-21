@@ -1,11 +1,15 @@
-import { SignupMethods, SignupWithEmailSchema, SignupWithPhoneSchema } from '@/schema/register';
+import {
+  AuthenticationMethods,
+  SignupWithEmailSchema,
+  SignupWithPhoneSchema,
+} from '@/schema/register';
 import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
 import { TAuthBasicUserInfo } from '@/schema/user';
 
 type RegisterUserParams = {
-  signupMethod: SignupMethods;
+  signupMethod: AuthenticationMethods;
   payload: SignupWithEmailSchema | SignupWithPhoneSchema;
 };
 

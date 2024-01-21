@@ -1,185 +1,125 @@
 'use client';
 
-import Link from 'next/link';
-import { InfoIcon, LockIcon, PhoneIcon } from 'lucide-react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@nextui-org/button';
+import * as React from 'react';
+import * as NextNavigation from 'next/navigation';
+import * as ReactHookForm from 'react-hook-form';
+import * as LoginSchema from '@/schema/login';
+import * as Resolver from '@hookform/resolvers/zod';
 
-import { LoginInputs, loginSchema } from '@/schema/login';
-import { routes } from '@/config/routes';
 import { RHFInput } from '@/components/form/RHFInput';
-import { auth } from '@/services/user/auth';
+import { Button } from '@nextui-org/button';
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
+import Link from 'next/link';
+import { routes } from '@/config/routes';
+import { AuthenticationMethods } from '@/schema/register';
+import { z } from 'zod';
+import { auth } from '@/services/user';
 import { toast } from 'sonner';
-import { mapValidationErrors } from '@/util/mapValidationError';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
-import { AUTH_TOKEN_NAME, GENERIC_ERROR_MSG } from '@/lib/constants';
 import { userActions } from '@/store';
-import { removeAuthCookie } from '@/util/removeAuthCookie';
-import { parsePhoneNumber } from 'libphonenumber-js';
-import dynamic from 'next/dynamic';
-import { createUrl } from '@/lib/utils';
-
-const OTPForm = dynamic(() => import('@/components/auth/otp-form'));
+import { getRedirectPath } from '@/lib/utils';
+import { mapValidationErrors } from '@/util/mapValidationError';
+import { GENERIC_ERROR_MSG } from '@/lib/constants';
+import { TApiData, TApiError } from '@/types';
+import { TAuthBasicUserInfo } from '@/schema/user';
 
 const LoginPage = () => {
-  const router = useRouter();
-  const [errMsg, setErrMsg] = useState('');
+  const [showPassword, setShowPassword] = React.useState(false);
 
-  const [loading, setLoading] = useState(false);
-  const [showOTPInputForm, setShowOTPInputForm] = useState(false);
+  const router = NextNavigation.useRouter();
 
-  const params = useSearchParams();
+  const params = NextNavigation.useSearchParams();
 
-  const formHandler = useForm<LoginInputs>({
-    criteriaMode: 'firstError',
+  const form = ReactHookForm.useForm<z.infer<typeof LoginSchema.loginSchema>>({
+    criteriaMode: 'all',
     mode: 'onTouched',
+    resolver: Resolver.zodResolver(LoginSchema.loginSchema),
     defaultValues: {
+      username: '',
       password: '',
-      phoneNumber: '',
     },
-    resolver: zodResolver(loginSchema),
   });
 
-  function redirectPath() {
-    const searchParams = new URLSearchParams(params);
-    const redirectPath = searchParams.get('pathname');
+  async function handleLoginResponse(res: TApiError | TApiData<TAuthBasicUserInfo>) {
+    if (res.status === 'success') {
+      userActions.setUser(res.data);
 
-    searchParams.delete('pathname');
-
-    if (redirectPath) {
-      const url = createUrl(decodeURIComponent(redirectPath), searchParams);
-
-      return url;
-    }
-
-    return routes.home;
-  }
-
-  async function onSubmit(data: LoginInputs) {
-    const res = await auth.login(data);
-
-    if (!res) {
-      toast.error('Something went wrong, please try again later');
+      router.push(getRedirectPath(params));
       return;
     }
 
     if (res.status === 'validationError') {
-      mapValidationErrors(res.errors, formHandler);
+      mapValidationErrors(res.errors, form);
       return;
     }
 
-    if (res.status !== 'success') {
-      toast.error(res.message);
-      return;
-    }
-
-    if (res.data.isVerified) {
-      userActions.setUser(res.data);
-      router.push(redirectPath());
-      return;
-    }
-
-    // at this point user's account is not verified
-    setErrMsg('Account not verified. Click to receive OTP for verification.');
-
-    removeAuthCookie(AUTH_TOKEN_NAME);
-
-    // if (res.status === 'fail' || res.status === 'error') {
-    //   toast.error(res.message);
-    //   return;
-    // }
-    // if (res.status === 'success' && res.data) {
-    //   setPhoneNumber(data.phoneNumber);
-    //   setShowOTPInputForm(true);
-    // }
+    // status is either error or fail, so display the message
+    toast.error(res.message || GENERIC_ERROR_MSG);
+    return;
   }
 
-  async function sendOTP() {
+  function validateUsername(username: string): 'email' | 'phone' | null {
+    const parsedEmail = LoginSchema.loginWithEmailSchema.shape.email.safeParse(username);
+    const parsedPhone = LoginSchema.loginWithPhoneSchema.shape.phone.safeParse(username);
+
+    if (parsedEmail.success) {
+      return 'email';
+    }
+
+    if (parsedPhone.success) {
+      return 'phone';
+    }
+
+    return null;
+  }
+
+  async function onSubmit(data: z.infer<typeof LoginSchema.loginSchema>) {
     try {
-      setLoading(true);
+      const method = validateUsername(data.username);
 
-      const res = await auth.sendOTP({
-        phoneNumber: parsePhoneNumber(formHandler.getValues('phoneNumber'), 'BD').number,
-      });
-
-      if (!res) {
-        toast.error('Something went wrong, please try again or after sometime');
+      if (!method) {
+        form.setError('username', { message: 'Invalid email or phone number' });
         return;
       }
 
-      if (res.status === 'fail' || res.status === 'error') {
-        toast.error(res.message ?? GENERIC_ERROR_MSG);
+      const payload = {
+        [method]: data.username,
+        password: data.password,
+      } as LoginSchema.LoginWithEmailSchema | LoginSchema.LoginWithPhoneSchema;
 
-        return;
-      }
-
-      if (res.status === 'success') {
-        setShowOTPInputForm(true);
-      } else {
-        toast.error(res.message);
-      }
+      const res = await auth.login({ loginMethod: method, payload });
+      handleLoginResponse(res);
     } catch (error) {
-      toast.error(GENERIC_ERROR_MSG);
-    } finally {
-      setLoading(false);
+      toast.error(error instanceof Error ? error.message : GENERIC_ERROR_MSG);
     }
   }
 
   return (
-    <>
-      <FormProvider {...formHandler}>
-        {errMsg && (
-          <div
-            role='alert'
-            className='flex items-start gap-2 rounded-lg border-2 border-rose-400 px-4 py-3'
-          >
-            <InfoIcon className='text-rose-600' />
-            <p className='font-medium text-default-600'>
-              {errMsg}
-
-              <Button
-                onPress={sendOTP}
-                size='sm'
-                className='ml-2'
-                variant='flat'
-                color='primary'
-                isLoading={loading}
-              >
-                Send OTP
-              </Button>
-            </p>
-          </div>
-        )}
+    <div className='space-y-5'>
+      <ReactHookForm.FormProvider {...form}>
         <form
-          className='mt-4 flex flex-col gap-6'
-          onSubmit={formHandler.handleSubmit(onSubmit)}
+          className='mt-4 flex flex-col gap-4'
+          onSubmit={form.handleSubmit(onSubmit)}
         >
           <RHFInput
-            name='phoneNumber'
-            required
-            autoComplete='tel'
-            placeholder='Phone number'
-            aria-label='enter the phone number'
-            startContent={
-              <div className='pointer-events-none flex items-center'>
-                <span className='text-default-500'>+880</span>
-              </div>
-            }
-            endContent={
-              <PhoneIcon className='pointer-events-none flex-shrink-0 text-2xl text-default-400' />
-            }
+            label='Email or Phone Number'
+            name='username'
+            autoComplete='username'
+            isRequired
           />
+
           <RHFInput
+            label='Password'
             name='password'
-            type='password'
-            required
-            autoComplete='current-password'
-            placeholder='Password'
-            aria-label='enter password'
+            isRequired
+            autoComplete='new-password'
+            type={showPassword ? 'text' : 'password'}
             endContent={
-              <LockIcon className='pointer-events-none flex-shrink-0 text-2xl text-default-400' />
+              <i
+                onClick={() => setShowPassword(!showPassword)}
+                className='flex-shrink-0 cursor-pointer text-2xl text-default-400'
+              >
+                {showPassword ? <EyeIcon /> : <EyeOffIcon />}
+              </i>
             }
           />
 
@@ -189,30 +129,23 @@ const LoginPage = () => {
             className='py-6 text-large font-semibold'
             color='primary'
             type='submit'
-            isLoading={formHandler.formState.isSubmitting}
+            isLoading={form.formState.isSubmitting}
           >
             Login
           </Button>
         </form>
-        <div className='mx-auto mt-6'>
-          <p className='font-semibold'>
-            <span className='text-default-500'>New to our platform? </span>
-            <Link
-              href={routes.register}
-              className='uppercase text-primary'
-            >
-              Create an account
-            </Link>
-          </p>
-        </div>
-      </FormProvider>
+      </ReactHookForm.FormProvider>
 
-      {showOTPInputForm && (
-        <OTPForm
-          phoneNumber={parsePhoneNumber(formHandler.getValues('phoneNumber'), 'BD').number}
-        />
-      )}
-    </>
+      <p className='text-center text-sm font-semibold'>
+        <span className='text-default-500'>New to our platform? </span>
+        <Link
+          href={routes.login}
+          className='uppercase text-primary'
+        >
+          Create an Account
+        </Link>
+      </p>
+    </div>
   );
 };
 export default LoginPage;
