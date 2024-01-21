@@ -57,22 +57,16 @@ const LoginPage = () => {
     return;
   }
 
-  function validateUsername(username: string) {
+  function validateUsername(username: string): 'email' | 'phone' | null {
     const parsedEmail = LoginSchema.loginWithEmailSchema.shape.email.safeParse(username);
     const parsedPhone = LoginSchema.loginWithPhoneSchema.shape.phone.safeParse(username);
 
     if (parsedEmail.success) {
-      return {
-        method: 'email',
-        data: parsedEmail.data,
-      };
+      return 'email';
     }
 
     if (parsedPhone.success) {
-      return {
-        method: 'phone',
-        data: parsedPhone.data,
-      };
+      return 'phone';
     }
 
     return null;
@@ -80,22 +74,19 @@ const LoginPage = () => {
 
   async function onSubmit(data: z.infer<typeof LoginSchema.loginSchema>) {
     try {
-      const validatedData = validateUsername(data.username);
+      const method = validateUsername(data.username);
 
-      if (!validatedData) {
+      if (!method) {
         form.setError('username', { message: 'Invalid email or phone number' });
         return;
       }
 
       const payload = {
-        [validatedData.method]: validatedData.data,
+        [method]: data.username,
         password: data.password,
       } as LoginSchema.LoginWithEmailSchema | LoginSchema.LoginWithPhoneSchema;
 
-      const res = await auth.login({
-        loginMethod: validatedData.method as AuthenticationMethods,
-        payload,
-      });
+      const res = await auth.login({ loginMethod: method, payload });
       handleLoginResponse(res);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : GENERIC_ERROR_MSG);

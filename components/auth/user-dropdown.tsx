@@ -3,13 +3,22 @@
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/dropdown';
 import { Avatar } from '@nextui-org/avatar';
 import { useSnapshot } from 'valtio';
-import { userStore } from '@/store';
+import { userActions, userStore } from '@/store';
 import { auth } from '@/services/user';
+import { useRouter } from 'next/navigation';
+import { routes } from '@/config/routes';
 
 const UserDropdown = () => {
+  const router = useRouter();
   const { user } = useSnapshot(userStore);
 
   if (!user) return null;
+
+  async function handleLogout() {
+    userActions.setUser(null);
+    auth.logout();
+    router.push(routes.home);
+  }
 
   return (
     <Dropdown placement='bottom-end'>
@@ -43,7 +52,7 @@ const UserDropdown = () => {
         <DropdownItem
           key='logout'
           color='danger'
-          onPress={auth.logout}
+          onPress={handleLogout}
         >
           Log Out
         </DropdownItem>

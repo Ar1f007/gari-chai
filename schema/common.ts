@@ -94,5 +94,8 @@ export const phoneNumberSchema = z
   .min(1, 'Phone number is required')
   .refine((val) => isValidPhoneNumber(val, 'BD'), {
     message: 'Please enter a valid Bangladeshi phone number',
-  })
-  .transform((phoneNumber) => parsePhoneNumber(phoneNumber, 'BD').number);
+  });
+
+export const formatPhoneNumberSchemaAsBangladeshi = phoneNumberSchema.transform(
+  (phoneNumber) => parsePhoneNumber(phoneNumber, 'BD').number,
+);
