@@ -26,7 +26,7 @@ const KeySpecifications = ({ car }: Props) => {
           <KeySpecificationItem
             icon={FuelIcon}
             propertyName='Fuel Type'
-            value={car.fuel.typeInfo.value.type}
+            value={car.fuel.map((type) => type.label).join(', ')}
           />
 
           {/* Transmission */}

@@ -29,6 +29,14 @@ const groupSpecificationSchema = z.object({
   values: z.array(singleSpecificationSchema),
 });
 
+export const fuelTypeSchema = z.object({
+  label: z.string(),
+  value: z.object({
+    fuelType: z.string(),
+    fullForm: z.string(),
+  }),
+});
+
 export const carSchema = z.object({
   _id: z.string(),
 
@@ -64,15 +72,7 @@ export const carSchema = z.object({
 
   seatingCapacity: z.number(),
 
-  fuel: z.object({
-    typeInfo: z.object({
-      value: z.object({
-        type: z.string(),
-        fullForm: z.string(),
-      }),
-      label: z.string(),
-    }),
-  }),
+  fuel: z.array(fuelTypeSchema),
 
   colors: z
     .array(
@@ -132,6 +132,8 @@ export const carSchema = z.object({
 
   status: z.enum(['available', 'sold', 'reserved']),
   soldAt: z.string().optional(),
+
+  metaData: z.record(z.string().min(1), z.any()).optional().default({}),
 });
 
 export type TCarSchema = z.infer<typeof carSchema>;
