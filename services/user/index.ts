@@ -1,10 +1,10 @@
 import { logout } from './logout';
-import { me } from './me';
+import { profile } from './me';
 import { registerUser } from './register';
 import { verifyOTP } from './verifyOTP';
 
 export const auth = {
-  me,
+  me: profile,
   registerUser,
   verifyOTP,
   logout,

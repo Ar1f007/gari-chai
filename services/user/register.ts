@@ -1,15 +1,19 @@
-import { RegisterInputs } from '@/schema/register';
+import { SignupMethods, SignupWithEmailSchema, SignupWithPhoneSchema } from '@/schema/register';
 import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
+import { TAuthBasicUserInfo } from '@/schema/user';
 
-export async function registerUser(payload: RegisterInputs) {
-  try {
-    return apiFetch(endpoints.api.users.baseUrl, {
-      method: ReqMethod.POST,
-      body: payload,
-    });
-  } catch (error) {
-    return null;
-  }
+type RegisterUserParams = {
+  signupMethod: SignupMethods;
+  payload: SignupWithEmailSchema | SignupWithPhoneSchema;
+};
+
+export async function registerUser(params: RegisterUserParams) {
+  const url = endpoints.api.users.signup + '/' + params.signupMethod;
+
+  return apiFetch<TAuthBasicUserInfo>(url, {
+    method: ReqMethod.POST,
+    body: params.payload,
+  });
 }

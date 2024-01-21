@@ -1,18 +1,23 @@
 'use client';
 
 import { auth } from '@/services/user';
-import { userActions } from '@/store';
+import { userActions, userStore } from '@/store';
 import { useEffect } from 'react';
+import { useSnapshot } from 'valtio';
 
 const SetStoreValue = () => {
+  const userSnap = useSnapshot(userStore);
+
   async function getUser() {
     const res = await auth.me();
     userActions.setUser(res);
   }
 
   useEffect(() => {
-    getUser();
-  }, []);
+    if (!userSnap.user) {
+      getUser();
+    }
+  }, [userStore.user]);
 
   return null;
 };

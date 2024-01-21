@@ -3,7 +3,7 @@
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/dropdown';
 import { Avatar } from '@nextui-org/avatar';
 import { useSnapshot } from 'valtio';
-import { userActions, userStore } from '@/store';
+import { userStore } from '@/store';
 import { auth } from '@/services/user';
 
 const UserDropdown = () => {
@@ -18,7 +18,9 @@ const UserDropdown = () => {
           isBordered
           as='button'
           className='transition-transform'
-          src={user.image ?? `https://eu.ui-avatars.com/api/?name=${user.name}&size=150`}
+          src={
+            user.profilePicture ?? `https://eu.ui-avatars.com/api/?name=${user.firstName}&size=150`
+          }
         />
       </DropdownTrigger>
 
@@ -31,7 +33,9 @@ const UserDropdown = () => {
           className='h-14 gap-2'
         >
           <p className='font-semibold'>Signed in as</p>
-          <p className='font-semibold'>{user.emails?.length ? user.emails?.[0] : user.name}</p>
+          <p className='font-semibold'>
+            {user.firstName} {user.lastName}
+          </p>
         </DropdownItem>
 
         <DropdownItem key='settings'>My Settings</DropdownItem>

@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 import { GENERIC_ERROR_MSG } from '@/lib/constants';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/config/routes';
-import { userAPIResponseSchema } from '@/schema/user';
+import { userBasicInfoAPIResponseSchema } from '@/schema/user';
 import { userActions } from '@/store';
 import { auth } from '@/services/user/auth';
 
@@ -87,7 +87,7 @@ const OTPForm = ({ phoneNumber }: OTPFormProps) => {
         return;
       }
 
-      const parsedData = userAPIResponseSchema.safeParse(res.data);
+      const parsedData = userBasicInfoAPIResponseSchema.safeParse(res.data);
 
       if (parsedData.success) {
         userActions.setUser(parsedData.data);

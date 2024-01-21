@@ -1,4 +1,4 @@
-import { TAuthUser } from '@/schema/user';
+import { TAuthBasicUserInfo } from '@/schema/user';
 import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
@@ -10,7 +10,7 @@ type VerifyOTPProps = {
 
 export async function verifyOTP(payload: VerifyOTPProps) {
   try {
-    return apiFetch<TAuthUser>(endpoints.api.users.verifyOTP, {
+    return apiFetch<TAuthBasicUserInfo>(endpoints.api.users.verifyOTP, {
       method: ReqMethod.POST,
       body: payload,
     });

@@ -27,11 +27,12 @@ export const endpoints = {
     },
     users: {
       baseUrl: '/users',
+      signup: '/users/signup',
       login: '/users/login',
       logout: '/users/logout',
       sendOTP: '/users/send-otp',
       verifyOTP: '/users/verify-otp',
-      me: '/users/me',
+      profile: '/users/profile',
     },
     reviews: {
       baseUrl: '/reviews',

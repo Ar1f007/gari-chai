@@ -1,17 +1,17 @@
 import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
-import { TAuthUser, userAPIResponseSchema } from '@/schema/user';
+import { TAuthBasicUserInfo, userBasicInfoAPIResponseSchema } from '@/schema/user';
 
-export async function me() {
+export async function profile() {
   try {
-    const res = await apiFetch<TAuthUser>(endpoints.api.users.me, {
+    const res = await apiFetch<TAuthBasicUserInfo>(endpoints.api.users.profile, {
       method: ReqMethod.GET,
       cache: 'no-store',
     });
 
     if (res.status === 'success') {
-      const parsedData = userAPIResponseSchema.safeParse(res.data);
+      const parsedData = userBasicInfoAPIResponseSchema.safeParse(res.data);
 
       if (parsedData.success) {
         return parsedData.data;

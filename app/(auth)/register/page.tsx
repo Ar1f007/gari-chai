@@ -1,142 +1,204 @@
 'use client';
 
+import React, { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { z } from 'zod';
+import { FormProvider, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+
+import { Tab, Tabs } from '@nextui-org/tabs';
+import { Button } from '@nextui-org/button';
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+
 import { RHFInput } from '@/components/form/RHFInput';
 import { routes } from '@/config/routes';
-import { RegisterInputs, registerSchema } from '@/schema/register';
-import { Button } from '@nextui-org/button';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { LockIcon, PhoneIcon, UserIcon } from 'lucide-react';
-import Link from 'next/link';
-
-import { FormProvider, useForm } from 'react-hook-form';
-import { registerUser } from '@/services/user/register';
-import { toast } from 'sonner';
-import { mapValidationErrors } from '@/util/mapValidationError';
-import { useState } from 'react';
-import { userAPIResponseSchema } from '@/schema/user';
+import { TApiData, TApiError } from '@/types';
+import { TAuthBasicUserInfo } from '@/schema/user';
 import { userActions } from '@/store';
-import dynamic from 'next/dynamic';
-
-const OTPForm = dynamic(() => import('@/components/auth/otp-form'));
+import { mapValidationErrors } from '@/util/mapValidationError';
+import { GENERIC_ERROR_MSG } from '@/lib/constants';
+import { SignupMethods, signupWithEmailSchema, signupWithPhoneSchema } from '@/schema/register';
+import { registerUser } from '@/services/user/register';
+import Link from 'next/link';
+import { getRedirectPath } from '@/lib/utils';
 
 const RegisterPage = () => {
-  const [showOTPInputForm, setShowOTPInputForm] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [signupMethod, setSignupMethod] = React.useState<SignupMethods>('email');
+  const [showPassword, setShowPassword] = useState(false);
 
-  const formHandler = useForm<RegisterInputs>({
-    criteriaMode: 'firstError',
+  const router = useRouter();
+
+  const params = useSearchParams();
+
+  const schema = signupMethod === 'email' ? signupWithEmailSchema : signupWithPhoneSchema;
+
+  const form = useForm<z.infer<typeof schema>>({
+    criteriaMode: 'all',
     mode: 'onTouched',
-    defaultValues: {
-      name: '',
-      password: '',
-      phoneNumber: '',
-    },
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(schema),
   });
 
-  async function onSubmit(data: RegisterInputs) {
-    const res = await registerUser(data);
+  async function handleSignupResponse(res: TApiError | TApiData<TAuthBasicUserInfo>) {
+    if (res.status === 'success') {
+      toast.success('Account created successfully');
 
-    if (!res) {
-      toast.error('Something went wrong, please try again later');
+      userActions.setUser(res.data);
+
+      router.push(getRedirectPath(params));
       return;
     }
 
     if (res.status === 'validationError') {
-      mapValidationErrors(res.errors, formHandler);
+      mapValidationErrors(res.errors, form);
       return;
     }
 
-    if (res.status === 'fail' || res.status === 'error') {
-      toast.error(res.message);
+    // status is either error or fail, so display the message
+    toast.error(res.message || GENERIC_ERROR_MSG);
+    return;
+  }
 
-      return;
-    }
+  async function onSubmit(data: z.infer<typeof schema>) {
+    try {
+      const res = await registerUser({
+        signupMethod,
+        payload: data,
+      });
 
-    if (res.status === 'success' && res.data) {
-      const parsedData = userAPIResponseSchema.safeParse(res.data);
+      handleSignupResponse(res);
+    } catch (error) {
+      const errMsg =
+        error instanceof Error ? error.message : 'Something went wrong, please try again later';
 
-      if (parsedData.success) {
-        userActions.setUser(parsedData.data);
-      }
-      setPhoneNumber(data.phoneNumber);
-      setShowOTPInputForm(true);
+      toast.error(errMsg);
     }
   }
 
-  return (
-    <>
-      <FormProvider {...formHandler}>
-        <form
-          className='mt-4 flex flex-col gap-6'
-          onSubmit={formHandler.handleSubmit(onSubmit)}
+  const firstNameAndLastNameFields = (
+    <div className='grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-2'>
+      <RHFInput
+        label='First Name'
+        name='firstName'
+        autoComplete='name'
+        // placeholder='Enter your first name'
+        isRequired
+        spellCheck={false}
+      />
+
+      <RHFInput
+        label='Last Name'
+        name='lastName'
+        autoComplete='name'
+        // placeholder='Enter your last name'
+        isRequired
+        spellCheck={false}
+      />
+    </div>
+  );
+
+  const passwordAndSubmitBtn = (
+    <React.Fragment>
+      <RHFInput
+        label='Password'
+        name='password'
+        isRequired
+        // placeholder='Enter your password'
+        autoComplete='new-password'
+        description='8+ characters with uppercase, lowercase, digit, and special character'
+        type={showPassword ? 'text' : 'password'}
+        endContent={
+          <i
+            onClick={() => setShowPassword(!showPassword)}
+            className='flex-shrink-0 cursor-pointer text-2xl text-default-400'
+          >
+            {showPassword ? <EyeIcon /> : <EyeOffIcon />}
+          </i>
+        }
+      />
+
+      <div className='flex justify-end gap-2'>
+        <Button
+          variant='faded'
+          fullWidth
+          className='py-6 text-large font-semibold'
+          color='primary'
+          type='submit'
+          isLoading={form.formState.isSubmitting}
         >
-          <RHFInput
-            name='name'
-            required
-            autoComplete='name'
-            placeholder='Your name'
-            aria-label='enter your name'
-            endContent={
-              <UserIcon className='pointer-events-none flex-shrink-0 text-2xl text-default-400' />
-            }
-          />
-
-          <RHFInput
-            name='phoneNumber'
-            required
-            autoComplete='tel'
-            placeholder='Phone number'
-            aria-label='enter the phone number'
-            startContent={
-              <div className='pointer-events-none flex items-center'>
-                <span className='text-default-500'>+880</span>
-              </div>
-            }
-            endContent={
-              <PhoneIcon className='pointer-events-none flex-shrink-0 text-2xl text-default-400' />
-            }
-          />
-
-          <RHFInput
-            name='password'
-            type='password'
-            required
-            autoComplete='current-password'
-            placeholder='Password'
-            aria-label='enter password'
-            endContent={
-              <LockIcon className='pointer-events-none flex-shrink-0 text-2xl text-default-400' />
-            }
-          />
-
-          <Button
-            variant='faded'
-            fullWidth
-            className='py-6 text-large font-semibold'
-            color='primary'
-            type='submit'
-            isLoading={formHandler.formState.isSubmitting}
-          >
-            Create Account
-          </Button>
-        </form>
-      </FormProvider>
-
-      <div className='mx-auto mt-6'>
-        <p className='font-semibold'>
-          <span className='text-default-500'>Already have an account? </span>
-          <Link
-            href={routes.login}
-            className='uppercase text-primary'
-          >
-            Login
-          </Link>
-        </p>
+          Create Account
+        </Button>
       </div>
+    </React.Fragment>
+  );
 
-      {showOTPInputForm && <OTPForm phoneNumber={phoneNumber} />}
-    </>
+  return (
+    <div className='space-y-2'>
+      <Tabs
+        fullWidth
+        size='md'
+        aria-label='Tabs form'
+        selectedKey={signupMethod}
+        onSelectionChange={(v) => setSignupMethod(v as 'email' | 'phone')}
+      >
+        <Tab
+          key='email'
+          title='Email'
+        >
+          <FormProvider {...form}>
+            <form
+              className='flex flex-col gap-4'
+              onSubmit={form.handleSubmit(onSubmit)}
+            >
+              {firstNameAndLastNameFields}
+              <RHFInput
+                label='Email'
+                name='email'
+                autoComplete='email'
+                // placeholder='Enter your email'
+                type='email'
+                isRequired
+              />
+              {passwordAndSubmitBtn}
+            </form>
+          </FormProvider>
+        </Tab>
+
+        <Tab
+          key='phone'
+          title='Phone'
+        >
+          <FormProvider {...form}>
+            <form
+              className='flex flex-col gap-4'
+              onSubmit={form.handleSubmit(onSubmit)}
+            >
+              {firstNameAndLastNameFields}
+              <RHFInput
+                label='Phone Number'
+                name='phone'
+                autoComplete='tel'
+                // placeholder='Enter your phone number'
+                type='tel'
+                isRequired
+              />
+              {passwordAndSubmitBtn}
+            </form>
+          </FormProvider>
+        </Tab>
+      </Tabs>
+
+      <p className='text-center text-sm font-semibold'>
+        <span className='text-default-500'>Already have an account? </span>
+        <Link
+          href={routes.login}
+          className='uppercase text-primary'
+        >
+          Login
+        </Link>
+      </p>
+    </div>
   );
 };
 export default RegisterPage;

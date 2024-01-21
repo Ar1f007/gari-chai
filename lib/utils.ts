@@ -1,6 +1,8 @@
 import { ReadonlyURLSearchParams } from 'next/navigation';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { routes } from '@/config/routes';
+import { URLSearchParams } from 'url';
 
 /**
  * Creates a URL string with the given pathname and parameters.
@@ -47,4 +49,17 @@ export function formatRangeToLakhCrore(min: number, max: number) {
   const endFormatted = formatValue(max);
 
   return `BDT ${startFormatted} - ${endFormatted}`;
+}
+
+export function getRedirectPath(params: URLSearchParams | ReadonlyURLSearchParams) {
+  const redirectPath = params.get('pathname');
+
+  if (redirectPath) {
+    // as the path is not required anymore
+    params.delete('pathname');
+    const url = createUrl(decodeURIComponent(redirectPath), params);
+    return url;
+  }
+
+  return routes.home;
 }
