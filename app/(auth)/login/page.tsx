@@ -57,16 +57,22 @@ const LoginPage = () => {
     return;
   }
 
-  function validateUsername(username: string): 'email' | 'phone' | null {
+  function validateUsername(username: string) {
     const parsedEmail = LoginSchema.loginWithEmailSchema.shape.email.safeParse(username);
     const parsedPhone = LoginSchema.loginWithPhoneSchema.shape.phone.safeParse(username);
 
     if (parsedEmail.success) {
-      return 'email';
+      return {
+        method: 'email',
+        data: parsedEmail.data,
+      };
     }
 
     if (parsedPhone.success) {
-      return 'phone';
+      return {
+        method: 'phone',
+        data: parsedPhone.data,
+      };
     }
 
     return null;
@@ -74,19 +80,22 @@ const LoginPage = () => {
 
   async function onSubmit(data: z.infer<typeof LoginSchema.loginSchema>) {
     try {
-      const method = validateUsername(data.username);
+      const validatedData = validateUsername(data.username);
 
-      if (!method) {
+      if (!validatedData) {
         form.setError('username', { message: 'Invalid email or phone number' });
         return;
       }
 
       const payload = {
-        [method]: data.username,
+        [validatedData.method]: validatedData.data,
         password: data.password,
       } as LoginSchema.LoginWithEmailSchema | LoginSchema.LoginWithPhoneSchema;
 
-      const res = await auth.login({ loginMethod: method, payload });
+      const res = await auth.login({
+        loginMethod: validatedData.method as AuthenticationMethods,
+        payload,
+      });
       handleLoginResponse(res);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : GENERIC_ERROR_MSG);
@@ -139,7 +148,7 @@ const LoginPage = () => {
       <p className='text-center text-sm font-semibold'>
         <span className='text-default-500'>New to our platform? </span>
         <Link
-          href={routes.login}
+          href={routes.register}
           className='uppercase text-primary'
         >
           Create an Account
