@@ -42,7 +42,7 @@ const QueryResults = async (props: QueryResultsProps) => {
         >
           <Link
             href={getHref(item)}
-            className='flex gap-5'
+            className='flex flex-col gap-2 sm:flex-row sm:gap-5'
           >
             <Image
               src={
@@ -51,11 +51,14 @@ const QueryResults = async (props: QueryResultsProps) => {
               alt={item.name}
               width={200}
               height={200}
+              className='w-full object-cover sm:max-w-48'
             />
 
-            <div className='flex flex-col gap-3'>
-              <h2 className={title({ size: 'xs' })}>{item.name}</h2>
-              <p className='mb-3 text-base font-semibold text-default-600'>
+            <div className='flex flex-col gap-3 px-5 py-5 sm:px-0'>
+              <h2 className={title({ size: 'xs', className: 'font-light text-default-800' })}>
+                {item.name}
+              </h2>
+              <p className='mb-3 text-base font-medium text-default-800'>
                 {formatAsBangladeshiCurrency(item.price.min)}
                 &nbsp;&mdash;&nbsp;
                 {formatAsBangladeshiCurrency(item.price.max)}
