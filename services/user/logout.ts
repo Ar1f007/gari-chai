@@ -4,7 +4,7 @@ import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
 
 export async function logout() {
-  apiFetch(endpoints.api.users.logout, {
+  return apiFetch(endpoints.api.users.logout, {
     method: ReqMethod.POST,
     body: { cookieName: AUTH_TOKEN_NAME },
   });

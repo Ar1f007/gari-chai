@@ -1,16 +1,40 @@
 'use client';
 
-import { settingsActions, userStore } from '@/store';
+import { settingsActions, userActions, userStore } from '@/store';
 import Link from 'next/link';
 import { useSnapshot } from 'valtio';
 import { routes } from '@/config/routes';
 import { auth } from '@/services/user';
 import { Avatar } from '@nextui-org/avatar';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { GENERIC_ERROR_MSG } from '@/lib/constants';
 
 export const MobileAuthButton = () => {
-  const userSnap = useSnapshot(userStore);
   const router = useRouter();
+  const userSnap = useSnapshot(userStore);
+
+  async function handleLogout() {
+    const user = userStore.user;
+
+    try {
+      settingsActions.toggleMenuState(false);
+      userActions.setUser(null);
+
+      const res = await auth.logout();
+
+      if (res.status === 'success') {
+        router.replace(routes.home);
+        return;
+      }
+
+      throw new Error(res.message || 'Something went wrong, could not logout');
+    } catch (err) {
+      userActions.setUser(user);
+      const errorMsg = err instanceof Error ? err.message : GENERIC_ERROR_MSG;
+      toast.error(errorMsg);
+    }
+  }
 
   if (userSnap.user) {
     return (
@@ -39,10 +63,7 @@ export const MobileAuthButton = () => {
           </Link>
         </div>
         <button
-          onClick={() => {
-            auth.logout();
-            settingsActions.toggleMenuState(false);
-          }}
+          onClick={handleLogout}
           className='self-start bg-transparent text-xl text-danger'
         >
           Logout

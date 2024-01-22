@@ -7,6 +7,8 @@ import { userActions, userStore } from '@/store';
 import { auth } from '@/services/user';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/config/routes';
+import { toast } from 'sonner';
+import { GENERIC_ERROR_MSG } from '@/lib/constants';
 
 const UserDropdown = () => {
   const router = useRouter();
@@ -15,9 +17,24 @@ const UserDropdown = () => {
   if (!user) return null;
 
   async function handleLogout() {
-    userActions.setUser(null);
-    auth.logout();
-    router.push(routes.home);
+    const user = userStore.user;
+
+    try {
+      userActions.setUser(null);
+
+      const res = await auth.logout();
+
+      if (res.status === 'success') {
+        router.replace(routes.home);
+        return;
+      }
+
+      throw new Error(res.message || 'Something went wrong, could not logout');
+    } catch (err) {
+      userActions.setUser(user);
+      const errorMsg = err instanceof Error ? err.message : GENERIC_ERROR_MSG;
+      toast.error(errorMsg);
+    }
   }
 
   return (
