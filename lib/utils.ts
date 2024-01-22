@@ -74,3 +74,7 @@ export function getRedirectPath(params: URLSearchParams | ReadonlyURLSearchParam
     return routes.home;
   }
 }
+
+export function delay(ms: number) {
+  return new Promise((res) => setTimeout(res, ms));
+}

@@ -5,7 +5,7 @@ import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
 import { TPagination } from '@/types';
-import { createUrl } from '@/lib/utils';
+import { createUrl, delay } from '@/lib/utils';
 
 type GetCarsResponseData = {
   results: TCarSchema[];
@@ -14,6 +14,8 @@ type GetCarsResponseData = {
 
 export async function getCars(queryParams: URLSearchParams) {
   try {
+    await delay(2000);
+
     const url = createUrl(endpoints.api.cars.newCarBaseUrl, queryParams);
 
     const res = await apiFetch<GetCarsResponseData>(url, {

@@ -53,6 +53,9 @@ dependencies:
   '@nextui-org/slider':
     specifier: ^2.2.5
     version: 2.2.5(@nextui-org/system@2.0.12)(@nextui-org/theme@2.1.17)(framer-motion@10.17.9)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20)
+  '@nextui-org/spinner':
+    specifier: ^2.0.24
+    version: 2.0.24(@nextui-org/theme@2.1.17)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20)
   '@nextui-org/switch':
     specifier: 2.0.23
     version: 2.0.23(@nextui-org/system@2.0.12)(@nextui-org/theme@2.1.17)(react-dom@18.2.0)(react@18.2.0)
