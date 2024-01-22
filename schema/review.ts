@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { userBasicInfoAPIResponseSchema } from './user';
 
 export const reviewSchema = z.object({
   title: z
@@ -41,12 +42,13 @@ const reviewBody = z.object({
   updatedAt: z.string(),
 });
 
+const userInfo = userBasicInfoAPIResponseSchema.pick({
+  firstName: true,
+  lastName: true,
+  profilePicture: true,
+});
 const reviewBodyWithUserBasicInfo = reviewBody.extend({
-  userInfo: z.object({
-    _id: z.string(),
-    name: z.string(),
-    image: z.string().optional(),
-  }),
+  userInfo,
 });
 
 export const reviewsWithStatsSchema = z.object({

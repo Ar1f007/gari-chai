@@ -17,6 +17,7 @@ type ReviewsProps = {
 const Reviews = async ({ car }: ReviewsProps) => {
   const res = await reviews.getReviewsWithStats({ carId: car._id });
 
+  // TODO: FIX: don't show null if review list is not available
   if (!res) {
     return null;
   }

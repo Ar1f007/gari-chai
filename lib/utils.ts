@@ -52,14 +52,25 @@ export function formatRangeToLakhCrore(min: number, max: number) {
 }
 
 export function getRedirectPath(params: URLSearchParams | ReadonlyURLSearchParams) {
-  const redirectPath = params.get('pathname');
+  // TODO FIX THIS
+  try {
+    const redirectPath = params.get('pathname');
 
-  if (redirectPath) {
-    // as the path is not required anymore
-    params.delete('pathname');
-    const url = createUrl(decodeURIComponent(redirectPath), params);
-    return url;
+    if (redirectPath) {
+      const mutableParams = new URLSearchParams(params);
+
+      // Remove the 'pathname' parameter
+      mutableParams.delete('pathname');
+
+      console.log(mutableParams.get('pathname'), decodeURIComponent(redirectPath));
+
+      // Create the new URL with the updated parameters
+      const url = createUrl(decodeURIComponent(redirectPath), mutableParams);
+      return url;
+    }
+
+    return routes.home;
+  } catch (e) {
+    return routes.home;
   }
-
-  return routes.home;
 }

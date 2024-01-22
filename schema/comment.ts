@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { userBasicInfoAPIResponseSchema } from './user';
 
 // used when form is being submitted
 export const commentFormSchema = z.object({
@@ -21,15 +22,18 @@ const commentUpdatePayloadSchema = z.object({
   }),
 });
 
+const commentUserSchema = userBasicInfoAPIResponseSchema.pick({
+  _id: true,
+  firstName: true,
+  lastName: true,
+  profilePicture: true,
+});
+
 // comment body that is coming from server
 export const commentSchemaWithoutChild = z.object({
   _id: z.string(),
   content: z.string(),
-  user: z.object({
-    _id: z.string(),
-    name: z.string(),
-    image: z.string().or(z.undefined()),
-  }),
+  user: commentUserSchema,
   car: z.string(),
   likes: z.number(),
   dislikes: z.number(),

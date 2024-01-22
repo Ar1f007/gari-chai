@@ -10,14 +10,14 @@ const CommentItem = ({ comment }: { comment: CommentBody }) => {
     <div className='flex flex-col gap-1'>
       <div className='flex items-center gap-3'>
         <Avatar
-          src={comment.user.image}
-          alt={comment.user.name}
+          src={comment.user.profilePicture}
+          alt={comment.user.firstName}
           size='md'
         />
 
         <div className='flex flex-col'>
-          <h4 className='text-base font-medium light:text-gray-700 dark:text-default-500'>
-            {comment.user.name}
+          <h4 className='text-base font-medium capitalize light:text-gray-700 dark:text-default-500'>
+            {comment.user.firstName} {comment.user.lastName}
           </h4>
           <p className='text-sm text-gray-500'>{formatTimeFromNow(comment.updatedAt)}</p>
         </div>

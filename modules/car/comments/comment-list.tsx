@@ -8,7 +8,7 @@ const CommentList = async ({ carId }: { carId: TCarSchema['_id'] }) => {
   if (!comments) return null;
 
   if (typeof comments === 'string') {
-    return <p className='text-center text-3xl text-danger'>{comments}</p>;
+    return <p className='text-center text-xl text-danger'>{comments}</p>;
   }
 
   return (

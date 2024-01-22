@@ -23,7 +23,9 @@ const Review = ({ review }: { review: ReviewBody }) => {
       </p>
 
       <footer className='flex flex-col gap-1'>
-        <span className='text-base font-medium text-gray-700'>By {review.userInfo.name}</span>
+        <span className='text-base font-medium capitalize text-gray-700'>
+          By {review.userInfo.firstName} {review.userInfo.lastName}
+        </span>
         <span className='text-sm text-gray-500'>
           on {dayjs(review.updatedAt).format('MMM MM, YYYY')}
         </span>

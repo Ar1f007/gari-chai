@@ -15,8 +15,8 @@ export const commentService = {
       const res = await apiFetch(url, {
         method: ReqMethod.GET,
         next: {
-          tags: [generateTagNameForComments(payload.carId)],
-          revalidate: 0, // revalidate every 2 hours
+          // tags: [generateTagNameForComments(payload.carId)],
+          revalidate: 0,
         },
       });
 
