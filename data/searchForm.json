@@ -35,6 +35,33 @@
         "label": "Above 1 Crore"
       }
     ],
+    "filterBudgets": [
+      {
+        "value": "100000-1000000",
+        "label": "1 - 10 Lakh"
+      },
+
+      {
+        "value": "1000000-2000000",
+        "label": "10 - 20 Lakh"
+      },
+      {
+        "value": "2000000-3500000",
+        "label": "20 - 35 Lakh"
+      },
+      {
+        "value": "3500000-5000000",
+        "label": "35 - 50 Lakh"
+      },
+      {
+        "value": "5000000-10000000",
+        "label": "50 Lakh - 1 Crore"
+      },
+      {
+        "value": "10000000-100000000000",
+        "label": "Above 1 Crore"
+      }
+    ],
     "bodyTypes": [
       {
         "value": "hatchback",

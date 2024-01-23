@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useCallback } from 'react';
-import Budget from "@/modules/search/filters/budget";
+import Budget from '@/modules/search/filters/budget';
 
 export const SearchFilters = () => {
   const router = useRouter();
@@ -28,11 +28,9 @@ export const SearchFilters = () => {
 
   return (
     <Suspense>
-      <p>Sort By {searchParams.get('query')}</p>
-
-        <div className="space-y-5">
-            <Budget />
-        </div>
+      <div className='space-y-5'>
+        <Budget />
+      </div>
 
       {/* using useRouter */}
       {/*<button*/}
