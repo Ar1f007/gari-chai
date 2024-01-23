@@ -6,6 +6,7 @@ import { Suspense, useCallback } from 'react';
 import Budget from '@/modules/search/filters/budget';
 import Brands from './filters/brands';
 import Models from './filters/models';
+import BodyStyles from './filters/body-styles';
 
 export const SearchFilters = () => {
   const router = useRouter();
@@ -34,6 +35,7 @@ export const SearchFilters = () => {
         <Budget />
         <Brands />
         <Models />
+        <BodyStyles />
       </div>
 
       {/* using useRouter */}

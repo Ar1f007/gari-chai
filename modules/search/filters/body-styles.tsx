@@ -1,19 +1,16 @@
-import useGetCarModels from '@/hooks/useGetCarModels';
 import { Accordion, AccordionItem } from '@nextui-org/accordion';
+
+import useGetBodyTypes from '@/hooks/useGetBodyTypes';
+import React from 'react';
 import { Spinner } from '@nextui-org/spinner';
 import { RadioGroup, Radio } from '@nextui-org/radio';
-import { Fragment, useEffect, useState } from 'react';
 import { Button } from '@nextui-org/button';
 
-const Models = () => {
-  const { fetchCarModels, data: models, errMsg, isLoading } = useGetCarModels();
+const BodyStyles = () => {
+  const { isLoading, bodyTypes, errMsg } = useGetBodyTypes();
 
-  const [selected, setSelected] = useState('');
-  const [showMore, setShowMore] = useState(false);
-
-  useEffect(() => {
-    fetchCarModels();
-  }, []);
+  const [selected, setSelected] = React.useState('');
+  const [showMore, setShowMore] = React.useState(false);
 
   function getContent() {
     if (isLoading) {
@@ -33,35 +30,35 @@ const Models = () => {
         value={selected}
         onValueChange={setSelected}
       >
-        {models.slice(0, 8).map((model) => (
+        {bodyTypes.slice(0, 8).map((bodyType) => (
           <Radio
-            key={model.value}
-            value={model.value}
+            key={bodyType.value}
+            value={bodyType.value}
             classNames={{
               label: 'text-[14.5px]',
             }}
           >
-            {model.label}
+            {bodyType.label}
           </Radio>
         ))}
 
         {showMore && (
-          <Fragment>
-            {models.slice(8).map((model) => (
+          <React.Fragment>
+            {bodyTypes.slice(8).map((bodyType) => (
               <Radio
-                key={model.value}
-                value={model.value}
+                key={bodyType.value}
+                value={bodyType.value}
                 classNames={{
                   label: 'text-[14.5px]',
                 }}
               >
-                {model.label}
+                {bodyType.label}
               </Radio>
             ))}
-          </Fragment>
+          </React.Fragment>
         )}
 
-        {models.length > 8 && (
+        {bodyTypes.length > 8 && (
           <Button
             variant='light'
             className='w-fit'
@@ -78,11 +75,12 @@ const Models = () => {
     <Accordion
       variant='splitted'
       keepContentMounted
+      className='pb-5'
     >
       <AccordionItem
         key='1'
         aria-label='Models'
-        title='Models'
+        title='Body Styles'
         className='group-[.is-splitted]:shadow-small'
       >
         <div className='pb-2'>{getContent()}</div>
@@ -90,4 +88,5 @@ const Models = () => {
     </Accordion>
   );
 };
-export default Models;
+
+export default BodyStyles;
