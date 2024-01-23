@@ -1,11 +1,12 @@
 'use client';
 
+import React from 'react';
 import useGetAllAndPopularBrands from '@/hooks/useGetAllAndPopularBrands';
 import { Accordion, AccordionItem } from '@nextui-org/accordion';
-import React, { Fragment, useEffect } from 'react';
 import { RadioGroup, Radio } from '@nextui-org/radio';
 import { Spinner } from '@nextui-org/spinner';
 import { BrandsWithSections } from '@/services/car/getAllAndPopularBrands';
+import { Button } from '@nextui-org/button';
 
 const Brands = () => {
   const { isLoading, brands, errMsg } = useGetAllAndPopularBrands();
@@ -13,8 +14,9 @@ const Brands = () => {
   const [selected, setSelected] = React.useState('');
   const [allBrands, setAllBrands] = React.useState<BrandsWithSections['allBrands']>([]);
   const [popularBrands, setPopularBrands] = React.useState<BrandsWithSections['popularBrands']>([]);
+  const [showMore, setShowMore] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (brands) {
       if (brands.popularBrands.length > 0) {
         setPopularBrands(brands.popularBrands);
@@ -34,9 +36,11 @@ const Brands = () => {
         title='Brands'
       >
         {isLoading ? (
-          <Spinner />
+          <div className='text-center'>
+            <Spinner label='Loading brands...' />
+          </div>
         ) : errMsg ? (
-          <p>{errMsg}</p>
+          <p className='text-red-500'>{errMsg}</p>
         ) : (
           <div className='flex flex-col gap-4 overflow-hidden px-2 pb-2'>
             {brands && !!brands.popularBrands.length && (
@@ -49,10 +53,39 @@ const Brands = () => {
                   <Radio
                     key={brand._id}
                     value={brand.slug}
+                    classNames={{
+                      label: 'text-[14.5px]',
+                    }}
                   >
                     {brand.name}
                   </Radio>
                 ))}
+
+                {showMore && (
+                  <React.Fragment>
+                    {popularBrands.slice(6).map((brand) => (
+                      <Radio
+                        key={brand._id}
+                        value={brand.slug}
+                        classNames={{
+                          label: 'text-[14.5px]',
+                        }}
+                      >
+                        {brand.name}
+                      </Radio>
+                    ))}
+                  </React.Fragment>
+                )}
+
+                {popularBrands.length > 6 && (
+                  <Button
+                    variant='light'
+                    className='w-fit'
+                    onClick={() => setShowMore((prev) => !prev)}
+                  >
+                    Show {showMore ? 'Less' : 'More'}
+                  </Button>
+                )}
               </RadioGroup>
             )}
 
@@ -66,10 +99,39 @@ const Brands = () => {
                   <Radio
                     key={brand._id}
                     value={brand.slug}
+                    classNames={{
+                      label: 'text-[14.5px]',
+                    }}
                   >
                     {brand.name}
                   </Radio>
                 ))}
+
+                {showMore && (
+                  <React.Fragment>
+                    {allBrands.slice(8).map((brand) => (
+                      <Radio
+                        key={brand._id}
+                        value={brand.slug}
+                        classNames={{
+                          label: 'text-[14.5px]',
+                        }}
+                      >
+                        {brand.name}
+                      </Radio>
+                    ))}
+                  </React.Fragment>
+                )}
+
+                {allBrands.length > 8 && (
+                  <Button
+                    variant='light'
+                    className='w-fit'
+                    onClick={() => setShowMore((prev) => !prev)}
+                  >
+                    Show {showMore ? 'Less' : 'More'}
+                  </Button>
+                )}
               </RadioGroup>
             )}
           </div>

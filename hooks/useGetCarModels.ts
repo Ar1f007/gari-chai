@@ -57,6 +57,7 @@ const useGetCarModels = ({ brandId }: UseGetCarModelsParams = {}) => {
     isLoading,
     data,
     errMsg,
+    fetchCarModels,
   };
 };
 export default useGetCarModels;

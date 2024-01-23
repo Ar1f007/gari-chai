@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useCallback } from 'react';
 import Budget from '@/modules/search/filters/budget';
 import Brands from './filters/brands';
+import Models from './filters/models';
 
 export const SearchFilters = () => {
   const router = useRouter();
@@ -32,6 +33,7 @@ export const SearchFilters = () => {
       <div className='space-y-5'>
         <Budget />
         <Brands />
+        <Models />
       </div>
 
       {/* using useRouter */}

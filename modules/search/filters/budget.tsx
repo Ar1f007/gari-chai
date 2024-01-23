@@ -48,6 +48,9 @@ const Budget = () => {
                 <Radio
                   key={idx}
                   value={budget.value}
+                  classNames={{
+                    label: 'text-[14.5px]',
+                  }}
                 >
                   {budget.label}
                 </Radio>
