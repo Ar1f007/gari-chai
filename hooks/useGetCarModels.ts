@@ -21,7 +21,7 @@ const useGetCarModels = ({ brandId }: UseGetCarModelsParams = {}) => {
 
   const [errMsg, setErrMsg] = useState('');
 
-  async function fetchCarModels(brandId: string | undefined) {
+  async function fetchCarModels(brandId?: string | undefined) {
     try {
       setIsLoading(true);
 

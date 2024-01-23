@@ -17,11 +17,15 @@ const Budget = () => {
   }, [selected]);
 
   return (
-    <Accordion variant='splitted'>
+    <Accordion
+      variant='splitted'
+      keepContentMounted
+    >
       <AccordionItem
         key='1'
         aria-label='Budget'
         title='Budget'
+        className='group-[.is-splitted]:shadow-small'
       >
         <div className='flex h-full flex-col items-start justify-center gap-4 overflow-hidden px-2 pb-2'>
           <Slider

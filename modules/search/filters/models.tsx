@@ -12,7 +12,7 @@ const Models = () => {
   const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
-    fetchCarModels(undefined);
+    fetchCarModels();
   }, []);
 
   function getContent() {
@@ -77,12 +77,14 @@ const Models = () => {
   return (
     <Accordion
       variant='splitted'
+      keepContentMounted
       className='pb-5'
     >
       <AccordionItem
         key='1'
         aria-label='Models'
         title='Models'
+        className='group-[.is-splitted]:shadow-small'
       >
         <div className='pb-2'>{getContent()}</div>
       </AccordionItem>

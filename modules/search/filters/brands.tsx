@@ -23,17 +23,34 @@ const Brands = () => {
       }
 
       if (brands.allBrands.length > 0) {
+        if (brands.popularBrands.length > 0) {
+          const brandsWithoutPopularOnes = brands.allBrands.filter((curBrand) => {
+            const existInPopularBrand = brands.popularBrands.find(
+              (popularBrand) => popularBrand._id === curBrand._id,
+            );
+            if (existInPopularBrand) return false;
+            return true;
+          });
+
+          setAllBrands(brandsWithoutPopularOnes);
+          return;
+        }
+
         setAllBrands(brands.allBrands);
       }
     }
   }, [JSON.stringify(brands)]);
 
   return (
-    <Accordion variant='splitted'>
+    <Accordion
+      variant='splitted'
+      keepContentMounted
+    >
       <AccordionItem
         key='1'
         aria-label='Brands'
         title='Brands'
+        className='group-[.is-splitted]:shadow-small'
       >
         {isLoading ? (
           <div className='text-center'>
