@@ -1,369 +1,92 @@
 {
-  "popularBrands": [
+  "fuelOptions": [
     {
-      "id": "b-1",
-      "imgSrc": "/cars/car1.webp",
-      "brandName": "Toyota"
+      "value": {
+        "fuelType": "Petrol",
+        "fullForm": "Gasoline (Petrol)"
+      },
+      "label": "Petrol"
     },
     {
-      "id": "b-2",
-      "imgSrc": "/cars/car2.webp",
-      "brandName": "Honda"
+      "value": {
+        "fuelType": "Diesel",
+        "fullForm": "Diesel"
+      },
+      "label": "Diesel"
     },
     {
-      "id": "b-3",
-      "imgSrc": "/cars/car3.webp",
-      "brandName": "Toyota"
+      "value": {
+        "fuelType": "CNG",
+        "fullForm": "Compressed Natural Gas"
+      },
+      "label": "CNG (Compressed Natural Gas)"
     },
     {
-      "id": "b-4",
-      "imgSrc": "/cars/car3.webp",
-      "brandName": "Honda"
+      "value": {
+        "fuelType": "LPG",
+        "fullForm": "Liquefied Petroleum Gas"
+      },
+      "label": "LPG (Liquefied Petroleum Gas)"
+    },
+    {
+      "value": {
+        "fuelType": "EV",
+        "fullForm": "Electricity (Electric Vehicles)"
+      },
+      "label": "EV (Electric Vehicles)"
+    },
+    {
+      "value": {
+        "fuelType": "Hybrid",
+        "fullForm": "Hybrid"
+      },
+      "label": "Hybrid"
     },
 
     {
-      "id": "b-5",
-      "imgSrc": "/cars/car1.webp",
-      "brandName": "Toyota"
+      "value": {
+        "fuelType": "Hydrogen",
+        "fullForm": "Hydrogen Fuel Cell"
+      },
+      "label": "Hydrogen Fuel Cell"
     },
     {
-      "id": "b-6",
-      "imgSrc": "/cars/car2.webp",
-      "brandName": "Honda"
+      "value": {
+        "fuelType": "Biodiesel",
+        "fullForm": "Biodiesel"
+      },
+      "label": "Biodiesel"
     },
     {
-      "id": "b-7",
-      "imgSrc": "/cars/car1.webp",
-      "brandName": "Toyota"
+      "value": {
+        "fuelType": "E85",
+        "fullForm": "Ethanol (E85)"
+      },
+      "label": "Ethanol (E85)"
     },
     {
-      "id": "b-8",
-      "imgSrc": "/cars/car3.webp",
-      "brandName": "Toyota"
+      "value": {
+        "fuelType": "Flex-Fuel",
+        "fullForm": "Flex-Fuel"
+      },
+      "label": "Flex-Fuel"
+    },
+    {
+      "value": {
+        "fuelType": "Methanol",
+        "fullForm": "Methanol"
+      },
+      "label": "Methanol"
+    },
+    {
+      "value": {
+        "fuelType": "PHEV",
+        "fullForm": "Plug-in Hybrid Electric Vehicle"
+      },
+      "label": "PHEV (Plug-in Hybrid Electric Vehicle)"
     }
   ],
-  "mostSearchedCars": [
-    {
-      "id": "SUV",
-      "brandName": "SUV",
-      "content": [
-        {
-          "id": "id-1",
-          "src": "/cars/car1.webp",
-          "name": "SUV - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "id-2",
-          "src": "/cars/car2.webp",
-          "name": "SUV - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "id-3",
-          "src": "/cars/car3.webp",
-          "name": "SUV - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "id-4",
-          "src": "/cars/car1.webp",
-          "name": "SUV - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "id-5",
-          "src": "/cars/car3.webp",
-          "name": "SUV - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "id-6",
-          "src": "/cars/car2.webp",
-          "name": "SUV - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        }
-      ]
-    },
-    {
-      "id": "Hatchback",
-      "brandName": "Hatchback",
-      "content": [
-        {
-          "id": "id-1",
-          "src": "/cars/car2.webp",
-          "name": "Hatchback - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "id-2",
-          "src": "/cars/car3.webp",
-          "name": "Hatchback - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "id-3",
-          "src": "/cars/car1.webp",
-          "name": "Hatchback - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
 
-        {
-          "id": "id-4",
-          "src": "/cars/car3.webp",
-          "name": "Hatchback - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "id-5",
-          "src": "/cars/car1.webp",
-          "name": "Hatchback - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "id-6",
-          "src": "/cars/car2.webp",
-          "name": "Hatchback - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        }
-      ]
-    },
-    {
-      "id": "Sedan",
-      "brandName": "Sedan",
-      "content": [
-        {
-          "id": "Sedan-1",
-          "src": "/cars/car1.webp",
-          "name": "Sedan - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "Sedan-2",
-          "src": "/cars/car2.webp",
-          "name": "Sedan - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "Sedan-3",
-          "src": "/cars/car3.webp",
-          "name": "Sedan - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "Sedan-4",
-          "src": "/cars/car1.webp",
-          "name": "Sedan - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "Sedan-5",
-          "src": "/cars/car3.webp",
-          "name": "Sedan - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "Sedan-6",
-          "src": "/cars/car2.webp",
-          "name": "Sedan - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        }
-      ]
-    },
-    {
-      "id": "MUV",
-      "brandName": "MUV",
-      "content": [
-        {
-          "id": "MUV-1",
-          "src": "/cars/car2.webp",
-          "name": "MUV - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "MUV-2",
-          "src": "/cars/car3.webp",
-          "name": "MUV - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "MUV-3",
-          "src": "/cars/car1.webp",
-          "name": "MUV - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "MUV-4",
-          "src": "/cars/car3.webp",
-          "name": "MUV - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "MUV-5",
-          "src": "/cars/car1.webp",
-          "name": "MUV - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "MUV-6",
-          "src": "/cars/car2.webp",
-          "name": "MUV - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        }
-      ]
-    },
-    {
-      "id": "Luxury",
-      "brandName": "Luxury",
-      "content": [
-        {
-          "id": "Luxury-1",
-          "src": "/cars/car1.webp",
-          "name": "LUXURY - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "Luxury-2",
-          "src": "/cars/car2.webp",
-          "name": "LUXURY - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "Luxury-3",
-          "src": "/cars/car3.webp",
-          "name": "LUXURY - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "Luxury-4",
-          "src": "/cars/car1.webp",
-          "name": "LUXURY - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "Luxury-5",
-          "src": "/cars/car3.webp",
-          "name": "LUXURY - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        },
-        {
-          "id": "Luxury-6",
-          "src": "/cars/car2.webp",
-          "name": "LUXURY - Tata Nexon",
-          "priceMin": "8.10",
-          "priceMax": "13.50"
-        }
-      ]
-    }
-  ],
-  "services": [
-    {
-      "serviceId": "s-1",
-      "serviceImg": "/cars/service.webp",
-      "serviceName": "Car Service History",
-      "price": {
-        "basePrice": "500",
-        "discount": "40%",
-        "salePrice": "299"
-      },
-      "btnText": "View Challan Details"
-    },
-    {
-      "serviceId": "s-2",
-      "serviceImg": "/cars/service.webp",
-      "serviceName": "Car Service History",
-      "price": {
-        "basePrice": "500",
-        "discount": "40%",
-        "salePrice": "299"
-      },
-      "btnText": "Get Report"
-    },
-    {
-      "serviceId": "s-3",
-      "serviceImg": "/cars/service.webp",
-      "serviceName": "Car Service History",
-      "price": {
-        "basePrice": "500",
-        "discount": "40%",
-        "salePrice": "299"
-      },
-      "btnText": "View Challan Details"
-    },
-    {
-      "serviceId": "s-4",
-      "serviceImg": "/cars/service.webp",
-      "serviceName": "Car Service History",
-      "price": {
-        "basePrice": "500",
-        "discount": "40%",
-        "salePrice": "299"
-      },
-      "btnText": "Get Report"
-    },
-    {
-      "serviceId": "s-5",
-      "serviceImg": "/cars/service.webp",
-      "serviceName": "Car Service History",
-      "price": {
-        "basePrice": "500",
-        "discount": "40%",
-        "salePrice": "299"
-      },
-      "btnText": "View details"
-    },
-    {
-      "serviceId": "s-6",
-      "serviceImg": "/cars/service.webp",
-      "serviceName": "Car Service History",
-      "price": {
-        "basePrice": "500",
-        "discount": "40%",
-        "salePrice": "299"
-      },
-      "btnText": "Book Now"
-    },
-    {
-      "serviceId": "s-7",
-      "serviceImg": "/cars/service.webp",
-      "serviceName": "Car Service History",
-      "price": {
-        "basePrice": "500",
-        "discount": "40%",
-        "salePrice": "299"
-      },
-      "btnText": "Book Now"
-    }
-  ],
   "locations": [
     { "value": "bagerhat", "label": "Bagerhat" },
     { "value": "bandarban", "label": "Bandarban" },

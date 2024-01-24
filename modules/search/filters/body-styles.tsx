@@ -26,48 +26,53 @@ const BodyStyles = () => {
     }
 
     return (
-      <RadioGroup
-        value={selected}
-        onValueChange={setSelected}
-      >
-        {bodyTypes.slice(0, 8).map((bodyType) => (
-          <Radio
-            key={bodyType.value}
-            value={bodyType.value}
-            classNames={{
-              label: 'text-[14.5px]',
-            }}
-          >
-            {bodyType.label}
-          </Radio>
-        ))}
+      <div className='space-y-4'>
+        <RadioGroup
+          value={selected}
+          onValueChange={setSelected}
+          classNames={{
+            wrapper: 'grid grid-cols-2 w-full',
+          }}
+        >
+          {bodyTypes.slice(0, 8).map((bodyType) => (
+            <Radio
+              key={bodyType.value}
+              value={bodyType.value}
+              classNames={{
+                label: 'text-[14.5px]',
+              }}
+            >
+              {bodyType.label}
+            </Radio>
+          ))}
 
-        {showMore && (
-          <React.Fragment>
-            {bodyTypes.slice(8).map((bodyType) => (
-              <Radio
-                key={bodyType.value}
-                value={bodyType.value}
-                classNames={{
-                  label: 'text-[14.5px]',
-                }}
-              >
-                {bodyType.label}
-              </Radio>
-            ))}
-          </React.Fragment>
-        )}
-
+          {showMore && (
+            <React.Fragment>
+              {bodyTypes.slice(8).map((bodyType) => (
+                <Radio
+                  key={bodyType.value}
+                  value={bodyType.value}
+                  classNames={{
+                    label: 'text-[14.5px]',
+                  }}
+                >
+                  {bodyType.label}
+                </Radio>
+              ))}
+            </React.Fragment>
+          )}
+        </RadioGroup>
         {bodyTypes.length > 8 && (
           <Button
             variant='light'
             className='w-fit'
             onClick={() => setShowMore((prev) => !prev)}
+            color='primary'
           >
             Show {showMore ? 'Less' : 'More'}
           </Button>
         )}
-      </RadioGroup>
+      </div>
     );
   }
 
@@ -75,7 +80,6 @@ const BodyStyles = () => {
     <Accordion
       variant='splitted'
       keepContentMounted
-      className='pb-5'
     >
       <AccordionItem
         key='1'
@@ -83,7 +87,7 @@ const BodyStyles = () => {
         title='Body Styles'
         className='group-[.is-splitted]:shadow-small'
       >
-        <div className='pb-2'>{getContent()}</div>
+        {getContent()}
       </AccordionItem>
     </Accordion>
   );

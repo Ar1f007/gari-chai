@@ -99,6 +99,7 @@ const Brands = () => {
                     variant='light'
                     className='w-fit'
                     onClick={() => setShowMore((prev) => !prev)}
+                    color='primary'
                   >
                     Show {showMore ? 'Less' : 'More'}
                   </Button>
@@ -145,6 +146,7 @@ const Brands = () => {
                     variant='light'
                     className='w-fit'
                     onClick={() => setShowMore((prev) => !prev)}
+                    color='primary'
                   >
                     Show {showMore ? 'Less' : 'More'}
                   </Button>

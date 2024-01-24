@@ -7,6 +7,8 @@ import Budget from '@/modules/search/filters/budget';
 import Brands from './filters/brands';
 import Models from './filters/models';
 import BodyStyles from './filters/body-styles';
+import NumberOfSeats from './filters/seats';
+import FuelTypes from './filters/fuel-type';
 
 export const SearchFilters = () => {
   const router = useRouter();
@@ -36,6 +38,8 @@ export const SearchFilters = () => {
         <Brands />
         <Models />
         <BodyStyles />
+        <NumberOfSeats />
+        <FuelTypes />
       </div>
 
       {/* using useRouter */}

@@ -34,7 +34,7 @@ const SelectBudgetAndBodyType = () => {
         variant='bordered'
         color='primary'
         size='sm'
-        disableAnimation
+        // disableAnimation
         isRequired
         selectedKeys={getSelectedKeysForBudget()}
         onChange={(e) =>
@@ -63,7 +63,7 @@ const SelectBudgetAndBodyType = () => {
         color='primary'
         variant='bordered'
         size='sm'
-        disableAnimation
+        // disableAnimation
         selectedKeys={getSelectedKeysForBodyType()}
         onChange={(e) =>
           searchQueryActions.setSearchQuery({
