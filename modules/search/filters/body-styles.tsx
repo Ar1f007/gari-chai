@@ -1,7 +1,5 @@
-import { Accordion, AccordionItem } from '@nextui-org/accordion';
-
 import useGetBodyTypes from '@/hooks/useGetBodyTypes';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Spinner } from '@nextui-org/spinner';
 import { RadioGroup, Radio } from '@nextui-org/radio';
 import { Button } from '@nextui-org/button';
@@ -76,21 +74,7 @@ const BodyStyles = () => {
     );
   }
 
-  return (
-    <Accordion
-      variant='splitted'
-      keepContentMounted
-    >
-      <AccordionItem
-        key='1'
-        aria-label='Models'
-        title='Body Styles'
-        className='group-[.is-splitted]:shadow-small'
-      >
-        {getContent()}
-      </AccordionItem>
-    </Accordion>
-  );
+  return <Fragment>{getContent()}</Fragment>;
 };
 
 export default BodyStyles;

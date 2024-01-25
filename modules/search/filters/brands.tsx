@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import useGetAllAndPopularBrands from '@/hooks/useGetAllAndPopularBrands';
 import { Accordion, AccordionItem } from '@nextui-org/accordion';
 import { RadioGroup, Radio } from '@nextui-org/radio';
@@ -15,6 +15,7 @@ const Brands = () => {
   const [allBrands, setAllBrands] = React.useState<BrandsWithSections['allBrands']>([]);
   const [popularBrands, setPopularBrands] = React.useState<BrandsWithSections['popularBrands']>([]);
   const [showMore, setShowMore] = React.useState(false);
+  const [showMorePopularBrands, setShowMorePopularBrands] = React.useState(false);
 
   React.useEffect(() => {
     if (brands) {
@@ -42,29 +43,24 @@ const Brands = () => {
   }, [JSON.stringify(brands)]);
 
   return (
-    <Accordion
-      variant='splitted'
-      keepContentMounted
-    >
-      <AccordionItem
-        key='1'
-        aria-label='Brands'
-        title='Brands'
-        className='group-[.is-splitted]:shadow-small'
-      >
-        {isLoading ? (
-          <div className='text-center'>
-            <Spinner label='Loading brands...' />
-          </div>
-        ) : errMsg ? (
-          <p className='text-red-500'>{errMsg}</p>
-        ) : (
-          <div className='flex flex-col gap-4 overflow-hidden px-2 pb-2'>
-            {brands && !!brands.popularBrands.length && (
+    <Fragment>
+      {isLoading ? (
+        <div className='text-center'>
+          <Spinner label='Loading brands...' />
+        </div>
+      ) : errMsg ? (
+        <p className='text-red-500'>{errMsg}</p>
+      ) : (
+        <div className='flex flex-col gap-4 overflow-hidden px-2 pb-2'>
+          {brands && !!brands.popularBrands.length && (
+            <div className='space-y-4'>
               <RadioGroup
                 value={selected}
                 onValueChange={setSelected}
                 label='Popular Brands'
+                classNames={{
+                  wrapper: 'grid grid-cols-2 w-full',
+                }}
               >
                 {popularBrands.slice(0, 6).map((brand) => (
                   <Radio
@@ -78,7 +74,7 @@ const Brands = () => {
                   </Radio>
                 ))}
 
-                {showMore && (
+                {showMorePopularBrands && (
                   <React.Fragment>
                     {popularBrands.slice(6).map((brand) => (
                       <Radio
@@ -93,25 +89,29 @@ const Brands = () => {
                     ))}
                   </React.Fragment>
                 )}
-
-                {popularBrands.length > 6 && (
-                  <Button
-                    variant='light'
-                    className='w-fit'
-                    onClick={() => setShowMore((prev) => !prev)}
-                    color='primary'
-                  >
-                    Show {showMore ? 'Less' : 'More'}
-                  </Button>
-                )}
               </RadioGroup>
-            )}
+              {popularBrands.length > 6 && (
+                <Button
+                  variant='light'
+                  className='w-fit'
+                  onClick={() => setShowMorePopularBrands((prev) => !prev)}
+                  color='primary'
+                >
+                  Show {showMore ? 'Less' : 'More'}
+                </Button>
+              )}
+            </div>
+          )}
 
-            {brands && !!brands.allBrands.length && (
+          {brands && !!brands.allBrands.length && (
+            <div className='space-y-4'>
               <RadioGroup
                 value={selected}
                 onValueChange={setSelected}
                 label='All Brands'
+                classNames={{
+                  wrapper: 'grid grid-cols-2 w-full',
+                }}
               >
                 {allBrands.slice(0, 8).map((brand) => (
                   <Radio
@@ -140,23 +140,22 @@ const Brands = () => {
                     ))}
                   </React.Fragment>
                 )}
-
-                {allBrands.length > 8 && (
-                  <Button
-                    variant='light'
-                    className='w-fit'
-                    onClick={() => setShowMore((prev) => !prev)}
-                    color='primary'
-                  >
-                    Show {showMore ? 'Less' : 'More'}
-                  </Button>
-                )}
               </RadioGroup>
-            )}
-          </div>
-        )}
-      </AccordionItem>
-    </Accordion>
+              {allBrands.length > 8 && (
+                <Button
+                  variant='light'
+                  className='w-fit'
+                  onClick={() => setShowMore((prev) => !prev)}
+                  color='primary'
+                >
+                  Show {showMore ? 'Less' : 'More'}
+                </Button>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+    </Fragment>
   );
 };
 export default Brands;

@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { Accordion, AccordionItem } from '@nextui-org/accordion';
 import { Checkbox } from '@nextui-org/checkbox';
 import { PlusIcon } from 'lucide-react';
 
@@ -29,7 +28,6 @@ const NumberOfSeats = () => {
             icon={<PlusIcon color='white' />}
             color='primary'
             isSelected={selectedSeats.includes(item)}
-            data-value={item}
             onValueChange={() => {
               toggleSeatSelection(item);
             }}
@@ -45,21 +43,9 @@ const NumberOfSeats = () => {
   }
 
   return (
-    <Accordion
-      variant='splitted'
-      keepContentMounted
-    >
-      <AccordionItem
-        key='1'
-        aria-label='Seats'
-        title='Seats'
-        className='group-[.is-splitted]:shadow-small'
-      >
-        <div className='flex h-full flex-col items-start justify-center gap-4 overflow-hidden px-2 pb-2'>
-          {getCheckboxes()}
-        </div>
-      </AccordionItem>
-    </Accordion>
+    <div className='flex h-full flex-col items-start justify-center gap-4 overflow-hidden px-2 pb-2'>
+      {getCheckboxes()}
+    </div>
   );
 };
 

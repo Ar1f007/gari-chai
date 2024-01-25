@@ -79,20 +79,6 @@ const Models = () => {
     );
   }
 
-  return (
-    <Accordion
-      variant='splitted'
-      keepContentMounted
-    >
-      <AccordionItem
-        key='1'
-        aria-label='Models'
-        title='Models'
-        className='group-[.is-splitted]:shadow-small'
-      >
-        <div className='pb-2'>{getContent()}</div>
-      </AccordionItem>
-    </Accordion>
-  );
+  return <div className='pb-2'>{getContent()}</div>;
 };
 export default Models;

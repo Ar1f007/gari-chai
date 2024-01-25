@@ -85,21 +85,9 @@ const FuelTypes = () => {
   }
 
   return (
-    <Accordion
-      variant='splitted'
-      keepContentMounted
-    >
-      <AccordionItem
-        key='1'
-        aria-label='Fuel Type'
-        title='Fuel Type'
-        className='group-[.is-splitted]:shadow-small'
-      >
-        <div className='flex h-full flex-col items-start justify-center gap-4 overflow-hidden px-2 pb-2'>
-          {getCheckboxes()}
-        </div>
-      </AccordionItem>
-    </Accordion>
+    <div className='flex h-full flex-col items-start justify-center gap-4 overflow-hidden px-2 pb-2'>
+      {getCheckboxes()}
+    </div>
   );
 };
 
