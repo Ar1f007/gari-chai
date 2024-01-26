@@ -56,6 +56,7 @@
     "postcss": "8.4.33",
     "react": "18.2.0",
     "react-countdown": "^2.3.5",
+    "react-device-detect": "^2.2.3",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.49.3",
     "react-photoswipe-gallery": "^3.0.1",

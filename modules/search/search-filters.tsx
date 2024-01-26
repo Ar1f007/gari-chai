@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Suspense, useCallback, useState } from 'react';
+import { Key, Suspense, useCallback, useEffect, useState } from 'react';
 import Budget from '@/modules/search/filters/budget';
 import Brands from './filters/brands';
 import Models from './filters/models';
@@ -12,13 +12,16 @@ import { Accordion, AccordionItem } from '@nextui-org/accordion';
 import { Button } from '@nextui-org/button';
 import { ListRestartIcon, SlidersHorizontalIcon } from 'lucide-react';
 import { Selection } from '@nextui-org/react';
+import { isMobile } from 'react-device-detect';
 
 export const SearchFilters = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [selectedKeys, setSelectedKeys] = useState('');
+  const [selectedKeys, setSelectedKeys] = useState<Selection>(
+    isMobile ? new Set([]) : new Set(['1', '2', '3', '4', '5', '6']),
+  );
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -36,107 +39,129 @@ export const SearchFilters = () => {
     return params.toString();
   }, []);
 
+  function handleExpandCollapseFilters() {
+    const keys =
+      (selectedKeys as Set<string>).size === 0
+        ? new Set(['1', '2', '3', '4', '5', '6'])
+        : new Set([]);
+
+    setSelectedKeys(keys);
+  }
+
+  const filters = (
+    <Accordion
+      variant='splitted'
+      keepContentMounted
+      selectionMode='multiple'
+      selectedKeys={selectedKeys}
+      onSelectionChange={setSelectedKeys}
+    >
+      <AccordionItem
+        key='1'
+        aria-label='Budget'
+        title='Budget'
+        className='group-[.is-splitted]:shadow-small'
+      >
+        <Budget />
+      </AccordionItem>
+
+      <AccordionItem
+        key='2'
+        aria-label='Brands'
+        title='Brands'
+        className='group-[.is-splitted]:shadow-small'
+      >
+        <Brands />
+      </AccordionItem>
+
+      <AccordionItem
+        key='3'
+        aria-label='Models'
+        title='Models'
+        className='group-[.is-splitted]:shadow-small'
+      >
+        <Models />
+      </AccordionItem>
+
+      <AccordionItem
+        key='4'
+        aria-label='Body Styles'
+        title='Body Styles'
+        className='group-[.is-splitted]:shadow-small'
+      >
+        <BodyStyles />
+      </AccordionItem>
+
+      <AccordionItem
+        key='5'
+        aria-label='Seats'
+        title='Seats'
+        className='group-[.is-splitted]:shadow-small'
+      >
+        <NumberOfSeats />
+      </AccordionItem>
+
+      <AccordionItem
+        key='6'
+        aria-label='Fuel Type'
+        title='Fuel Type'
+        className='group-[.is-splitted]:shadow-small'
+      >
+        <FuelTypes />
+      </AccordionItem>
+    </Accordion>
+  );
+
+  const buttons = (
+    <div className='flex justify-between gap-2 px-2'>
+      <Button
+        variant='bordered'
+        onClick={handleExpandCollapseFilters}
+        startContent={<SlidersHorizontalIcon className='size-[16px]' />}
+        className='text-xs font-medium uppercase text-foreground'
+      >
+        {(selectedKeys as Set<string>).size === 0 ? 'Expand' : 'Collapse'} all filters
+      </Button>
+      <Button
+        variant='bordered'
+        onClick={() => {
+          router.push(pathname + '?' + resetQueryPath());
+        }}
+        className='text-xs font-medium uppercase text-foreground'
+        startContent={<ListRestartIcon className='size-[18px]' />}
+      >
+        Reset Filters
+      </Button>
+    </div>
+  );
+
   return (
-    <Suspense>
+    <Suspense
+      unstable_expectedLoadTime={200}
+      fallback={<p>Loading...</p>}
+    >
       <div className='space-y-5'>
-        <div className='flex justify-between gap-2 px-2'>
-          <Button
-            variant='bordered'
-            onClick={() => {
-              setSelectedKeys((prev) => (prev === 'all' ? '' : 'all'));
-            }}
-            startContent={<SlidersHorizontalIcon className='size-[16px]' />}
-            className='text-xs font-medium uppercase text-foreground'
-          >
-            {selectedKeys.length ? 'Collapse' : 'Expand'} all filters
-          </Button>
-          <Button
-            variant='bordered'
-            onClick={() => {
-              router.push(pathname + '?' + resetQueryPath());
-            }}
-            className='text-xs font-medium uppercase text-foreground'
-            startContent={<ListRestartIcon className='size-[18px]' />}
-          >
-            Reset Filters
-          </Button>
-        </div>
-        <Accordion
-          variant='splitted'
-          keepContentMounted
-          selectionMode='multiple'
-          selectedKeys={selectedKeys}
-          onSelectionChange={(keys: Selection) => {
-            console.log(keys instanceof Set);
-          }}
-        >
-          <AccordionItem
-            key='1'
-            aria-label='Budget'
-            title='Budget'
-            className='group-[.is-splitted]:shadow-small'
-          >
-            <Budget />
-          </AccordionItem>
+        {!isMobile && buttons}
 
-          <AccordionItem
-            key='2'
-            aria-label='Brands'
-            title='Brands'
-            className='group-[.is-splitted]:shadow-small'
+        {isMobile ? (
+          <Accordion
+            variant='splitted'
+            keepContentMounted
+            className='px-0'
           >
-            <Brands />
-          </AccordionItem>
-
-          <AccordionItem
-            key='3'
-            aria-label='Models'
-            title='Models'
-            className='group-[.is-splitted]:shadow-small'
-          >
-            <Models />
-          </AccordionItem>
-
-          <AccordionItem
-            key='4'
-            aria-label='Body Styles'
-            title='Body Styles'
-            className='group-[.is-splitted]:shadow-small'
-          >
-            <BodyStyles />
-          </AccordionItem>
-
-          <AccordionItem
-            key='5'
-            aria-label='Seats'
-            title='Seats'
-            className='group-[.is-splitted]:shadow-small'
-          >
-            <NumberOfSeats />
-          </AccordionItem>
-
-          <AccordionItem
-            key='6'
-            aria-label='Fuel Type'
-            title='Fuel Type'
-            className='group-[.is-splitted]:shadow-small'
-          >
-            <FuelTypes />
-          </AccordionItem>
-        </Accordion>
-
-        {/* <div className='px-2'>
-          <Button
-            variant='bordered'
-            onClick={() => {
-              router.push(pathname + '?' + resetQueryPath());
-            }}
-            // color='primary'
-            // className='w-full text-lg'
-          >
-            Reset Filters
-          </Button>
-        </div> */}
+            <AccordionItem
+              key='0'
+              aria-label='Filters'
+              title='Filters'
+              className='group-[.is-splitted]:shadow-small'
+            >
+              <div className='mb-5'>{buttons}</div>
+              {filters}
+            </AccordionItem>
+          </Accordion>
+        ) : (
+          filters
+        )}
       </div>
     </Suspense>
   );
