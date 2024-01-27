@@ -1,5 +1,4 @@
 {
-  "newCarBudget": [{}],
   "newCar": {
     "budgets": [
       {
@@ -31,7 +30,7 @@
         "label": "50 Lakh - 1 Crore"
       },
       {
-        "value": "10000000-100000000000",
+        "value": "10000000-20000000",
         "label": "Above 1 Crore"
       }
     ],
@@ -58,58 +57,8 @@
         "label": "50 Lakh - 1 Crore"
       },
       {
-        "value": "10000000-100000000000",
+        "value": "10000000-20000000",
         "label": "Above 1 Crore"
-      }
-    ],
-    "bodyTypes": [
-      {
-        "value": "hatchback",
-        "label": "Hatchback"
-      },
-      {
-        "value": "sedan",
-        "label": "Sedan"
-      },
-      {
-        "value": "suv",
-        "label": "SUV (Sport Utility Vehicle)"
-      },
-      {
-        "value": "muv",
-        "label": "MUV (Multi Utility Vehicle)"
-      },
-      {
-        "value": "luxury",
-        "label": "Luxury"
-      },
-      {
-        "value": "super-luxury",
-        "label": "Super Luxury"
-      },
-      {
-        "value": "convertible",
-        "label": "Convertible"
-      },
-      {
-        "value": "hybrid",
-        "label": "Hybrid"
-      },
-      {
-        "value": "coupe",
-        "label": "Coupe"
-      },
-      {
-        "value": "pickup-truck",
-        "label": "Pickup Truck"
-      },
-      {
-        "value": "minivan",
-        "label": "Minivan"
-      },
-      {
-        "value": "wagon",
-        "label": "Wagon"
       }
     ]
   }

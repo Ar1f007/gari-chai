@@ -19,7 +19,6 @@ const SearchPage = async ({ searchParams }: { searchParams?: Partial<QueryParams
         <p className='text-center font-medium text-foreground'>
           Please type something in the search box.
         </p>
-        ;
       </div>
     );
   }
@@ -34,7 +33,7 @@ const SearchPage = async ({ searchParams }: { searchParams?: Partial<QueryParams
         <div className='lg:hidden'>
           <Search />
         </div>
-        <p className='text-center text-xl font-medium'>{res}</p>;
+        <p className='text-center text-xl font-medium'>{res}</p>
       </div>
     );
   }
@@ -45,7 +44,7 @@ const SearchPage = async ({ searchParams }: { searchParams?: Partial<QueryParams
         <div className='lg:hidden'>
           <Search />
         </div>
-        <p className='text-center text-xl font-medium'>{res.message}</p>;
+        <p className='text-center text-xl font-medium'>{res.message}</p>
       </div>
     );
   }
