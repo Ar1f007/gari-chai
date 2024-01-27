@@ -79,7 +79,8 @@ export const searchParamsSchema = z
     model: queryParamSchema,
     city: queryParamSchema, // city to search, default: 'all'
     scope: queryParamSchema, // search scope 'global' | 'new' | 'used',
-    launchedAt: queryParamSchema, // future | past , future means upcoming cars, past means already launched
+    launchedAt: queryParamSchema, // future | past , future means upcoming cars, past means already launched,
+    seats: z.union([z.string(), z.array(z.string())]).optional(),
   })
   .refine(({ scope, query }) => {
     // make sure if scope value is global, then a query string is provided

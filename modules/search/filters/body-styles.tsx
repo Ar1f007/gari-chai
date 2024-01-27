@@ -3,11 +3,13 @@ import React, { Fragment } from 'react';
 import { Spinner } from '@nextui-org/spinner';
 import { RadioGroup, Radio } from '@nextui-org/radio';
 import { Button } from '@nextui-org/button';
+import useQueryParam from '@/hooks/useQueryString';
 
 const BodyStyles = () => {
   const { isLoading, bodyTypes, errMsg } = useGetBodyTypes();
 
   const [selected, setSelected] = React.useState('');
+  const { initialValue, setQueryParam } = useQueryParam('bodyType');
   const [showMore, setShowMore] = React.useState(false);
 
   function getContent() {
@@ -26,8 +28,8 @@ const BodyStyles = () => {
     return (
       <div className='space-y-4'>
         <RadioGroup
-          value={selected}
-          onValueChange={setSelected}
+          value={initialValue || ''}
+          onValueChange={(val) => setQueryParam('bodyType', val)}
           classNames={{
             wrapper: 'grid grid-cols-2 w-full',
           }}

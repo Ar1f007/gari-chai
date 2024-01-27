@@ -23,9 +23,19 @@ const useQueryParam = (paramName?: string) => {
   }, [searchParams, paramName]);
 
   const setQueryParam = useCallback(
-    (name: string, value: string) => {
+    (name: string, values: string | string[] | number | number[]) => {
       const params = new URLSearchParams(searchParams);
-      params.set(name, value);
+
+      // Clear existing values for the parameter
+      params.delete(name);
+
+      if (Array.isArray(values)) {
+        values.forEach((value) => params.append(name, value.toString()));
+      } else {
+        params.append(name, values.toString());
+      }
+
+      // params.set(name, value);
 
       router.push(`?${params.toString()}`);
     },

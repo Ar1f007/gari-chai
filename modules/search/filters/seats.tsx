@@ -1,10 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Checkbox } from '@nextui-org/checkbox';
 import { PlusIcon } from 'lucide-react';
+import useQueryParam from '@/hooks/useQueryString';
 
 const NumberOfSeats = () => {
+  const { setQueryParam } = useQueryParam('seats');
+
   const [selectedSeats, setSelectedSeats] = React.useState<number[]>([]);
 
   function toggleSeatSelection(seatNumber: number) {
@@ -17,6 +20,10 @@ const NumberOfSeats = () => {
       setSelectedSeats([...selectedSeats, seatNumber]);
     }
   }
+
+  useEffect(() => {
+    setQueryParam('seats', selectedSeats);
+  }, [selectedSeats]);
 
   function getCheckboxes() {
     return (

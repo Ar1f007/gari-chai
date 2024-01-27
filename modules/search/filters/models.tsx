@@ -1,18 +1,22 @@
-import useGetCarModels from '@/hooks/useGetCarModels';
-import { Accordion, AccordionItem } from '@nextui-org/accordion';
 import { Spinner } from '@nextui-org/spinner';
 import { RadioGroup, Radio } from '@nextui-org/radio';
 import { Fragment, useEffect, useState } from 'react';
 import { Button } from '@nextui-org/button';
 
+import useQueryParam from '@/hooks/useQueryString';
+import useGetCarModels from '@/hooks/useGetCarModels';
+
 const Models = () => {
   const { fetchCarModels, data: models, errMsg, isLoading } = useGetCarModels();
 
-  const [selected, setSelected] = useState('');
   const [showMore, setShowMore] = useState(false);
+
+  const { initialValue, setQueryParam } = useQueryParam('model');
 
   useEffect(() => {
     fetchCarModels();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function getContent() {
@@ -28,11 +32,15 @@ const Models = () => {
       return <p className='text-red-500'>{errMsg}</p>;
     }
 
+    console.log(initialValue);
+
     return (
       <div className='space-y-4'>
         <RadioGroup
-          value={selected}
-          onValueChange={setSelected}
+          value={initialValue || ''}
+          onValueChange={(val) => {
+            setQueryParam('model', val);
+          }}
           classNames={{
             wrapper: 'grid grid-cols-2 w-full',
           }}

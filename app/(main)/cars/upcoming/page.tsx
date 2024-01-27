@@ -20,7 +20,7 @@ const UpcomingCarsPage = async ({ searchParams }: TCarsPageParams) => {
     );
   }
 
-  const queryParams = new URLSearchParams(parsedParams.data);
+  const queryParams = new URLSearchParams(searchParams);
 
   queryParams.set('launchedAt', 'future');
   // queryParams.set('tags', HOME_SETTINGS_OPTIONS.upcomingCars);

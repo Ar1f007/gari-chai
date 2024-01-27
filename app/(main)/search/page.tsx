@@ -23,7 +23,7 @@ const SearchPage = async ({ searchParams }: { searchParams?: Partial<QueryParams
     );
   }
 
-  const queryParams = new URLSearchParams(parsedParams.data);
+  const queryParams = new URLSearchParams(searchParams);
 
   const res = await fetchFilteredCars(queryParams);
 

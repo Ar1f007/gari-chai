@@ -8,7 +8,9 @@ import budgetData from '@/data/searchForm.json';
 import debounce from 'debounce';
 import useQueryParam from '@/hooks/useQueryString';
 
-// TODO : FIX API BEING CALLED MULTIPLE TIMES
+// TODO
+// FIX API BEING CALLED MULTIPLE TIMES
+// SET INITIAL VALUE FROM QUERY PARAMS
 
 const Budget = () => {
   const { setQueryParam } = useQueryParam();
@@ -16,16 +18,22 @@ const Budget = () => {
   const [value, setValue] = React.useState<SliderValue>([0, 2_00_00_000]);
   const [selected, setSelected] = React.useState('');
   const [userInteracted, setUserInteracted] = React.useState(false);
+  const [isRequestInProgress, setIsRequestInProgress] = React.useState(false);
 
   function updateUrlQuery(value: SliderValue | string) {
+    if (isRequestInProgress) {
+      return; // Skip making additional requests while one is in progress
+    }
+
+    setIsRequestInProgress(true);
     const budget = Array.isArray(value) ? value.join('-') : value + '';
     setQueryParam('budget', budget);
+    setIsRequestInProgress(false);
   }
 
   function findAndUpdateRadioGroupVal(value: SliderValue) {
     if (Array.isArray(value)) {
       const val = value.join('-');
-      console.log(val);
 
       const existInBudgetDataArr = budgetData.newCar.filterBudgets.find(
         (budget) => budget.value === val,
