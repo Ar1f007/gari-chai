@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Key, Suspense, useCallback, useEffect, useState } from 'react';
+import { Suspense, useCallback, useState } from 'react';
 import Budget from '@/modules/search/filters/budget';
 import Brands from './filters/brands';
 import Models from './filters/models';
@@ -14,13 +14,15 @@ import { ListRestartIcon, SlidersHorizontalIcon } from 'lucide-react';
 import { Selection } from '@nextui-org/react';
 import { isMobile } from 'react-device-detect';
 
+const ALL_FILTER_KEYS = ['1', '2', '3', '4', '5', '6'];
+
 export const SearchFilters = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const [selectedKeys, setSelectedKeys] = useState<Selection>(
-    isMobile ? new Set([]) : new Set(['1', '2', '3', '4', '5', '6']),
+    isMobile ? new Set([]) : new Set(ALL_FILTER_KEYS),
   );
 
   const createQueryString = useCallback(
@@ -40,10 +42,7 @@ export const SearchFilters = () => {
   }, []);
 
   function handleExpandCollapseFilters() {
-    const keys =
-      (selectedKeys as Set<string>).size === 0
-        ? new Set(['1', '2', '3', '4', '5', '6'])
-        : new Set([]);
+    const keys = (selectedKeys as Set<string>).size === 0 ? new Set(ALL_FILTER_KEYS) : new Set([]);
 
     setSelectedKeys(keys);
   }
@@ -125,7 +124,7 @@ export const SearchFilters = () => {
       <Button
         variant='bordered'
         onClick={() => {
-          router.push(pathname + '?' + resetQueryPath());
+          router.push('/search');
         }}
         className='text-xs font-medium uppercase text-foreground'
         startContent={<ListRestartIcon className='size-[18px]' />}
@@ -136,10 +135,7 @@ export const SearchFilters = () => {
   );
 
   return (
-    <Suspense
-      unstable_expectedLoadTime={200}
-      fallback={<p>Loading...</p>}
-    >
+    <Suspense>
       <div className='space-y-5'>
         {!isMobile && buttons}
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Input } from '@nextui-org/input';
 
@@ -11,6 +11,7 @@ import { DEFAULT_PAGINATION_ITEMS_LIMIT } from '@/lib/constants';
 export default function Search() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [query, setQuery] = useState('');
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -34,6 +35,17 @@ export default function Search() {
 
     router.push(createUrl('/search', newParams));
   }
+
+  useEffect(() => {
+    const newParams = new URLSearchParams(searchParams);
+    const query = searchParams.get('query');
+    if (!query?.length) {
+      newParams.delete('query');
+      newParams.delete('scope');
+
+      router.push(createUrl('/search', newParams));
+    }
+  }, [router, searchParams]);
 
   return (
     <>

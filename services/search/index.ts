@@ -18,6 +18,14 @@ type TFetchFilteredCarsResponse = {
 
 export async function fetchFilteredCars(queryParams: URLSearchParams | ReadonlyURLSearchParams) {
   try {
+    if (!queryParams.toString().length) {
+      return 'Find cars by filtering or type something on the search bar';
+    }
+
+    if (!queryParams.has('car')) {
+      queryParams.append('car', 'new');
+    }
+
     const url = createUrl(endpoints.api.search.baseUrl, queryParams);
 
     return apiFetch<TFetchFilteredCarsResponse>(url, {
