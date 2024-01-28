@@ -11,6 +11,15 @@ export const sliderSchema = z.object({
   sort: z.number(),
   createdAt: z.string(),
   updatedAt: z.string(),
+
+  isSponsored: z.boolean().default(false).optional(),
+  metadata: z.record(z.string().min(1), z.any()).optional().default({}),
+  sliderStyle: z
+    .object({
+      textColor: z.string().default(''),
+      bgColor: z.string().default(''),
+    })
+    .optional(),
 });
 
 export type TSlider = z.infer<typeof sliderSchema>;

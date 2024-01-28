@@ -115,6 +115,7 @@ const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
         variant='bordered'
         color='primary'
         onPress={() => setShowReviewModal(true)}
+        className='w-fit'
       >
         Write a Review
       </Button>
