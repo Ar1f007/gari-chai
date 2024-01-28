@@ -22,7 +22,6 @@ const Brands = () => {
   React.useEffect(() => {
     if (brands) {
       const { popularBrands: pb, allBrands: ab } = brands;
-
       if (pb.length > 0) {
         setPopularBrands(pb);
       }
@@ -54,7 +53,7 @@ const Brands = () => {
         {brandsList.slice(0, showMoreState ? undefined : 6).map((brand) => (
           <Radio
             key={brand._id}
-            value={brand.slug}
+            value={brand.name}
             classNames={{ label: 'text-[14.5px]' }}
           >
             {brand.name}
