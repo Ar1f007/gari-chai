@@ -36,12 +36,16 @@ export const SearchFilters = () => {
       selectionMode='multiple'
       selectedKeys={selectedKeys}
       onSelectionChange={setSelectedKeys}
+      className='px-1'
     >
       <AccordionItem
         key='1'
         aria-label='Budget'
         title='Budget'
-        className='group-[.is-splitted]:shadow-small'
+        className='group-[.is-splitted]:px-3 group-[.is-splitted]:shadow-small'
+        classNames={{
+          content: 'overflow-x-hidden',
+        }}
       >
         <Budget />
       </AccordionItem>
@@ -50,7 +54,10 @@ export const SearchFilters = () => {
         key='2'
         aria-label='Brands'
         title='Brands'
-        className='group-[.is-splitted]:shadow-small'
+        className='group-[.is-splitted]:px-3 group-[.is-splitted]:shadow-small'
+        classNames={{
+          content: 'overflow-x-hidden',
+        }}
       >
         <Brands />
       </AccordionItem>
@@ -59,7 +66,10 @@ export const SearchFilters = () => {
         key='3'
         aria-label='Models'
         title='Models'
-        className='group-[.is-splitted]:shadow-small'
+        className='group-[.is-splitted]:px-3 group-[.is-splitted]:shadow-small'
+        classNames={{
+          content: 'overflow-x-hidden',
+        }}
       >
         <Models />
       </AccordionItem>
@@ -68,7 +78,10 @@ export const SearchFilters = () => {
         key='4'
         aria-label='Body Styles'
         title='Body Styles'
-        className='group-[.is-splitted]:shadow-small'
+        className='group-[.is-splitted]:px-3 group-[.is-splitted]:shadow-small'
+        classNames={{
+          content: 'overflow-x-hidden',
+        }}
       >
         <BodyStyles />
       </AccordionItem>
@@ -77,7 +90,10 @@ export const SearchFilters = () => {
         key='5'
         aria-label='Seats'
         title='Seats'
-        className='group-[.is-splitted]:shadow-small'
+        className='group-[.is-splitted]:px-3 group-[.is-splitted]:shadow-small'
+        classNames={{
+          content: 'overflow-x-hidden',
+        }}
       >
         <NumberOfSeats />
       </AccordionItem>
@@ -86,7 +102,10 @@ export const SearchFilters = () => {
         key='6'
         aria-label='Fuel Type'
         title='Fuel Type'
-        className='group-[.is-splitted]:shadow-small'
+        className='group-[.is-splitted]:px-3 group-[.is-splitted]:shadow-small'
+        classNames={{
+          content: 'overflow-x-hidden',
+        }}
       >
         <FuelTypes />
       </AccordionItem>
@@ -131,7 +150,10 @@ export const SearchFilters = () => {
               key='0'
               aria-label='Filters'
               title='Filters'
-              className='group-[.is-splitted]:shadow-small'
+              className='group-[.is-splitted]:px-3 group-[.is-splitted]:shadow-small'
+              classNames={{
+                content: 'overflow-x-hidden',
+              }}
             >
               <div className='mb-5'>{buttons}</div>
               {filters}
