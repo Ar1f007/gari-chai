@@ -9,8 +9,6 @@ export const sliderSchema = z.object({
   type: z.enum(['desktop', 'mobile']),
   status: z.enum(['active', 'hidden']),
   sort: z.number(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
 
   isSponsored: z.boolean().default(false).optional(),
   metadata: z.record(z.string().min(1), z.any()).optional().default({}),
@@ -20,6 +18,9 @@ export const sliderSchema = z.object({
       bgColor: z.string().default(''),
     })
     .optional(),
+
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });
 
 export type TSlider = z.infer<typeof sliderSchema>;
