@@ -1,7 +1,6 @@
 import { Car } from '@/components/car/new-car-card';
 import { Section } from '@/components/layout/section';
 import Pagination from '@/components/pagination';
-import { HOME_SETTINGS_OPTIONS } from '@/lib/constants';
 import { searchParamsSchema } from '@/schema';
 import { getCars } from '@/services/car/getCars';
 import { TCarsPageParams } from '@/types';

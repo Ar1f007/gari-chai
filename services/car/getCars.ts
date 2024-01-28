@@ -14,6 +14,10 @@ type GetCarsResponseData = {
 
 export async function getCars(queryParams: URLSearchParams) {
   try {
+    if (!queryParams.has('limit')) {
+      queryParams.append('limit', '12');
+    }
+
     const url = createUrl(endpoints.api.cars.newCarBaseUrl, queryParams);
 
     const res = await apiFetch<GetCarsResponseData>(url, {

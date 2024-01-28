@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Accordion, AccordionItem } from '@nextui-org/accordion';
 import { Checkbox } from '@nextui-org/checkbox';
 import { Button } from '@nextui-org/button';
@@ -8,10 +8,15 @@ import { Button } from '@nextui-org/button';
 import { PlusIcon } from 'lucide-react';
 
 import fuelData from '@/data/index.json';
+import useQueryParam from '@/hooks/useQueryString';
 
 type Fuel = { value: { fuelType: string; fullForm: string }; label: string };
 
+const FUEL_KEY = 'fuelType';
+
 const FuelTypes = () => {
+  const { setQueryParam } = useQueryParam(FUEL_KEY);
+
   const [selectedFuels, setSelectedFuels] = React.useState<Fuel[]>([]);
   const [showMore, setShowMore] = React.useState(false);
 
@@ -29,6 +34,13 @@ const FuelTypes = () => {
       setSelectedFuels([...selectedFuels, fuelType]);
     }
   }
+
+  useEffect(() => {
+    if (!selectedFuels.length) return;
+
+    const fuelTypes = selectedFuels.map((fuel) => fuel.value.fuelType);
+    setQueryParam(FUEL_KEY, fuelTypes);
+  }, [setQueryParam, selectedFuels]);
 
   function getCheckboxes() {
     return (
@@ -85,7 +97,7 @@ const FuelTypes = () => {
   }
 
   return (
-    <div className='flex h-full flex-col items-start justify-center gap-4 overflow-hidden px-2 pb-2'>
+    <div className='flex h-full flex-col items-start justify-center gap-4 overflow-hidden px-2 pb-2 pt-[2px]'>
       {getCheckboxes()}
     </div>
   );

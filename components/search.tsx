@@ -37,15 +37,16 @@ export default function Search() {
   }
 
   useEffect(() => {
-    const newParams = new URLSearchParams(searchParams);
-    const query = searchParams.get('query');
-    if (!query?.length) {
-      newParams.delete('query');
+    if (
+      searchParams.has('scope') &&
+      (!searchParams.get('query') || !searchParams.get('query')?.length)
+    ) {
+      const newParams = new URLSearchParams(searchParams);
       newParams.delete('scope');
 
       router.push(createUrl('/search', newParams));
     }
-  }, [router, searchParams]);
+  }, [searchParams, router]);
 
   return (
     <>

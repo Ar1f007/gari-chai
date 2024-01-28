@@ -23,7 +23,7 @@ const NumberOfSeats = () => {
 
   useEffect(() => {
     setQueryParam('seats', selectedSeats);
-  }, [selectedSeats]);
+  }, [selectedSeats, setQueryParam]);
 
   function getCheckboxes() {
     return (
@@ -50,7 +50,7 @@ const NumberOfSeats = () => {
   }
 
   return (
-    <div className='flex h-full flex-col items-start justify-center gap-4 overflow-hidden px-2 pb-2'>
+    <div className='flex h-full flex-col items-start justify-center gap-4 overflow-hidden px-2 pb-2 pt-[2px]'>
       {getCheckboxes()}
     </div>
   );
