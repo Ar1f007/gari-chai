@@ -18,28 +18,10 @@ const ALL_FILTER_KEYS = ['1', '2', '3', '4', '5', '6'];
 
 export const SearchFilters = () => {
   const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   const [selectedKeys, setSelectedKeys] = useState<Selection>(
     isMobile ? new Set([]) : new Set(ALL_FILTER_KEYS),
   );
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams],
-  );
-
-  const resetQueryPath = useCallback(() => {
-    const params = new URLSearchParams();
-    params.set('query', '');
-    return params.toString();
-  }, []);
 
   function handleExpandCollapseFilters() {
     const keys = (selectedKeys as Set<string>).size === 0 ? new Set(ALL_FILTER_KEYS) : new Set([]);

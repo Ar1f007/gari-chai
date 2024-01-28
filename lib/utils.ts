@@ -15,7 +15,7 @@ import { URLSearchParams } from 'url';
  * const pathname = '/users';
  * const params = new URLSearchParams({ name: 'John', age: '30' });
  * const url = createUrl(pathname, params);
- * console.log(url); // Output: '/users?name=John&age=30'
+ * Output: '/users?name=John&age=30'
  */
 export const createUrl = (pathname: string, params: URLSearchParams | ReadonlyURLSearchParams) => {
   const paramsString = params.toString();
@@ -61,8 +61,6 @@ export function getRedirectPath(params: URLSearchParams | ReadonlyURLSearchParam
 
       // Remove the 'pathname' parameter
       mutableParams.delete('pathname');
-
-      console.log(mutableParams.get('pathname'), decodeURIComponent(redirectPath));
 
       // Create the new URL with the updated parameters
       const url = createUrl(decodeURIComponent(redirectPath), mutableParams);

@@ -42,7 +42,6 @@ export const reviews = {
         if (parsedData.success) {
           return parsedData.data;
         }
-        console.error('ERROR REVIEW_WITH_STATS API');
       }
 
       return null;

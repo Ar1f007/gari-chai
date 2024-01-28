@@ -40,7 +40,6 @@ export async function getCars(queryParams: URLSearchParams) {
 
     throw new Error('ERROR! Car data missing');
   } catch (err) {
-    console.log(err);
     if (err instanceof Error) {
       return err.message;
     }

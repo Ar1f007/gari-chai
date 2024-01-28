@@ -37,7 +37,6 @@ export async function apiFetch<Data = unknown, ErrData = TApiError>(
 
     return jsonRes;
   } catch (e: any) {
-    console.log({ e });
     throw e;
   }
 }

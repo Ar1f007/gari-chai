@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { Accordion, AccordionItem } from '@nextui-org/accordion';
 import { Checkbox } from '@nextui-org/checkbox';
 import { Button } from '@nextui-org/button';
 
@@ -15,7 +14,9 @@ type Fuel = { value: { fuelType: string; fullForm: string }; label: string };
 const FUEL_KEY = 'fuelType';
 
 const FuelTypes = () => {
-  const { setQueryParam } = useQueryParam(FUEL_KEY);
+  const { getQueryParam, setQueryParam } = useQueryParam(FUEL_KEY);
+
+  const fuelsInUrl = getQueryParam(FUEL_KEY);
 
   const [selectedFuels, setSelectedFuels] = React.useState<Fuel[]>([]);
   const [showMore, setShowMore] = React.useState(false);
@@ -36,11 +37,16 @@ const FuelTypes = () => {
   }
 
   useEffect(() => {
+    if (!fuelsInUrl) setSelectedFuels([]);
+  }, [fuelsInUrl]);
+
+  useEffect(() => {
     if (!selectedFuels.length) return;
 
     const fuelTypes = selectedFuels.map((fuel) => fuel.value.fuelType);
     setQueryParam(FUEL_KEY, fuelTypes);
-  }, [setQueryParam, selectedFuels]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedFuels]);
 
   function getCheckboxes() {
     return (

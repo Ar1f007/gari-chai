@@ -32,8 +32,6 @@ const Models = () => {
       return <p className='text-red-500'>{errMsg}</p>;
     }
 
-    console.log(initialValue);
-
     return (
       <div className='space-y-4'>
         <RadioGroup

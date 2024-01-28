@@ -12,10 +12,14 @@ import useQueryParam from '@/hooks/useQueryString';
 // FIX API BEING CALLED MULTIPLE TIMES
 // SET INITIAL VALUE FROM QUERY PARAMS
 
-const Budget = () => {
-  const { setQueryParam } = useQueryParam();
+const BUDGET_KEY = 'budget';
+const DEFAULT_RANGE_VALUE = [0, 2_00_00_000];
 
-  const [value, setValue] = React.useState<SliderValue>([0, 2_00_00_000]);
+const Budget = () => {
+  const { getQueryParam, setQueryParam } = useQueryParam();
+  const budgetValInUrl = getQueryParam(BUDGET_KEY);
+
+  const [value, setValue] = React.useState<SliderValue>(DEFAULT_RANGE_VALUE);
   const [selected, setSelected] = React.useState('');
   const [userInteracted, setUserInteracted] = React.useState(false);
   const [isRequestInProgress, setIsRequestInProgress] = React.useState(false);
@@ -51,6 +55,13 @@ const Budget = () => {
   const updateUrlQueryDebounced = React.useMemo(() => debounce(updateUrlQuery, 500), []);
 
   const updateSelectValue = React.useMemo(() => debounce(findAndUpdateRadioGroupVal, 500), []);
+
+  React.useEffect(() => {
+    if (!budgetValInUrl) {
+      setSelected('');
+      setValue(DEFAULT_RANGE_VALUE);
+    }
+  }, [budgetValInUrl]);
 
   React.useEffect(() => {
     if (!selected.length) return;

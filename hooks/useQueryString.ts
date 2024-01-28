@@ -22,6 +22,22 @@ const useQueryParam = (paramName?: string) => {
     }
   }, [searchParams, paramName]);
 
+  const getQueryParam = useCallback(
+    (name: string): string | string[] | null => {
+      const params = new URLSearchParams(searchParams);
+      const paramValue = params.getAll(name);
+
+      if (paramValue.length === 0) {
+        return null;
+      } else if (paramValue.length === 1) {
+        return paramValue[0];
+      } else {
+        return paramValue;
+      }
+    },
+    [searchParams],
+  );
+
   const setQueryParam = useCallback(
     (name: string, values: string | string[] | number | number[]) => {
       const params = new URLSearchParams(searchParams);
@@ -46,7 +62,7 @@ const useQueryParam = (paramName?: string) => {
     router.push('');
   }, [router]);
 
-  return { initialValue, setQueryParam, resetQueryParams };
+  return { initialValue, getQueryParam, setQueryParam, resetQueryParams };
 };
 
 export default useQueryParam;

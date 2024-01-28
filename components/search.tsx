@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Input } from '@nextui-org/input';
 
@@ -11,7 +11,6 @@ import { DEFAULT_PAGINATION_ITEMS_LIMIT } from '@/lib/constants';
 export default function Search() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [query, setQuery] = useState('');
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -23,30 +22,19 @@ export default function Search() {
 
     if (search.value) {
       newParams.set('query', search.value);
+      newParams.set('scope', 'global');
     } else {
       newParams.delete('query');
+      newParams.delete('scope');
     }
 
     // if (!search.value.length) return; // prevent user from searching with an empty value
 
     newParams.set('page', newParams.get('page') || '1');
     newParams.set('limit', newParams.get('limit') || DEFAULT_PAGINATION_ITEMS_LIMIT.toString());
-    newParams.set('scope', 'global');
 
     router.push(createUrl('/search', newParams));
   }
-
-  useEffect(() => {
-    if (
-      searchParams.has('scope') &&
-      (!searchParams.get('query') || !searchParams.get('query')?.length)
-    ) {
-      const newParams = new URLSearchParams(searchParams);
-      newParams.delete('scope');
-
-      router.push(createUrl('/search', newParams));
-    }
-  }, [searchParams, router]);
 
   return (
     <>
