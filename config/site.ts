@@ -1,5 +1,5 @@
 import { TNavItems } from '@/types';
-import { navMenuItems } from './routes';
+import { navMenuItems, navigation } from './routes';
 
 export type SiteConfig = {
   name: string;
@@ -8,6 +8,11 @@ export type SiteConfig = {
   links: {
     github: string;
     twitter: string;
+  };
+  navigation: {
+    commonNavItems: TNavItems;
+    mobileNavItems: TNavItems;
+    desktopNavItems: TNavItems;
   };
 };
 
@@ -20,4 +25,5 @@ export const siteConfig = {
     github: 'https://github.com/Ar1f007',
     twitter: 'https://github.com/Ar1f007',
   },
+  navigation,
 } satisfies SiteConfig;

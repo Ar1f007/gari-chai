@@ -15,7 +15,7 @@ import { Button } from '@nextui-org/button';
 import { Logo } from '@/components/icons';
 import Search from '@/components/search';
 
-import { siteConfig } from '@/config/site';
+import { SiteConfig, siteConfig } from '@/config/site';
 import { routes } from '@/config/routes';
 
 import MenuItems from './multi-dropdown/menu-items';
@@ -27,14 +27,15 @@ import SelectLocation from './SelectLocation';
 import NavItem from './NavItem';
 import { MobileAuthButton } from './mobile-auth-button';
 import AuthButton from './auth-button';
+import { TNavItems } from '@/types';
 
 const Navbar = () => {
   const settingSnap = useSnapshot(settingsStore);
 
   const pathname = usePathname();
 
-  function renderNavMenuItems() {
-    return siteConfig.navMenuItems.map((item) => {
+  function renderNavMenuItems(navItems: TNavItems) {
+    return navItems.map((item) => {
       const depthLevel = 0;
       return (
         <MenuItems
@@ -72,7 +73,12 @@ const Navbar = () => {
           </li>
 
           <li className='flex-auto justify-center'>
-            <ul className='ml-2 flex justify-center gap-4 2xl:gap-8'>{renderNavMenuItems()}</ul>
+            <ul className='ml-2 flex justify-center gap-4 2xl:gap-8'>
+              {renderNavMenuItems([
+                ...siteConfig.navigation.commonNavItems,
+                ...siteConfig.navigation.desktopNavItems,
+              ])}
+            </ul>
           </li>
 
           <li>
@@ -124,7 +130,15 @@ const Navbar = () => {
           </li>
           <li>
             <ul className='mx-4 mt-2 flex flex-col gap-6'>
-              {siteConfig.navMenuItems.map((item) => (
+              {siteConfig.navigation.commonNavItems.map((item) => (
+                <NavItem
+                  key={item.id}
+                  item={item}
+                  currentActivePathname={pathname}
+                />
+              ))}
+
+              {siteConfig.navigation.mobileNavItems.map((item) => (
                 <NavItem
                   key={item.id}
                   item={item}

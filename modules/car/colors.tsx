@@ -27,7 +27,7 @@ const Colors = ({ car }: { car: TCarSchema }) => {
       {totalNumOfColors == 1 ? (
         <SingleColorImageGallery galleryItem={car.colors[0]} />
       ) : (
-        <ul className='flex flex-col flex-wrap gap-8 lg:flex-row'>
+        <ul className='flex flex-wrap gap-8 sm:flex-row'>
           {car.colors.map((color, idx) => (
             <li
               key={`color_${idx}`}
@@ -36,7 +36,7 @@ const Colors = ({ car }: { car: TCarSchema }) => {
               <Image
                 src={color.imageUrls?.[0]?.url.thumbnailUrl || PLACEHOLDER_IMAGE}
                 alt={color.name}
-                width={200}
+                width={100}
                 height={200}
                 className='aspect-square rounded object-cover'
               />

@@ -34,7 +34,7 @@ export async function fetchFilteredCars(queryParams: URLSearchParams | ReadonlyU
     });
   } catch (error) {
     if (error instanceof Error) {
-      return error.message;
+      return process.env.NODE_ENV === 'production' ? 'Something went wrong' : error.message;
     }
 
     return 'Something went wrong';

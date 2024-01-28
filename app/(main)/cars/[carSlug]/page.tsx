@@ -32,7 +32,7 @@ export default async function CarDetailsPage(props: Props) {
 
   return (
     <Fragment>
-      <div className='flex flex-col gap-5 xl:flex-row xl:gap-10'>
+      <div className='flex flex-col gap-5 md:flex-row md:gap-5 xl:gap-10'>
         <CarImage car={car} />
 
         <Suspense>

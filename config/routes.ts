@@ -132,17 +132,23 @@ export const navMenuItems: SiteConfig['navMenuItems'] = [
       },
     ],
   },
-
-  {
-    id: 'menu-6',
-    label: 'Car Loan',
-    href: routes.loan,
-    hasChildren: false,
-  },
-  {
-    id: 'menu-7',
-    label: 'Advanced Search',
-    href: routes.search,
-    hasChildren: false,
-  },
 ];
+
+export const navigation: SiteConfig['navigation'] = {
+  commonNavItems: navMenuItems,
+  mobileNavItems: [
+    {
+      id: 'mobile-menu-1',
+      label: 'Car Loan',
+      href: routes.loan,
+      hasChildren: false,
+    },
+    {
+      id: 'mobile-menu-2',
+      label: 'Advance Search',
+      href: routes.search,
+      hasChildren: false,
+    },
+  ],
+  desktopNavItems: [],
+};

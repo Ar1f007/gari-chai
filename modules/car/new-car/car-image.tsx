@@ -14,9 +14,9 @@ const CarImage = (props: Props) => {
       <Image
         src={posterImage.originalUrl}
         alt={name}
-        width={600}
-        height={600}
-        className='h-auto w-auto rounded-lg object-cover'
+        width={500}
+        height={500}
+        className='h-auto w-auto rounded-lg object-cover md:max-w-[500px]'
         priority
       />
     </div>
