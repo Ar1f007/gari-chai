@@ -34,15 +34,15 @@ const QueryResults = async (props: QueryResultsProps) => {
   }
 
   return (
-    <ul className='flex flex-col gap-10'>
+    <ul className='flex flex-col gap-5'>
       {props.items.map((item) => (
         <li
           key={item._id}
-          className='overflow-hidden rounded-md shadow-md'
+          className='overflow-hidden rounded-md  shadow-md '
         >
           <Link
             href={getHref(item)}
-            className='flex flex-col gap-2 sm:flex-row sm:gap-5'
+            className='flex flex-col sm:flex-row sm:gap-5'
           >
             <Image
               src={
@@ -51,14 +51,14 @@ const QueryResults = async (props: QueryResultsProps) => {
               alt={item.name}
               width={200}
               height={200}
-              className='w-full object-cover sm:max-w-48'
+              className='max-h-48 w-full object-cover sm:max-w-48'
             />
 
-            <div className='flex flex-col gap-3 px-5 py-5 sm:px-0'>
+            <div className='flex flex-col gap-2 truncate p-3 pb-5 sm:px-0 md:py-5'>
               <h2 className={title({ size: 'xs', className: 'font-light text-default-800' })}>
                 {item.name}
               </h2>
-              <p className='mb-3 text-base font-medium text-default-800'>
+              <p className='truncate text-sm font-medium text-default-800 md:mb-3 md:text-base'>
                 {formatAsBangladeshiCurrency(item.price.min)}
                 &nbsp;&mdash;&nbsp;
                 {formatAsBangladeshiCurrency(item.price.max)}
@@ -67,7 +67,7 @@ const QueryResults = async (props: QueryResultsProps) => {
                 )}
               </p>
 
-              <div className='flex space-x-2'>
+              <div className='flex flex-wrap gap-2'>
                 <Chip>{item.brand.label}</Chip>
                 <Chip>{item.brandModel.label}</Chip>
                 <Chip>{item.bodyStyle.label}</Chip>

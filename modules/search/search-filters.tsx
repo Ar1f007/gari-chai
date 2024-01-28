@@ -125,7 +125,7 @@ export const SearchFilters = () => {
           <Accordion
             variant='splitted'
             keepContentMounted
-            className='px-0'
+            className='max-w-full px-0'
           >
             <AccordionItem
               key='0'

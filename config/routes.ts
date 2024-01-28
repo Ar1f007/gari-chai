@@ -28,6 +28,8 @@ export const routes = {
   reviews: '/reviews',
 
   profileSettings: '/profile-settings',
+
+  search: '/search',
 };
 
 export const navMenuItems: SiteConfig['navMenuItems'] = [
@@ -135,6 +137,12 @@ export const navMenuItems: SiteConfig['navMenuItems'] = [
     id: 'menu-6',
     label: 'Car Loan',
     href: routes.loan,
+    hasChildren: false,
+  },
+  {
+    id: 'menu-7',
+    label: 'Advanced Search',
+    href: routes.search,
     hasChildren: false,
   },
 ];

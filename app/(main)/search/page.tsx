@@ -27,12 +27,16 @@ const SearchPage = async ({ searchParams }: { searchParams?: Partial<QueryParams
 
   const res = await fetchFilteredCars(queryParams);
 
+  const mobileSearchBar = (
+    <div className='flex justify-center lg:hidden'>
+      <Search />
+    </div>
+  );
+
   if (typeof res === 'string') {
     return (
       <div className='space-y-5'>
-        <div className='lg:hidden'>
-          <Search />
-        </div>
+        {mobileSearchBar}
         <p className='text-center text-xl font-medium'>{res}</p>
       </div>
     );
@@ -41,9 +45,7 @@ const SearchPage = async ({ searchParams }: { searchParams?: Partial<QueryParams
   if (res.status !== 'success') {
     return (
       <div className='space-y-5'>
-        <div className='lg:hidden'>
-          <Search />
-        </div>
+        {mobileSearchBar}
         <p className='text-center text-xl font-medium'>{res.message}</p>
       </div>
     );
@@ -53,9 +55,7 @@ const SearchPage = async ({ searchParams }: { searchParams?: Partial<QueryParams
 
   return (
     <div className='flex flex-col space-y-5 lg:space-y-0'>
-      <div className='lg:hidden'>
-        <Search />
-      </div>
+      {mobileSearchBar}
 
       <Suspense
         key={queryParams.toString()}

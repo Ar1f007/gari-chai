@@ -40,7 +40,7 @@ export default function Search() {
     <>
       <form
         onSubmit={onSubmit}
-        className='xl-w-full relative w-full max-w-[550px] lg:w-80 xl:w-full'
+        className='xl-w-full relative w-full max-w-[550px] lg:w-80'
       >
         <Input
           name='search'
