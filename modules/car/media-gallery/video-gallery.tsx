@@ -6,11 +6,11 @@ type CarVideoGalleryProps = {
 };
 const CarVideoGallery = ({ videos }: CarVideoGalleryProps) => {
   return (
-    <div className='flex flex-wrap justify-center gap-8'>
+    <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
       {videos.map((video, idx) => (
         <div
           key={idx}
-          className='h-auto w-full max-w-[640px] lg:h-[360px]'
+          className='md:h-[360px] md:w-[640px]'
         >
           <ReactPlayer
             url={video.link}

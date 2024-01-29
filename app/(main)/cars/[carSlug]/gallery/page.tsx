@@ -1,4 +1,4 @@
-import MediaGallery from '@/modules/car/media-gallery';
+import MediaGallery from '@/modules/car/media-gallery/media-gallery';
 import { getCarBySlug } from '@/services/car/getCarBySlug';
 import { notFound } from 'next/navigation';
 

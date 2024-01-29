@@ -1,5 +1,3 @@
-import '@/styles/photo-swipe.css';
-
 /* eslint-disable @next/next/no-img-element */
 import { Gallery, Item } from 'react-photoswipe-gallery';
 
@@ -22,7 +20,7 @@ const CarImageGallery = ({ carName = 'car', images }: CarImageGalleryProps) => {
 
   return (
     <Gallery>
-      <div className='grid grid-cols-2 gap-4 overflow-hidden md:grid-cols-3 lg:grid-cols-4'>
+      <div className='grid grid-cols-2 gap-4 overflow-hidden lg:grid-cols-3'>
         {images.map((image) => (
           <Item
             key={image.key}
@@ -36,8 +34,8 @@ const CarImageGallery = ({ carName = 'car', images }: CarImageGalleryProps) => {
                 loading='lazy'
                 src={image.url.originalUrl}
                 alt={`${carName} images`}
-                width={250}
-                height={250}
+                width={400}
+                height={400}
                 className='aspect-video cursor-pointer rounded-sm object-cover drop-shadow-sm'
                 ref={ref}
                 onClick={open}
