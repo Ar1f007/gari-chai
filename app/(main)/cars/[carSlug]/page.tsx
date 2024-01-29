@@ -4,6 +4,10 @@ import CarDescription from '@/modules/car/description';
 import CarImage from '@/modules/car/new-car/car-image';
 import CarInfo from '@/modules/car/new-car/car-info';
 import Reviews from '@/modules/car/reviews';
+import { CarImageSkeleton } from '@/modules/car/skeletons/image';
+import CarInfoSkeleton from '@/modules/car/skeletons/info';
+import SpecificationsSkeleton from '@/modules/car/skeletons/specification';
+import CarDetailsTopInfoPlaceholder from '@/modules/car/skeletons/top-part';
 import Specifications from '@/modules/car/specifications';
 
 import { getCarBySlug } from '@/services/car/getCarBySlug';
@@ -32,19 +36,19 @@ export default async function CarDetailsPage(props: Props) {
 
   return (
     <Fragment>
-      <div className='flex flex-col gap-5 md:flex-row md:gap-5 xl:gap-10'>
-        <CarImage car={car} />
+      <Suspense fallback={<CarDetailsTopInfoPlaceholder />}>
+        <div className='flex flex-col gap-5 md:flex-row md:gap-5 xl:gap-10'>
+          <CarImage car={car} />
 
-        <Suspense>
           <CarInfo car={car} />
-        </Suspense>
-      </div>
+        </div>
 
-      <Specifications car={car} />
+        <Specifications car={car} />
 
-      {car.description && <CarDescription text={car.description} />}
+        {car.description && <CarDescription text={car.description} />}
 
-      <Colors car={car} />
+        <Colors car={car} />
+      </Suspense>
 
       <Suspense>
         <Reviews car={car} />

@@ -1,14 +1,11 @@
-import { Spinner } from '@nextui-org/spinner';
+import CarPageLoader from '@/modules/car/skeletons/car-page-loader';
+import CarDetailsTopInfoPlaceholder from '@/modules/car/skeletons/top-part';
 
 const Loading = () => {
   return (
-    <div className='flex h-[calc(100vh_-_300px)] items-center justify-center'>
-      <Spinner
-        size='md'
-        color='primary'
-      />
+    <div>
+      <CarPageLoader />
     </div>
   );
 };
-
 export default Loading;

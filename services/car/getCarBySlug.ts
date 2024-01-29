@@ -2,6 +2,7 @@ import { carSchema } from '@/schema/car';
 import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
+import { delay } from '@/lib/utils';
 
 type TGetCarBySlugPayload = {
   slug: string;
