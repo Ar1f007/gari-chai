@@ -103,7 +103,12 @@ export const carSchema = z.object({
     thumbnailUrl: z.string().url(),
   }),
 
-  imageUrls: z.array(imageSchema),
+  imageUrls: z.array(
+    z.object({
+      key: z.string(),
+      url: imageSchema,
+    }),
+  ),
 
   videos: z
     .array(
@@ -136,7 +141,13 @@ export const carSchema = z.object({
   isVerified: z.boolean(),
 
   panoramaImages: z
-    .array(imageSchema.extend({ title: z.string() }))
+    .array(
+      z.object({
+        key: z.string(),
+        title: z.string(),
+        url: imageSchema,
+      }),
+    )
     .optional()
     .default([]),
 
