@@ -122,7 +122,7 @@ export default CarImage;
 const RenderCount = ({ count, text }: { count: number; text: string }) => {
   return (
     <p className='ms-2 text-small font-medium text-foreground'>
-      {count > 0 ? +count : null} {text}
+      {count > 0 ? `+${count} ${text}` : null}
     </p>
   );
 };

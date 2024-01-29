@@ -1,10 +1,16 @@
 import { NextRequest } from 'next/server';
-import { revalidateTag } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { HttpStatus } from '@/services';
 import { z } from 'zod';
 
-const TagsSchema = z.object({
+const RevalidateParamsSchema = z.object({
   tags: z.array(z.string()),
+  paths: z.array(
+    z.object({
+      path: z.string(),
+      type: z.enum(['layout', 'page']).optional(),
+    }),
+  ),
 });
 
 export async function POST(request: NextRequest) {
@@ -27,13 +33,13 @@ export async function POST(request: NextRequest) {
 
     const data = await request.json();
 
-    const parsedData = TagsSchema.safeParse(data);
+    const parsedData = RevalidateParamsSchema.safeParse(data);
 
     if (!parsedData.success) {
       return Response.json(
         {
           success: 'fail',
-          message: "Invalid data structure. Valid Ex: {tags: ['tag']}",
+          message: "Invalid data structure. Valid Ex: {tags: ['tag']} { paths: ['/path']}",
         },
         {
           status: HttpStatus.BAD_REQUEST,
@@ -42,6 +48,7 @@ export async function POST(request: NextRequest) {
     }
 
     parsedData.data.tags.forEach((tag) => revalidateTag(tag));
+    parsedData.data.paths.forEach((path) => revalidatePath(path.path, path.type));
 
     let allowedOrigin;
 
