@@ -30,7 +30,7 @@ const CarImage = (props: Props) => {
 
       {imageUrls.length > 0 && (
         <Link
-          href={`/cars/${slug}/gallery?media=image`}
+          href={`/cars/${slug}/gallery?media=images`}
           className='inline-block'
         >
           <AvatarGroup

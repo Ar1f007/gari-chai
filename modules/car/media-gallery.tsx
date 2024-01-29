@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import ColorSlider from './color-slider';
 import CarImageGallery from './image-gallery';
+import CarVideoGallery from './video-gallery';
 
 type MediaType = 'images' | 'videos' | 'colors';
 
@@ -40,7 +41,7 @@ const MediaGallery = ({ car }: { car: TCarSchema }) => {
             key='images'
             title='Images'
           >
-            <div className='container w-full '>
+            <div className='container'>
               <CarImageGallery
                 carName={car.name}
                 images={car.imageUrls}
@@ -51,13 +52,15 @@ const MediaGallery = ({ car }: { car: TCarSchema }) => {
             key='videos'
             title='Videos'
           >
-            <div>B</div>
+            <div className='container'>
+              <CarVideoGallery videos={car.videos} />
+            </div>
           </Tab>
           <Tab
             key='colors'
             title='Colors'
           >
-            <div className='container w-full '>
+            <div className='container'>
               <ColorSlider car={car} />
             </div>
           </Tab>
