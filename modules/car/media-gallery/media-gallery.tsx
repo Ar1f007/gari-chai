@@ -1,7 +1,6 @@
 'use client';
 import '@/styles/photo-swipe.css';
 
-import { useState } from 'react';
 import { TCarSchema } from '@/schema/car';
 import { Tab, Tabs } from '@nextui-org/tabs';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
