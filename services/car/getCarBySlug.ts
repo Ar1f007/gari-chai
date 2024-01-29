@@ -17,7 +17,7 @@ export async function getCarBySlug(payload: TGetCarBySlugPayload) {
     const res = await apiFetch(url + '/' + payload.slug, {
       method: ReqMethod.GET,
       next: {
-        revalidate: 600,
+        revalidate: 0,
       },
     });
 
