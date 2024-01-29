@@ -1,11 +1,10 @@
-import Image from 'next/image';
-import Link from 'next/link';
-
 import { title } from '@/components/primitives';
 import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 import { TCarSchema } from '@/schema/car';
 
 import SingleColorImageGallery from './single-color-img-gallery';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const Colors = ({ car }: { car: TCarSchema }) => {
   if (!car.colors.length) return null;
