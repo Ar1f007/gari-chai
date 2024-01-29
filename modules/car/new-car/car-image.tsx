@@ -4,7 +4,6 @@ import { TCarSchema } from '@/schema/car';
 import { Avatar, AvatarGroup } from '@nextui-org/avatar';
 import Image from 'next/image';
 import Link from 'next/link';
-import RenderCount from '../render-count';
 import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 
 type Props = {
@@ -17,13 +16,13 @@ const CarImage = (props: Props) => {
   } = props;
 
   return (
-    <div className='max-w-[500px] space-y-5'>
+    <div className='max-w-[550px] space-y-5'>
       <Image
         src={posterImage.originalUrl}
         alt={name}
-        width={500}
-        height={500}
-        className='h-auto w-full rounded-lg object-cover md:max-w-[500px]'
+        width={550}
+        height={550}
+        className='h-auto w-full rounded-lg object-cover'
         priority
       />
 
@@ -41,7 +40,7 @@ const CarImage = (props: Props) => {
               size='lg'
               renderCount={(count) => (
                 <RenderCount
-                  count={count}
+                  count={count - 3}
                   text='images'
                 />
               )}
@@ -70,7 +69,7 @@ const CarImage = (props: Props) => {
               size='lg'
               renderCount={(count) => (
                 <RenderCount
-                  count={count}
+                  count={count - 1}
                   text='videos'
                 />
               )}
@@ -99,7 +98,7 @@ const CarImage = (props: Props) => {
               size='lg'
               renderCount={(count) => (
                 <RenderCount
-                  count={count}
+                  count={count - 1}
                   text='colors'
                 />
               )}
@@ -119,3 +118,11 @@ const CarImage = (props: Props) => {
   );
 };
 export default CarImage;
+
+const RenderCount = ({ count, text }: { count: number; text: string }) => {
+  return (
+    <p className='ms-2 text-small font-medium text-foreground'>
+      +{count} {text}
+    </p>
+  );
+};

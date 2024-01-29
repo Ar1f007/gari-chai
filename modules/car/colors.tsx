@@ -51,7 +51,7 @@ const Colors = ({ car }: { car: TCarSchema }) => {
         <div>
           <Link
             className='text-primary underline'
-            href={`/cars/${car.slug}/colors`}
+            href={`/cars/${car.slug}/gallery?media=colors`}
           >
             View all images with colors
           </Link>
