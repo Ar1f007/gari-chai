@@ -11,12 +11,11 @@ import { Button } from '@nextui-org/button';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import Link from 'next/link';
 import { routes } from '@/config/routes';
-import { AuthenticationMethods } from '@/schema/register';
 import { z } from 'zod';
 import { auth } from '@/services/user';
 import { toast } from 'sonner';
 import { userActions } from '@/store';
-import { getRedirectPath } from '@/lib/utils';
+import { createUrl } from '@/lib/utils';
 import { mapValidationErrors } from '@/util/mapValidationError';
 import { GENERIC_ERROR_MSG } from '@/lib/constants';
 import { TApiData, TApiError } from '@/types';
@@ -39,11 +38,26 @@ const LoginPage = () => {
     },
   });
 
+  function redirectPath() {
+    const searchParams = new URLSearchParams(params);
+    const redirectPath = searchParams.get('pathname');
+
+    searchParams.delete('pathname');
+
+    if (redirectPath) {
+      const url = createUrl(decodeURIComponent(redirectPath), searchParams);
+
+      return url;
+    }
+
+    return routes.home;
+  }
+
   async function handleLoginResponse(res: TApiError | TApiData<TAuthBasicUserInfo>) {
     if (res.status === 'success') {
       userActions.setUser(res.data);
 
-      router.push(getRedirectPath(params));
+      router.push(redirectPath());
       return;
     }
 

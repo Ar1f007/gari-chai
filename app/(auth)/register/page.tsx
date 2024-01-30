@@ -26,7 +26,7 @@ import {
 } from '@/schema/register';
 import { registerUser } from '@/services/user/register';
 import Link from 'next/link';
-import { getRedirectPath } from '@/lib/utils';
+import { createUrl } from '@/lib/utils';
 
 const RegisterPage = () => {
   const [signupMethod, setSignupMethod] = React.useState<AuthenticationMethods>('email');
@@ -44,13 +44,28 @@ const RegisterPage = () => {
     resolver: zodResolver(schema),
   });
 
+  function redirectPath() {
+    const searchParams = new URLSearchParams(params);
+    const redirectPath = searchParams.get('pathname');
+
+    searchParams.delete('pathname');
+
+    if (redirectPath) {
+      const url = createUrl(decodeURIComponent(redirectPath), searchParams);
+
+      return url;
+    }
+
+    return routes.home;
+  }
+
   async function handleSignupResponse(res: TApiError | TApiData<TAuthBasicUserInfo>) {
     if (res.status === 'success') {
       toast.success('Account created successfully');
 
       userActions.setUser(res.data);
 
-      router.push(getRedirectPath(params));
+      router.push(redirectPath());
       return;
     }
 
