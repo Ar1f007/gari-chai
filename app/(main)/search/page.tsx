@@ -27,11 +27,7 @@ const SearchPage = async ({ searchParams }: { searchParams?: Partial<QueryParams
 
   const res = await fetchFilteredCars(queryParams);
 
-  const mobileSearchBar = (
-    <div className='flex justify-center lg:hidden'>
-      <Search />
-    </div>
-  );
+  const mobileSearchBar = <SearchBar />;
 
   if (typeof res === 'string') {
     return (
@@ -74,3 +70,9 @@ const SearchPage = async ({ searchParams }: { searchParams?: Partial<QueryParams
 };
 
 export default SearchPage;
+
+const SearchBar = () => (
+  <div className='flex justify-center lg:hidden'>
+    <Search />
+  </div>
+);

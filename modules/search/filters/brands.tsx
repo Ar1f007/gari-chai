@@ -18,6 +18,7 @@ const Brands = () => {
   const [popularBrands, setPopularBrands] = React.useState<BrandsWithSections['popularBrands']>([]);
   const [showMore, setShowMore] = React.useState(false);
   const [showMorePopularBrands, setShowMorePopularBrands] = React.useState(false);
+  const [_pending, startTransition] = React.useTransition();
 
   React.useEffect(() => {
     if (brands) {
@@ -45,7 +46,9 @@ const Brands = () => {
       <RadioGroup
         value={initialValue || ''}
         onValueChange={(value) => {
-          setQueryParam('brand', value);
+          startTransition(() => {
+            setQueryParam('brand', value);
+          });
         }}
         label={label}
         classNames={{ wrapper: 'grid grid-cols-2 w-full' }}

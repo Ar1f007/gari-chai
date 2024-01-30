@@ -1,6 +1,6 @@
 import { Spinner } from '@nextui-org/spinner';
 import { RadioGroup, Radio } from '@nextui-org/radio';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState, useTransition } from 'react';
 import { Button } from '@nextui-org/button';
 
 import useQueryParam from '@/hooks/useQueryString';
@@ -10,6 +10,8 @@ const Models = () => {
   const { fetchCarModels, data: models, errMsg, isLoading } = useGetCarModels();
 
   const [showMore, setShowMore] = useState(false);
+
+  const [_pending, startTransition] = useTransition();
 
   const { initialValue, setQueryParam } = useQueryParam('model');
 
@@ -37,7 +39,9 @@ const Models = () => {
         <RadioGroup
           value={initialValue || ''}
           onValueChange={(val) => {
-            setQueryParam('model', val);
+            startTransition(() => {
+              setQueryParam('model', val);
+            });
           }}
           classNames={{
             wrapper: 'grid grid-cols-2 w-full',
