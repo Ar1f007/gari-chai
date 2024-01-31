@@ -51,7 +51,8 @@ const MediaGallery = ({ car }: { car: TCarSchema }) => {
           >
             <CarImageGallery
               carName={car.name}
-              images={car.imageUrls}
+              additionalImages={car.imageUrls}
+              colorImages={car.colors}
             />
           </Tab>
           <Tab

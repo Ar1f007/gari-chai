@@ -1,7 +1,7 @@
 'use client';
 
+import { subtitle } from '@/components/primitives';
 import { TCarSchema } from '@/schema/car';
-import { useReducer } from 'react';
 import { Gallery, Item } from 'react-photoswipe-gallery';
 
 type ColorSpecificImagesProps = {
@@ -13,34 +13,44 @@ const ColorSpecificImages = ({ colorImages }: ColorSpecificImagesProps) => {
 
   return (
     <Gallery withCaption>
-      <div className='grid grid-cols-2 gap-4 overflow-hidden lg:grid-cols-3'>
-        {colorImages.map((imageGroup) =>
-          imageGroup.imageUrls.map((image) => (
-            <Item<HTMLImageElement>
-              key={image.key}
-              original={image.url.originalUrl}
-              thumbnail={image.url.thumbnailUrl}
-              width={500}
-              height={500}
-              caption={imageGroup.name}
-              alt={`${imageGroup.name} images`}
+      <div className='space-y-5'>
+        {colorImages.map((imageGroup, idx) => {
+          return (
+            <div
+              className='space-y-5'
+              key={idx}
             >
-              {({ ref, open }) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  loading='lazy'
-                  src={image.url.originalUrl}
-                  alt={`${imageGroup.name} images`}
-                  width={400}
-                  height={400}
-                  className='aspect-video cursor-pointer rounded-sm object-cover drop-shadow-sm'
-                  ref={ref}
-                  onClick={open}
-                />
-              )}
-            </Item>
-          )),
-        )}
+              <h3 className={subtitle({ className: 'font-medium' })}>{imageGroup.name}</h3>
+              <div className='grid grid-cols-2 gap-4 overflow-hidden lg:grid-cols-3'>
+                {imageGroup.imageUrls.map((image) => (
+                  <Item<HTMLImageElement>
+                    key={image.key}
+                    original={image.url.thumbnailUrl}
+                    thumbnail={image.url.thumbnailUrl}
+                    width={500}
+                    height={500}
+                    caption={imageGroup.name}
+                    alt={`images for ${imageGroup.name} color`}
+                  >
+                    {({ ref, open }) => (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        loading='lazy'
+                        src={image.url.thumbnailUrl}
+                        alt={`images for ${imageGroup.name} color`}
+                        width={400}
+                        height={400}
+                        className='aspect-video cursor-pointer rounded-sm object-cover drop-shadow-sm'
+                        ref={ref}
+                        onClick={open}
+                      />
+                    )}
+                  </Item>
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </Gallery>
   );
