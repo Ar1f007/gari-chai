@@ -11,7 +11,7 @@ export const sliderSchema = z.object({
   sort: z.number(),
 
   isSponsored: z.boolean().default(false).optional(),
-  metadata: z.record(z.string().min(1), z.any()).optional().default({}),
+  metadata: z.record(z.string().min(1), z.unknown()).optional().default({}),
   sliderStyle: z
     .object({
       textColor: z.string().default(''),
