@@ -28,7 +28,7 @@ export const Car = ({ car }: CarProps) => {
           />
         </Link>
       </CardHeader>
-      <CardBody className='px-4'>
+      <CardBody className='justify-around px-4 pb-4'>
         <Link href={url}>
           <h2
             title={name.length > 30 ? name : ''}
