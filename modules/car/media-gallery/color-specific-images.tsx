@@ -13,15 +13,17 @@ const ColorSpecificImages = ({ colorImages }: ColorSpecificImagesProps) => {
 
   return (
     <Gallery withCaption>
-      <div className='space-y-5'>
+      <div className='mx-auto flex max-w-screen-xl flex-wrap gap-5'>
         {colorImages.map((imageGroup, idx) => {
           return (
             <div
               className='space-y-5'
               key={idx}
             >
-              <h3 className={subtitle({ className: 'font-medium' })}>{imageGroup.name}</h3>
-              <div className='grid grid-cols-2 gap-4 overflow-hidden lg:grid-cols-3'>
+              <h3 className={subtitle({ className: 'font-medium capitalize' })}>
+                {imageGroup.name}
+              </h3>
+              <div className='flex flex-wrap gap-5'>
                 {imageGroup.imageUrls.map((image) => (
                   <Item<HTMLImageElement>
                     key={image.key}

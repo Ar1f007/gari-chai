@@ -4,6 +4,7 @@ import { Gallery, Item } from 'react-photoswipe-gallery';
 import ColorSpecificImages from './color-specific-images';
 import { TCarSchema } from '@/schema/car';
 import { subtitle, title } from '@/components/primitives';
+import { cn } from '@/lib/utils';
 
 type ImageGalleryItem = {
   title?: string;
@@ -28,7 +29,7 @@ const CarImageGallery = ({
     return <p className='text-center text-xl'>No additional images were for this car</p>;
 
   return (
-    <div className='space-y-10'>
+    <div className={cn({ 'space-y-10': additionalImages.length > 0 })}>
       <Gallery>
         <div className='grid grid-cols-2 gap-4 overflow-hidden lg:grid-cols-3'>
           {additionalImages.map((image) => (
@@ -57,7 +58,16 @@ const CarImageGallery = ({
       </Gallery>
 
       <div className='space-y-5'>
-        <h3 className={title({ size: 'sm', className: 'text-center', fullWidth: true })}>Colors</h3>
+        {!!additionalImages.length && (
+          <h3
+            className={subtitle({
+              className: 'text-center font-medium capitalize',
+              fullWidth: true,
+            })}
+          >
+            Colors
+          </h3>
+        )}
         <ColorSpecificImages colorImages={colorImages} />
       </div>
     </div>
