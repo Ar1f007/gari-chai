@@ -2,7 +2,6 @@ import { carSchema } from '@/schema/car';
 import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
-import { delay } from '@/lib/utils';
 
 type TGetCarBySlugPayload = {
   slug: string;
@@ -17,9 +16,10 @@ export async function getCarBySlug(payload: TGetCarBySlugPayload) {
 
     const res = await apiFetch(url + '/' + payload.slug, {
       method: ReqMethod.GET,
-      next: {
-        revalidate: 0,
-      },
+      cache: 'force-cache',
+      // next: {
+      //   revalidate: 0,
+      // },
     });
 
     if (res.status === 'success') {

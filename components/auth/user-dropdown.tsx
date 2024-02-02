@@ -59,7 +59,7 @@ const UserDropdown = () => {
           className='h-14 gap-2'
         >
           <p className='font-semibold'>Signed in as</p>
-          <p className='font-semibold'>
+          <p className='font-semibold capitalize'>
             {user.firstName} {user.lastName}
           </p>
         </DropdownItem>
