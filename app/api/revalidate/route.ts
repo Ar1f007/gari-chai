@@ -54,7 +54,8 @@ export async function POST(request: NextRequest) {
 
     if (
       requestOrigin === process.env.ALLOWED_ORIGIN_1! ||
-      requestOrigin === process.env.ALLOWED_ORIGIN_2!
+      requestOrigin === process.env.ALLOWED_ORIGIN_2! ||
+      requestOrigin === process.env.ALLOWED_ORIGIN_3!
     ) {
       allowedOrigin = requestOrigin;
     } else {
