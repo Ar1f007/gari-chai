@@ -8,6 +8,7 @@ import CarImageGallery from './image-gallery';
 import CarVideoGallery from './video-gallery';
 import ColorSpecificImages from './color-specific-images';
 import { createUrl } from '@/lib/utils';
+import { Suspense, useState } from 'react';
 
 type MediaType = 'images' | 'videos' | 'colors';
 
@@ -15,6 +16,8 @@ const MediaGallery = ({ car }: { car: TCarSchema }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+
+  const [selected, setSelected] = useState(searchParams.get('media') || 'images');
 
   function setPath(val: MediaType) {
     const params = new URLSearchParams(searchParams);
@@ -37,13 +40,14 @@ const MediaGallery = ({ car }: { car: TCarSchema }) => {
   const currentMediaType = searchParams.get('media') || 'images';
 
   return (
-    <div>
+    <Suspense fallback={<p>Loading....</p>}>
       <div className='grid grid-cols-1 place-content-center place-items-center items-center gap-5'>
         <Tabs
           aria-label='Media Tabs'
           radius='full'
-          selectedKey={currentMediaType}
-          onSelectionChange={(val) => setPath(val as MediaType)}
+          selectedKey={selected}
+          onSelectionChange={(val) => setSelected(val as MediaType)}
+          // onSelectionChange={(val) => setPath(val as MediaType)}
         >
           <Tab
             key='images'
@@ -69,7 +73,7 @@ const MediaGallery = ({ car }: { car: TCarSchema }) => {
           </Tab>
         </Tabs>
       </div>
-    </div>
+    </Suspense>
   );
 };
 export default MediaGallery;

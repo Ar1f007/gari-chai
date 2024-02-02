@@ -137,12 +137,12 @@ export const navMenuItems: SiteConfig['navMenuItems'] = [
 export const navigation: SiteConfig['navigation'] = {
   commonNavItems: navMenuItems,
   mobileNavItems: [
-    {
-      id: 'mobile-menu-1',
-      label: 'Car Loan',
-      href: routes.loan,
-      hasChildren: false,
-    },
+    // {
+    //   id: 'mobile-menu-1',
+    //   label: 'Car Loan',
+    //   href: routes.loan,
+    //   hasChildren: false,
+    // },
     {
       id: 'mobile-menu-2',
       label: 'Advance Search',

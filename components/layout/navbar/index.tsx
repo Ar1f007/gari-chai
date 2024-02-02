@@ -81,7 +81,7 @@ const Navbar = () => {
             </ul>
           </li>
 
-          <li>
+          {/* <li>
             <Button
               as={Link}
               href={routes.loan}
@@ -91,7 +91,7 @@ const Navbar = () => {
             >
               Car Loan
             </Button>
-          </li>
+          </li> */}
         </NavbarContent>
 
         {/* Mobile */}
