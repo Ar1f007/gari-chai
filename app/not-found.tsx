@@ -3,21 +3,21 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: '404',
-  description: 'Something went wrong',
+  description: 'Page Not Found',
 };
 
 export default function NotFound() {
   return (
-    <div className='flex min-h-[calc(100vh-64px)] flex-col items-center justify-center'>
-      <h1 className='text-2xl-semi text-gry-900'>Page not found</h1>
-      <p className='text-small-regular text-foreground'>
-        The page you tried to access does not exist.
+    <div className='flex min-h-[calc(100vh-64px)] flex-col items-center justify-center gap-8'>
+      <h1 className='text-3xl lg:text-5xl'>Page Not Found</h1>
+      <p className='text-lg'>
+        The page you tried to access does not exist or is temporarily unavailable
       </p>
       <Link
         href='/'
-        className='text-base-regular mt-4 text-foreground underline'
+        className='rounded-md bg-primary-500 px-4 py-2 text-white hover:opacity-95'
       >
-        Go to frontpage
+        Go to Home
       </Link>
     </div>
   );
