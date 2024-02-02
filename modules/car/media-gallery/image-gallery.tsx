@@ -29,9 +29,9 @@ const CarImageGallery = ({
     return <p className='text-center text-xl'>No additional images were for this car</p>;
 
   return (
-    <div className={cn({ 'space-y-10': additionalImages.length > 0 })}>
+    <div className={cn({ 'mx-auto max-w-screen-xl space-y-10 ': additionalImages.length > 0 })}>
       <Gallery>
-        <div className='grid grid-cols-2 gap-4 overflow-hidden lg:grid-cols-3'>
+        <div className='flex flex-wrap gap-5'>
           {additionalImages.map((image) => (
             <Item
               key={image.key}
