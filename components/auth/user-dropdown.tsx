@@ -64,7 +64,12 @@ const UserDropdown = () => {
           </p>
         </DropdownItem>
 
-        <DropdownItem key='settings'>My Settings</DropdownItem>
+        <DropdownItem
+          key='settings'
+          onPress={() => router.push(routes.profileSettings)}
+        >
+          My Settings
+        </DropdownItem>
 
         <DropdownItem
           key='logout'

@@ -4,9 +4,6 @@ import CarDescription from '@/modules/car/description';
 import CarImage from '@/modules/car/new-car/car-image';
 import CarInfo from '@/modules/car/new-car/car-info';
 import Reviews from '@/modules/car/reviews';
-import { CarImageSkeleton } from '@/modules/car/skeletons/image';
-import CarInfoSkeleton from '@/modules/car/skeletons/info';
-import SpecificationsSkeleton from '@/modules/car/skeletons/specification';
 import CarDetailsTopInfoPlaceholder from '@/modules/car/skeletons/top-part';
 import Specifications from '@/modules/car/specifications';
 

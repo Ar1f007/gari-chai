@@ -20,6 +20,10 @@ export const userBasicInfoAPIResponseSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   local: userLocal,
+  address: z.string().optional(),
+  additionalInfo: z
+    .object({ email: z.string().optional(), phone: z.string().optional() })
+    .optional(),
   social: z.object({ providers: z.array(socialProvider) }),
   role: z.array(UserRoleEnum).default(['user']),
   isVerified: z.boolean(),

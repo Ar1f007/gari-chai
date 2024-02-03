@@ -40,7 +40,7 @@ const RegisterPage = () => {
 
   const form = useForm<z.infer<typeof schema>>({
     criteriaMode: 'all',
-    mode: 'onTouched',
+    mode: 'all',
     resolver: zodResolver(schema),
   });
 
