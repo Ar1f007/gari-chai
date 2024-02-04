@@ -1,16 +1,16 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 const Hero = () => {
   return (
-    <div className="h-[70vh] relative container mx-auto max-w-screen-2xl">
+    <div className='container relative h-[70vh] max-w-screen-2xl'>
       <Image
-        src="/hero.webp"
-        alt="Lady standing by a car"
+        src='/hero.webp'
+        alt='Lady standing by a car'
         priority
-        className="absolute inset-0 object-cover"
+        className='absolute inset-0 object-cover'
         draggable={false}
         fill
-        sizes="100vw"
+        sizes='100vw'
       />
     </div>
   );
