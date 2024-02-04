@@ -1,3 +1,5 @@
+'use client';
+
 import { memo } from 'react';
 import { Select, SelectItem } from '@nextui-org/select';
 import Icon from '@/components/icon';
@@ -13,8 +15,13 @@ const SelectLocation = () => {
       size='sm'
       className='min-w-[180px]'
     >
-      {manifest.locations.map((location) => (
-        <SelectItem key={location.value}>{location.label}</SelectItem>
+      {manifest.locations.map((location, idx) => (
+        <SelectItem
+          key={idx}
+          value={location.value}
+        >
+          {location.label}
+        </SelectItem>
       ))}
     </Select>
   );

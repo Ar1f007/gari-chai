@@ -3,34 +3,71 @@
 import { RHFInput } from '@/components/form/RHFInput';
 import { RHFTextarea } from '@/components/form/RHFTextarea';
 import SectionTitle from '@/components/section-title';
+import { routes } from '@/config/routes';
+import { invalidatePath, invalidateTags } from '@/lib/actions';
+import { GENERIC_ERROR_MSG } from '@/lib/constants';
+import { TUserProfileSchema, userProfileFormSchema } from '@/schema/user';
+import { auth } from '@/services/user';
 import { userStore } from '@/store';
+import { mapValidationErrors } from '@/util/mapValidationError';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@nextui-org/button';
-import { useEffect } from 'react';
+import { revalidatePath } from 'next/cache';
 import { FormProvider, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { useSnapshot } from 'valtio';
 
 const ProfileInformation = () => {
   const userSnap = useSnapshot(userStore);
 
-  const form = useForm({
-    defaultValues: {
-      firstName: userSnap.user?.firstName || '',
-      lastName: userSnap.user?.lastName || '',
-      address: userSnap.user?.address || '',
-    },
+  const form = useForm<TUserProfileSchema>({
     values: {
       firstName: userSnap.user?.firstName || '',
       lastName: userSnap.user?.lastName || '',
       address: userSnap.user?.address || '',
+      additionalInfo: {
+        email: userSnap.user?.additionalInfo?.email || '',
+        phone: userSnap.user?.additionalInfo?.phone || '',
+      },
     },
+    resolver: zodResolver(userProfileFormSchema),
   });
+
+  async function updateProfileInfo(data: TUserProfileSchema) {
+    try {
+      const res = await auth.updateProfileInfo(data);
+
+      if (!res) throw new Error();
+
+      if (res.status === 'success') {
+        toast('Profile info updated');
+        invalidatePath([
+          {
+            path: routes.profileSettings,
+          },
+        ]);
+        return;
+      }
+
+      if (res.status === 'validationError') {
+        console.log(res.errors);
+        mapValidationErrors(res.errors, form);
+        return;
+      }
+
+      throw new Error(res.message);
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : GENERIC_ERROR_MSG;
+      toast.error(msg);
+    }
+  }
 
   return (
     <section>
       <SectionTitle>Profile Information</SectionTitle>
       <FormProvider {...form}>
         <form
-          onSubmit={form.handleSubmit(() => {})}
+          onSubmit={form.handleSubmit(updateProfileInfo)}
           className='my-5 grid max-w-3xl grid-cols-1 gap-5'
         >
           <div className='grid grid-cols-1 gap-5 sm:grid-cols-2'>
@@ -48,12 +85,12 @@ const ProfileInformation = () => {
           <div className='grid grid-cols-1 gap-5 sm:grid-cols-2'>
             <RHFInput
               label='Phone'
-              name='phone'
+              name='additionalInfo.phone'
               autoComplete='tel'
             />
             <RHFInput
               label='Email'
-              name='email'
+              name='additionalInfo.email'
               autoComplete='email'
             />
           </div>
@@ -69,6 +106,8 @@ const ProfileInformation = () => {
             className='w-fit font-medium'
             size='lg'
             isDisabled={!form.formState.isDirty}
+            type='submit'
+            isLoading={form.formState.isSubmitting}
           >
             Save Changes
           </Button>

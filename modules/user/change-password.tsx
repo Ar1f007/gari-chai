@@ -1,13 +1,44 @@
 'use client';
 
 import { RHFInput } from '@/components/form/RHFInput';
+import { GENERIC_ERROR_MSG } from '@/lib/constants';
+import { TChangePasswordSchema, changePasswordSchema } from '@/schema/user';
+import { auth } from '@/services/user';
+import { userActions } from '@/store';
+import { mapValidationErrors } from '@/util/mapValidationError';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@nextui-org/button';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 const ChangePassword = () => {
   const [showChangePasswordForm, setShowChangePasswordForm] = useState(false);
-  const form = useForm();
+  const form = useForm<TChangePasswordSchema>({
+    resolver: zodResolver(changePasswordSchema),
+  });
+
+  async function handleChangePassword(data: TChangePasswordSchema) {
+    try {
+      const res = await auth.updatePassword(data);
+
+      if (res.status === 'success') {
+        userActions.setUser(res.data);
+        toast('Password changed successfully');
+        return;
+      }
+
+      if (res.status === 'validationError') {
+        mapValidationErrors(res.errors, form);
+        return;
+      }
+
+      throw new Error(res.message);
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : GENERIC_ERROR_MSG;
+      toast.error(msg);
+    }
+  }
 
   return (
     <div>
@@ -28,17 +59,17 @@ const ChangePassword = () => {
           <h2 className='font-medium'>Change Password</h2>
           <FormProvider {...form}>
             <form
-              onSubmit={form.handleSubmit(() => {})}
+              onSubmit={form.handleSubmit(handleChangePassword)}
               className='max-w-sm space-y-5'
             >
               <RHFInput
-                name='password'
+                name='oldPassword'
                 label='Old Password'
                 autoComplete='current-password'
               />
 
               <RHFInput
-                name='password'
+                name='newPassword'
                 label='New Password'
                 autoComplete='new-password'
               />
@@ -49,6 +80,7 @@ const ChangePassword = () => {
                   className='font-medium'
                   variant='flat'
                   color='primary'
+                  isLoading={form.formState.isSubmitting}
                 >
                   Update
                 </Button>

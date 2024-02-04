@@ -33,6 +33,8 @@ export const endpoints = {
       sendOTP: '/users/send-otp',
       verifyOTP: '/users/verify-otp',
       profile: '/users/profile',
+      updateBasicInfo: '/users/update-basic-info',
+      updatePassword: '/users/update-password',
     },
     reviews: {
       baseUrl: '/reviews',

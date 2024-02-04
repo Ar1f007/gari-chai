@@ -1,4 +1,6 @@
 import { z } from 'zod';
+import { phoneNumberSchema } from './common';
+import { signupPasswordSchema } from './register';
 
 const socialProvider = z.object({
   name: z.string(),
@@ -35,3 +37,49 @@ export const userBasicInfoAPIResponseSchema = z.object({
 });
 
 export type TAuthBasicUserInfo = z.infer<typeof userBasicInfoAPIResponseSchema>;
+
+// ========================================================
+export const userProfileFormSchema = z.object({
+  firstName: z.string().min(1, 'First name is required'),
+  lastName: z.string().min(1, 'Last name is required'),
+
+  additionalInfo: z.object({
+    phone: z.optional(
+      z.string().refine(
+        (val) => {
+          if (val.length > 0) {
+            return phoneNumberSchema.safeParse(val).success;
+          }
+
+          return true;
+        },
+        {
+          message: 'Please enter a valid Bangladeshi phone number',
+        },
+      ),
+    ),
+    email: z.string().refine(
+      (val) => {
+        if (val.length > 0) {
+          return z.string().email().safeParse(val).success;
+        } else {
+          return true;
+        }
+      },
+      {
+        message: 'Please enter a valid email address',
+      },
+    ),
+  }),
+
+  address: z.string().optional(),
+});
+
+export type TUserProfileSchema = z.infer<typeof userProfileFormSchema>;
+
+export const changePasswordSchema = z.object({
+  oldPassword: z.string().min(1, 'Old password is required'),
+  newPassword: signupPasswordSchema.shape.password,
+});
+
+export type TChangePasswordSchema = z.infer<typeof changePasswordSchema>;

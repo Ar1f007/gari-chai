@@ -3,6 +3,7 @@ import { profile } from './me';
 import { registerUser } from './register';
 import { verifyOTP } from './verifyOTP';
 import { login } from './login';
+import { updateProfileInfo, updatePassword } from './update-info';
 
 export const auth = {
   me: profile,
@@ -10,4 +11,6 @@ export const auth = {
   verifyOTP,
   logout,
   login,
+  updateProfileInfo,
+  updatePassword,
 };

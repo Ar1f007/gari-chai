@@ -1,5 +1,5 @@
 import { Textarea, TextAreaProps } from '@nextui-org/input';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, get, useFormContext } from 'react-hook-form';
 
 type RHFTextareaProps = {
   name: string;
@@ -13,7 +13,7 @@ export const RHFTextarea = (props: RHFTextareaProps) => {
     formState: { errors },
   } = useFormContext();
 
-  const hasError = !!errors[name];
+  const error = get(errors, name);
 
   return (
     <Controller
@@ -23,9 +23,9 @@ export const RHFTextarea = (props: RHFTextareaProps) => {
       render={({ field }) => (
         <Textarea
           variant='flat'
-          isInvalid={hasError}
-          color={hasError ? 'danger' : 'default'}
-          errorMessage={hasError && errors[name]?.message?.toString()}
+          isInvalid={error}
+          color={error ? 'danger' : 'default'}
+          errorMessage={error && error?.message}
           {...field}
           {...rest}
         />
