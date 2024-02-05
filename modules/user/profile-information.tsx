@@ -4,15 +4,14 @@ import { RHFInput } from '@/components/form/RHFInput';
 import { RHFTextarea } from '@/components/form/RHFTextarea';
 import SectionTitle from '@/components/section-title';
 import { routes } from '@/config/routes';
-import { invalidatePath, invalidateTags } from '@/lib/actions';
+import { invalidatePath } from '@/lib/actions';
 import { GENERIC_ERROR_MSG } from '@/lib/constants';
 import { TUserProfileSchema, userProfileFormSchema } from '@/schema/user';
 import { auth } from '@/services/user';
-import { userStore } from '@/store';
+import { userActions, userStore } from '@/store';
 import { mapValidationErrors } from '@/util/mapValidationError';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@nextui-org/button';
-import { revalidatePath } from 'next/cache';
 import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { useSnapshot } from 'valtio';
@@ -40,17 +39,13 @@ const ProfileInformation = () => {
       if (!res) throw new Error();
 
       if (res.status === 'success') {
+        userActions.setUser(res.data);
         toast('Profile info updated');
-        invalidatePath([
-          {
-            path: routes.profileSettings,
-          },
-        ]);
+
         return;
       }
 
       if (res.status === 'validationError') {
-        console.log(res.errors);
         mapValidationErrors(res.errors, form);
         return;
       }

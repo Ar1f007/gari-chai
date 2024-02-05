@@ -1,6 +1,7 @@
 'use client';
 
 import { RHFInput } from '@/components/form/RHFInput';
+import PasswordInput from '@/components/form/password-input';
 import { GENERIC_ERROR_MSG } from '@/lib/constants';
 import { TChangePasswordSchema, changePasswordSchema } from '@/schema/user';
 import { auth } from '@/services/user';
@@ -14,7 +15,9 @@ import { toast } from 'sonner';
 
 const ChangePassword = () => {
   const [showChangePasswordForm, setShowChangePasswordForm] = useState(false);
+
   const form = useForm<TChangePasswordSchema>({
+    mode: 'onTouched',
     resolver: zodResolver(changePasswordSchema),
   });
 
@@ -29,6 +32,7 @@ const ChangePassword = () => {
       }
 
       if (res.status === 'validationError') {
+        console.log(res.errors);
         mapValidationErrors(res.errors, form);
         return;
       }
@@ -62,13 +66,13 @@ const ChangePassword = () => {
               onSubmit={form.handleSubmit(handleChangePassword)}
               className='max-w-sm space-y-5'
             >
-              <RHFInput
+              <PasswordInput
                 name='oldPassword'
                 label='Old Password'
                 autoComplete='current-password'
               />
 
-              <RHFInput
+              <PasswordInput
                 name='newPassword'
                 label='New Password'
                 autoComplete='new-password'

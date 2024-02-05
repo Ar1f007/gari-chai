@@ -6,7 +6,7 @@ type RHFInputProps = {
 } & InputProps;
 
 export const RHFInput = (props: RHFInputProps) => {
-  const { name, ...rest } = props;
+  const { name, variant = 'flat', ...rest } = props;
 
   const {
     control,
@@ -22,7 +22,7 @@ export const RHFInput = (props: RHFInputProps) => {
       defaultValue=''
       render={({ field }) => (
         <Input
-          variant='flat'
+          variant={variant}
           isInvalid={error}
           color={error ? 'danger' : 'default'}
           errorMessage={error && error?.message}

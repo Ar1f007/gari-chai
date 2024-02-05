@@ -15,9 +15,9 @@ const SelectLocation = () => {
       size='sm'
       className='min-w-[180px]'
     >
-      {manifest.locations.map((location, idx) => (
+      {manifest.locations.map((location) => (
         <SelectItem
-          key={idx}
+          key={location.value}
           value={location.value}
         >
           {location.label}
