@@ -1,12 +1,19 @@
 'use client';
 
-import { Button, ButtonGroup } from '@nextui-org/button';
+import { Button } from '@nextui-org/button';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/dropdown';
 import { ChevronDownIcon } from 'lucide-react';
+import { Fragment, useState } from 'react';
 
 const DeactivateOrDeleteAccount = () => {
+  const [showModal, setShowModal] = useState<{ type: 'deactivate' | 'delete' | null }>({
+    type: null,
+  });
+
+  const modalTitle = showModal.type === 'deactivate' ? 'Deactivate Account' : 'Delete Account';
+
   return (
-    <div>
+    <Fragment>
       <Dropdown>
         <DropdownTrigger>
           <Button
@@ -38,7 +45,7 @@ const DeactivateOrDeleteAccount = () => {
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
-    </div>
+    </Fragment>
   );
 };
 export default DeactivateOrDeleteAccount;
