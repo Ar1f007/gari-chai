@@ -3,7 +3,6 @@
 import { Button, ButtonGroup } from '@nextui-org/button';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/dropdown';
 import { ChevronDownIcon } from 'lucide-react';
-import { useState } from 'react';
 
 const DeactivateOrDeleteAccount = () => {
   return (
