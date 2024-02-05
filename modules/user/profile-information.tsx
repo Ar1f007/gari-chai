@@ -6,6 +6,7 @@ import SectionTitle from '@/components/section-title';
 import { routes } from '@/config/routes';
 import { invalidatePath } from '@/lib/actions';
 import { GENERIC_ERROR_MSG } from '@/lib/constants';
+import extendedDayjs from '@/lib/dayjs';
 import { TUserProfileSchema, userProfileFormSchema } from '@/schema/user';
 import { auth } from '@/services/user';
 import { userActions, userStore } from '@/store';
@@ -60,6 +61,11 @@ const ProfileInformation = () => {
   return (
     <section>
       <SectionTitle>Profile Information</SectionTitle>
+
+      <h3 className='my-3 font-medium text-foreground-500'>
+        Joined on {extendedDayjs(userSnap.user?.createdAt).format('MMM MM, YYYY')}
+      </h3>
+
       <FormProvider {...form}>
         <form
           onSubmit={form.handleSubmit(updateProfileInfo)}

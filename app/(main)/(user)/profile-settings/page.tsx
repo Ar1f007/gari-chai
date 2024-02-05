@@ -1,4 +1,5 @@
 import { Section } from '@/components/layout/section';
+
 import AccountSettings from '@/modules/user/account-settings';
 import ProfileInformation from '@/modules/user/profile-information';
 import { Suspense } from 'react';
