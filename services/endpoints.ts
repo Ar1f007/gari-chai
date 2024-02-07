@@ -35,6 +35,7 @@ export const endpoints = {
       profile: '/users/profile',
       updateBasicInfo: '/users/update-basic-info',
       updatePassword: '/users/update-password',
+      deactivateAccount: '/users/deactivate-account',
     },
     reviews: {
       baseUrl: '/reviews',

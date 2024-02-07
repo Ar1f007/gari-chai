@@ -38,7 +38,7 @@ export type TApiData<T> = {
   status: 'success';
 };
 
-type TApiErrorData = {
+export type TApiErrorData = {
   status: 'error' | 'fail';
   message: string;
 };

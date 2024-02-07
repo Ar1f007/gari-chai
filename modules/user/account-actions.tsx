@@ -1,18 +1,64 @@
 'use client';
 
+import { routes } from '@/config/routes';
+import { GENERIC_ERROR_MSG } from '@/lib/constants';
+import { auth } from '@/services/user';
+import { userActions } from '@/store';
 import { Button } from '@nextui-org/button';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/dropdown';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from '@nextui-org/modal';
 import { ChevronDownIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { Fragment, useState } from 'react';
+import { toast } from 'sonner';
 
 const DeactivateOrDeleteAccount = () => {
   const [showModal, setShowModal] = useState<{ type: 'deactivate' | 'delete' | null }>({
     type: null,
   });
 
-  function handleDeleteAccount() {}
-  function handleDeactivateAccount() {}
+  const router = useRouter();
+
+  async function handleDeleteAccount() {
+    try {
+      const res = await auth.deleteAccount();
+
+      if (res.status === 'success') {
+        toast.success('Account deleted successfully');
+        userActions.setUser(null);
+
+        router.replace(routes.home);
+
+        return;
+      }
+
+      toast.error(res.message);
+    } catch (error) {
+      toast.error(GENERIC_ERROR_MSG);
+    } finally {
+      setShowModal({ type: null });
+    }
+  }
+  async function handleDeactivateAccount() {
+    try {
+      const res = await auth.deactivateAccount();
+
+      if (res.status === 'success') {
+        toast.success('Account deactivated successfully');
+        userActions.setUser(null);
+
+        router.replace(routes.home);
+
+        return;
+      }
+
+      toast.error(res.message);
+    } catch (error) {
+      toast.error(GENERIC_ERROR_MSG);
+    } finally {
+      setShowModal({ type: null });
+    }
+  }
 
   const modalContent = {
     title: showModal.type === 'deactivate' ? 'Deactivate Account' : 'Delete Account',

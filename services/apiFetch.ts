@@ -1,7 +1,5 @@
-import { routes } from '@/config/routes';
-import { API_V1_URL } from '@/lib/constants';
-import { TApiData, TApiError } from '@/types';
-import { redirect } from 'next/navigation';
+import { API_V1_URL, GENERIC_ERROR_MSG } from '@/lib/constants';
+import { TApiData, TApiError, TApiErrorData } from '@/types';
 
 type FetchExtendedOptions = {
   isFormData?: boolean;
@@ -37,7 +35,10 @@ export async function apiFetch<Data = unknown, ErrData = TApiError>(
 
     return jsonRes;
   } catch (e: any) {
-    throw e;
+    return {
+      status: 'error',
+      message: e instanceof Error ? e.message : GENERIC_ERROR_MSG,
+    } as TApiErrorData;
   }
 }
 
