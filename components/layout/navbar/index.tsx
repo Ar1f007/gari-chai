@@ -10,12 +10,10 @@ import {
   Navbar as NextUINavbar,
 } from '@nextui-org/navbar';
 
-import { Button } from '@nextui-org/button';
-
 import { Logo } from '@/components/icons';
 import Search from '@/components/search';
 
-import { SiteConfig, siteConfig } from '@/config/site';
+import { siteConfig } from '@/config/site';
 import { routes } from '@/config/routes';
 
 import MenuItems from './multi-dropdown/menu-items';
