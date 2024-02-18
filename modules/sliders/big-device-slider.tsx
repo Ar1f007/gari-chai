@@ -58,13 +58,14 @@ const BigDeviceSlider = ({ sliders }: { sliders: TSlider[] }) => {
             >
               <span
                 className={cn(
-                  'inline-block w-[20ch] max-w-[25ch] border-b-3 border-gray-400 pb-1 text-sm text-white',
+                  'inline-block w-[20ch] truncate border-b-3 border-gray-400 pb-1 text-sm capitalize text-default-100',
                   {
                     'border-primary': currentSlide === index,
                   },
                 )}
               >
-                {slider.title}
+                {!slider.showTitle && <span>&nbsp;</span>}
+                {slider.showTitle && slider.title}
               </span>
             </li>
           ))}
