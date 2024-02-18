@@ -5,7 +5,6 @@ import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
 import { z } from 'zod';
-import { generateTagNameForComments } from '@/util/generate-tag-name';
 
 export const commentService = {
   async getComments(payload: { carId: TCarSchema['_id'] }) {

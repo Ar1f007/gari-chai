@@ -11,7 +11,15 @@ type Store = {
   routes: {
     currentActivePath: string;
   };
+
+  notifications: {
+    campaigns: {
+      isPromoShown: boolean;
+    };
+  };
 };
+
+type Path<T> = string & keyof T;
 
 const initialState: Store = {
   layout: {
@@ -20,6 +28,12 @@ const initialState: Store = {
 
   routes: {
     currentActivePath: '/',
+  },
+
+  notifications: {
+    campaigns: {
+      isPromoShown: false,
+    },
   },
 };
 
@@ -32,6 +46,15 @@ export const settingsActions = {
 
   setCurrentActivePathname(pathname: string) {
     settingsStore.routes.currentActivePath = pathname;
+  },
+
+  toggleProperty<T>(path: Path<T>, value: boolean) {
+    const nestedPaths = path.split('.');
+    let targetObject: any = settingsStore;
+    for (const nestedPath of nestedPaths.slice(0, -1)) {
+      targetObject = targetObject[nestedPath];
+    }
+    targetObject[nestedPaths[nestedPaths.length - 1]] = value;
   },
 };
 

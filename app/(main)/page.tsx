@@ -1,9 +1,13 @@
+import { Suspense } from 'react';
+
 import { ElectricCars } from '@/modules/home/electric-cars';
 import { LatestCars } from '@/modules/home/latest-cars';
 import { PopularCars } from '@/modules/home/popular-cars';
 import { UpcomingCars } from '@/modules/home/upcoming-cars';
-import SliderList from '@/modules/sliders/sliderList';
+
+import CampaignPromo from '@/modules/sliders/campaign-promo';
 import PopularBrands from '@/modules/home/popular-brands/popular-brands';
+import SliderList from '@/modules/sliders/sliderList';
 
 const Homepage = () => {
   return (
@@ -12,12 +16,30 @@ const Homepage = () => {
         <SliderList />
       </section>
       <section className='mx-auto max-w-screen-2xl px-6 2xl:px-0'>
-        <LatestCars />
-        <UpcomingCars />
-        <PopularCars />
-        <ElectricCars />
-        <PopularBrands />
+        <Suspense>
+          <LatestCars />
+        </Suspense>
+
+        <Suspense>
+          <UpcomingCars />
+        </Suspense>
+
+        <Suspense>
+          <PopularCars />
+        </Suspense>
+
+        <Suspense>
+          <ElectricCars />
+        </Suspense>
+
+        <Suspense>
+          <PopularBrands />
+        </Suspense>
       </section>
+
+      <Suspense>
+        <CampaignPromo />
+      </Suspense>
     </>
   );
 };

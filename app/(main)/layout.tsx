@@ -11,7 +11,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       <SetStoreValue />
       <TopHeader />
       <Navbar />
-      <main className='pb-5'>{children}</main>
+      <main className='min-h-[80svh] pb-5'>{children}</main>
       <Footer />
     </>
   );

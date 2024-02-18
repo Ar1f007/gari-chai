@@ -4,7 +4,6 @@ import { getHomePageCarsBySection } from '@/services';
 import SectionTitle from '@/components/section-title';
 import Sliders from '@/components/slider';
 import { Car } from '@/components/car/new-car-card';
-import { MoveRightIcon } from 'lucide-react';
 import { routes } from '@/config/routes';
 
 export const LatestCars = async () => {

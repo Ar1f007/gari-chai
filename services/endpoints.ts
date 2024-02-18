@@ -50,6 +50,9 @@ export const endpoints = {
     sliders: {
       baseUrl: '/sliders',
     },
+    campaigns: {
+      cars: '/campaigns/cars',
+    },
   },
   admin: {},
 };

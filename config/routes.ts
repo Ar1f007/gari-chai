@@ -30,6 +30,7 @@ export const routes = {
   profileSettings: '/profile-settings',
 
   search: '/search',
+  campaigns: '/campaigns',
 };
 
 export const navMenuItems: SiteConfig['navMenuItems'] = [
