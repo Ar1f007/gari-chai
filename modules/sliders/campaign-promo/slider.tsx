@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@nextui-org/button';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from '@nextui-org/modal';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import { title } from '../../../components/primitives';
 import { useRouter } from 'next/navigation';
@@ -18,6 +18,7 @@ type CampaignSliderProps = {
 
 const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
   const router = useRouter();
+
   const [showPromo, setShowPromo] = useState(
     settingsStore.notifications.campaigns.isPromoShown ? false : true,
   );
@@ -55,6 +56,11 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
 
     return () => clearTimeout(timerId);
   }, []);
+
+  if (sliders.length == 0) {
+    return null;
+  }
+
   return (
     <Modal
       isOpen={showPromo}
@@ -99,7 +105,7 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
               ))}
             </Carousel>
 
-            <div className='text-pretty text-center'>
+            <div className='text-pretty text-center first-letter:capitalize'>
               <h2 className={title({ size: 'xs', color: 'blue' })}>
                 {sliders[currentSlide].title}
               </h2>
@@ -109,39 +115,67 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
                 </p>
               )}
             </div>
+
+            <Button
+              className='mx-auto w-fit text-[12px] font-medium uppercase tracking-wider text-default-50'
+              variant='solid'
+              color='primary'
+              onPress={() => handleOnPosterClick(routes.campaigns)}
+              size='sm'
+            >
+              Go to Campaigns
+            </Button>
           </ModalBody>
-          <ModalFooter className='justify-between'>
-            <Button
-              className='text-[12px] uppercase tracking-wider text-default-50'
-              variant='solid'
-              color='primary'
-              onPress={goToPrevSlide}
-              size='sm'
-            >
-              Back
-            </Button>
-            <div className='flex items-center gap-2'>
-              {Array.from({ length: sliders.length }).map((item, idx) => (
+          <ModalFooter
+            className={cn('justify-between', {
+              'justify-center': sliders.length == 1,
+            })}
+          >
+            {sliders.length > 1 ? (
+              <Fragment>
                 <Button
-                  key={idx}
+                  className='text-[12px] uppercase tracking-wider text-default-50'
+                  variant='solid'
+                  color='primary'
+                  onPress={goToPrevSlide}
                   size='sm'
-                  className={cn(
-                    'h-3 min-w-3 cursor-pointer rounded-full bg-default-300 p-0 hover:bg-primary/70',
-                    { 'bg-primary': currentSlide == idx },
-                  )}
-                  onPress={() => goToSlide(idx)}
-                />
-              ))}
-            </div>
-            <Button
-              className='text-[12px] uppercase tracking-wider text-default-50'
-              variant='solid'
-              color='primary'
-              onPress={goToNextSlide}
-              size='sm'
-            >
-              Next
-            </Button>
+                >
+                  Back
+                </Button>
+                <div className='flex items-center gap-2'>
+                  {Array.from({ length: sliders.length }).map((item, idx) => (
+                    <Button
+                      key={idx}
+                      size='sm'
+                      className={cn(
+                        'h-3 min-w-3 cursor-pointer rounded-full bg-default-300 p-0 hover:bg-primary/70',
+                        { 'bg-primary': currentSlide == idx },
+                      )}
+                      onPress={() => goToSlide(idx)}
+                    />
+                  ))}
+                </div>
+                <Button
+                  className='text-[12px] uppercase tracking-wider text-default-50'
+                  variant='solid'
+                  color='primary'
+                  onPress={goToNextSlide}
+                  size='sm'
+                >
+                  Next
+                </Button>
+              </Fragment>
+            ) : (
+              <Button
+                className='text-[12px] uppercase tracking-wider text-default-50'
+                variant='solid'
+                color='primary'
+                onPress={() => handleOnPosterClick(routes.campaigns)}
+                size='sm'
+              >
+                Go to Campaigns
+              </Button>
+            )}
           </ModalFooter>
         </>
       </ModalContent>

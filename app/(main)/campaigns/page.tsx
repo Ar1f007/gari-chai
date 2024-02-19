@@ -1,9 +1,13 @@
 import { Section } from '@/components/layout/section';
+import CountdownTimer from '@/modules/campaigns/countdown';
 
 const CampaignsPage = () => {
   return (
     <Section classNames='py-10'>
-      <p className='text-center'>Coming Soon</p>
+      <CountdownTimer
+        text='Campaign Starts in'
+        time=''
+      />
     </Section>
   );
 };
