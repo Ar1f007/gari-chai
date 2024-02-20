@@ -1,22 +1,25 @@
-import { TCarSchema } from '@/schema/car';
-import { Card, CardBody, CardHeader } from '@nextui-org/card';
 import Image from 'next/image';
 import Link from 'next/link';
-import { subtitle } from '../primitives';
+import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/card';
+
+import { TCarSchema } from '@/schema/car';
+
 import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 import { Button } from '@nextui-org/button';
 import { formatRangeToLakhCrore } from '@/lib/utils';
+import { subtitle } from '@/components/primitives';
+import { MakeOfferButton } from './car-make-offer-btn';
 
 type CarProps = {
   car: TCarSchema;
 };
-export const Car = ({ car }: CarProps) => {
+export const CampaignCarCard = ({ car }: CarProps) => {
   const { posterImage, name, slug, price } = car;
 
   const url = car.carType === 'new' ? `/cars/${slug}` : `/used-cars/${slug}`;
 
   return (
-    <Card className='h-full max-h-[425px] justify-between border-1 border-slate-200 shadow-lg'>
+    <Card className='h-full justify-between border-1 border-slate-200 shadow-lg'>
       <CardHeader className='p-0'>
         <Link href={url}>
           <Image
@@ -38,7 +41,7 @@ export const Car = ({ car }: CarProps) => {
           </h2>
         </Link>
 
-        <p className='mb-4 text-lg font-semibold text-default-600'>
+        <p className='text-lg font-semibold text-default-600'>
           {formatRangeToLakhCrore(price.min, price.max)}
           {price.isNegotiable && (
             <>
@@ -47,17 +50,20 @@ export const Car = ({ car }: CarProps) => {
             </>
           )}
         </p>
+      </CardBody>
 
+      <CardFooter className='flex justify-between gap-4 pt-0 *:flex-1 *:shrink-0 *:font-medium'>
         <Button
           color='primary'
           variant='bordered'
           as={Link}
           href={url}
-          className='shrink-0'
         >
           View Details
         </Button>
-      </CardBody>
+
+        <MakeOfferButton car={car} />
+      </CardFooter>
     </Card>
   );
 };

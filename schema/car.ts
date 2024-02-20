@@ -151,6 +151,8 @@ export const carSchema = z.object({
     .optional()
     .default([]),
 
+  totalRatings: z.number().optional(),
+
   metaData: z.record(z.string().min(1), z.any()).optional().default({}),
 });
 

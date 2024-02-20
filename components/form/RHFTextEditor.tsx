@@ -19,12 +19,13 @@ type CustomEditorOptions = {
 type TextEditorProps = {
   name: string;
   tiptapOptions?: CustomEditorOptions;
+  placeholder?: string;
 };
 
 const ACTIVE_ICON_CLASSES = 'font-semibold text-primary';
 const INACTIVE_ICON_CLASSES = 'text-gray-500';
 
-export const RHFTextEditor: React.FC<TextEditorProps> = ({ name, tiptapOptions }) => {
+export const RHFTextEditor: React.FC<TextEditorProps> = ({ name, tiptapOptions, placeholder }) => {
   const { control } = useFormContext();
   const { field, fieldState } = useController({ name, control });
   const value = useWatch({ name });
@@ -39,7 +40,9 @@ export const RHFTextEditor: React.FC<TextEditorProps> = ({ name, tiptapOptions }
         multicolor: true,
       }),
       Typography,
-      Placeholder,
+      Placeholder.configure({
+        placeholder: placeholder || 'write something...',
+      }),
     ],
     content: field.value || '',
     onUpdate: debounce(

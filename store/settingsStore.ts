@@ -2,6 +2,7 @@ import { proxy } from 'valtio';
 import { devtools } from 'valtio/utils';
 import type {} from '@redux-devtools/extension';
 import { IS_CLIENT } from '@/lib/constants';
+import { TCarSchema } from '@/schema/car';
 
 type Store = {
   layout: {
@@ -17,6 +18,8 @@ type Store = {
       isPromoShown: boolean;
     };
   };
+
+  currentlySelectedCar: TCarSchema | null;
 };
 
 type Path<T> = string & keyof T;
@@ -35,6 +38,8 @@ const initialState: Store = {
       isPromoShown: false,
     },
   },
+
+  currentlySelectedCar: null,
 };
 
 export const settingsStore = proxy<Store>(initialState);
@@ -55,6 +60,10 @@ export const settingsActions = {
       targetObject = targetObject[nestedPath];
     }
     targetObject[nestedPaths[nestedPaths.length - 1]] = value;
+  },
+
+  setSelectedCar(car: TCarSchema) {
+    settingsStore.currentlySelectedCar = car;
   },
 };
 

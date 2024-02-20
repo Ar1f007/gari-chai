@@ -1,5 +1,6 @@
 'use client';
 
+import { title } from '@/components/primitives';
 import { useCallback, useEffect, useState, useRef } from 'react';
 
 type CountdownTime = {
@@ -10,7 +11,7 @@ type CountdownTime = {
 };
 
 type CountdownTimerProps = {
-  time: any;
+  campaignTime: any;
   text: string;
 };
 
@@ -82,11 +83,12 @@ const CountdownTimer = (props: CountdownTimerProps) => {
   }, [startCountDown]);
 
   return (
-    <div className='h-screen bg-[#191A24]'>
-      <div className='flex h-full w-full flex-col items-center justify-center gap-8 sm:gap-16'>
-        <span className='px-2 text-center text-2xl font-semibold tracking-widest text-white sm:text-3xl'>
+    <div className='flex  min-h-[300px] items-center bg-[#191A24] md:min-h-[400px]'>
+      <div className='flex h-full w-full flex-col items-center justify-center gap-8 sm:gap-12'>
+        {/* px-2 text-center text-2xl font-semibold tracking-widest text-white sm:text-3xl */}
+        <h1 className={title({ color: 'violet', size: 'sm', className: '!leading-normal' })}>
           {props.text}
-        </span>
+        </h1>
         <div className='flex justify-center gap-3 sm:gap-8'>
           <div className='relative flex flex-col gap-5'>
             <div className='flex h-16 w-16 items-center justify-between rounded-lg bg-[#343650] sm:h-32 sm:w-32 lg:h-40 lg:w-40'>
