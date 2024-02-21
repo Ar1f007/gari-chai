@@ -4,8 +4,8 @@ import { PinIcon } from 'lucide-react';
 
 const CampaignComments = () => {
   return (
-    <div className='max-w-[500px]'>
-      <div className='mb-4 min-h-64 rounded-lg border bg-default-50 p-5'>
+    <div className='xl:max-w-[500px]'>
+      <div className='mb-8 min-h-72 rounded-lg border bg-default-50 p-5'>
         <h2 className='flex items-center justify-center gap-2'>
           <span className='inline-block text-2xl font-bold text-default-800'>Top Bidders </span>
           <PinIcon className='size-7 rotate-45 text-primary' />

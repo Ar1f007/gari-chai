@@ -116,15 +116,17 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
               )}
             </div>
 
-            <Button
-              className='mx-auto w-fit text-[12px] font-medium uppercase tracking-wider text-default-50'
-              variant='solid'
-              color='primary'
-              onPress={() => handleOnPosterClick(routes.campaigns)}
-              size='sm'
-            >
-              Go to Campaigns
-            </Button>
+            {sliders.length > 1 && (
+              <Button
+                className='mx-auto w-fit text-[12px] font-medium uppercase tracking-wider text-default-50'
+                variant='solid'
+                color='primary'
+                onPress={() => handleOnPosterClick(routes.campaigns)}
+                size='sm'
+              >
+                Go to Campaigns
+              </Button>
+            )}
           </ModalBody>
           <ModalFooter
             className={cn('justify-between', {
@@ -167,11 +169,10 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
               </Fragment>
             ) : (
               <Button
-                className='text-[12px] uppercase tracking-wider text-default-50'
+                className='text-md uppercase tracking-wider text-default-50'
                 variant='solid'
                 color='primary'
                 onPress={() => handleOnPosterClick(routes.campaigns)}
-                size='sm'
               >
                 Go to Campaigns
               </Button>

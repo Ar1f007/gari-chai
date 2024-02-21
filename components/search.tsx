@@ -7,6 +7,7 @@ import { Input } from '@nextui-org/input';
 import { SearchIcon } from '@/components/icons';
 import { createUrl } from '@/lib/utils';
 import { DEFAULT_PAGINATION_ITEMS_LIMIT } from '@/lib/constants';
+import { routes } from '@/config/routes';
 
 export default function Search() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function Search() {
     newParams.set('page', newParams.get('page') || '1');
     newParams.set('limit', newParams.get('limit') || DEFAULT_PAGINATION_ITEMS_LIMIT.toString());
 
-    router.push(createUrl('/search', newParams));
+    router.push(createUrl(routes.search, newParams));
   }
 
   return (

@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import { imageSchema } from './common';
+import { imageSchema, minMaxPriceSchema } from './common';
 import { carSchema } from './car';
+import { userBasicInfoAPIResponseSchema } from './user';
 
 export const carCampaignSchema = z.object({
   _id: z.string(),
@@ -21,13 +22,28 @@ export const carCampaignSchema = z.object({
 
   metaData: z.record(z.string().min(1), z.unknown()).optional().default({}),
 
-  newCars: z.array(carSchema),
+  newCars: z.array(
+    z.object({
+      car: carSchema,
+      campaignPrice: minMaxPriceSchema,
+    }),
+  ),
 
-  usedCars: z.array(z.any()),
+  usedCars: z.array(
+    // z.object({
+    //   car: any,
+    //   campaignPrice: minMaxPriceSchema,
+    // })
+    // TODO: FIX IT
+    z.any(),
+  ),
 
   sort: z.number().optional(),
 
   link: z.string().optional(),
+
+  // TODO: FIX IT
+  createdBy: userBasicInfoAPIResponseSchema.optional(),
 });
 
 export type TCarCampaign = z.infer<typeof carCampaignSchema>;

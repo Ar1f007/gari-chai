@@ -3,6 +3,8 @@ import { devtools } from 'valtio/utils';
 import type {} from '@redux-devtools/extension';
 import { IS_CLIENT } from '@/lib/constants';
 import { TCarSchema } from '@/schema/car';
+import { TCarCampaign } from '@/schema/campaign';
+import { TMinMaxPriceSchema } from '@/schema';
 
 type Store = {
   layout: {
@@ -19,7 +21,10 @@ type Store = {
     };
   };
 
-  currentlySelectedCar: TCarSchema | null;
+  currentlySelectedCar: {
+    details: TCarSchema;
+    campaignPrice: TMinMaxPriceSchema;
+  } | null;
 };
 
 type Path<T> = string & keyof T;
@@ -62,7 +67,7 @@ export const settingsActions = {
     targetObject[nestedPaths[nestedPaths.length - 1]] = value;
   },
 
-  setSelectedCar(car: TCarSchema) {
+  setSelectedCar(car: { details: TCarSchema; campaignPrice: TMinMaxPriceSchema }) {
     settingsStore.currentlySelectedCar = car;
   },
 };

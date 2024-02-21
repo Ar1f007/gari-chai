@@ -2,18 +2,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/card';
 
-import { TCarSchema } from '@/schema/car';
-
 import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 import { Button } from '@nextui-org/button';
 import { formatRangeToLakhCrore } from '@/lib/utils';
-import { subtitle } from '@/components/primitives';
+import { subtitle, title } from '@/components/primitives';
 import { MakeOfferButton } from './car-make-offer-btn';
+import { TCarCampaign } from '@/schema/campaign';
+import { Chip } from '@nextui-org/chip';
 
 type CarProps = {
-  car: TCarSchema;
+  car: TCarCampaign['newCars'][number]['car'];
+  campaignPrice: TCarCampaign['newCars'][number]['campaignPrice'];
 };
-export const CampaignCarCard = ({ car }: CarProps) => {
+export const CampaignCarCard = ({ car, campaignPrice }: CarProps) => {
   const { posterImage, name, slug, price } = car;
 
   const url = car.carType === 'new' ? `/cars/${slug}` : `/used-cars/${slug}`;
@@ -50,6 +51,22 @@ export const CampaignCarCard = ({ car }: CarProps) => {
             </>
           )}
         </p>
+
+        <div className='mt-4 flex items-center gap-2'>
+          <Chip
+            variant='flat'
+            color='primary'
+          >
+            Campaign Price
+          </Chip>
+
+          <Chip
+            variant='dot'
+            color='primary'
+          >
+            {formatRangeToLakhCrore(price.min, price.max)}
+          </Chip>
+        </div>
       </CardBody>
 
       <CardFooter className='flex justify-between gap-4 pt-0 *:flex-1 *:shrink-0 *:font-medium'>
@@ -62,7 +79,10 @@ export const CampaignCarCard = ({ car }: CarProps) => {
           View Details
         </Button>
 
-        <MakeOfferButton car={car} />
+        <MakeOfferButton
+          car={car}
+          campaignPrice={campaignPrice}
+        />
       </CardFooter>
     </Card>
   );

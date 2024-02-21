@@ -7,6 +7,8 @@ import Icon from '@/components/icon';
 import manifest from '@/data/index.json';
 
 const SelectLocation = () => {
+  // TODO REPLACE IT
+  return null;
   return (
     <Select
       label='Select location'

@@ -1,6 +1,6 @@
-import { Car } from '@/components/car/new-car-card';
 import { Section } from '@/components/layout/section';
 import { subtitle, title } from '@/components/primitives';
+import { cn } from '@/lib/utils';
 import CampaignCars from '@/modules/campaigns/campaign-cars';
 import CountdownTimer from '@/modules/campaigns/countdown';
 import { getCarsCampaign } from '@/services/campaign/car-campaign';
@@ -29,13 +29,17 @@ const CampaignsPage = async () => {
             className={title({
               size: 'sm',
               fullWidth: true,
-              color: 'green',
-              className: 'mb-3 text-center',
+              color: 'pink',
+              className: cn('mb-3 text-center capitalize', !campaign.tagline && 'mb-6'),
             })}
           >
-            Special Summer Sale
+            {campaign.title}
           </h1>
-          <p className={subtitle({ className: 'mb-5 text-center' })}>Tagline Goes Here</p>
+
+          {campaign.tagline && (
+            <p className={subtitle({ className: 'mb-5 text-center' })}>{campaign.tagline}</p>
+          )}
+
           <CountdownTimer
             text='Campaign Starts in'
             campaignTime=''
