@@ -134,6 +134,12 @@ export const navMenuItems: SiteConfig['navMenuItems'] = [
       },
     ],
   },
+  {
+    id: 'menu-6',
+    label: 'Campaigns',
+    href: routes.campaigns,
+    hasChildren: false,
+  },
 ];
 
 export const navigation: SiteConfig['navigation'] = {

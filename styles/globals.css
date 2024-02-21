@@ -5,7 +5,17 @@
 :root {
   --primary-color-500: #1e8667;
   --light: #fff;
+
+  --scrollbarThumbBgColor: #3a8d7d;
+  --scrollbarTrackColor: #c0e5de;
+  --scrollbarThumbHover: #1e8667;
+
+  /* Subtle Grey: */
+  /* --scrollbarThumbBgColor: #6c757d;
+--scrollbarTrackColor: #d2d2d2;
+--scrollbarThumbHover: #495057; */
 }
+
 .highlight-text {
   background-color: var(--primary-color-500);
   color: var(--light);
@@ -13,6 +23,27 @@
 
 @layer utilities {
   .home-section-wrapper {
-    @apply mt-4 rounded-xl bg-background px-2 py-4 md:mt-16 lg:px-6 lg:py-8 md:shadow-md
+    @apply mt-4 rounded-xl bg-background px-2 py-4 md:mt-16 md:shadow-md lg:px-6 lg:py-8;
   }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--scrollbarThumbBgColor);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: var(--scrollbarTrackColor);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--scrollbarThumbBgColor);
+  transition: all 0.5s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbarThumbHover);
 }

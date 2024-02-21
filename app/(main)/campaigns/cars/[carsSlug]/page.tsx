@@ -31,85 +31,90 @@ const CarSlug = () => {
   return (
     <Section classNames='py-10 px-2'>
       <div className='container mx-auto max-w-5xl rounded-md border p-5 shadow-md'>
-        <div className='flex flex-col gap-5 *:flex-1 md:flex-row'>
-          <div className='w-full max-w-[450px] space-y-5'>
-            <Card className='w-full justify-between border-1 border-slate-200 shadow-sm'>
-              <CardHeader className='p-0'>
-                <Link href={url}>
-                  <Image
-                    src={
-                      car.posterImage.originalUrl ||
-                      car.posterImage.thumbnailUrl ||
-                      PLACEHOLDER_IMAGE
-                    }
-                    alt={car.name}
-                    width={500}
-                    height={200}
-                    className='h-auto w-auto object-fill'
-                  />
-                </Link>
-              </CardHeader>
-              <CardBody className='justify-around px-4 pb-1'>
-                <Link href={url}>
-                  <h2
-                    title={car.name.length > 30 ? car.name : ''}
-                    className={subtitle({
-                      className: 'truncate font-semibold first-letter:capitalize',
-                    })}
-                  >
-                    {car.name}
-                  </h2>
-                </Link>
+        <div className='flex flex-col gap-5 *:flex-1 md:flex-row md:items-stretch md:justify-between'>
+          <div className='h-full w-full max-w-[450px] space-y-10'>
+            <div>
+              <Card className='w-full justify-between border-1 border-slate-200 shadow-sm'>
+                <CardHeader className='p-0'>
+                  <Link href={url}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={
+                        car.posterImage.originalUrl ||
+                        car.posterImage.thumbnailUrl ||
+                        PLACEHOLDER_IMAGE
+                      }
+                      alt={car.name}
+                      width={450}
+                      height={300}
+                      className='h-auto w-auto object-cover'
+                      loading='lazy'
+                    />
+                  </Link>
+                </CardHeader>
+                <CardBody className='justify-around px-4 pb-1'>
+                  <Link href={url}>
+                    <h2
+                      title={car.name.length > 30 ? car.name : ''}
+                      className={subtitle({
+                        className: 'truncate font-semibold first-letter:capitalize',
+                      })}
+                    >
+                      {car.name}
+                    </h2>
+                  </Link>
 
-                <div className='flex w-full flex-wrap justify-between gap-x-1 gap-y-4'>
-                  <div className='flex flex-wrap gap-2'>
+                  <div className='flex w-full flex-wrap justify-between gap-x-1 gap-y-4'>
+                    <div className='flex flex-wrap gap-2'>
+                      <Chip
+                        variant='flat'
+                        color='default'
+                      >
+                        {car.brand.label}
+                      </Chip>
+                      <Chip
+                        variant='flat'
+                        color='default'
+                      >
+                        {car.brandModel.label}
+                      </Chip>
+                      <Chip
+                        variant='flat'
+                        color='default'
+                      >
+                        {car.bodyStyle.label}
+                      </Chip>
+                    </div>
+
                     <Chip
-                      variant='flat'
-                      color='default'
+                      variant='dot'
+                      color='primary'
                     >
-                      {car.brand.label}
-                    </Chip>
-                    <Chip
-                      variant='flat'
-                      color='default'
-                    >
-                      {car.brandModel.label}
-                    </Chip>
-                    <Chip
-                      variant='flat'
-                      color='default'
-                    >
-                      {car.bodyStyle.label}
+                      Starts From: 2.5Lakh
                     </Chip>
                   </div>
+                </CardBody>
 
+                <CardFooter className='flex flex-col items-start gap-4'>
                   <Chip
-                    variant='dot'
-                    color='primary'
+                    variant='flat'
+                    color='default'
                   >
-                    Starts From: 2.5Lakh
+                    Regular Price: {formatRangeToLakhCrore(car.price.min, car.price.max)}
                   </Chip>
-                </div>
-              </CardBody>
-
-              <CardFooter className='flex flex-col items-start gap-4'>
-                <Chip
-                  variant='flat'
-                  color='default'
-                >
-                  Regular Price: {formatRangeToLakhCrore(car.price.min, car.price.max)}
-                </Chip>
-                <Button
-                  color='primary'
-                  variant='bordered'
-                  as={Link}
-                  href={url}
-                  className='w-full shrink-0'
-                >
-                  View Details
-                </Button>
-              </CardFooter>
-            </Card>
+                  <Button
+                    color='primary'
+                    variant='bordered'
+                    as={Link}
+                    href={url}
+                    size='lg'
+                    className='w-full shrink-0 text-lg font-medium'
+                  >
+                    View Details
+                  </Button>
+                </CardFooter>
+              </Card>
+            </div>
 
             <CampaignCommentForm />
           </div>

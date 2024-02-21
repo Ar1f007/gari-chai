@@ -56,6 +56,12 @@ export const commentSchema: z.ZodType<Comment> = commentSchemaWithoutChild.exten
   children: z.lazy(() => z.array(commentSchema)),
 });
 
+export const carCampaignCommentSchema = z.object({
+  amount: z
+    .string()
+    .refine((val) => !isNaN(Number(val)), { message: 'Only numbers are allowed. eg: 500000' }),
+});
+
 export type CommentInputs = z.infer<typeof commentFormSchema>;
 
 export type CommentCreationPayload = z.infer<typeof commentCreationPayloadSchema>;
@@ -63,3 +69,5 @@ export type CommentCreationPayload = z.infer<typeof commentCreationPayloadSchema
 export type CommentBody = z.infer<typeof commentSchema>;
 
 export type CommentUpdatePayload = z.infer<typeof commentUpdatePayloadSchema>;
+
+export type CarCampaignCommentInputs = z.infer<typeof carCampaignCommentSchema>;

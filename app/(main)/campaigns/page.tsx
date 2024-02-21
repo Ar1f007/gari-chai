@@ -11,7 +11,7 @@ const CampaignsPage = async () => {
   if (!campaigns.data || !campaigns.data.length) {
     return (
       <Section classNames='py-10'>
-        <h1 className={title({ size: 'sm', className: 'text-center' })}>
+        <h1 className={title({ size: 'sm', className: 'text-center', fullWidth: true })}>
           No Campaigns Running At the Moment.
         </h1>
       </Section>
