@@ -45,10 +45,7 @@ const CampaignsPage = async () => {
             campaignTime=''
           />
 
-          <CampaignCars
-            newCars={campaign.newCars}
-            usedCars={campaign.usedCars}
-          />
+          <CampaignCars campaign={campaign} />
         </div>
       ))}
     </Section>

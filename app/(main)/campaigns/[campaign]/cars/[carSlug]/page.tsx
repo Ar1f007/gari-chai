@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter, useParams, useSearchParams } from 'next/navigation';
+import { useRouter, useParams, useSearchParams, notFound, redirect } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
 import { useSnapshot } from 'valtio';
 import { z } from 'zod';
@@ -59,14 +59,14 @@ const CarSlug = () => {
       const res = await getCarBySlug(parsedParams.data);
 
       if (!res) {
-        return router.push(routes.campaigns);
+        return;
       }
 
       settingsActions.setSelectedCar({
         details: res,
         campaignPrice: {
           min: parsedParams.data.priceMin,
-          max: parsedParams.data.priceMin,
+          max: parsedParams.data.priceMax,
         },
       });
     } catch (error) {
@@ -88,7 +88,7 @@ const CarSlug = () => {
   }
 
   if (!isLoading && !settingsSnap.currentlySelectedCar) {
-    router.push(routes.campaigns);
+    return redirect(routes.campaigns);
   }
 
   const car = settingsSnap.currentlySelectedCar!;

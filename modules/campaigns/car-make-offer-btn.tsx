@@ -13,6 +13,7 @@ type MakeOfferButtonProps = {
   //  | TCarCampaign['usedCars'][number]
   car: TCarCampaign['newCars'][number]['car'];
   campaignPrice: TCarCampaign['newCars'][number]['campaignPrice'];
+  campaignId: TCarCampaign['_id'];
 };
 
 export const MakeOfferButton = (props: MakeOfferButtonProps) => {
@@ -30,7 +31,8 @@ export const MakeOfferButton = (props: MakeOfferButtonProps) => {
     params.append('priceMin', props.campaignPrice.min.toString());
     params.append('priceMax', props.campaignPrice.max.toString());
 
-    router.push(createUrl(routes.carCampaigns + '/' + props.car.slug, params));
+    const url = routes.carCampaigns(props.campaignId) + '/' + props.car.slug;
+    router.push(createUrl(url, params));
   }
 
   return (

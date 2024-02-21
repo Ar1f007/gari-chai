@@ -31,7 +31,7 @@ export const routes = {
 
   search: '/search',
   campaigns: '/campaigns',
-  carCampaigns: '/campaigns/cars',
+  carCampaigns: (campaign: string) => `/campaigns/${campaign}/cars`,
 };
 
 export const navMenuItems: SiteConfig['navMenuItems'] = [

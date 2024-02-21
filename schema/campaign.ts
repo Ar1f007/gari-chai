@@ -46,4 +46,19 @@ export const carCampaignSchema = z.object({
   createdBy: userBasicInfoAPIResponseSchema.optional(),
 });
 
+export const carCampaignComment = z.object({
+  _id: z.string(),
+  content: z.number(),
+
+  user: z.object({
+    firstName: z.string(),
+    lastName: z.string(),
+    profilePicture: z.string(),
+  }),
+
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
+
 export type TCarCampaign = z.infer<typeof carCampaignSchema>;
+export type TCarCampaignComment = z.infer<typeof carCampaignComment>;

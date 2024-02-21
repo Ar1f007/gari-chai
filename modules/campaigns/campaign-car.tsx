@@ -5,7 +5,7 @@ import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/card';
 import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 import { Button } from '@nextui-org/button';
 import { formatRangeToLakhCrore } from '@/lib/utils';
-import { subtitle, title } from '@/components/primitives';
+import { subtitle } from '@/components/primitives';
 import { MakeOfferButton } from './car-make-offer-btn';
 import { TCarCampaign } from '@/schema/campaign';
 import { Chip } from '@nextui-org/chip';
@@ -13,8 +13,9 @@ import { Chip } from '@nextui-org/chip';
 type CarProps = {
   car: TCarCampaign['newCars'][number]['car'];
   campaignPrice: TCarCampaign['newCars'][number]['campaignPrice'];
+  campaignId: TCarCampaign['_id'];
 };
-export const CampaignCarCard = ({ car, campaignPrice }: CarProps) => {
+export const CampaignCarCard = ({ car, campaignPrice, campaignId }: CarProps) => {
   const { posterImage, name, slug, price } = car;
 
   const url = car.carType === 'new' ? `/cars/${slug}` : `/used-cars/${slug}`;
@@ -64,7 +65,7 @@ export const CampaignCarCard = ({ car, campaignPrice }: CarProps) => {
             variant='dot'
             color='primary'
           >
-            {formatRangeToLakhCrore(price.min, price.max)}
+            {formatRangeToLakhCrore(campaignPrice.min, campaignPrice.max)}
           </Chip>
         </div>
       </CardBody>
@@ -82,6 +83,7 @@ export const CampaignCarCard = ({ car, campaignPrice }: CarProps) => {
         <MakeOfferButton
           car={car}
           campaignPrice={campaignPrice}
+          campaignId={campaignId}
         />
       </CardFooter>
     </Card>

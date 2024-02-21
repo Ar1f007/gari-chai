@@ -49,7 +49,7 @@ const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
 
     const url = encodeURI(createUrl(routes.login, params));
 
-    http: toast.error('Please login to continue', {
+    toast.error('Please login to continue', {
       action: {
         label: 'Go to Login',
         onClick: () => router.push(url),
