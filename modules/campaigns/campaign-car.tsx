@@ -29,7 +29,7 @@ export const CampaignCarCard = ({ car, campaignPrice, campaignId }: CarProps) =>
             alt={name}
             width={400}
             height={150}
-            className='aspect-[3/2]'
+            className='aspect-[3/2] h-auto w-auto'
           />
         </Link>
       </CardHeader>
@@ -37,7 +37,9 @@ export const CampaignCarCard = ({ car, campaignPrice, campaignId }: CarProps) =>
         <Link href={url}>
           <h2
             title={name.length > 30 ? name : ''}
-            className={subtitle({ className: 'truncate font-semibold first-letter:capitalize' })}
+            className={subtitle({
+              className: 'max-w-[30ch] truncate font-semibold first-letter:capitalize',
+            })}
           >
             {name}
           </h2>

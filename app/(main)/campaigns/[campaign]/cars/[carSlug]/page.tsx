@@ -188,7 +188,9 @@ const CarSlug = () => {
               <CampaignCommentForm />
             </div>
 
-            <CampaignComments />
+            <Suspense>
+              <CampaignComments />
+            </Suspense>
           </div>
         </div>
       </Section>

@@ -1,8 +1,10 @@
 import { Section } from '@/components/layout/section';
 import { subtitle, title } from '@/components/primitives';
+import extendedDayjs from '@/lib/dayjs';
 import { cn } from '@/lib/utils';
 import CampaignCars from '@/modules/campaigns/campaign-cars';
 import CountdownTimer from '@/modules/campaigns/countdown';
+import { RenderCountDown } from '@/modules/campaigns/render-count-down';
 import { getCarsCampaign } from '@/services/campaign/car-campaign';
 
 const CampaignsPage = async () => {
@@ -19,10 +21,10 @@ const CampaignsPage = async () => {
   }
 
   return (
-    <Section classNames='py-10'>
+    <Section classNames='py-10 px-2'>
       {campaigns.data.map((campaign) => (
         <div
-          className='mt-8 rounded-md bg-default-50 py-5 shadow-lg'
+          className='mt-12 rounded-md bg-default-50 py-8 shadow-lg'
           key={campaign._id}
         >
           <h1
@@ -40,9 +42,9 @@ const CampaignsPage = async () => {
             <p className={subtitle({ className: 'mb-5 text-center' })}>{campaign.tagline}</p>
           )}
 
-          <CountdownTimer
-            text='Campaign Starts in'
-            campaignTime=''
+          <RenderCountDown
+            startDate={campaign.startDate}
+            endDate={campaign.endDate}
           />
 
           <CampaignCars campaign={campaign} />

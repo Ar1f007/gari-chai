@@ -96,7 +96,7 @@ export const CampaignCommentForm = () => {
     }
 
     if (res.status == 'success') {
-      await refetch();
+      refetch();
       form.reset();
       return;
     }

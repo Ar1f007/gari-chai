@@ -92,7 +92,7 @@ const CampaignComments = () => {
         </div>
         <ul
           className={cn(
-            'mt-3 flex max-h-[350px] min-h-[285px] flex-col gap-2 overflow-y-auto',
+            'mt-3 flex h-full max-h-[285px] flex-col gap-2 overflow-y-auto',
             campaignSnap.comments.length > 4 && 'pr-3',
           )}
         >

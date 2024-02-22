@@ -1,6 +1,7 @@
 'use client';
 
 import { title } from '@/components/primitives';
+import extendedDayjs from '@/lib/dayjs';
 import { useCallback, useEffect, useState, useRef } from 'react';
 
 type CountdownTime = {
@@ -11,11 +12,11 @@ type CountdownTime = {
 };
 
 type CountdownTimerProps = {
-  campaignTime: any;
+  date: string;
   text: string;
 };
 
-const CountdownTimer = (props: CountdownTimerProps) => {
+const CountdownTimer = ({ date, text }: CountdownTimerProps) => {
   const [countDownTime, setCountDownTime] = useState<CountdownTime>({
     days: '00',
     hours: '00',
@@ -23,71 +24,109 @@ const CountdownTimer = (props: CountdownTimerProps) => {
     seconds: '00',
   });
 
+  console.log(new Date(date));
+
   const intervalId = useRef<NodeJS.Timeout>();
 
-  const getTimeDifference = (countDownTime: number) => {
-    const currentTime = new Date().getTime();
-    const timeDifference = countDownTime - currentTime;
-    let days =
-      Math.floor(timeDifference / (24 * 60 * 60 * 1000)) >= 10
-        ? Math.floor(timeDifference / (24 * 60 * 60 * 1000)).toString()
-        : `0${Math.floor(timeDifference / (24 * 60 * 60 * 1000))}`;
-    const hours =
-      Math.floor((timeDifference % (24 * 60 * 60 * 1000)) / (1000 * 60 * 60)) >= 10
-        ? Math.floor((timeDifference % (24 * 60 * 60 * 1000)) / (1000 * 60 * 60)).toString()
-        : `0${Math.floor((timeDifference % (24 * 60 * 60 * 1000)) / (1000 * 60 * 60))}`;
-    const minutes =
-      Math.floor((timeDifference % (60 * 60 * 1000)) / (1000 * 60)) >= 10
-        ? Math.floor((timeDifference % (60 * 60 * 1000)) / (1000 * 60)).toString()
-        : `0${Math.floor((timeDifference % (60 * 60 * 1000)) / (1000 * 60))}`;
-    const seconds =
-      Math.floor((timeDifference % (60 * 1000)) / 1000) >= 10
-        ? Math.floor((timeDifference % (60 * 1000)) / 1000).toString()
-        : `0${Math.floor((timeDifference % (60 * 1000)) / 1000)}`;
+  const getTimeDifference = (endTime: extendedDayjs.Dayjs) => {
+    const currentTime = extendedDayjs();
+    const timeDifference = endTime.diff(currentTime, 'second');
+    const duration = extendedDayjs.duration(timeDifference, 'seconds');
+    setCountDownTime({
+      days: duration.days().toString().padStart(2, '0'),
+      hours: duration.hours().toString().padStart(2, '0'),
+      minutes: duration.minutes().toString().padStart(2, '0'),
+      seconds: duration.seconds().toString().padStart(2, '0'),
+    });
     if (timeDifference < 0) {
-      setCountDownTime({
-        days: '00',
-        hours: '00',
-        minutes: '00',
-        seconds: '00',
-      });
-      clearInterval(intervalId.current);
-    } else {
-      setCountDownTime({
-        days: days,
-        hours: hours,
-        minutes: minutes,
-        seconds: seconds,
-      });
+      clearInterval(intervalId.current!);
     }
   };
 
   const startCountDown = useCallback(() => {
-    const customDate = new Date();
-    const countDownDate = new Date(
-      customDate.getFullYear(),
-      customDate.getMonth() + 1,
-      customDate.getDate() + 6,
-      customDate.getHours(),
-      customDate.getMinutes(),
-      customDate.getSeconds() + 1,
-    );
+    const endTime = extendedDayjs(date);
     intervalId.current = setInterval(() => {
-      getTimeDifference(countDownDate.getTime());
+      getTimeDifference(endTime);
     }, 1000);
-    return () => clearInterval(intervalId.current);
-  }, []);
+    return () => clearInterval(intervalId.current!);
+  }, [date]);
 
   useEffect(() => {
     startCountDown();
+    return () => clearInterval(intervalId.current!);
   }, [startCountDown]);
+  // const [countDownTime, setCountDownTime] = useState<CountdownTime>({
+  //   days: '00',
+  //   hours: '00',
+  //   minutes: '00',
+  //   seconds: '00',
+  // });
+
+  // const intervalId = useRef<NodeJS.Timeout>();
+
+  // const getTimeDifference = (countDownTime: number) => {
+  //   const currentTime = new Date().getTime();
+  //   const timeDifference = countDownTime - currentTime;
+  //   let days =
+  //     Math.floor(timeDifference / (24 * 60 * 60 * 1000)) >= 10
+  //       ? Math.floor(timeDifference / (24 * 60 * 60 * 1000)).toString()
+  //       : `0${Math.floor(timeDifference / (24 * 60 * 60 * 1000))}`;
+  //   const hours =
+  //     Math.floor((timeDifference % (24 * 60 * 60 * 1000)) / (1000 * 60 * 60)) >= 10
+  //       ? Math.floor((timeDifference % (24 * 60 * 60 * 1000)) / (1000 * 60 * 60)).toString()
+  //       : `0${Math.floor((timeDifference % (24 * 60 * 60 * 1000)) / (1000 * 60 * 60))}`;
+  //   const minutes =
+  //     Math.floor((timeDifference % (60 * 60 * 1000)) / (1000 * 60)) >= 10
+  //       ? Math.floor((timeDifference % (60 * 60 * 1000)) / (1000 * 60)).toString()
+  //       : `0${Math.floor((timeDifference % (60 * 60 * 1000)) / (1000 * 60))}`;
+  //   const seconds =
+  //     Math.floor((timeDifference % (60 * 1000)) / 1000) >= 10
+  //       ? Math.floor((timeDifference % (60 * 1000)) / 1000).toString()
+  //       : `0${Math.floor((timeDifference % (60 * 1000)) / 1000)}`;
+  //   if (timeDifference < 0) {
+  //     setCountDownTime({
+  //       days: '00',
+  //       hours: '00',
+  //       minutes: '00',
+  //       seconds: '00',
+  //     });
+  //     clearInterval(intervalId.current);
+  //   } else {
+  //     setCountDownTime({
+  //       days: days,
+  //       hours: hours,
+  //       minutes: minutes,
+  //       seconds: seconds,
+  //     });
+  //   }
+  // };
+
+  // const startCountDown = useCallback(() => {
+  //   const customDate = new Date();
+  //   const countDownDate = new Date(
+  //     customDate.getFullYear(),
+  //     customDate.getMonth() + 1,
+  //     customDate.getDate() + 6,
+  //     customDate.getHours(),
+  //     customDate.getMinutes(),
+  //     customDate.getSeconds() + 1,
+  //   );
+  //   intervalId.current = setInterval(() => {
+  //     getTimeDifference(countDownDate.getTime());
+  //   }, 1000);
+  //   return () => clearInterval(intervalId.current);
+  // }, []);
+
+  // useEffect(() => {
+  //   startCountDown();
+  // }, [startCountDown]);
 
   return (
     <div className='flex  min-h-[300px] items-center bg-[#191A24] md:min-h-[400px]'>
       <div className='flex h-full w-full flex-col items-center justify-center gap-8 sm:gap-12'>
         {/* px-2 text-center text-2xl font-semibold tracking-widest text-white sm:text-3xl */}
         <h1 className={title({ color: 'violet', size: 'sm', className: '!leading-normal' })}>
-          {props.text}
+          {text}
         </h1>
         <div className='flex justify-center gap-3 sm:gap-8'>
           <div className='relative flex flex-col gap-5'>
