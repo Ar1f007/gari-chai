@@ -26,7 +26,7 @@ const CarInfo = async ({ car }: Props) => {
               stars={reviewsInfo.averageRating}
               hideEmptyStar
             />
-            {reviewsInfo.averageRating}
+            {reviewsInfo.averageRating.toFixed(2)}
           </div>
 
           <span className='inline-block text-base'>Reviews ({reviewsInfo.totalReviews})</span>

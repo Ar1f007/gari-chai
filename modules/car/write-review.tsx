@@ -1,23 +1,38 @@
 'use client';
+
+// External dependencies
+import { useEffect, useState } from 'react';
+import { useSnapshot } from 'valtio';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { createUrl } from '@/lib/utils';
+import { ZodError } from 'zod';
+
+// UI Components
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from '@nextui-org/modal';
 import { Button } from '@nextui-org/button';
-import { FormProvider, useForm } from 'react-hook-form';
+import { Select, SelectItem } from '@nextui-org/select';
+
+// Form and Input
+import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { RHFInput } from '@/components/form/RHFInput';
 import { RHFTextarea } from '@/components/form/RHFTextarea';
-import { useEffect, useState } from 'react';
-import { ReviewFormInputs, reviewSchema } from '@/schema/review';
+
+// Schemas and Validators
+import { reviewSchema, ReviewFormInputs } from '@/schema/review';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { TCarSchema } from '@/schema/car';
+
+// Services and Utilities
 import { reviews } from '@/services/reviews';
 import { toast } from 'sonner';
 import { GENERIC_ERROR_MSG } from '@/lib/constants';
 import { mapValidationErrors } from '@/util/mapValidationError';
-import { ZodError } from 'zod';
-import { TCarSchema } from '@/schema/car';
-import { useSnapshot } from 'valtio';
-import { userStore } from '@/store';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { routes } from '@/config/routes';
-import { createUrl } from '@/lib/utils';
+
+// Data and others
+import { userStore } from '@/store';
+import data from '@/data/index.json';
+import { RHFRatingInput } from '@/components/form/rhf-rating';
 
 const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
   const [showReviewModal, setShowReviewModal] = useState(false);
@@ -32,9 +47,10 @@ const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
     mode: 'onTouched',
     resolver: zodResolver(reviewSchema),
     defaultValues: {
+      reviewType: decodeURIComponent(searchParams.get('reviewType') || ''),
       title: decodeURIComponent(searchParams.get('title') || ''),
       review: decodeURIComponent(searchParams.get('review') || ''),
-      rating: decodeURIComponent(searchParams.get('rating') || ''),
+      rating: +decodeURIComponent(searchParams.get('rating') || ''),
     },
   });
 
@@ -43,9 +59,10 @@ const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
 
     params.set('pathname', pathname);
     params.set('showReviewModal', 'true');
+    params.set('reviewType', formHandler.getValues('reviewType'));
     params.set('title', formHandler.getValues('title'));
     params.set('review', formHandler.getValues('review'));
-    params.set('rating', formHandler.getValues('rating'));
+    params.set('rating', formHandler.getValues('rating')?.toString());
 
     const url = encodeURI(createUrl(routes.login, params));
 
@@ -80,9 +97,10 @@ const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
     }
 
     if (res.status === 'success') {
-      toast.success('Your review will be added shortly.');
       formHandler.reset();
       setShowReviewModal(false);
+      toast.success('Your review will be added shortly.');
+      router.replace(pathname);
 
       return;
     }
@@ -129,6 +147,32 @@ const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
             <form onSubmit={formHandler.handleSubmit(onSubmit)}>
               <ModalHeader className='flex flex-col gap-1'>Write your review</ModalHeader>
               <ModalBody>
+                <Controller
+                  name='reviewType'
+                  render={({ field }) => (
+                    <Select
+                      label='Type'
+                      placeholder='Select an option'
+                      disableSelectorIconRotation
+                      defaultSelectedKeys={[field.value || '']}
+                      {...field}
+                      errorMessage={
+                        !!formHandler.formState.errors['reviewType'] ? 'Please select a type' : ''
+                      }
+                      isInvalid={!!formHandler.formState.errors['reviewType']}
+                    >
+                      {data.reviewTypeOptions.map((review) => (
+                        <SelectItem
+                          key={review.value}
+                          value={review.value}
+                        >
+                          {review.label}
+                        </SelectItem>
+                      ))}
+                    </Select>
+                  )}
+                />
+
                 <RHFInput
                   name='title'
                   label='Add a heading'
@@ -136,15 +180,12 @@ const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
 
                 <RHFTextarea
                   name='review'
-                  label='What did you like or dislike?'
+                  label='Review'
                 />
 
-                <RHFInput
+                <RHFRatingInput
                   name='rating'
-                  label='Rating (1-5)'
-                  type='number'
-                  min={1}
-                  max={5}
+                  label='Rating'
                 />
               </ModalBody>
               <ModalFooter>

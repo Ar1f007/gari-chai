@@ -38,7 +38,7 @@ const Reviews = async ({ car }: ReviewsProps) => {
             aria-label='Filled Star Icon'
           />
           <p className='flex items-end gap-2'>
-            <span className='text-3xl font-semibold'>{res.averageRating}</span>
+            <span className='text-3xl font-semibold'>{res.averageRating.toFixed(2)}</span>
             <span className='text-default-500'>Based on reviews ({res.totalReviews})</span>
           </p>
         </div>
@@ -48,7 +48,9 @@ const Reviews = async ({ car }: ReviewsProps) => {
 
       {!!res.reviews.length && (
         <div className='py-3'>
-          <Sliders sliderOptions={{ options: reviewKeenSliderOptions }}>
+          <Sliders
+            sliderOptions={{ options: reviewKeenSliderOptions, autoplay: res.totalReviews > 3 }}
+          >
             {res.reviews.map((review) => (
               <li
                 className='keen-slider__slide max-w-[500px]'

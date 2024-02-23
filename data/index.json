@@ -151,5 +151,48 @@
     { "value": "sylhet", "label": "Sylhet" },
     { "value": "tangail", "label": "Tangail" },
     { "value": "thakurgaon", "label": "Thakurgaon" }
+  ],
+  "reviewTypeOptions": [
+    {
+      "label": "Overall Satisfaction",
+      "value": "overall_satisfaction",
+      "description": "Rate your overall satisfaction with the car."
+    },
+    {
+      "label": "Performance",
+      "value": "performance",
+      "description": "Rate the performance of the car."
+    },
+    { "label": "Comfort", "value": "comfort", "description": "Rate the comfort level of the car." },
+    {
+      "label": "Features and Technology",
+      "value": "features_technology",
+      "description": "Rate the features and technology available in the car."
+    },
+    {
+      "label": "Safety",
+      "value": "safety",
+      "description": "Rate the safety features and overall safety of the car."
+    },
+    {
+      "label": "Fuel Efficiency",
+      "value": "fuel_efficiency",
+      "description": "Rate the fuel efficiency and mileage of the car."
+    },
+    {
+      "label": "Maintenance and Reliability",
+      "value": "maintenance_reliability",
+      "description": "Rate the maintenance requirements and reliability of the car."
+    },
+    {
+      "label": "Exterior Design",
+      "value": "exterior_design",
+      "description": "Rate the exterior design and aesthetics of the car."
+    },
+    {
+      "label": "Interior Design",
+      "value": "interior_design",
+      "description": "Rate the interior design and comfort of the car."
+    }
   ]
 }

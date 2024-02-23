@@ -2,22 +2,16 @@ import { z } from 'zod';
 import { userBasicInfoAPIResponseSchema } from './user';
 
 export const reviewSchema = z.object({
+  reviewType: z.string().min(1),
+
   title: z
     .string()
     .min(1, 'Please enter a heading')
-    .min(10, 'Heading should be at least 10 characters long')
     .max(60, 'Too long (max 60 characters allowed)'),
 
-  review: z
-    .string()
-    .min(1, 'Please type your review')
-    .min(50, 'Review should be at least 50 characters long'),
+  review: z.string().min(1, 'Please type your review'),
 
-  rating: z
-    .string()
-    .min(1, 'Please add your rating')
-    .refine((val) => !!Number(val), { message: 'Rating should be a number' })
-    .refine((val) => +val >= 1 && +val <= 5, { message: 'Rating should be between 1 and 5' }),
+  rating: z.coerce.number().min(1, 'Please give a rating'),
 });
 
 // this schema is used when adding a review
