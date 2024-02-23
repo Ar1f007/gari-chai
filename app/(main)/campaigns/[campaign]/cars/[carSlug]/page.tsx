@@ -115,7 +115,7 @@ const CarSlug = () => {
                       alt={car.details.name}
                       width={450}
                       height={300}
-                      className='h-auto w-auto object-cover'
+                      className='min-h-[250px] w-auto object-cover'
                       loading='lazy'
                     />
                   </Link>

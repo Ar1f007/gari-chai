@@ -58,7 +58,7 @@ const CarImageGallery = ({
       </Gallery>
 
       <div className='space-y-5'>
-        {!!additionalImages.length && (
+        {/* {!!additionalImages.length && (
           <h3
             className={subtitle({
               className: 'text-center font-medium capitalize',
@@ -67,7 +67,7 @@ const CarImageGallery = ({
           >
             Colors
           </h3>
-        )}
+        )} */}
         <ColorSpecificImages colorImages={colorImages} />
       </div>
     </div>

@@ -20,10 +20,10 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className='container flex h-screen flex-col items-center justify-center gap-8'>
+    <div className='container flex h-screen flex-col items-center justify-center gap-8 p-5 text-center'>
       <h1 className={title({ size: 'md' })}>{message}</h1>
 
-      <p className='text-xl font-medium lg:text-2xl'>
+      <p className='font-medium md:text-xl lg:text-2xl'>
         Don&apos;t worry, our team is already on it and working to fix the issue.
       </p>
       <Button

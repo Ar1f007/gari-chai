@@ -14,6 +14,10 @@ export type SiteConfig = {
     mobileNavItems: TNavItems;
     desktopNavItems: TNavItems;
   };
+
+  contactInfo: {
+    phone: string;
+  };
 };
 
 export const siteConfig = {
@@ -26,4 +30,7 @@ export const siteConfig = {
     twitter: 'https://github.com/Ar1f007',
   },
   navigation,
+  contactInfo: {
+    phone: '01633746005',
+  },
 } satisfies SiteConfig;

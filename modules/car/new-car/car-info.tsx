@@ -4,7 +4,6 @@ import AddToWishlist from './add-to-wishlist';
 import OfferBtn from '../offer-btn';
 import { reviews } from '@/services/reviews';
 import { Ratings } from '@/components/ratings';
-import { formatAsBangladeshiCurrency } from '@/util/covert-currency';
 import { formatRangeToLakhCrore } from '@/lib/utils';
 
 type Props = {
@@ -17,7 +16,7 @@ const CarInfo = async ({ car }: Props) => {
   const reviewsInfo = await reviews.getReviewsWithStats({ carId: car._id });
 
   return (
-    <div className='flex flex-col gap-2 xl:gap-5'>
+    <div className='flex flex-col gap-2 xl:gap-8'>
       <h1 className={title()}>{name}</h1>
 
       {reviewsInfo && (

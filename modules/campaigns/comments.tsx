@@ -31,7 +31,7 @@ const CampaignComments = () => {
 
         <ul className='mt-8 flex flex-col gap-5 xl:px-8'>
           {campaignSnap.comments.length === 0 ? (
-            <li>
+            <li className='mt-8'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 width='100'
@@ -86,18 +86,18 @@ const CampaignComments = () => {
           )}
         </ul>
       </div>
-      <div className='h-fit rounded-lg border px-2 py-5 shadow-sm md:p-5'>
+      <div className='rounded-lg border px-2 py-5 shadow-sm md:p-5'>
         <div className='mb-2 rounded-md bg-primary-900 py-4 shadow-sm'>
           <h4 className='text-center text-xl font-bold text-primary'>Comments</h4>
         </div>
         <ul
           className={cn(
-            'mt-3 flex h-full max-h-[285px] flex-col gap-2 overflow-y-auto',
+            'mt-3 flex h-full max-h-[285px] min-h-[285px] flex-col gap-2 overflow-y-auto',
             campaignSnap.comments.length > 4 && 'pr-3',
           )}
         >
           {campaignSnap.comments.length === 0 ? (
-            <li className='py-10'>
+            <li className='mt-20'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 width='100'

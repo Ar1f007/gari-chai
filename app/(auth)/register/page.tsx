@@ -65,7 +65,7 @@ const RegisterPage = () => {
 
       userActions.setUser(res.data);
 
-      router.push(redirectPath());
+      router.replace(redirectPath());
       return;
     }
 

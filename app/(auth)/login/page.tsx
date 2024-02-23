@@ -57,7 +57,7 @@ const LoginPage = () => {
     if (res.status === 'success') {
       userActions.setUser(res.data);
 
-      router.push(redirectPath());
+      router.replace(redirectPath());
       return;
     }
 
@@ -136,6 +136,12 @@ const LoginPage = () => {
               </i>
             }
           />
+          <Link
+            className='text-right text-sm text-primary'
+            href={routes.forgotPassword}
+          >
+            Forgot Password?
+          </Link>
 
           <Button
             variant='faded'

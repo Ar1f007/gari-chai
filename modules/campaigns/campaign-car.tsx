@@ -9,6 +9,7 @@ import { subtitle } from '@/components/primitives';
 import { MakeOfferButton } from './car-make-offer-btn';
 import { TCarCampaign } from '@/schema/campaign';
 import { Chip } from '@nextui-org/chip';
+import { formatAsBangladeshiCurrency } from '@/util/covert-currency';
 
 type CarProps = {
   car: TCarCampaign['newCars'][number]['car'];
@@ -24,12 +25,14 @@ export const CampaignCarCard = ({ car, campaignPrice, campaignId }: CarProps) =>
     <Card className='h-full justify-between border-1 border-slate-200 shadow-lg'>
       <CardHeader className='p-0'>
         <Link href={url}>
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={posterImage.originalUrl || posterImage.thumbnailUrl || PLACEHOLDER_IMAGE}
             alt={name}
             width={400}
-            height={150}
-            className='aspect-[3/2] h-auto w-auto'
+            height={300}
+            className='min-h-[250px] w-auto object-cover'
+            loading='lazy'
           />
         </Link>
       </CardHeader>
@@ -55,7 +58,7 @@ export const CampaignCarCard = ({ car, campaignPrice, campaignId }: CarProps) =>
           )}
         </p>
 
-        <div className='mt-4 flex items-center gap-2'>
+        <div className='mt-4 flex flex-wrap items-center gap-2 sm:flex-nowrap'>
           <Chip
             variant='flat'
             color='primary'
@@ -66,8 +69,19 @@ export const CampaignCarCard = ({ car, campaignPrice, campaignId }: CarProps) =>
           <Chip
             variant='dot'
             color='primary'
+            classNames={{
+              content: 'text-small',
+            }}
           >
-            {formatRangeToLakhCrore(campaignPrice.min, campaignPrice.max)}
+            {/* {formatRangeToLakhCrore(campaignPrice.min, campaignPrice.max)} */}
+            {campaignPrice.min === campaignPrice.max ? (
+              formatAsBangladeshiCurrency(campaignPrice.min)
+            ) : (
+              <>
+                {formatAsBangladeshiCurrency(campaignPrice.min)} -{' '}
+                {formatAsBangladeshiCurrency(campaignPrice.max)}
+              </>
+            )}
           </Chip>
         </div>
       </CardBody>
