@@ -41,14 +41,17 @@ export const RHFRatingInput = (props: any) => {
               <p className='text-xl font-bold'>{value}</p>
             </div>
 
-            <Button
-              isIconOnly
-              variant='flat'
-              aria-label='Clear'
-              onClick={() => setValue(name, 0)}
-            >
-              <XIcon />
-            </Button>
+            {!!value && (
+              <Button
+                isIconOnly
+                variant='flat'
+                aria-label='Clear'
+                onClick={() => setValue(name, 0)}
+                type='button'
+              >
+                <XIcon />
+              </Button>
+            )}
           </div>
         )}
       />

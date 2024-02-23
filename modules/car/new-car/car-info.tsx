@@ -16,7 +16,7 @@ const CarInfo = async ({ car }: Props) => {
   const reviewsInfo = await reviews.getReviewsWithStats({ carId: car._id });
 
   return (
-    <div className='flex flex-col gap-2 xl:gap-8'>
+    <div className='flex flex-col gap-4 xl:gap-8'>
       <h1 className={title()}>{name}</h1>
 
       {reviewsInfo && (
@@ -33,7 +33,7 @@ const CarInfo = async ({ car }: Props) => {
         </div>
       )}
 
-      <p className={subtitle({ className: 'my-0 font-bold' })}>
+      <p className={subtitle({ className: 'my-0 ml-1 font-bold' })}>
         {formatRangeToLakhCrore(price.min, price.max)}
         {price.isNegotiable && (
           <>
