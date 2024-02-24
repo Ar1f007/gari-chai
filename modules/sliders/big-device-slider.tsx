@@ -45,6 +45,7 @@ const BigDeviceSlider = ({ sliders }: { sliders: TSlider[] }) => {
               priority
               width={1536}
               height={500}
+              className='max-h-[550px] object-cover'
             />
           </Link>
         ))}
