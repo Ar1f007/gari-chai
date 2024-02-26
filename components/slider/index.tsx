@@ -6,7 +6,6 @@ import '@/styles/slider.css';
 import { Arrow } from '@/components/Arrow';
 import { UseSliderProps, useSlider } from '@/hooks/useSlider';
 import { ReactNode } from 'react';
-import { Carousel } from 'react-responsive-carousel';
 
 type Props = {
   children: ReactNode;
