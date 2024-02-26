@@ -14,6 +14,7 @@ type CountdownTime = {
 type CountdownTimerProps = {
   date: string;
   text: string;
+  onCountdownFinish: () => void;
 };
 
 const TimeUnit = ({ unit, value }: { unit: string; value: string }) => {
@@ -33,7 +34,7 @@ const TimeUnit = ({ unit, value }: { unit: string; value: string }) => {
   );
 };
 
-const CountdownTimer = ({ date, text }: CountdownTimerProps) => {
+const CountdownTimer = ({ date, text, onCountdownFinish }: CountdownTimerProps) => {
   const [countDownTime, setCountDownTime] = useState<CountdownTime>({
     days: '00',
     hours: '00',
@@ -44,25 +45,36 @@ const CountdownTimer = ({ date, text }: CountdownTimerProps) => {
   const intervalId = useRef<NodeJS.Timeout>();
 
   const stopCountDown = useCallback(() => {
+    setCountDownTime({
+      days: '00',
+      hours: '00',
+      minutes: '00',
+      seconds: '00',
+    });
+
     if (intervalId.current) {
       clearInterval(intervalId.current);
     }
   }, []);
 
-  const getTimeDifference = useCallback((endTime: extendedDayjs.Dayjs) => {
-    const currentTime = extendedDayjs();
-    const timeDifference = endTime.diff(currentTime, 'second');
-    const duration = extendedDayjs.duration(timeDifference, 'seconds');
-    setCountDownTime({
-      days: duration.days().toString().padStart(2, '0'),
-      hours: duration.hours().toString().padStart(2, '0'),
-      minutes: duration.minutes().toString().padStart(2, '0'),
-      seconds: duration.seconds().toString().padStart(2, '0'),
-    });
-    if (timeDifference < 0) {
-      stopCountDown();
-    }
-  }, []);
+  const getTimeDifference = useCallback(
+    (endTime: extendedDayjs.Dayjs) => {
+      const currentTime = extendedDayjs();
+      const timeDifference = endTime.diff(currentTime, 'second');
+      const duration = extendedDayjs.duration(timeDifference, 'seconds');
+      setCountDownTime({
+        days: duration.days().toString().padStart(2, '0'),
+        hours: duration.hours().toString().padStart(2, '0'),
+        minutes: duration.minutes().toString().padStart(2, '0'),
+        seconds: duration.seconds().toString().padStart(2, '0'),
+      });
+      if (timeDifference <= 0) {
+        stopCountDown();
+        onCountdownFinish();
+      }
+    },
+    [stopCountDown, onCountdownFinish],
+  );
 
   const startCountDown = useCallback(() => {
     const endTime = extendedDayjs(date);
@@ -78,7 +90,7 @@ const CountdownTimer = ({ date, text }: CountdownTimerProps) => {
   }, [startCountDown, stopCountDown]);
 
   return (
-    <div className='flex  min-h-[300px] items-center bg-[#191A24] md:min-h-[400px]'>
+    <div className='flex  min-h-[300px] items-center rounded-lg bg-[#191A24] sm:rounded-none md:min-h-[400px]'>
       <div className='flex h-full w-full flex-col items-center justify-center gap-8 sm:gap-12'>
         <h1 className={title({ color: 'violet', size: 'sm', className: '!leading-normal' })}>
           {text}

@@ -22,7 +22,7 @@ export const CampaignCarCard = ({ car, campaignPrice, campaignId }: CarProps) =>
   const url = car.carType === 'new' ? `/cars/${slug}` : `/used-cars/${slug}`;
 
   return (
-    <Card className='h-full justify-between border-1 border-slate-200 shadow-lg'>
+    <Card className='h-full justify-between border lg:shadow-md'>
       <CardHeader className='p-0'>
         <Link href={url}>
           {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -14,8 +14,9 @@ export async function getCarsCampaign({ status = 'active' }: Partial<GetCarsCamp
     const res = await apiFetch<TCarCampaign[]>(url, {
       method: ReqMethod.GET,
       next: {
-        revalidate: 0,
+        // revalidate: 0,
       },
+      cache: 'no-store',
     });
 
     if (res.status == 'success') {
