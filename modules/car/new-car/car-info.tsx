@@ -16,7 +16,7 @@ const CarInfo = async ({ car }: Props) => {
   const reviewsInfo = await reviews.getReviewsWithStats({ carId: car._id });
 
   return (
-    <div className='flex w-full max-w-2xl flex-col gap-4 xl:gap-8'>
+    <div className='flex w-full max-w-4xl flex-col gap-4 xl:gap-8'>
       <h1 className={title()}>{name}</h1>
 
       {reviewsInfo && (
@@ -45,7 +45,7 @@ const CarInfo = async ({ car }: Props) => {
 
       <OfferBtn />
 
-      <AddToWishlist />
+      {/* <AddToWishlist /> */}
     </div>
   );
 };
