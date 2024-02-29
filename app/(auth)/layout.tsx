@@ -19,10 +19,10 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
           <CardBody className='mx-auto xl:px-12'>
             {children}
 
-            <div className='mx-auto mb-5 mt-3 flex w-full items-center justify-evenly text-xl font-medium text-foreground before:mr-4 before:block before:h-px before:flex-grow before:bg-foreground-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-foreground-400'>
+            {/* <div className='mx-auto mb-5 mt-3 flex w-full items-center justify-evenly text-xl font-medium text-foreground before:mr-4 before:block before:h-px before:flex-grow before:bg-foreground-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-foreground-400'>
               or
             </div>
-            <GoogleSignInButton />
+            <GoogleSignInButton /> */}
           </CardBody>
         </Suspense>
       </Card>

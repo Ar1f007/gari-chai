@@ -11,7 +11,7 @@ const OfferBtn = () => {
         </p> */}
       <Button
         color='primary'
-        className='shrink-0 text-medium text-default-50'
+        className='max-w-[200px] shrink-0 text-medium text-default-50'
         fullWidth
         as={Link}
         href={routes.campaigns}
@@ -24,7 +24,7 @@ const OfferBtn = () => {
         color='primary'
         as={Link}
         href={`tel:${siteConfig.contactInfo.phone}`}
-        className='shrink-0 text-medium font-medium'
+        className='max-w-[200px] shrink-0 text-medium font-medium'
       >
         Call Us
       </Button>
