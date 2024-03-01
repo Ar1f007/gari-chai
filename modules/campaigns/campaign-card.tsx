@@ -22,7 +22,6 @@ const CampaignCard = ({ campaign }: { campaign: TCarCampaign }) => {
     console.log('False');
   }, [rerender]);
 
-  console.log('render');
   const isValid =
     currentTime.isBefore(extendedDayjs(campaign.startDate)) ||
     currentTime.isBefore(extendedDayjs(campaign.endDate));

@@ -99,8 +99,14 @@ const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
     if (res.status === 'success') {
       formHandler.reset();
       setShowReviewModal(false);
-      toast.success('Your review will be added shortly.');
-      router.replace(pathname);
+      toast.message('Review Submitted', {
+        description:
+          'Your review has been submitted and is pending approval by our team. Thank you for your contribution!',
+      });
+
+      if (searchParams.toString().length) {
+        router.replace(pathname);
+      }
 
       return;
     }
