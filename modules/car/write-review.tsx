@@ -23,7 +23,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { TCarSchema } from '@/schema/car';
 
 // Services and Utilities
-import { reviews } from '@/services/reviews';
+import { reviewsService } from '@/services/reviews';
 import { toast } from 'sonner';
 import { GENERIC_ERROR_MSG } from '@/lib/constants';
 import { mapValidationErrors } from '@/util/mapValidationError';
@@ -80,7 +80,7 @@ const WriteReview = ({ carId }: { carId: TCarSchema['_id'] }) => {
       return;
     }
 
-    const res = await reviews.addReview({
+    const res = await reviewsService.addReview({
       ...data,
       carId,
       userId: userSnap.user._id,

@@ -2,7 +2,7 @@ import { subtitle, title } from '@/components/primitives';
 import { TCarSchema } from '@/schema/car';
 import AddToWishlist from './add-to-wishlist';
 import OfferBtn from '../offer-btn';
-import { reviews } from '@/services/reviews';
+import { reviewsService } from '@/services/reviews';
 import { Ratings } from '@/components/ratings';
 import { formatRangeToLakhCrore } from '@/lib/utils';
 
@@ -13,7 +13,7 @@ type Props = {
 const CarInfo = async ({ car }: Props) => {
   const { name, price } = car;
 
-  const reviewsInfo = await reviews.getReviewsWithStats({ carId: car._id });
+  const reviewsInfo = await reviewsService.getReviewsWithStats({ carId: car._id });
 
   return (
     <div className='flex w-full max-w-4xl flex-col gap-4 xl:gap-8'>

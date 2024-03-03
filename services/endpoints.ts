@@ -39,6 +39,7 @@ export const endpoints = {
     },
     reviews: {
       baseUrl: '/reviews',
+      userReviews: '/reviews/users',
     },
 
     comments: {

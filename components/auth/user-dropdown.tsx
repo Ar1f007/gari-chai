@@ -72,6 +72,13 @@ const UserDropdown = () => {
         </DropdownItem>
 
         <DropdownItem
+          key='reviews'
+          onPress={() => router.push(routes.userReviews)}
+        >
+          Reviews
+        </DropdownItem>
+
+        <DropdownItem
           key='logout'
           color='danger'
           onPress={handleLogout}

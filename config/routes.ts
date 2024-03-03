@@ -30,6 +30,7 @@ export const routes = {
   reviews: '/reviews',
 
   profileSettings: '/profile-settings',
+  userReviews: '/profile/reviews',
 
   search: '/search',
   campaigns: '/campaigns',

@@ -5,7 +5,7 @@ import { title } from '@/components/primitives';
 import { TCarSchema } from '@/schema/car';
 import Review from './review';
 import WriteReview from '@/modules/car/write-review';
-import { reviews } from '@/services/reviews';
+import { reviewsService } from '@/services/reviews';
 import Sliders from '@/components/slider';
 
 import { reviewKeenSliderOptions } from '@/lib/keen-slider/keen-slider-options';
@@ -15,7 +15,7 @@ type ReviewsProps = {
   car: TCarSchema;
 };
 const Reviews = async ({ car }: ReviewsProps) => {
-  const res = await reviews.getReviewsWithStats({ carId: car._id });
+  const res = await reviewsService.getReviewsWithStats({ carId: car._id });
 
   // TODO: FIX: don't show null if review list is not available
   if (!res) {

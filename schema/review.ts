@@ -34,6 +34,10 @@ const reviewBody = z.object({
   tags: z.array(z.string()).optional(),
   createdAt: z.string(),
   updatedAt: z.string(),
+
+  status: z.enum(['pending', 'approved', 'discard']),
+  reviewType: z.string(),
+  discardReason: z.string(),
 });
 
 const userInfo = userBasicInfoAPIResponseSchema.pick({

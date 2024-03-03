@@ -1,10 +1,15 @@
-import { AddReviewPayload, addReviewPayloadSchema, reviewsWithStatsSchema } from '@/schema/review';
+import {
+  AddReviewPayload,
+  ReviewBody,
+  addReviewPayloadSchema,
+  reviewsWithStatsSchema,
+} from '@/schema/review';
 import { apiFetch } from '../apiFetch';
 import { endpoints } from '../endpoints';
 import { ReqMethod } from '../serviceHelper';
 import { ZodError } from 'zod';
 
-export const reviews = {
+export const reviewsService = {
   addReview: async function (payload: AddReviewPayload) {
     try {
       const parsedPayload = addReviewPayloadSchema.parse(payload);
@@ -49,5 +54,22 @@ export const reviews = {
     } catch (error) {
       return null;
     }
+  },
+
+  getUserReviews: async function ({ userId }: { userId: string }) {
+    const url = endpoints.api.reviews.userReviews + '/' + userId;
+
+    return apiFetch<ReviewBody[]>(url, {
+      method: ReqMethod.GET,
+      cache: 'no-store',
+    });
+  },
+
+  deleteReview: async function ({ reviewId }: { reviewId: string }) {
+    const url = endpoints.api.reviews.baseUrl + '/' + reviewId;
+
+    return apiFetch<ReviewBody[]>(url, {
+      method: ReqMethod.DELETE,
+    });
   },
 };
