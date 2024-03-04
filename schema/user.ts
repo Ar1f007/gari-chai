@@ -17,6 +17,27 @@ const userLocal = z.object({
 
 const UserRoleEnum = z.enum(['admin', 'editor', 'moderator', 'super-admin', 'support', 'user']);
 
+export const resetPasswordRequestSchema = z.object({
+  sendCodeTo: z.string(),
+  requestedFrom: z.string(),
+});
+
+export const resetPasswordSchema = z.object({
+  code: z.string(),
+  password: z.string(),
+});
+
+export const loginWithEmailSchema = z.object({
+  email: z.string().min(1, 'Email is required').email(),
+  password: z.string().min(1, 'Password is required'),
+});
+
+export const loginWithPhoneSchema = z.object({
+  phone: phoneNumberSchema,
+  password: z.string().min(1, 'Password is required'),
+});
+
+export type ResetPasswordRequestPayload = z.infer<typeof resetPasswordRequestSchema>;
 export const userBasicInfoAPIResponseSchema = z.object({
   _id: z.string(),
   firstName: z.string(),
@@ -35,6 +56,7 @@ export const userBasicInfoAPIResponseSchema = z.object({
   updatedAt: z.string(),
   profilePicture: z.string(),
 });
+export type ResetPasswordPayload = z.infer<typeof resetPasswordSchema>;
 
 export type TAuthBasicUserInfo = z.infer<typeof userBasicInfoAPIResponseSchema>;
 

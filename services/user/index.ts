@@ -5,6 +5,7 @@ import { verifyOTP } from './verifyOTP';
 import { login } from './login';
 import { updateProfileInfo, updatePassword } from './update-info';
 import { deleteAccount, deactivateAccount } from './delete-deactivate';
+import {resetPassword, resetPasswordCode} from "@/services/user/password-reset";
 
 export const auth = {
   deactivateAccount,
@@ -16,4 +17,6 @@ export const auth = {
   updatePassword,
   updateProfileInfo,
   verifyOTP,
+  resetPasswordCode,
+  resetPassword,
 };
