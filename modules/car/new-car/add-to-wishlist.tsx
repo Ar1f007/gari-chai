@@ -1,18 +1,46 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@nextui-org/button';
-const AddToWishlist = () => {
+import { TCarSchema } from '@/schema/car';
+
+type WishlistItem = {
+  car: TCarSchema;
+};
+
+const AddToWishlist = ({ car }: { car: TCarSchema }) => {
   const [wishListed, setWishListed] = useState(false);
 
-  async function handleAddToWishlist() {
-    setWishListed(!wishListed);
-
-    if (wishListed) {
-      // add to wishlist
-    } else {
-      // remove from wishlist
+  useEffect(() => {
+    const storedWishlist = localStorage.getItem('wishlist');
+    if (storedWishlist) {
+      const wishlist: WishlistItem[] = JSON.parse(storedWishlist);
+      setWishListed(wishlist.some((item) => item.car._id === car._id));
     }
+  }, [car]);
+
+  async function handleAddToWishlist() {
+    const updatedWishlist: WishlistItem[] = wishListed
+      ? removeFromWishlist(car)
+      : addToWishlist(car);
+
+    setWishListed(!wishListed);
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+  }
+
+  function addToWishlist(car: TCarSchema): WishlistItem[] {
+    const storedWishlist = localStorage.getItem('wishlist');
+    const wishlist: WishlistItem[] = storedWishlist ? JSON.parse(storedWishlist) : [];
+    wishlist.push({ car });
+    return wishlist;
+  }
+
+  function removeFromWishlist(carId: TCarSchema): WishlistItem[] {
+    const storedWishlist = localStorage.getItem('wishlist');
+    if (!storedWishlist) return [];
+    const wishlist: WishlistItem[] = JSON.parse(storedWishlist);
+    const updatedWishlist = wishlist.filter((item) => item.car._id !== car._id);
+    return updatedWishlist;
   }
 
   return (

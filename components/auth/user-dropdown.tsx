@@ -79,6 +79,13 @@ const UserDropdown = () => {
         </DropdownItem>
 
         <DropdownItem
+          key='wishlist'
+          onPress={() => router.push(routes.userWishlist)}
+        >
+          Wishlist
+        </DropdownItem>
+
+        <DropdownItem
           key='logout'
           color='danger'
           onPress={handleLogout}

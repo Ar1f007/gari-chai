@@ -45,7 +45,7 @@ const CarInfo = async ({ car }: Props) => {
 
       <OfferBtn />
 
-      {/* <AddToWishlist /> */}
+      <AddToWishlist car={car} />
     </div>
   );
 };

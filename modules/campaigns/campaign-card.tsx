@@ -19,7 +19,6 @@ const CampaignCard = ({ campaign }: { campaign: TCarCampaign }) => {
 
   useEffect(() => {
     setRerender(false);
-    console.log('False');
   }, [rerender]);
 
   const isValid =

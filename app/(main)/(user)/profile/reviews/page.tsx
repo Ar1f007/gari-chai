@@ -61,7 +61,7 @@ const MyReviewsPage = () => {
     <Section classNames='py-10'>
       {error ? (
         <p className='text-center'>{error}</p>
-      ) : (
+      ) : reviews.length > 0 ? (
         <div className='grid grid-cols-3 gap-4'>
           {reviews.map((review) => (
             <blockquote
@@ -113,6 +113,8 @@ const MyReviewsPage = () => {
             </blockquote>
           ))}
         </div>
+      ) : (
+        <h1 className='px-2 text-center text-2xl'>No Reviews!</h1>
       )}
     </Section>
   );

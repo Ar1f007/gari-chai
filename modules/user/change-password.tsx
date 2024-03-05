@@ -32,7 +32,6 @@ const ChangePassword = () => {
       }
 
       if (res.status === 'validationError') {
-        console.log(res.errors);
         mapValidationErrors(res.errors, form);
         return;
       }

@@ -31,6 +31,7 @@ export const routes = {
 
   profileSettings: '/profile-settings',
   userReviews: '/profile/reviews',
+  userWishlist: '/profile/wishlist',
 
   search: '/search',
   campaigns: '/campaigns',

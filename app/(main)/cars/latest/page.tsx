@@ -32,7 +32,7 @@ const LatestCarsPage = async ({ searchParams }: TCarsPageParams) => {
 
   return (
     <Section classNames='py-10'>
-      {res.cars.length === 0 && <p className='text-center'>Phew! List is empty.</p>}
+      {res.cars.length === 0 && <p className='text-center'>List is empty.</p>}
 
       <div className='flex flex-col space-y-5'>
         <div className='grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
