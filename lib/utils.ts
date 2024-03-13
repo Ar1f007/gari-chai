@@ -66,7 +66,6 @@ export function getRedirectPath(params: URLSearchParams | ReadonlyURLSearchParam
 
     return routes.home;
   } catch (e) {
-    console.log(e);
     return routes.home;
   }
 }
