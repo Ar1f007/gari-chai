@@ -3,11 +3,11 @@ import Image from 'next/image';
 
 import { routes } from '@/config/routes';
 import { title } from '@/components/primitives';
-import { THomeSettingApiBrandSchemaSingleInstance } from '@/schema/common';
+import { THomeBrandSchema } from '@/schema/common';
 import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 
 type BrandProps = {
-  brand: THomeSettingApiBrandSchemaSingleInstance;
+  brand: THomeBrandSchema;
 };
 
 const Brand = (props: BrandProps) => {
@@ -21,7 +21,7 @@ const Brand = (props: BrandProps) => {
       className='flex max-h-[200px] flex-col items-center overflow-hidden rounded-lg pb-3 shadow duration-300 ease-in-out'
     >
       <Image
-        src={content.image.originalUrl}
+        src={content.image.originalUrl || PLACEHOLDER_IMAGE}
         alt={content.name}
         width={200}
         height={100}

@@ -42,7 +42,7 @@ export const ElectricCars = async () => {
 
   return (
     <section className='home-section-wrapper'>
-      <SectionTitle>Electric Cars</SectionTitle>
+      <SectionTitle title='h2'>Electric Cars</SectionTitle>
 
       <TabSlider data={groupedCars} />
 

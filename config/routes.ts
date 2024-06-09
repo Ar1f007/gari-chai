@@ -16,6 +16,8 @@ export const routes = {
   electricCars: '/cars/electric',
   upcomingCars: '/cars/upcoming',
 
+  carParts: '/parts/cars',
+
   videoAndReels: 'video-and-reels',
   videos: '/videos',
   reels: '/reels',

@@ -1,36 +1,39 @@
-import Link from 'next/link';
-import { HOME_SETTINGS_OPTIONS } from '@/lib/constants';
-import { getHomePageCarsBySection } from '@/services';
 import SectionTitle from '@/components/section-title';
 import Sliders from '@/components/slider';
-import { Car } from '@/components/car/new-car-card';
 import { routes } from '@/config/routes';
+import { HOME_SETTINGS_OPTIONS } from '@/lib/constants';
+import { getHomePageCarPartsBySectionName } from '@/services/home/car-parts';
+import Link from 'next/link';
+import CarPartCard from './car-part-card';
 
-export const LatestCars = async () => {
-  const res = await getHomePageCarsBySection(HOME_SETTINGS_OPTIONS.latestCars);
+const HomeCarParts = async () => {
+  const carParts = await getHomePageCarPartsBySectionName(HOME_SETTINGS_OPTIONS.carParts);
 
-  if (!res || !res.length) {
+  if (!carParts || !carParts.length) {
     return null;
   }
 
   return (
     <section className='home-section-wrapper'>
-      <SectionTitle title='h2'>Latest Cars</SectionTitle>
+      <SectionTitle title='h2'>Parts</SectionTitle>
 
       <div className='mt-5 flex flex-col space-y-5'>
         <Sliders>
-          {res.map((item) => (
+          {carParts.map((item) => (
             <li
               className='keen-slider__slide max-w-[372px] rounded-2xl'
               key={item._id}
             >
-              <Car car={item.content} />
+              <CarPartCard
+                key={item._id}
+                carPart={item.content}
+              />
             </li>
           ))}
         </Sliders>
 
         <Link
-          href={routes.latestCars}
+          href={routes.carParts}
           className='flex gap-2 text-primary underline-offset-4 hover:underline'
         >
           <span>View all latest cars</span>
@@ -39,3 +42,4 @@ export const LatestCars = async () => {
     </section>
   );
 };
+export default HomeCarParts;
