@@ -35,6 +35,7 @@ export const HOME_SETTINGS_OPTIONS = {
   mostSearchedCars: 'most-searched-cars',
   popularBrands: 'popular-brands',
   upcomingCars: 'upcoming-cars',
+  carParts: 'car-parts',
 };
 
 export const homePageSectionNameEnum = z.enum([
@@ -45,4 +46,5 @@ export const homePageSectionNameEnum = z.enum([
   HOME_SETTINGS_OPTIONS.electricCars,
   HOME_SETTINGS_OPTIONS.services,
   HOME_SETTINGS_OPTIONS.popularBrands,
+  HOME_SETTINGS_OPTIONS.carParts,
 ]);

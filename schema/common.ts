@@ -4,6 +4,7 @@ import { isValidPhoneNumber, parsePhoneNumber } from 'libphonenumber-js';
 import { homePageSectionNameEnum } from '@/lib/constants';
 import { carSchema } from './car';
 import { brandSchema } from './brand-and-model';
+import { carPartSchema } from './car-part';
 
 export const imageSchema = z.object({
   thumbnailUrl: z.string().url(),
@@ -24,14 +25,22 @@ export const isNumberRequiredErrMsg = {
   invalid_type_error: 'required a number',
 };
 
-export const homeSettingApiSchemaSingleInstance = z.object({
+export const homeSettingCommonSchema = z.object({
   _id: z.string(),
   sectionName: homePageSectionNameEnum,
-  content: carSchema,
   tags: z.array(z.string()),
   sort: z.number(),
   contentId: z.string(),
+
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });
+
+export const homeSettingApiSchemaSingleInstance = homeSettingCommonSchema.merge(
+  z.object({
+    content: carSchema,
+  }),
+);
 
 export type THomeSettingApiSchemaSingleInstance = z.infer<
   typeof homeSettingApiSchemaSingleInstance
@@ -42,22 +51,29 @@ export type TCarsByTagName = { name: string; items: THomeSettingApiSchemaSingleI
 /**
  * Single Brand response from `Home Setting table`
  */
-export const homeSettingApiBrandSchemaSingleInstance = z.object({
-  _id: z.string(),
-  sectionName: z.string(),
-  sort: z.number(),
-  content: brandSchema,
-  tags: z.array(z.string()),
-  contentId: z.string(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-});
+export const homeBrandSchemaSingleInstance = homeSettingCommonSchema.merge(
+  z.object({
+    content: brandSchema,
+  }),
+);
 
-export type THomeSettingApiBrandSchemaSingleInstance = z.infer<
-  typeof homeSettingApiBrandSchemaSingleInstance
->;
+export type THomeBrandSchema = z.infer<typeof homeBrandSchemaSingleInstance>;
 /**
  * End Brands schema - Home page
+ */
+
+/**
+ * Single Car Part response from `Home Setting table`
+ */
+export const homeCarPartSchemaSingleInstance = homeSettingCommonSchema.merge(
+  z.object({
+    content: carPartSchema,
+  }),
+);
+
+export type THomeCarPartSchema = z.infer<typeof homeCarPartSchemaSingleInstance>;
+/**
+ * End Car Part schema - Home page
  */
 
 const queryParamSchema = z.optional(

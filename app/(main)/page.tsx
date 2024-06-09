@@ -8,6 +8,7 @@ import { UpcomingCars } from '@/modules/home/upcoming-cars';
 import CampaignPromo from '@/modules/sliders/campaign-promo';
 import PopularBrands from '@/modules/home/popular-brands/popular-brands';
 import SliderList from '@/modules/sliders/sliderList';
+import HomeCarParts from '@/modules/home/car-parts';
 
 const Homepage = () => {
   return (
@@ -30,6 +31,10 @@ const Homepage = () => {
 
         <Suspense>
           <ElectricCars />
+        </Suspense>
+
+        <Suspense>
+          <HomeCarParts />
         </Suspense>
 
         <Suspense>
