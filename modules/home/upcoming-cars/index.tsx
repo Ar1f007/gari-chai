@@ -15,7 +15,7 @@ export const UpcomingCars = async () => {
 
   return (
     <section className='home-section-wrapper'>
-      <SectionTitle>Upcoming Cars</SectionTitle>
+      <SectionTitle title='h2'>Upcoming Cars</SectionTitle>
 
       <div className='mt-5 flex flex-col space-y-5'>
         <Sliders>
