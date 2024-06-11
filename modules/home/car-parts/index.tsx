@@ -36,7 +36,7 @@ const HomeCarParts = async () => {
           href={routes.carParts}
           className='flex gap-2 text-primary underline-offset-4 hover:underline'
         >
-          <span>View all latest cars</span>
+          <span>View all parts</span>
         </Link>
       </div>
     </section>
