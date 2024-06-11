@@ -21,7 +21,7 @@ export const routes = {
   videoAndReels: 'video-and-reels',
   videos: '/videos',
   reels: '/reels',
-  buyParts: '/buy-parts',
+  buyParts: '/parts/cars',
 
   buyAndSellUsedCars: '/buy-and-sell-cars',
   buyUsedCar: '/buy-used-cars',
