@@ -36,3 +36,12 @@ export const carPartSchema = z.object({
 });
 
 export type TCarPartSchema = z.infer<typeof carPartSchema>;
+
+export const carPartQuerySchema = z.object({
+  name: z.string(),
+  limit: z.string(),
+  page: z.string(),
+  price: z.string(),
+});
+
+export type TCarPartQuerySchema = z.infer<typeof carPartQuerySchema>;

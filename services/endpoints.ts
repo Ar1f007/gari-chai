@@ -57,6 +57,10 @@ export const endpoints = {
       cars: '/campaigns/cars',
       comments: '/campaigns/comments',
     },
+
+    parts: {
+      carParts: '/car-parts',
+    },
   },
   admin: {},
 };
