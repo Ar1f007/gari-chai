@@ -30,12 +30,12 @@ const CarParts = async ({ searchParams }: { searchParams: Partial<TCarPartQueryS
       {res.data.carParts.length === 0 && <p className='text-center'>Phew! List is empty.</p>}
 
       <div className='flex flex-col space-y-5'>
-        <h1 className={title({ size: 'xs' })}>
+        {res.data.carParts.length > 0 && (
           <Chip size='lg'>
             Car Parts: {res.data.pagination.totalItems < 10 ? '0' : null}
             {res.data.pagination.totalItems}
           </Chip>
-        </h1>
+        )}
         <div className='grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
           {res.data.carParts.map((part) => (
             <CarPartCard
