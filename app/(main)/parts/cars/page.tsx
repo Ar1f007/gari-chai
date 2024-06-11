@@ -8,7 +8,6 @@ const CarParts = async ({ searchParams }: { searchParams: Partial<TCarPartQueryS
   const parsedParams = carPartQuerySchema.partial().safeParse(searchParams);
 
   if (!parsedParams.success) {
-    console.log(parsedParams.error.errors.map((e) => ({ m: e.message, p: e.path })));
     return (
       <div className='max-w-5xl'>
         <p className='text-center font-medium text-foreground'>Invalid Query Params Provided</p>;
