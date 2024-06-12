@@ -32,7 +32,7 @@ const CarPartImages = ({ additionalImages, posterImg }: Props) => {
         alt='parts'
         width={400}
         height={300}
-        className='aspect-square rounded object-cover shadow-sm'
+        className='w-full rounded object-contain shadow-sm'
       />
 
       <ul className='flex flex-wrap gap-5'>
