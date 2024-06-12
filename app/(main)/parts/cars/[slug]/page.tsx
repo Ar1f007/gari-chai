@@ -1,12 +1,9 @@
 import CarPartImages from '@/components/car-parts/car-parts-images';
-import { Section } from '@/components/layout/section';
 import { subtitle, title } from '@/components/primitives';
 import OfferBtn from '@/modules/car/offer-btn';
 import { carPartsService } from '@/services/parts/car-part';
 import { formatAsBangladeshiCurrency } from '@/util/covert-currency';
 import { convertHtmlToText } from '@/util/html-to-text';
-import { Chip } from '@nextui-org/chip';
-import Image from 'next/image';
 import { Fragment, Suspense } from 'react';
 
 type Props = {
