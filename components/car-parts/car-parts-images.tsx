@@ -4,7 +4,7 @@ import { PLACEHOLDER_IMAGE } from '@/lib/constants';
 import { TCarPartSchema } from '@/schema/car-part';
 import { Avatar } from '@nextui-org/avatar';
 import Image from 'next/image';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 type Props = {
   posterImg: TCarPartSchema['posterImage'];

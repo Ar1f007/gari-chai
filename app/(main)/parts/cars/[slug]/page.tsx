@@ -1,10 +1,12 @@
+import { Fragment, Suspense } from 'react';
+
 import CarPartImages from '@/components/car-parts/car-parts-images';
-import { subtitle, title } from '@/components/primitives';
 import OfferBtn from '@/modules/car/offer-btn';
+
+import { subtitle, title } from '@/components/primitives';
 import { carPartsService } from '@/services/parts/car-part';
 import { formatAsBangladeshiCurrency } from '@/util/covert-currency';
 import { convertHtmlToText } from '@/util/html-to-text';
-import { Fragment, Suspense } from 'react';
 
 type Props = {
   params: {
