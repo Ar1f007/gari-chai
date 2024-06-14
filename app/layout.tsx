@@ -39,8 +39,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head />
       <body className={clsx('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-        <Providers themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
-          <main>{children}</main>
+        <Providers>
+          <main className='light'>{children}</main>
         </Providers>
         <SpeedInsights />
       </body>
