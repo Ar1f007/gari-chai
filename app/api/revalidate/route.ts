@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     if (secretToken !== process.env.REVALIDATE_SECRET) {
       return Response.json(
         {
-          success: 'fail',
+          success: false,
           message: 'You are not authorized',
         },
         {
@@ -36,9 +36,14 @@ export async function POST(request: NextRequest) {
     const parsedData = RevalidateParamsSchema.safeParse(data);
 
     if (!parsedData.success) {
+      console.log(
+        '================FAILED=============',
+        parsedData.error.errors.map((e) => e.message),
+      );
+
       return Response.json(
         {
-          success: 'fail',
+          success: false,
           message: "Invalid data structure. Valid Ex: {tags: ['tag']} { paths: ['/path']}",
         },
         {
@@ -62,6 +67,8 @@ export async function POST(request: NextRequest) {
       allowedOrigin = process.env.DEFAULT_ALLOWED_ORIGIN!;
     }
 
+    console.log('========================ALLOWED ORIGIN================', allowedOrigin);
+
     const responseHeaders = new Headers({
       'Access-Control-Allow-Methods': 'GET, DELETE, PATCH, POST, PUT',
       'Access-Control-Allow-Headers':
@@ -70,7 +77,7 @@ export async function POST(request: NextRequest) {
     });
 
     return Response.json(
-      { success: 'success', message: 'revalidated' },
+      { success: true, message: 'revalidated' },
       {
         status: HttpStatus.OK,
         headers: responseHeaders,
@@ -79,7 +86,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return Response.json(
       {
-        success: 'error',
+        success: false,
         message: (error as any)?.message ?? 'Something went wrong',
       },
       {

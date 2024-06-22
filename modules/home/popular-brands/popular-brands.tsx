@@ -7,6 +7,8 @@ import { THomeBrandSchema } from '@/schema/common';
 const PopularBrands = async () => {
   const brands = await getHomePageBrandsBySectionName(HOME_SETTINGS_OPTIONS.popularBrands);
 
+  console.log('============POPULAR BRANDS===============', brands);
+
   if (!brands || !brands.length) return null;
 
   const renderBrand = (brand: THomeBrandSchema) => (
