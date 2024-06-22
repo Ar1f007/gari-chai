@@ -17,6 +17,8 @@ export async function getHomePageCarPartsBySectionName(sectionName: string) {
   try {
     const url = endpoints.api.homeSettings.baseUrl + '/' + sectionName;
 
+    console.log('>>>>>>>>URL>>>>>>>>>', url);
+
     const res = await apiFetch(url, {
       method: ReqMethod.GET,
       next: {
