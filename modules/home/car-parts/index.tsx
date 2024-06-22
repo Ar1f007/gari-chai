@@ -9,8 +9,6 @@ import CarPartCard from './car-part-card';
 const HomeCarParts = async () => {
   const carParts = await getHomePageCarPartsBySectionName(HOME_SETTINGS_OPTIONS.carParts);
 
-  console.log('==============CAR PARTS==========', carParts);
-
   if (!carParts || !carParts.length) {
     return null;
   }

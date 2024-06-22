@@ -36,11 +36,6 @@ export async function POST(request: NextRequest) {
     const parsedData = RevalidateParamsSchema.safeParse(data);
 
     if (!parsedData.success) {
-      console.log(
-        '================FAILED=============',
-        parsedData.error.errors.map((e) => e.message),
-      );
-
       return Response.json(
         {
           success: false,
@@ -66,8 +61,6 @@ export async function POST(request: NextRequest) {
     } else {
       allowedOrigin = process.env.DEFAULT_ALLOWED_ORIGIN!;
     }
-
-    console.log('========================ALLOWED ORIGIN================', allowedOrigin);
 
     const responseHeaders = new Headers({
       'Access-Control-Allow-Methods': 'GET, DELETE, PATCH, POST, PUT',
