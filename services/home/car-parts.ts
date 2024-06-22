@@ -24,12 +24,20 @@ export async function getHomePageCarPartsBySectionName(sectionName: string) {
       },
     });
 
+    console.log('=======================CAR PARTS RESPONSE===========', res);
+
     if (res.status === 'success') {
       const parsedData = z.array(homeCarPartSchemaSingleInstance).safeParse(res.data);
 
       if (parsedData.success) {
+        console.log('=============SUCCESS DATA============', parsedData);
         return parsedData.data;
       }
+
+      console.log(
+        '==========ERROR DATA===========',
+        parsedData.error.errors.map((e) => e.message),
+      );
 
       throw new Error(`Home: ${sectionName} data missing`);
     }
