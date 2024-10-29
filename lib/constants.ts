@@ -13,7 +13,7 @@ export const DEFAULT_PAGINATION_ITEMS_LIMIT = 10;
 export const IS_CLIENT = typeof window !== 'undefined';
 
 export const API_BASE_URL =
-  process.env.NODE_ENV === 'development'
+  process.env.NODE_ENV !== 'development'
     ? 'http://localhost:8000'
     : 'https://gari-chai.onrender.com';
 

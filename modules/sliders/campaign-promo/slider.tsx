@@ -82,7 +82,7 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
               showStatus={false}
               showArrows={false}
               showIndicators={false}
-              interval={20000}
+              interval={4000}
               axis='horizontal'
               onChange={(index) => setCurrentSlide(index)}
               selectedItem={currentSlide}
@@ -94,12 +94,13 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
                   className='cursor-pointer'
                 >
                   <Image
-                    src={slider.posterImage.thumbnailUrl}
+                    src={slider.posterImage.originalUrl}
                     alt={slider.title}
                     width={400}
                     height={400}
                     priority
-                    className='rounded'
+                    className='rounded max-h-[70dvh] lg:max-h-[400px] aspect-square object-cover'
+                    quality={100}
                   />
                 </div>
               ))}
