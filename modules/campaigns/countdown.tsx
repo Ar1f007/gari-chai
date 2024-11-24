@@ -1,23 +1,18 @@
-'use client';
+'use client'
 
-import { useCallback, useEffect, useState, useRef } from 'react';
-import extendedDayjs from '@/lib/dayjs';
+import { useEffect, useState } from 'react'
 import { title } from '@/components/primitives';
 
-type CountdownTime = {
-  days: string;
-  hours: string;
-  minutes: string;
-  seconds: string;
-};
 
-type CountdownTimerProps = {
-  date: string;
-  text: string;
-  onCountdownFinish: () => void;
-};
+type TimeLeft = {
+  days: number
+  hours: number
+  minutes: number
+  seconds: number
+}
 
-const TimeUnit = ({ unit, value }: { unit: string; value: string }) => {
+const TimeUnit = ({ unit, value }: { unit: string; value: number }) => {
+
   return (
     <div className='relative flex flex-col gap-5'>
       <div className='flex h-16 w-16 items-center justify-between rounded-lg bg-[#343650] sm:h-32 sm:w-32 lg:h-40 lg:w-40'>
@@ -28,66 +23,52 @@ const TimeUnit = ({ unit, value }: { unit: string; value: string }) => {
         <div className='relative -right-[6px] h-2.5 w-2.5 rounded-full bg-[#191A24] sm:h-3 sm:w-3'></div>
       </div>
       <span className='text-center text-xs capitalize text-[#8486A9] sm:text-2xl'>
-        {value == '01' ? unit.slice(0, -1) : unit}
+        {value <= 1 ? unit.slice(0, -1) : unit}
       </span>
     </div>
   );
 };
 
-const CountdownTimer = ({ date, text, onCountdownFinish }: CountdownTimerProps) => {
-  const [countDownTime, setCountDownTime] = useState<CountdownTime>({
-    days: '00',
-    hours: '00',
-    minutes: '00',
-    seconds: '00',
-  });
 
-  const intervalId = useRef<NodeJS.Timeout>();
+type CountdownProps = {
+  text: string
+  targetDate: Date
+  onComplete?: () => void
+}
 
-  const stopCountDown = useCallback(() => {
-    setCountDownTime({
-      days: '00',
-      hours: '00',
-      minutes: '00',
-      seconds: '00',
-    });
-
-    if (intervalId.current) {
-      clearInterval(intervalId.current);
-    }
-  }, []);
-
-  const getTimeDifference = useCallback(
-    (endTime: extendedDayjs.Dayjs) => {
-      const currentTime = extendedDayjs();
-      const timeDifference = endTime.diff(currentTime, 'second');
-      const duration = extendedDayjs.duration(timeDifference, 'seconds');
-      setCountDownTime({
-        days: duration.days().toString().padStart(2, '0'),
-        hours: duration.hours().toString().padStart(2, '0'),
-        minutes: duration.minutes().toString().padStart(2, '0'),
-        seconds: duration.seconds().toString().padStart(2, '0'),
-      });
-      if (timeDifference <= 0) {
-        stopCountDown();
-        onCountdownFinish();
-      }
-    },
-    [stopCountDown, onCountdownFinish],
-  );
-
-  const startCountDown = useCallback(() => {
-    const endTime = extendedDayjs(date);
-    intervalId.current = setInterval(() => {
-      getTimeDifference(endTime);
-    }, 1000);
-    return stopCountDown;
-  }, [date, getTimeDifference, stopCountDown]);
+export function Countdown({ text, targetDate, onComplete }: CountdownProps) {
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+  const [isComplete, setIsComplete] = useState(false)
 
   useEffect(() => {
-    startCountDown();
-    return stopCountDown;
-  }, [startCountDown, stopCountDown]);
+    const calculateTimeLeft = () => {
+      const difference = targetDate.getTime() - new Date().getTime()
+
+      if (difference <= 0) {
+        setIsComplete(true)
+        onComplete?.()
+        return
+      }
+
+      setTimeLeft({
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60)
+      })
+    }
+
+    // Calculate immediately
+    calculateTimeLeft()
+
+    const timer = setInterval(calculateTimeLeft, 1000)
+
+    return () => clearInterval(timer)
+  }, [targetDate, onComplete])
+
+  if (isComplete) {
+    return null
+  }
 
   return (
     <div className='flex  min-h-[300px] items-center rounded-lg bg-[#191A24] sm:rounded-none md:min-h-[400px]'>
@@ -96,26 +77,18 @@ const CountdownTimer = ({ date, text, onCountdownFinish }: CountdownTimerProps) 
           {text}
         </h1>
         <div className='flex justify-center gap-3 sm:gap-8'>
-          <TimeUnit
-            unit='Days'
-            value={countDownTime?.days}
-          />
-          <TimeUnit
-            unit='Hours'
-            value={countDownTime?.hours}
-          />
-          <TimeUnit
-            unit='Minutes'
-            value={countDownTime?.minutes}
-          />
-          <TimeUnit
-            unit='Seconds'
-            value={countDownTime?.seconds}
-          />
+          {
+            Object.entries(timeLeft).map(([key, val]) => (
+              <TimeUnit
+                key={key}
+                unit={key}
+                value={val}
+              />
+            ))
+          }
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CountdownTimer;

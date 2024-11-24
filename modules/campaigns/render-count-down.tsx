@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import extendedDayjs from '@/lib/dayjs';
-import CountdownTimer from './countdown';
+import { Countdown } from './countdown';
 
 export const RenderCountDown = (campaign: {
   startDate: string;
@@ -13,18 +12,18 @@ export const RenderCountDown = (campaign: {
 
   if (currentTime.isBefore(extendedDayjs(campaign.startDate))) {
     return (
-      <CountdownTimer
+      <Countdown
         text='Campaign starts in'
-        date={campaign.startDate}
-        onCountdownFinish={campaign.onCountdownFinish}
+        targetDate={new Date(campaign.startDate)}
+        onComplete={campaign.onCountdownFinish}
       />
     );
   } else if (currentTime.isBefore(extendedDayjs(campaign.endDate))) {
     return (
-      <CountdownTimer
+      <Countdown
         text='Campaign ends in'
-        date={campaign.endDate}
-        onCountdownFinish={campaign.onCountdownFinish}
+        targetDate={new Date(campaign.endDate)}
+        onComplete={campaign.onCountdownFinish}
       />
     );
   } else {

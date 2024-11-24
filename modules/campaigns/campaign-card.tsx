@@ -31,7 +31,7 @@ const CampaignCard = ({ campaign }: { campaign: TCarCampaign }) => {
 
   return (
     <div
-      className='rounded-md sm:border sm:bg-default-50 md:mt-12 md:py-8 md:shadow-md'
+      className='rounded-md border bg-default-50 mt-12 px-4 md:px-0 py-8 shadow-md'
       key={campaign._id}
     >
       <h1
@@ -50,6 +50,7 @@ const CampaignCard = ({ campaign }: { campaign: TCarCampaign }) => {
       )}
 
       <RenderCountDown
+        key={campaign._id}
         startDate={campaign.startDate}
         endDate={campaign.endDate}
         onCountdownFinish={handleCountdownFinish}

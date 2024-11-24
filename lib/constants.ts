@@ -17,7 +17,7 @@ export const API_BASE_URL =
     ? 'http://localhost:8000'
     : 'https://gari-chai.onrender.com';
 
-export const API_V1_URL = API_BASE_URL + '/api/v1';
+export const API_V1_URL = "https://gari-chai.onrender.com" + '/api/v1';
 
 export const PRIMARY_COLOR_500 = '#1e8667';
 

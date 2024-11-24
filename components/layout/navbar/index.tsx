@@ -120,7 +120,7 @@ const Navbar = () => {
           </NavbarContent>
         </NavbarContent>
 
-        <NavbarMenu>
+        <NavbarMenu className='max-h-[calc(100svh_-_4rem)] overflow-y-auto py-4'>
           <li>
             <Suspense>
               <Search />

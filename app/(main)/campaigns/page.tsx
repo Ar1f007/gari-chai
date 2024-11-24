@@ -24,7 +24,7 @@ const CampaignsPage = async () => {
     );
   }
 
-  const currentDateTime = extendedDayjs(); // Assuming extendedDayjs() returns current date and time
+  const currentDateTime = extendedDayjs();
 
   const validCampaigns = campaigns.data.filter((campaign) =>
     extendedDayjs(campaign.endDate).isSameOrAfter(currentDateTime),
