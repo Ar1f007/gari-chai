@@ -1,16 +1,16 @@
 'use client';
 
-import { routes } from '@/config/routes';
-import { cn } from '@/lib/utils';
-import { Button } from '@nextui-org/button';
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from '@nextui-org/modal';
 import Image from 'next/image';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Button } from '@nextui-org/button';
+import { ChevronLeftIcon, ChevronRightIcon, SparklesIcon, XIcon } from 'lucide-react';
+import { Modal, ModalContent, ModalBody } from '@nextui-org/modal';
 import { Carousel } from 'react-responsive-carousel';
-import { title } from '../../../components/primitives';
 import { useRouter } from 'next/navigation';
 import { TCarCampaign } from '@/schema/campaign';
+import { routes } from '@/config/routes';
 import { settingsActions, settingsStore } from '@/store';
+import { title } from '@/components/primitives';
 
 type CampaignSliderProps = {
   sliders: TCarCampaign[];
@@ -20,7 +20,7 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
   const router = useRouter();
 
   const [showPromo, setShowPromo] = useState(
-    settingsStore.notifications.campaigns.isPromoShown ? false : true,
+    () => settingsStore.notifications.campaigns.isPromoShown ? false : true,
   );
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -29,10 +29,6 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
   };
   const goToNextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide === sliders.length - 1 ? 0 : prevSlide + 1));
-  };
-
-  const goToSlide = (slideIdx: number) => {
-    setCurrentSlide(() => slideIdx);
   };
 
   const handleRouting = (link: string) => {
@@ -64,15 +60,24 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
   return (
     <Modal
       isOpen={showPromo}
-      placement='center'
+      placement="center"
       onOpenChange={handleClosePromo}
+      hideCloseButton
     >
       <ModalContent>
-        <>
-          <ModalHeader className='flex flex-col gap-1'>
-            <span className={title({ color: 'blue', size: 'xs' })}>Special Campaigns On Going</span>
-          </ModalHeader>
-          <ModalBody>
+        <ModalBody className="p-0 gap-0 bg-default-100">
+
+          {/* Close Button */}
+          <Button
+            className="absolute top-2 right-2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition z-50"
+            onPress={handleClosePromo}
+            isIconOnly
+            aria-label="Close"
+          >
+            <XIcon className='size-6' />
+          </Button>
+
+          <div className="relative">
             <Carousel
               autoPlay
               dynamicHeight
@@ -83,7 +88,7 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
               showArrows={false}
               showIndicators={false}
               interval={4000}
-              axis='horizontal'
+              axis="horizontal"
               onChange={(index) => setCurrentSlide(index)}
               selectedItem={currentSlide}
             >
@@ -91,97 +96,68 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
                 <div
                   key={idx}
                   onClick={() => handleOnPosterClick(slider.link || routes.campaigns)}
-                  className='cursor-pointer'
+                  className="cursor-pointer relative"
                 >
-                  <Image
-                    src={slider.posterImage.originalUrl}
-                    alt={slider.title}
-                    width={400}
-                    height={400}
-                    priority
-                    className='rounded max-h-[70dvh] lg:max-h-[400px] aspect-square object-cover'
-                    quality={100}
-                  />
+                  {/* Image with overlay */}
+                  <div className="relative">
+                    <Image
+                      src={slider.posterImage.originalUrl}
+                      alt={slider.title}
+                      width={400}
+                      height={400}
+                      priority
+                      className="rounded rounded-bl-none rounded-br-none max-h-[70dvh] lg:max-h-[400px] aspect-square object-cover"
+                      quality={100}
+                    />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                  </div>
                 </div>
               ))}
             </Carousel>
 
-            <div className='text-pretty text-center first-letter:capitalize'>
-              <h2 className={title({ size: 'xs', color: 'blue' })}>
-                {sliders[currentSlide].title}
-              </h2>
-              {sliders[currentSlide]?.tagline && (
-                <p className='text-md font-medium text-default-600'>
-                  {sliders[currentSlide].tagline}
-                </p>
-              )}
-            </div>
+            {/* Left Navigation Button */}
+            <Button
+              className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition"
+              onPress={goToPrevSlide}
+              isIconOnly
+              aria-label='previous'
+            >
+              <ChevronLeftIcon className="size-6" />
+            </Button>
+
+            {/* Right Navigation Button */}
+            <Button
+              className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition"
+              onClick={goToNextSlide}
+              isIconOnly
+              aria-label='next'
+            >
+              <ChevronRightIcon className="size-6" />
+            </Button>
+          </div>
+
+          {/* Title Section */}
+          <div className="flex flex-col justify-center items-center gap-4 px-4 py-5 text-center">
+            <h2 className={title({ size: "xs", color: "blue" })}>
+              {sliders[currentSlide].title}
+            </h2>
 
             {sliders.length > 1 && (
               <Button
-                className='mx-auto w-fit text-[12px] font-medium uppercase tracking-wider text-default-50'
-                variant='solid'
-                color='primary'
+                className="bg-gradient-to-r from-blue-500 to-violet-500 text-white font-medium w-fit mx-auto shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105"
+                endContent={<SparklesIcon className="h-4 w-4" />}
                 onPress={() => handleOnPosterClick(routes.campaigns)}
-                size='sm'
+                size="lg"
               >
-                Go to Campaigns
+                Go to Campaign
               </Button>
             )}
-          </ModalBody>
-          <ModalFooter
-            className={cn('justify-between', {
-              'justify-center': sliders.length == 1,
-            })}
-          >
-            {sliders.length > 1 ? (
-              <Fragment>
-                <Button
-                  className='text-[12px] uppercase tracking-wider text-default-50'
-                  variant='solid'
-                  color='primary'
-                  onPress={goToPrevSlide}
-                  size='sm'
-                >
-                  Back
-                </Button>
-                <div className='flex items-center gap-2'>
-                  {Array.from({ length: sliders.length }).map((item, idx) => (
-                    <Button
-                      key={idx}
-                      size='sm'
-                      className={cn(
-                        'h-3 min-w-3 cursor-pointer rounded-full bg-default-300 p-0 hover:bg-primary/70',
-                        { 'bg-primary': currentSlide == idx },
-                      )}
-                      onPress={() => goToSlide(idx)}
-                    />
-                  ))}
-                </div>
-                <Button
-                  className='text-[12px] uppercase tracking-wider text-default-50'
-                  variant='solid'
-                  color='primary'
-                  onPress={goToNextSlide}
-                  size='sm'
-                >
-                  Next
-                </Button>
-              </Fragment>
-            ) : (
-              <Button
-                className='text-md uppercase tracking-wider text-default-50'
-                variant='solid'
-                color='primary'
-                onPress={() => handleOnPosterClick(routes.campaigns)}
-              >
-                Go to Campaigns
-              </Button>
-            )}
-          </ModalFooter>
-        </>
+          </div>
+        </ModalBody>
       </ModalContent>
     </Modal>
+
   );
 };
 export default CampaignSlider;
