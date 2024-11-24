@@ -8,7 +8,9 @@ import { TAGS } from '../tags';
 import { homeBrandSchemaSingleInstance } from '@/schema/common';
 
 export async function getHomePageBrandsBySectionName(sectionName: string) {
+
   const parsedSectionName = homePageSectionNameEnum.safeParse(sectionName);
+
   if (!parsedSectionName.success) {
     const errMessages = parsedSectionName.error.errors.map((e) => e.message);
     throw new Error(errMessages.toString());
