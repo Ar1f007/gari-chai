@@ -106,7 +106,7 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
                       width={400}
                       height={400}
                       priority
-                      className="rounded rounded-bl-none rounded-br-none max-h-[70dvh] lg:max-h-[400px] aspect-square object-cover"
+                      className="rounded rounded-bl-none rounded-br-none w-full max-h-[70dvh] lg:max-h-[400px] aspect-square object-cover"
                       quality={100}
                     />
                     {/* Gradient Overlay */}
@@ -117,24 +117,30 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
             </Carousel>
 
             {/* Left Navigation Button */}
-            <Button
-              className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition"
-              onPress={goToPrevSlide}
-              isIconOnly
-              aria-label='previous'
-            >
-              <ChevronLeftIcon className="size-6" />
-            </Button>
+            {
+              sliders.length > 1 &&
+              <>
+                <Button
+                  className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition"
+                  onPress={goToPrevSlide}
+                  isIconOnly
+                  aria-label='previous'
+                >
+                  <ChevronLeftIcon className="size-6" />
+                </Button>
 
-            {/* Right Navigation Button */}
-            <Button
-              className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition"
-              onClick={goToNextSlide}
-              isIconOnly
-              aria-label='next'
-            >
-              <ChevronRightIcon className="size-6" />
-            </Button>
+                {/* Right Navigation Button */}
+                <Button
+                  className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 transition"
+                  onClick={goToNextSlide}
+                  isIconOnly
+                  aria-label='next'
+                >
+                  <ChevronRightIcon className="size-6" />
+                </Button>
+              </>
+            }
+
           </div>
 
           {/* Title Section */}
@@ -143,16 +149,14 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
               {sliders[currentSlide].title}
             </h2>
 
-            {sliders.length > 1 && (
-              <Button
-                className="bg-gradient-to-r from-blue-500 to-violet-500 text-white font-medium w-fit mx-auto shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105"
-                endContent={<SparklesIcon className="h-4 w-4" />}
-                onPress={() => handleOnPosterClick(routes.campaigns)}
-                size="lg"
-              >
-                Go to Campaign
-              </Button>
-            )}
+            <Button
+              className="bg-gradient-to-r from-blue-500 to-violet-500 text-white font-medium w-fit mx-auto shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105"
+              endContent={<SparklesIcon className="h-4 w-4" />}
+              onPress={() => handleOnPosterClick(routes.campaigns)}
+              size="lg"
+            >
+              Go to Campaign
+            </Button>
           </div>
         </ModalBody>
       </ModalContent>

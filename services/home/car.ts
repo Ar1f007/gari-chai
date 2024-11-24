@@ -7,6 +7,7 @@ import { TAGS } from '../tags';
 import { homeSettingApiSchemaSingleInstance } from '@/schema/common';
 
 export async function getHomePageCarsBySection(sectionName: string) {
+
   const parsedSectionName = homePageSectionNameEnum.safeParse(sectionName);
 
   if (!parsedSectionName.success) {
