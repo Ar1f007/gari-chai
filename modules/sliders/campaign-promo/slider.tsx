@@ -144,7 +144,7 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
           </div>
 
           {/* Title Section */}
-          <div className="flex flex-col justify-center items-center gap-4 px-4 py-5 text-center">
+          <div className="flex flex-col justify-center items-center gap-4 px-4 pt-3 pb-6 text-center">
             <h2 className={title({ size: "xs", color: "blue" })}>
               {sliders[currentSlide].title}
             </h2>
