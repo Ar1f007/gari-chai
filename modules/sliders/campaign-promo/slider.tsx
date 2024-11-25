@@ -20,7 +20,7 @@ const CampaignSlider = ({ sliders }: CampaignSliderProps) => {
   const router = useRouter();
 
   const [showPromo, setShowPromo] = useState(
-    () => !settingsStore.notifications.campaigns.isPromoShown,
+    () => settingsStore.notifications.campaigns.isPromoShown ? false : true,
   );
   const [currentSlide, setCurrentSlide] = useState(0);
 
