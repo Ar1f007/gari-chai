@@ -2,13 +2,22 @@
 
 ## Links
 
-- [**Visit WEB VIEW**](https://www.garichaibd.com)
+- [**Visit Web View**](https://www.garichaibd.com)
 - [**Visit Admin Dashboard**](https://www.garichaibd.com)
 
-### Credentials
+### Admin Dashboard Credentials
 
 > **Email/Phone**: `01633333333`  
 > **Password**: `admin123`
+
+---
+
+### ⚠️ **Important Note**
+
+- The API is hosted on a Render free-tier plan, which enters sleep mode after 15 minutes of
+  inactivity.
+- As a result, the application may take **15-30 seconds, or at most 50 seconds** when accessed.
+- **If the page doesn’t load immediately, please refresh it after 15-30 seconds.**
 
 ## Overview
 
@@ -40,6 +49,15 @@ admin panel, ensuring a smooth and transparent transaction process.
   easy exploration.
 - A quick search functionality on the homepage (on top of slider section) allows users to find cars
   efficiently.
+
+#### Campaigns
+
+- Admin can create campaigns by selecting cars to offer at discounted prices for a limited time.
+- Users can place bids on the cars during the campaign period, within the specified offer price
+  range.
+- The highest three bidders for each car are pinned at the top, with other bids visible in the bid
+  section.
+- At the end of the campaign, the highest bidder wins the car.
 
 #### Global Search
 
