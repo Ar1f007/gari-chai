@@ -1,4 +1,3 @@
-import SectionTitle from '@/components/section-title';
 import BrandSkeleton from './brand-skeleton';
 
 const PopularBrandsSkeleton = ({ count }: { count: number }) => {
