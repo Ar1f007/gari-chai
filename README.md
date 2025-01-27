@@ -2,12 +2,12 @@
 
 ## Links
 
-- [**Visit Web View**](https://www.garichaibd.com)
-- [**Visit Admin Dashboard**](https://www.garichaibd.com)
+- [**Visit Web View**](https://gari-chai-ar1f007s-projects.vercel.app)
+- [**Visit Admin Dashboard**](https://gari-chai-admin-ar1f007s-projects.vercel.app)
 
 ### Admin Dashboard Credentials
 
-> **Email/Phone**: `01633333333`  
+> **Email/Phone**: `01633333333`
 > **Password**: `admin123`
 
 ---
