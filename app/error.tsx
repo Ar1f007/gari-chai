@@ -32,12 +32,12 @@ export default function Error({
     <div className='container flex h-screen flex-col items-center justify-center gap-8 p-5 text-center'>
       <h1 className={title({ size: 'sm', })}>
         {process.env.NODE_ENV === 'production'
-          ? "Our API is currently waking up after a period of inactivity."
+          ? "API is currently waking up after a period of inactivity."
           : message}
       </h1>
 
       <p className='font-medium md:text-xl max-w-4xl text-gray-700'>
-        Our API is hosted on a free-tier service which goes to sleep after inactivity. It{"'"}s now starting up and should be ready in {countdown} seconds. Thank you for your patience!
+        Reason: API is hosted on a free-tier service which goes to sleep after inactivity. It{"'"}s now starting up and should be ready in {countdown} seconds. Thank you for your patience!
       </p>
 
       <div className="flex gap-4">
